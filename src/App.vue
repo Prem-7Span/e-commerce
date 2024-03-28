@@ -1,7 +1,16 @@
 <template>
-  <SfButton class="w-full"> Hello </SfButton>
+ <router-view></router-view>
+ 
 </template>
 
-<script lang="ts" setup>
-import { SfButton } from "@storefront-ui/vue";
+<script>
+
+
+export default {
+ name: 'App',
+ components: {
+   
+ }
+}
 </script>
+
