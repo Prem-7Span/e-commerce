@@ -6,12 +6,12 @@
           <div class="space-y-4">
            
             <div>
-              <input v-model="Username" type="number" maxlength="10" placeholder="Mobile No" class="w-full rounded-md px-4 py-2 bg-gray-100 ">
+              <input v-model="Username" type="number" maxlength="10" placeholder="Phone No" class="w-full rounded-md px-4 py-2 bg-gray-100 ">
               <p class="text-red-500 mt-2">{{ errors.MobileNo }}</p>
             </div>
            
             <div>
-              <button type="submit" class="w-full  bg-blue-500  text-white font-semibold rounded-md py-2">Sign In</button>
+              <button type="submit" v-on:click="pop()" class="w-full  bg-blue-500  text-white font-semibold rounded-md py-2">Sign In</button>
               
               <p class="justify-end flex	text-blue-500"><router-link to="/">Create a new account</router-link></p>
             </div>
@@ -32,10 +32,11 @@
       submitForm() {
         this.errors = {};
         if (!this.MobileNo) this.errors.MobileNo = 'Mobile No is required';
-      
   
       },
-     
+      pop() {
+      alert("login successful");
+    }
     }
   };
   </script>

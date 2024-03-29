@@ -26,7 +26,7 @@
             <div>
               <button type="submit" class="w-full bg-blue-500 text-white font-semibold rounded-md py-2">Sign up</button>
             </div>
-            <p class="justify-end flex 	text-blue-500"><router-link to="/signin">Login</router-link></p>
+            <p class="justify-end flex 	text-blue-500"><router-link to="/signin">Sign In</router-link></p>
           </div>
         </form>
       </div>
