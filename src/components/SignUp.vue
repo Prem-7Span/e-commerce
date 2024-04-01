@@ -7,7 +7,22 @@
       <form @submit.prevent="submitForm">
         <div class="space-y-4">
           <div class="flex flex-col sm:flex-row sm:space-x-8">
+  <div class="flex items-center justify-center min-h-screen bg-black">
+    <div class="w-full max-w-md p-8 bg-white rounded-lg shadow-xl">
+      <h2 class="mb-8 text-3xl font-extrabold text-center text-gray-900">
+        Sign up
+      </h2>
+      <form @submit.prevent="submitForm">
+        <div class="space-y-4">
+          <div class="flex flex-col sm:flex-row sm:space-x-8">
             <div>
+              <input
+                v-model="firstname"
+                type="text"
+                placeholder="First Name"
+                class="w-full px-4 py-2 bg-gray-100 rounded-md sm:w-44"
+              />
+              <p class="mt-2 text-red-500">{{ errors.firstname }}</p>
               <input
                 v-model="firstname"
                 type="text"
