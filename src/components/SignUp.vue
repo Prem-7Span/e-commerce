@@ -14,13 +14,7 @@
                 placeholder="First Name"
                 class="w-full px-4 py-2 bg-gray-100 rounded-md sm:w-44"
               />
-              <p class="mt-2 text-red-500">{{ errors.firstname }}</p>
-              <input
-                v-model="firstname"
-                type="text"
-                placeholder="First Name"
-                class="w-full px-4 py-2 bg-gray-100 rounded-md sm:w-44"
-              />
+              
               <p class="mt-2 text-red-500">{{ errors.firstname }}</p>
             </div>
             <div>
@@ -78,10 +72,10 @@ import authentication from "./config"; // Assuming a Firebase authentication con
 export default {
   data() {
     return {
-      firstname: "Shubham",
-      lastname: "Parsaniya",
-      email: "shubham.p@7span.com",
-      phoneNumber: "8401827835",
+      firstname: "",
+      lastname: "",
+      email: "",
+      phoneNumber: "",
       recaptchaVerifier: undefined,
       errors: {},
     };

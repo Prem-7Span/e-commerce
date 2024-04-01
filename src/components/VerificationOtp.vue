@@ -23,7 +23,7 @@
             <input v-model="VerificationOtp" type="hidden" name="otp">
           </div>
           <div>
-            <button type="submit" class="w-full bg-blue-500 text-white font-semibold rounded-md py-2">
+            <button type="submit" v-on:click="submitForm()" class="w-full bg-blue-500 text-white font-semibold rounded-md py-2">
               Verify
             </button>
           </div>
