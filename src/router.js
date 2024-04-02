@@ -8,16 +8,19 @@ const routes = [
     name: "auth",
     path: "/",
     component: Auth,
+    children: [
+      {
+        name: "signIn",
+        path: "/signin",
+        component: SignIn,
+      },
+    ],
   },
+
   {
     name: "signUp",
     path: "/signup",
     component: SignUp,
-  },
-  {
-    name: "signIn",
-    path: "/signin",
-    component: SignIn,
   },
   {
     name: "VerificationOtp",

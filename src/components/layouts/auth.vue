@@ -12,7 +12,7 @@
       </div>
     </div>
     <div id="container-2" class="w-full h-screen bg-white">
-      saghdfkuavsduyfuyk
+      <router-view></router-view>
     </div>
   </div>
 </template>
