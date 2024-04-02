@@ -1,4 +1,5 @@
 <template>
+  
   <div id="main-container" class="grid grid-cols-2">
     <div
       id="container-1"
@@ -12,7 +13,7 @@
       </div>
     </div>
     <div id="container-2" class="w-full h-screen bg-white">
-      saghdfkuavsduyfuyk
+    
     </div>
   </div>
 </template>

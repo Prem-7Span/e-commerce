@@ -1,76 +1,82 @@
 <template>
-  <div class="flex">
-    <div><img src="../assets/bg-signup.png" alt="background-image" /></div>
-    <div class="flex items-center justify-center min-h-screen bg-black">
-      <div class="w-full max-w-md p-8 bg-white rounded-lg shadow-xl">
-        <h2 class="mb-8 text-3xl font-extrabold text-center text-gray-900">
-          Sign up
-        </h2>
-        <form @submit.prevent="submitForm">
-          <div class="space-y-4">
-            <div class="flex flex-col sm:flex-row sm:space-x-8">
-              <div>
-                <input
-                  v-model="firstname"
-                  type="text"
-                  placeholder="First Name"
-                  class="w-full px-4 py-2 bg-gray-100 rounded-md sm:w-44"
-                />
+  <div class="sign-up-page flex flex-col items-center justify-center min-h-screen py-12 px-4">
+    <div class="w-full max-w-md space-y-5">
+      <div class="text-2xl animate_animated animate_fadeIn">Sign Up</div>
 
-                <p class="mt-2 text-red-500">{{ errors.firstname }}</p>
-              </div>
-              <div>
-                <input
-                  v-model="lastname"
-                  type="text"
-                  placeholder="Last Name"
-                  class="w-full px-4 py-2 bg-gray-100 rounded-md sm:w-44"
-                />
-                <p class="mt-2 text-red-500">{{ errors.lastname }}</p>
-              </div>
-            </div>
-            <div>
-              <input
-                v-model="email"
-                type="email"
-                placeholder="Email"
-                class="w-full px-4 py-2 bg-gray-100 rounded-md focus:ring-purple-600"
-              />
-              <p class="mt-2 text-red-500">{{ errors.email }}</p>
-            </div>
-            <div>
-              <input
-                v-model="phoneNumber"
-                type="text"
-                maxlength="12"
-                placeholder="Phone Number"
-                class="w-full px-4 py-2 bg-gray-100 rounded-md"
-              />
-              <p class="mt-2 text-red-500">{{ errors.phoneNumber }}</p>
-            </div>
+      <div class="flex flex-col space-y-2">
+        <input
+          v-model="firstname"
+          type="text"
+          placeholder="First Name"
+          class="appearance-none rounded-md border border-gray-300 px-3 py-2 text-gray-700 transition duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-700 hover:border-indigo-500"
+        />
+        <p class="mt-2 text-red-500">{{ errors.firstname }}</p>
+      </div>
 
-            <div>
-              <button
-                type="submit"
-                class="w-full py-2 font-semibold text-white bg-blue-500 rounded-md"
-              >
-                Sign up
-              </button>
-            </div>
-            <div id="recaptcha-container"></div>
-            <p class="flex justify-end text-blue-500">
-              <router-link to="/signin">Sign In</router-link>
-            </p>
-          </div>
-        </form>
+      <div class="flex flex-col space-y-2">
+        <input
+          v-model="lastname"
+          type="text"
+          placeholder="Last Name"
+          class="appearance-none rounded-md border border-gray-300 px-3 py-2 text-gray-700 transition duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-700 hover:border-indigo-500"
+        />
+        <p class="mt-2 text-red-500">{{ errors.lastname }}</p>
+      </div>
+
+      <div class="flex flex-col space-y-2">
+        <input
+          v-model="email"
+          type="email"
+          placeholder="Email"
+          class="appearance-none rounded-md border border-gray-300 px-3 py-2 text-gray-700 transition duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-700 hover:border-indigo-500">
+          <p class="mt-2 text-red-500">{{ errors.email }}</p>
+        
+
+      </div>
+
+      <div class="flex flex-col space-y-2">
+        <input
+          v-model="phoneNumber"
+          type="text"
+          maxlength="12"
+          placeholder="Mobile Number"
+          class="appearance-none rounded-md border border-gray-300 px-3 py-2 text-gray-700 transition duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-700 hover:border-indigo-500">
+          <p class="mt-2 text-red-500">{{ errors.phoneNumber }}</p>
+      
+      </div>
+
+      <div class="flex items-center space-x-2">
+        <input
+          type="checkbox"
+          id="terms"
+          class="w-4 h-4 accent-indigo-500 focus:ring-2 focus:ring-indigo-500"
+        />
+        <label for="terms" class="text-sm text-gray-700">
+          By continuing you agree to website's Terms & Conditions and Privacy Policy
+        </label>
+      </div>
+
+      <button
+        type="button"
+        class="w-full rounded-md bg-indigo-500 py-2 px-4 text-center text-white font-medium transition duration-200 ease-in-out hover:scale-105 focus:outline-none focus:ring-2 focus:ring-indigo-700 focus:ring-opacity-50"
+        @click="submitForm"
+      >
+        Continue
+      </button>
+      <div id="recaptcha-container"></div>
+
+      <div class="text-center text-sm text-gray-500">
+        Already have an account?
+        <a href="#" class="text-indigo-500 hover:text-indigo-700">Sign in</a>
       </div>
     </div>
   </div>
 </template>
 
+
 <script>
 import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
-import authentication from "/src/components/config.js";
+import authentication from "/src/components/config.js"; // Assuming a Firebase authentication config
 
 export default {
   data() {
@@ -97,60 +103,53 @@ export default {
         }
       );
     },
-
-    async submitForm() {
-      if (!this.recaptchaVerifier) {
-        console.log("Generating Captcha...");
-        this.generateCaptcha();
-      } else {
-        try {
-          const phoneNumberVerification = await signInWithPhoneNumber(
-            authentication,
-            `+91${this.phoneNumber}`,
-            this.recaptchaVerifier
-          );
-
-          console.log(
-            "Phone number verification successful:",
-            phoneNumberVerification
-          );
-
-          this.$router.push({
-            name: "VerificationOtp",
-            query: { obj: phoneNumberVerification.verificationId },
-          });
-        } catch (error) {
-          console.error("Error during phone number verification:", error);
-          // Handle the error appropriately, e.g., display an error message to the user
-        }
-      }
-
-      this.errors = {};
-      if (!this.firstname) {
-        this.errors.firstname = "First Name is required";
-      }
-      if (!this.lastname) {
-        this.errors.lastname = "Last Name is required";
-      }
-      if (!this.email) {
-        this.errors.email = "Email is required";
-      } else if (!this.isValidEmail(this.email)) {
-        this.errors.email = "Invalid email address";
-      }
-      if (!this.phoneNumber) {
-        this.errors.phoneNumber = "Phone Number is required";
-      }
-
-      if (Object.keys(this.errors).length === 0) {
-        console.log(
-          "Form submitted successfully (client-side validation passed)"
-        );
+    submitForm() {
+      switch (true) {
+        case !this.firstname:
+          this.errors.firstname = "First Name is required";
+         
+        case !this.lastname:
+          this.errors.lastname = "Last Name is required";
+        
+        case !this.email:
+          this.errors.email = "Email is required";
+        
+        case !this.isValidEmail(this.email):
+          this.errors.email = "Invalid email address";
+        
+        case !this.phoneNumber:
+          this.errors.phoneNumber = "Phone Number is required";
+          break;
+        default:
+          console.log("Form submitted successfully (client-side validation passed)");
+          if (!this.recaptchaVerifier) {
+            console.log("Generating Captcha...");
+            this.generateCaptcha();
+          } else {
+            console.log("RecaptchaVerifier already created:", this.recaptchaVerifier);
+          }
+          this.verifyPhoneNumber();
       }
     },
-
+    async verifyPhoneNumber() {
+      try {
+        const phoneNumberVerification = await signInWithPhoneNumber(
+          authentication,
+          `+91${this.phoneNumber}`,
+          this.recaptchaVerifier
+        );
+        console.log("Phone number verification successful:", phoneNumberVerification);
+        this.$router.push({
+          name: "VerificationOtp", // Assuming a route for verification
+        });
+      } catch (error) {
+        console.error("Error during phone number verification:", error);
+        // Handle the error appropriately, e.g., display an error message to the user
+      }
+    },
     isValidEmail(email) {
       return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
     },
-  },
+  },
 };
 </script>
