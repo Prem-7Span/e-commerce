@@ -71,7 +71,7 @@
 
       <div class="text-sm text-center text-gray-500">
         Already have an account?
-        <a href="#" class="text-primary-200 hover:text-indigo-700">Sign in</a>
+        <a href="#" class="text-primary-200 hover:text-primary-100">Sign in</a>
       </div>
     </div>
   </div>

@@ -33,7 +33,7 @@
       <div class="mt-6 text-sm text-center text-gray-500">
         Don’t have an account?
 
-        <router-link to="/signup" class="bg-primary-100">Sign Up</router-link>
+        <router-link to="/signup" class="text-primary-100">Sign Up</router-link>
       </div>
     </div>
   </div>
