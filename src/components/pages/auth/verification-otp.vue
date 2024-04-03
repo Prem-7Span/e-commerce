@@ -1,7 +1,9 @@
 <template>
   <div class="flex items-center justify-center min-h-screen bg-white">
-    <div class="px-8 py-6 bg-white rounded-lg shadow-md text-center md:text-left md:max-w-md w-full">
-      <h3 class="text-xl text-gray-700 font-semibold">OTP Verification</h3>
+    <div
+      class="w-full px-8 py-6 text-center bg-white rounded-lg shadow-md md:text-left md:max-w-md"
+    >
+      <h3 class="text-xl font-semibold text-gray-700">OTP Verification</h3>
       <p class="mt-6 text-sm text-gray-600">
         Please enter OTP here to continue
       </p>
@@ -12,19 +14,19 @@
           v-model="verificationOtp[index]"
           type="text"
           maxlength="1"
-          class="w-12 md:w-16 mb-2 md:mb-0 border border-gray-300 rounded px-3 py-2 text-center"
+          class="w-12 px-3 py-2 mb-2 text-center border border-gray-300 rounded md:w-16 md:mb-0"
           @input="handleInput(index)"
           :ref="`otpBox${index}`"
         />
       </div>
       <button
-        class="mt-4 block text-sm text-gray-400 hover:underline"
+        class="block mt-4 text-sm text-gray-400 hover:underline"
         @click="resendOTP"
       >
         Resend OTP
       </button>
       <button
-        class="mt-6 w-full px-3 py-2 bg-primary-100 text-white font-bold rounded-md hover:bg-blue-700 focus:outline-none focus:ring-1 focus:ring-blue-500"
+        class="w-full px-3 py-2 mt-6 font-bold text-white rounded-md bg-primary-100 hover:bg-blue-700 focus:outline-none focus:ring-1 focus:ring-blue-500"
         @click="submitForm"
       >
         Continue
@@ -36,20 +38,22 @@
 </template>
 
 <script>
+import authentication from "/src/components/config.js";
 import { PhoneAuthProvider, signInWithCredential } from "firebase/auth";
 
 export default {
-  props: {
-    confirmationResult: {
-      type: Object,
-      required: true, // Ensure confirmationResult is received as a prop
-    },
-  },
+  // props: {
+  //   confirmationResult: {
+  //     type: Object,
+  //     required: true, // Ensure confirmationResult is received as a prop
+  //   },
+  // },
   data() {
     return {
       verificationOtp: ["", "", "", "", "", ""],
       errorMessage: "",
       successMessage: "",
+      confirmationResult: this.$route.query.obj,
     };
   },
   methods: {
@@ -60,7 +64,10 @@ export default {
       }
 
       // Limit input to numbers only
-      this.verificationOtp[index] = this.verificationOtp[index].replace(/\D/g, "");
+      this.verificationOtp[index] = this.verificationOtp[index].replace(
+        /\D/g,
+        ""
+      );
     },
     async submitForm() {
       const otp = this.verificationOtp.join("");
@@ -74,12 +81,13 @@ export default {
       }
 
       try {
+        console.log(this.verificationOtp);
         const credential = PhoneAuthProvider.credential(
           this.confirmationResult,
           otp
         );
 
-        await signInWithCredential(firebase.auth(), credential) // Assuming firebase is imported elsewhere
+        await signInWithCredential(authentication, credential) // Assuming firebase is imported elsewhere
           .then((res) => {
             console.log(res);
             this.successMessage = "Verification successful!";

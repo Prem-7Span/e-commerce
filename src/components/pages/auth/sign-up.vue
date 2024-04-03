@@ -1,6 +1,10 @@
 <template>
-  <div class="sign-up-page  flex flex-col items-center justify-center min-h-screen py-12 px-4">
-      <div class="px-8 py-6 bg-white rounded-lg shadow-md text-center md:text-left md:max-w-md w-full  max-w-md space-y-5">
+  <div
+    class="flex flex-col items-center justify-center min-h-screen px-4 py-12 sign-up-page"
+  >
+    <div
+      class="w-full max-w-md px-8 py-6 space-y-5 text-center bg-white rounded-lg shadow-md md:text-left md:max-w-md"
+    >
       <div class="text-2xl animate_animated animate_fadeIn">Sign Up</div>
 
       <div class="flex flex-col space-y-2">
@@ -8,7 +12,7 @@
           v-model="firstname"
           type="text"
           placeholder="First Name"
-          class="appearance-none rounded-md border border-gray-300 px-3 py-2 text-gray-700 transition duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-700 hover:border-indigo-500"
+          class="px-3 py-2 text-gray-700 transition duration-200 ease-in-out border border-gray-300 rounded-md appearance-none focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-700 hover:border-indigo-500"
         />
         <p class="mt-2 text-primary-200">{{ errors.firstname }}</p>
       </div>
@@ -18,7 +22,7 @@
           v-model="lastname"
           type="text"
           placeholder="Last Name"
-          class="appearance-none rounded-md border border-gray-300 px-3 py-2 text-gray-700 transition duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-700 hover:border-indigo-500"
+          class="px-3 py-2 text-gray-700 transition duration-200 ease-in-out border border-gray-300 rounded-md appearance-none focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-700 hover:border-indigo-500"
         />
         <p class="mt-2 text-primary-200">{{ errors.lastname }}</p>
       </div>
@@ -28,10 +32,9 @@
           v-model="email"
           type="email"
           placeholder="Email"
-          class="appearance-none rounded-md border border-gray-300 px-3 py-2 text-gray-700 transition duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-700 hover:border-indigo-500">
-          <p class="mt-2 text-primary-200">{{ errors.email }}</p>
-        
-
+          class="px-3 py-2 text-gray-700 transition duration-200 ease-in-out border border-gray-300 rounded-md appearance-none focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-700 hover:border-indigo-500"
+        />
+        <p class="mt-2 text-primary-200">{{ errors.email }}</p>
       </div>
 
       <div class="flex flex-col space-y-2">
@@ -40,9 +43,9 @@
           type="text"
           maxlength="12"
           placeholder="Mobile Number"
-          class="appearance-none rounded-md border border-gray-300 px-3 py-2 text-gray-700 transition duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-700 hover:border-indigo-500">
-          <p class="mt-2 text-primary-200">{{ errors.phoneNumber }}</p>
-      
+          class="px-3 py-2 text-gray-700 transition duration-200 ease-in-out border border-gray-300 rounded-md appearance-none focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-700 hover:border-indigo-500"
+        />
+        <p class="mt-2 text-primary-200">{{ errors.phoneNumber }}</p>
       </div>
 
       <div class="flex items-center space-x-2">
@@ -52,27 +55,27 @@
           class="w-4 h-4 accent-indigo-500 focus:ring-2 focus:ring-indigo-500"
         />
         <label for="terms" class="text-sm text-gray-700">
-          By continuing you agree to website's Terms & Conditions and Privacy Policy
+          By continuing you agree to website's Terms & Conditions and Privacy
+          Policy
         </label>
       </div>
 
       <button
         type="button"
-        class="w-full rounded-md bg-primary-100 py-2 px-4 text-center text-white font-medium transition duration-200 ease-in-out hover:scale-105 focus:outline-none focus:ring-2 focus:ring-indigo-700 focus:ring-opacity-50"
+        class="w-full px-4 py-2 font-medium text-center text-white transition duration-200 ease-in-out rounded-md bg-primary-100 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-indigo-700 focus:ring-opacity-50"
         @click="submitForm"
       >
         Continue
       </button>
       <div id="recaptcha-container"></div>
 
-      <div class="text-center text-sm text-gray-500">
+      <div class="text-sm text-center text-gray-500">
         Already have an account?
         <a href="#" class="text-primary-200 hover:text-indigo-700">Sign in</a>
       </div>
     </div>
   </div>
 </template>
-
 
 <script>
 import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
@@ -107,26 +110,31 @@ export default {
       switch (true) {
         case !this.firstname:
           this.errors.firstname = "First Name is required";
-         
+
         case !this.lastname:
           this.errors.lastname = "Last Name is required";
-        
+
         case !this.email:
           this.errors.email = "Email is required";
-        
+
         case !this.isValidEmail(this.email):
           this.errors.email = "Invalid email address";
-        
+
         case !this.phoneNumber:
           this.errors.phoneNumber = "Phone Number is required";
           break;
         default:
-          console.log("Form submitted successfully (client-side validation passed)");
+          console.log(
+            "Form submitted successfully (client-side validation passed)"
+          );
           if (!this.recaptchaVerifier) {
             console.log("Generating Captcha...");
             this.generateCaptcha();
           } else {
-            console.log("RecaptchaVerifier already created:", this.recaptchaVerifier);
+            console.log(
+              "RecaptchaVerifier already created:",
+              this.recaptchaVerifier
+            );
           }
           this.verifyPhoneNumber();
       }
@@ -138,9 +146,13 @@ export default {
           `+91${this.phoneNumber}`,
           this.recaptchaVerifier
         );
-        console.log("Phone number verification successful:", phoneNumberVerification);
+        console.log(
+          "Phone number verification successful:",
+          phoneNumberVerification
+        );
         this.$router.push({
           name: "VerificationOtp", // Assuming a route for verification
+          query: { obj: phoneNumberVerification.verificationId },
         });
       } catch (error) {
         console.error("Error during phone number verification:", error);
@@ -150,6 +162,6 @@ export default {
     isValidEmail(email) {
       return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
     },
-  },
+  },
 };
 </script>
