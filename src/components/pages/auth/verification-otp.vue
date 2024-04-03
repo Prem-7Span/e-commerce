@@ -1,7 +1,9 @@
 <template>
   <div class="flex items-center justify-center min-h-screen bg-white">
-    <div class="px-8 py-6 bg-white rounded-lg shadow-md text-center md:text-left md:max-w-md w-full">
-      <h3 class="text-xl text-gray-700 font-semibold">OTP Verification</h3>
+    <div
+      class="w-full px-8 py-6 text-center bg-white rounded-lg shadow-md md:text-left md:max-w-md"
+    >
+      <h3 class="text-xl font-semibold text-gray-700">OTP Verification</h3>
       <p class="mt-6 text-sm text-gray-600">
         Please enter OTP here to continue
       </p>
@@ -18,7 +20,7 @@
   />
 </div>
       <button
-        class="mt-4 block text-sm text-gray-400 hover:underline"
+        class="block mt-4 text-sm text-gray-400 hover:underline"
         @click="resendOTP"
       >
         Resend OTP
@@ -36,21 +38,23 @@
 </template>
 
 <script>
+import authentication from "/src/components/config.js";
 import { PhoneAuthProvider, signInWithCredential } from "firebase/auth";
 import { getAuth } from 'firebase/auth';
 
 export default {
-  props: {
-    confirmationResult: {
-      type: Object,
-      required: true, 
-    },
-  },
+  // props: {
+  //   confirmationResult: {
+  //     type: Object,
+  //     required: true, // Ensure confirmationResult is received as a prop
+  //   },
+  // },
   data() {
     return {
       verificationOtp: ["", "", "", "", "", ""],
       errorMessage: "",
       successMessage: "",
+      confirmationResult: this.$route.query.obj,
     };
   },
   methods: {
@@ -60,7 +64,11 @@ export default {
         this.$refs[`otpBox${index + 1}`][0].focus();
       }
 
-      this.verificationOtp[index] = this.verificationOtp[index].replace(/\D/g, "");
+      // Limit input to numbers only
+      this.verificationOtp[index] = this.verificationOtp[index].replace(
+        /\D/g,
+        ""
+      );
     },
     async submitForm() {
       const otp = this.verificationOtp.join("");
@@ -74,11 +82,13 @@ export default {
       }
 
       try {
+        console.log(this.verificationOtp);
         const credential = PhoneAuthProvider.credential(
           this.confirmationResult,
           otp
         );
-        await signInWithCredential(firebase.auth(), credential) 
+
+        await signInWithCredential(authentication, credential) // Assuming firebase is imported elsewhere
           .then((res) => {
             console.log(res);
             this.successMessage = "Verification successful!";
