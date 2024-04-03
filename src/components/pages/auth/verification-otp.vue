@@ -1,5 +1,5 @@
 <template>
-  <div class="flex items-center justify-center min-h-screen bg-gray-100">
+  <div class="flex items-center justify-center min-h-screen bg-white">
     <div class="px-8 py-6 bg-white rounded-lg shadow-md text-center md:text-left md:max-w-md w-full">
       <h3 class="text-xl text-gray-700 font-semibold">OTP Verification</h3>
       <p class="mt-6 text-sm text-gray-600">
@@ -24,7 +24,7 @@
         Resend OTP
       </button>
       <button
-        class="mt-6 w-full px-3 py-2 bg-blue-500 text-white font-bold rounded-md hover:bg-blue-700 focus:outline-none focus:ring-1 focus:ring-blue-500"
+        class="mt-6 w-full px-3 py-2 bg-primary-100 text-white font-bold rounded-md hover:bg-blue-700 focus:outline-none focus:ring-1 focus:ring-blue-500"
         @click="submitForm"
       >
         Continue

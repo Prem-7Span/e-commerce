@@ -3,26 +3,28 @@ import SignUp from "./components/pages/auth/sign-up.vue";
 import SignIn from "./components/pages/auth/sign-in.vue";
 import VerificationOtp from "./components/pages/auth/verification-otp.vue"; // Make sure to include the correct file extension (.vue)
 import Auth from "./components/layouts/auth.vue";
+
 const routes = [
   {
-    name: "auth",
     path: "/",
     component: Auth,
-  },
-  {
-    name: "signUp",
-    path: "/signup",
-    component: SignUp,
-  },
-  {
-    name: "signIn",
-    path: "/signin",
-    component: SignIn,
-  },
-  {
-    name: "VerificationOtp",
-    path: "/otp", // Corrected path to '/otp'
-    component: VerificationOtp,
+    children: [
+      {
+        name: "signIn",
+        path: "",
+        component: SignIn,
+      },
+      {
+        name: "signUp",
+        path: "signup",
+        component: SignUp,
+      },
+      {
+        name: "VerificationOtp",
+        path: "VerificationOtp",
+        component: VerificationOtp,
+      },
+    ],
   },
 ];
 

@@ -1,6 +1,6 @@
 <template>
-  <div class="sign-up-page flex flex-col items-center justify-center min-h-screen py-12 px-4">
-    <div class="w-full max-w-md space-y-5">
+  <div class="sign-up-page  flex flex-col items-center justify-center min-h-screen py-12 px-4">
+      <div class="px-8 py-6 bg-white rounded-lg shadow-md text-center md:text-left md:max-w-md w-full  max-w-md space-y-5">
       <div class="text-2xl animate_animated animate_fadeIn">Sign Up</div>
 
       <div class="flex flex-col space-y-2">
@@ -10,7 +10,7 @@
           placeholder="First Name"
           class="appearance-none rounded-md border border-gray-300 px-3 py-2 text-gray-700 transition duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-700 hover:border-indigo-500"
         />
-        <p class="mt-2 text-red-500">{{ errors.firstname }}</p>
+        <p class="mt-2 text-primary-200">{{ errors.firstname }}</p>
       </div>
 
       <div class="flex flex-col space-y-2">
@@ -20,7 +20,7 @@
           placeholder="Last Name"
           class="appearance-none rounded-md border border-gray-300 px-3 py-2 text-gray-700 transition duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-700 hover:border-indigo-500"
         />
-        <p class="mt-2 text-red-500">{{ errors.lastname }}</p>
+        <p class="mt-2 text-primary-200">{{ errors.lastname }}</p>
       </div>
 
       <div class="flex flex-col space-y-2">
@@ -29,7 +29,7 @@
           type="email"
           placeholder="Email"
           class="appearance-none rounded-md border border-gray-300 px-3 py-2 text-gray-700 transition duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-700 hover:border-indigo-500">
-          <p class="mt-2 text-red-500">{{ errors.email }}</p>
+          <p class="mt-2 text-primary-200">{{ errors.email }}</p>
         
 
       </div>
@@ -41,7 +41,7 @@
           maxlength="12"
           placeholder="Mobile Number"
           class="appearance-none rounded-md border border-gray-300 px-3 py-2 text-gray-700 transition duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-700 hover:border-indigo-500">
-          <p class="mt-2 text-red-500">{{ errors.phoneNumber }}</p>
+          <p class="mt-2 text-primary-200">{{ errors.phoneNumber }}</p>
       
       </div>
 
@@ -58,7 +58,7 @@
 
       <button
         type="button"
-        class="w-full rounded-md bg-indigo-500 py-2 px-4 text-center text-white font-medium transition duration-200 ease-in-out hover:scale-105 focus:outline-none focus:ring-2 focus:ring-indigo-700 focus:ring-opacity-50"
+        class="w-full rounded-md bg-primary-100 py-2 px-4 text-center text-white font-medium transition duration-200 ease-in-out hover:scale-105 focus:outline-none focus:ring-2 focus:ring-indigo-700 focus:ring-opacity-50"
         @click="submitForm"
       >
         Continue
@@ -67,7 +67,7 @@
 
       <div class="text-center text-sm text-gray-500">
         Already have an account?
-        <a href="#" class="text-indigo-500 hover:text-indigo-700">Sign in</a>
+        <a href="#" class="text-primary-200 hover:text-indigo-700">Sign in</a>
       </div>
     </div>
   </div>
