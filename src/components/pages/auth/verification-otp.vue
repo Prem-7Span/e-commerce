@@ -5,18 +5,18 @@
       <p class="mt-6 text-sm text-gray-600">
         Please enter OTP here to continue
       </p>
-      <div class="flex flex-wrap justify-center mt-5">
-        <input
-          v-for="(input, index) in 6"
-          :key="index"
-          v-model="verificationOtp[index]"
-          type="text"
-          maxlength="1"
-          class="w-12 md:w-16 mb-2 md:mb-0 border border-gray-300 rounded px-3 py-2 text-center"
-          @input="handleInput(index)"
-          :ref="`otpBox${index}`"
-        />
-      </div>
+      <div class="flex justify-center mt-5 gap-2">
+  <input
+    v-for="(input, index) in 6"
+    :key="index"
+    v-model="verificationOtp[index]"
+    type="text"
+    maxlength="1"
+    class="w-15 md:w-16 border border-gray-300 rounded px-3 py-2 text-center focus:outline-none focus:ring-1 focus:ring-indigo-500"
+    @input="handleInput(index)"
+    :ref="`otpBox${index}`"
+  />
+</div>
       <button
         class="mt-4 block text-sm text-gray-400 hover:underline"
         @click="resendOTP"
@@ -24,7 +24,7 @@
         Resend OTP
       </button>
       <button
-        class="mt-6 w-full px-3 py-2 bg-primary-100 text-white font-bold rounded-md hover:bg-blue-700 focus:outline-none focus:ring-1 focus:ring-blue-500"
+     class="mt-6 w-full px-3 py-2 bg-primary-100 text-white font-bold rounded-md hover:bg-primary-100 focus:outline-none focus:ring-1 focus:bg-primary-100"
         @click="submitForm"
       >
         Continue
@@ -37,12 +37,13 @@
 
 <script>
 import { PhoneAuthProvider, signInWithCredential } from "firebase/auth";
+import { getAuth } from 'firebase/auth';
 
 export default {
   props: {
     confirmationResult: {
       type: Object,
-      required: true, // Ensure confirmationResult is received as a prop
+      required: true, 
     },
   },
   data() {
@@ -59,7 +60,6 @@ export default {
         this.$refs[`otpBox${index + 1}`][0].focus();
       }
 
-      // Limit input to numbers only
       this.verificationOtp[index] = this.verificationOtp[index].replace(/\D/g, "");
     },
     async submitForm() {
@@ -78,14 +78,13 @@ export default {
           this.confirmationResult,
           otp
         );
-
-        await signInWithCredential(firebase.auth(), credential) // Assuming firebase is imported elsewhere
+        await signInWithCredential(firebase.auth(), credential) 
           .then((res) => {
             console.log(res);
             this.successMessage = "Verification successful!";
-            // Redirect logic (consider using router or a dedicated function)
+          
             setTimeout(() => {
-              // Your redirection logic here (e.g., this.$router.push('/dashboard'))
+            
             }, 1500);
           })
           .catch((error) => {
@@ -103,7 +102,7 @@ export default {
       }
     },
     resendOTP() {
-      // Implement resend OTP logic here
+  
       console.log("Resending OTP...");
     },
   },
