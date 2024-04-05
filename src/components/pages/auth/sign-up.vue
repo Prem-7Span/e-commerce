@@ -77,7 +77,8 @@
   </div>
 </template>
 
-<script>
+<!-- <script>
+import axios from "axios";
 import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
 import authentication from "/src/components/config.js"; // Assuming a Firebase authentication config
 
@@ -156,6 +157,71 @@ export default {
         });
       } catch (error) {
         console.error("Error during phone number verification:", error);
+        // Handle the error appropriately, e.g., display an error message to the user
+      }
+    },
+    isValidEmail(email) {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    },
+  },
+};
+</script> -->
+
+<script>
+import axios from "axios";
+
+export default {
+  data() {
+    return {
+      firstname: "",
+      lastname: "",
+      email: "",
+      phoneNumber: "",
+      errors: {},
+    };
+  },
+  methods: {
+    async submitForm() {
+      // Clear any previous errors
+      this.errors = {};
+
+      // Validate form fields
+      if (!this.firstname) {
+        this.errors.firstname = "First Name is required";
+      }
+      if (!this.lastname) {
+        this.errors.lastname = "Last Name is required";
+      }
+      if (!this.email) {
+        this.errors.email = "Email is required";
+      } else if (!this.isValidEmail(this.email)) {
+        this.errors.email = "Invalid email address";
+      }
+      if (!this.phoneNumber) {
+        this.errors.phoneNumber = "Phone Number is required";
+      }
+
+      // If there are errors, stop further processing
+      if (Object.keys(this.errors).length > 0) {
+        return;
+      }
+
+      // If all validations pass, proceed with API call
+      try {
+        const response = await axios.post(
+          "http://13.233.85.16/api/v1/register",
+          {
+            firstName: this.firstname,
+            lastName: this.lastname,
+            email: this.email,
+            mobileNo: this.phoneNumber,
+          }
+        );
+
+        // Handle response, e.g., show success message, redirect user, etc.
+        console.log("Signup successful:", response.data);
+      } catch (error) {
+        console.error("Error during signup:", error);
         // Handle the error appropriately, e.g., display an error message to the user
       }
     },

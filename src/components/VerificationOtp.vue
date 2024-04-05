@@ -43,26 +43,22 @@ export default {
       } else if (!this.isValidOTP(this.otp)) {
         this.errors.otp = "Invalid OTP";
       } else {
-
         const isCorrectOTP = this.verifyOTP(this.otp);
         if (isCorrectOTP) {
           alert("Correct OTP entered!");
-          
         } else {
           this.errors.otp = "Incorrect OTP entered";
         }
       }
     },
     isValidOTP(otp) {
-     
       return /^[0-9]{6}$/.test(otp);
     },
     verifyOTP(otp) {
- 
       const isCorrectOTP = this.verifyOTP(this.otp);
-        if (isCorrectOTP) { 
-      return otp === correctOTP;
-        }
+      if (isCorrectOTP) {
+        return otp === correctOTP;
+      }
     },
   },
 };
