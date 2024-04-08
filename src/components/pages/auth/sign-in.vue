@@ -95,6 +95,8 @@ export default {
             "Phone Number is not available. Please sign up.";
         }
       } catch (error) {
+        this.errors.phoneNumber =
+          "Phone Number is not available. Please sign up.";
         console.error("Error checking phone number availability:", error);
         // Handle error appropriately, e.g., display an error message to the user
       }

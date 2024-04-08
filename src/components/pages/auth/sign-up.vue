@@ -40,7 +40,7 @@
       <div class="flex flex-col space-y-2">
         <input
           v-model="phoneNumber"
-          type="text"
+          type="number"
           maxlength="12"
           placeholder="Mobile Number"
           class="px-3 py-2 text-gray-700 transition duration-200 ease-in-out border border-gray-300 rounded-md appearance-none focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-700 hover:border-indigo-500"
@@ -219,7 +219,8 @@ export default {
         );
 
         // Handle response, e.g., show success message, redirect user, etc.
-        console.log("Signup successful:", response.data);
+        console.log("Signup successful:", response);
+        this.$router.push({ name: "VerificationOtp" });
       } catch (error) {
         console.error("Error during signup:", error);
         // Handle the error appropriately, e.g., display an error message to the user
