@@ -77,100 +77,16 @@
   </div>
 </template>
 
-<!-- <script>
-import axios from "axios";
-import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
-import authentication from "/src/components/config.js"; // Assuming a Firebase authentication config
-
-export default {
-  data() {
-    return {
-      firstname: "",
-      lastname: "",
-      email: "",
-      phoneNumber: "",
-      recaptchaVerifier: undefined,
-      errors: {},
-    };
-  },
-  methods: {
-    generateCaptcha() {
-      console.log("Entering generateCaptcha method");
-      this.recaptchaVerifier = new RecaptchaVerifier(
-        authentication,
-        "recaptcha-container",
-        {
-          size: "invisible",
-          callback: (response) => {
-            console.log("Recaptcha response:", response);
-          },
-        }
-      );
-    },
-    submitForm() {
-      switch (true) {
-        case !this.firstname:
-          this.errors.firstname = "First Name is required";
-
-        case !this.lastname:
-          this.errors.lastname = "Last Name is required";
-
-        case !this.email:
-          this.errors.email = "Email is required";
-
-        case !this.isValidEmail(this.email):
-          this.errors.email = "Invalid email address";
-
-        case !this.phoneNumber:
-          this.errors.phoneNumber = "Phone Number is required";
-          break;
-        default:
-          console.log(
-            "Form submitted successfully (client-side validation passed)"
-          );
-          if (!this.recaptchaVerifier) {
-            console.log("Generating Captcha...");
-            this.generateCaptcha();
-          } else {
-            console.log(
-              "RecaptchaVerifier already created:",
-              this.recaptchaVerifier
-            );
-          }
-          this.verifyPhoneNumber();
-      }
-    },
-    async verifyPhoneNumber() {
-      try {
-        const phoneNumberVerification = await signInWithPhoneNumber(
-          authentication,
-          `+91${this.phoneNumber}`,
-          this.recaptchaVerifier
-        );
-        console.log(
-          "Phone number verification successful:",
-          phoneNumberVerification
-        );
-        this.$router.push({
-          name: "VerificationOtp", // Assuming a route for verification
-          query: { obj: phoneNumberVerification.verificationId },
-        });
-      } catch (error) {
-        console.error("Error during phone number verification:", error);
-        // Handle the error appropriately, e.g., display an error message to the user
-      }
-    },
-    isValidEmail(email) {
-      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-    },
-  },
-};
-</script> -->
-
 <script>
 import axios from "axios";
+import { useToast } from "vue-toastification";
 
 export default {
+  setup() {
+    const toast = useToast();
+    return { toast };
+  },
+
   data() {
     return {
       firstname: "",
@@ -220,10 +136,13 @@ export default {
 
         // Handle response, e.g., show success message, redirect user, etc.
         console.log("Signup successful:", response);
+        this.toast.success("Sign-up successful");
         this.$router.push({ name: "VerificationOtp" });
       } catch (error) {
-        console.error("Error during signup:", error);
-        // Handle the error appropriately, e.g., display an error message to the user
+        this.errors.phoneNumber = "phone number already exist, please login!";
+        this.toast.error("User already exist, please login");
+        console.error("Error checking phone number availability:", error);
+        // Handle error appropriately, e.g., display an error message to the user
       }
     },
     isValidEmail(email) {

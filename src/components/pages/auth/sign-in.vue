@@ -50,8 +50,14 @@
 import axios from "axios";
 import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
 import authentication from "/src/components/config.js"; // Assuming a Firebase authentication config
+import { useToast } from "vue-toastification";
 
 export default {
+  setup() {
+    const toast = useToast();
+    return { toast };
+  },
+
   data() {
     return {
       phoneNumber: undefined,
@@ -114,6 +120,7 @@ export default {
           this.recaptchaVerifier
         );
       }
+      this.toast.success("Sign-in successful");
       this.verifyPhoneNumber();
     },
     async verifyPhoneNumber() {
