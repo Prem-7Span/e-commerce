@@ -40,7 +40,7 @@
       <div class="flex flex-col space-y-2">
         <input
           v-model="phoneNumber"
-          type="number"
+          type="text"
           maxlength="12"
           placeholder="Mobile Number"
           class="px-3 py-2 text-gray-700 transition duration-200 ease-in-out border border-gray-300 rounded-md appearance-none focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-700 hover:border-indigo-500"
@@ -77,12 +77,17 @@
   </div>
 </template>
 
-<!-- <script>
+<script>
 import axios from "axios";
 import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
 import authentication from "/src/components/config.js"; // Assuming a Firebase authentication config
-
+import { useToast } from "vue-toastification";
 export default {
+  setup() {
+    const toast = useToast();
+    return { toast };
+  },
+
   data() {
     return {
       firstname: "",
@@ -91,6 +96,7 @@ export default {
       phoneNumber: "",
       recaptchaVerifier: undefined,
       errors: {},
+      isUserValid: false,
     };
   },
   methods: {
@@ -128,7 +134,8 @@ export default {
           console.log(
             "Form submitted successfully (client-side validation passed)"
           );
-          if (!this.recaptchaVerifier) {
+          this.registerUser();
+          if (!this.recaptchaVerifier && this.isUserValid) {
             console.log("Generating Captcha...");
             this.generateCaptcha();
           } else {
@@ -160,53 +167,7 @@ export default {
         // Handle the error appropriately, e.g., display an error message to the user
       }
     },
-    isValidEmail(email) {
-      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-    },
-  },
-};
-</script> -->
-
-<script>
-import axios from "axios";
-
-export default {
-  data() {
-    return {
-      firstname: "",
-      lastname: "",
-      email: "",
-      phoneNumber: "",
-      errors: {},
-    };
-  },
-  methods: {
-    async submitForm() {
-      // Clear any previous errors
-      this.errors = {};
-
-      // Validate form fields
-      if (!this.firstname) {
-        this.errors.firstname = "First Name is required";
-      }
-      if (!this.lastname) {
-        this.errors.lastname = "Last Name is required";
-      }
-      if (!this.email) {
-        this.errors.email = "Email is required";
-      } else if (!this.isValidEmail(this.email)) {
-        this.errors.email = "Invalid email address";
-      }
-      if (!this.phoneNumber) {
-        this.errors.phoneNumber = "Phone Number is required";
-      }
-
-      // If there are errors, stop further processing
-      if (Object.keys(this.errors).length > 0) {
-        return;
-      }
-
-      // If all validations pass, proceed with API call
+    async registerUser() {
       try {
         const response = await axios.post(
           "http://13.233.85.16/api/v1/register",
@@ -218,12 +179,17 @@ export default {
           }
         );
 
+        this.isUserValid = true;
         // Handle response, e.g., show success message, redirect user, etc.
-        console.log("Signup successful:", response);
-        this.$router.push({ name: "VerificationOtp" });
+        console.log("Signup successful:", response.data);
+        this.toast.success("Sign-up successful");
       } catch (error) {
+        this.isUserValid = false;
         console.error("Error during signup:", error);
         // Handle the error appropriately, e.g., display an error message to the user
+        this.errors.phoneNumber = "phone number already exist, please login!";
+        this.toast.error("User already exist, please login");
+        console.error("Error checking phone number availability:", error);
       }
     },
     isValidEmail(email) {
