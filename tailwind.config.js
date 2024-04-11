@@ -10,7 +10,15 @@ export default {
     "./node_modules/@storefront-ui/vue/**/*.{js,mjs}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors:{
+        primary:{
+          100:"#754F23",
+          200:"#E20F0F"
+        }
+      }
+    
+    },
   },
   plugins: [],
 };
