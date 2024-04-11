@@ -3,35 +3,39 @@
     class="flex items-center justify-center min-h-screen px-2 py-12 bg-white md:px-5"
   >
     <div
-      class="w-full px-8 py-6 text-center bg-white rounded-lg shadow-md md:text-left md:max-w-md"
+      class="container w-full px-8 py-6 text-center bg-white rounded-lg shadow-md md:text-left md:max-w-md"
     >
       <div class="text-2xl animate_animated animate_fadeIn">Sign In</div>
 
-      <div class="flex flex-col mt-5 space-y-2">
+      <div class="flex flex-col mt-2 space-y-2">
         <input
           v-model="phoneNumber"
           type="text"
-          maxlength="12"
+          maxlength="10"
           placeholder="Mobile Number"
           class="px-3 py-2 text-gray-700 transition duration-200 ease-in-out border border-gray-300 rounded-md appearance-none focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-700 hover:border-indigo-500"
         />
+        <p class="mt-2 text-primary-200">{{ errors.phoneNumber }}</p>
+      </div>
 
-        <div v-if="errors.phoneNumber" class="text-xs text-primary-200">
-          <p>{{ errors.phoneNumber }}</p>
-        </div>
-
-        <div class="text-sm text-gray-700">
-          <p class="mt-4">
-            By continuing you agree to website’s Terms & Conditions and Privacy
-            Policy
-          </p>
-        </div>
+      <div class="flex items-center space-x-2">
+        <input
+          v-model="termsAccepted"
+          type="checkbox"
+          id="terms"
+          class="w-4 h-4 accent-indigo-500 focus:ring-2 focus:ring-indigo-500"
+        />
+        <label for="terms" class="mb-2 text-sm text-gray-700">
+          By continuing you agree to website's Terms & Conditions and Privacy
+          Policy
+        </label>
       </div>
 
       <button
+        :disabled="!termsAccepted"
         type="button"
-        class="w-full px-4 py-2 mt-4 font-medium text-center text-white transition duration-200 ease-in-out rounded-md bg-primary-100 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-indigo-700 focus:ring-opacity-50"
-        @click="checkPhoneNumberAvailability"
+        class="w-full px-4 py-2 font-medium text-center text-white transition duration-200 ease-in-out rounded-md bg-primary-100 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-indigo-700 focus:ring-opacity-50"
+        @click="submitForm"
       >
         Continue
       </button>
@@ -57,9 +61,11 @@ export default {
     const toast = useToast();
     return { toast };
   },
+
   data() {
     return {
       phoneNumber: undefined,
+      termsAccepted: false,
       errors: {},
     };
   },

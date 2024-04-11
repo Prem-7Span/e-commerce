@@ -41,7 +41,7 @@
         <input
           v-model="phoneNumber"
           type="text"
-          maxlength="12"
+          maxlength="10"
           placeholder="Mobile Number"
           class="px-3 py-2 text-gray-700 transition duration-200 ease-in-out border border-gray-300 rounded-md appearance-none focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-700 hover:border-indigo-500"
         />
@@ -50,6 +50,7 @@
 
       <div class="flex items-center space-x-2">
         <input
+          v-model="termsAccepted"
           type="checkbox"
           id="terms"
           class="w-4 h-4 accent-indigo-500 focus:ring-2 focus:ring-indigo-500"
@@ -61,6 +62,7 @@
       </div>
 
       <button
+        :disabled="!termsAccepted"
         type="button"
         class="w-full px-4 py-2 font-medium text-center text-white transition duration-200 ease-in-out rounded-md bg-primary-100 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-indigo-700 focus:ring-opacity-50"
         @click="submitForm"
@@ -97,6 +99,7 @@ export default {
       recaptchaVerifier: undefined,
       errors: {},
       isUserValid: false,
+      termsAccepted: false,
     };
   },
   methods: {
