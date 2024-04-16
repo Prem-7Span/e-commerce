@@ -14,7 +14,7 @@
           v-model="verificationOtp[index]"
           type="text"
           maxlength="1"
-          class="px-3 py-2 text-center border border-gray-300 rounded w-15 md:w-16 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+          class="w-8 text-center border border-gray-300 rounded md:px-3 md:py-2 md:w-16 focus:outline-none focus:ring-1 focus:ring-indigo-500"
           @input="handleInput(index)"
           :ref="`otpBox${index}`"
         />
@@ -26,7 +26,7 @@
         Resend OTP
       </button>
       <button
-        class="w-full px-3 py-2 mt-6 font-bold text-white rounded-md bg-primary-100 hover:bg-primary-100 focus:outline-none focus:ring-1 focus:bg-primary-100"
+        class="w-full py-2 mt-6 font-bold text-white rounded-md md:w-full md:px-3 bg-primary-100 hover:bg-primary-100 focus:outline-none focus:ring-1 focus:bg-primary-100"
         @click="submitForm"
       >
         Continue
@@ -38,8 +38,9 @@
 </template>
 
 <script>
-import authentication from "/src/components/config.js";
+import authentication from "@/plugins/firebase.js";
 import { PhoneAuthProvider, signInWithCredential } from "firebase/auth";
+import { useToast } from "vue-toastification";
 import { getAuth } from "firebase/auth";
 import axios from "axios";
 
@@ -147,7 +148,7 @@ export default {
           v-model="verificationOtp[index]"
           type="text"
           maxlength="1"
-          class="px-3 py-2 text-center border border-gray-300 rounded w-15 md:w-16 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+          class="w-8 text-center border border-gray-300 rounded md:px-3 md:py-2 md:w-16 focus:outline-none focus:ring-1 focus:ring-indigo-500"
           @input="handleInput(index)"
           :ref="`otpBox${index}`"
         />
@@ -159,7 +160,7 @@ export default {
         Resend OTP
       </button>
       <button
-        class="w-full px-3 py-2 mt-6 font-bold text-white rounded-md bg-primary-100 hover:bg-primary-100 focus:outline-none focus:ring-1 focus:bg-primary-100"
+        class="w-full py-2 mt-6 font-bold text-white rounded-md md:w-full md:px-3 bg-primary-100 hover:bg-primary-100 focus:outline-none focus:ring-1 focus:bg-primary-100"
         @click="submitForm"
       >
         Continue
@@ -177,12 +178,11 @@ import { getAuth } from "firebase/auth";
 import axios from "axios"; // Import axios for making HTTP requests
 
 export default {
-  // props: {
-  //   confirmationResult: {
-  //     type: Object,
-  //     required: true, // Ensure confirmationResult is received as a prop
-  //   },
-  // },
+  setup() {
+    const toast = useToast();
+    return { toast };
+  },
+
   data() {
     return {
       verificationOtp: ["", "", "", "", "", ""],
@@ -225,7 +225,9 @@ export default {
         await signInWithCredential(authentication, credential) // Assuming firebase is imported elsewhere
           .then((res) => {
             console.log(res);
-            this.successMessage = "Verification successful!";
+            this.toast.success("Verification successful!");
+            this.$router.push({ name: "HomePage" });
+            // this.successMessage = "Verification successful!";
 
             // Send mobile number to backend API
             // this.sendMobileNumber(res.user.phoneNumber);

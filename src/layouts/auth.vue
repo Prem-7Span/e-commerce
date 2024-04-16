@@ -1,15 +1,11 @@
 <template>
-  
-  <div id="main-container" class="grid grid-cols-2">
+  <div id="main-container" class="grid-cols-1 md:grid md:grid-cols-2">
     <div
       id="container-1"
-      class="bg-[url('/src/assets/bg-signup.png')] bg-no-repeat h-screen max-w-fll max-h-full"
+      class="md:bg-[url('public/auth/bg-signup.png')] md:bg-no-repeat md:h-screen md:max-w-full md:max-h-full hidden lg:block"
     >
-    
-      <!-- <img src="/src/assets/bg-signup.png" alt="bg-img" /> -->
       <div class="flex flex-col items-center justify-between h-full py-10">
-        <img src="/src/assets/Logo.svg" class="max-w-96" alt="" />
-
+        <img src="/public/auth/Logo.svg" class="md:max-w-96" alt="" />
         <h1 class="text-6xl text-white">Your fashion,your way!</h1>
       </div>
     </div>
