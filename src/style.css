@@ -2,3 +2,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.bg-overlay:before {
+  @apply absolute inset-0 z-10 w-full h-full;
+  content: "";
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.3) 0%,
+    rgba(102, 102, 102, 0.3) 100%
+  );
+}

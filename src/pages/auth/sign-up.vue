@@ -73,7 +73,12 @@
 
       <div class="text-sm text-center text-gray-500">
         Already have an account?
-        <a href="#" class="text-primary-200 hover:text-primary-100">Sign in</a>
+        <router-link
+          :to="{ name: 'SignIn' }"
+          class="text-primary-200 hover:text-primary-100"
+        >
+          Sign in
+        </router-link>
       </div>
     </div>
   </div>
@@ -82,7 +87,7 @@
 <script>
 import axios from "axios";
 import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
-import authentication from "/src/components/config.js"; // Assuming a Firebase authentication config
+import authentication from "@/plugins/firebase.js"; // Assuming a Firebase authentication config
 import { useToast } from "vue-toastification";
 export default {
   setup() {

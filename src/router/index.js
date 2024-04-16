@@ -1,0 +1,64 @@
+import { createRouter, createWebHashHistory } from "vue-router"; // Import createRouter and createWebHashHistory from vue-router
+import SignUp from "@/pages/auth/sign-up.vue";
+import SignIn from "@/pages/auth/sign-in.vue";
+import VerificationOtp from "@/pages/auth/verification-otp.vue"; // Make sure to include the correct file extension (.vue)
+import Auth from "@/layouts/auth.vue";
+import HomePage from "@/pages/public/home-page/index.vue";
+import ProductDetail from "@/pages/public/product-details/index.vue";
+import ProductList from "@/pages/public/product-list/index.vue";
+import Default from "@/layouts/default.vue";
+import ProductCard from "@/components/card/product-card.vue";
+const routes = [
+  {
+    path: "/",
+    component: Default,
+    children: [
+      {
+        name: "HomePage",
+        path: "",
+        component: HomePage,
+      },
+      {
+        name: "ProductList",
+        path: "product-list",
+        component: ProductList,
+      },
+      {
+        name: "ProductDetail",
+        path: "product-details",
+        component: ProductDetail,
+      },
+      {
+        name: "auth",
+        path: "auth",
+        component: Auth,
+        children: [
+          {
+            name: "SignIn",
+            path: "sign-in",
+            component: SignIn,
+          },
+
+          {
+            name: "SignUp",
+            path: "sign-up",
+            component: SignUp,
+          },
+
+          {
+            name: "VerificationOtp",
+            path: "verification-otp",
+            component: VerificationOtp,
+          },
+        ],
+      },
+    ],
+  },
+];
+
+const router = createRouter({
+  history: createWebHashHistory(),
+  routes,
+});
+
+export default router;
