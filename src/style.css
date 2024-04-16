@@ -12,3 +12,15 @@
     rgba(102, 102, 102, 0.3) 100%
   );
 }
+
+.product-wrap{
+
+display: grid;
+grid-template-columns: auto 1fr;
+
+}
+
+.img-container{
+
+padding-bottom: 132%;
+}

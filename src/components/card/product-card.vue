@@ -2,20 +2,24 @@
   <div class="rounded-md shadow-md hover:shadow-lg">
     <div class="relative">
       <!-- <img src="/src/assets/product-img/img1.png" class="object-cover w-full h-auto rounded-t-md" /> -->
+   <div class="img-container relative">
 
-      <img
-        v-if="product.images.length > 0"
-        :src="product.images[0].imageUrl"
-        class="object-cover w-full h-auto rounded-t-md"
-      />
-      <!-- <img
+     <img
+       v-if="product.images.length > 0"
+       :src="product.images[0].imageUrl"
+       class="object-cover  rounded-t-md absolute inset-0 w-full h-full"
+     />
+     <img
         v-else
-        src="/src/assets/product-img/img1.png"
-        class="object-cover w-full h-auto rounded-t-md"
-      /> -->
+        src="/public/img/Black.jpg"
+        class="object-cover w-full h-full rounded-t-md absolute inset-0"
+      />  
+   </div>
+    
+      
 
       <button class="absolute top-0 right-0 mt-2 mb-2 mr-2">
-        <!-- <img src="/src/assets/product-img/icon.svg" alt="" /> -->
+        <img src="/public/img/icon.svg" alt="" />
       </button>
       <button
         class="absolute top-0 left-0 p-1 m-1 mx-2 mt-2 mb-2 text-white rounded-md md:mx-3 bg-primary-300 md:p-2 md:w-20 md:m-6"
@@ -24,7 +28,7 @@
       </button>
     </div>
     <div class="p-3">
-      <a href="" class="font-semibold no-underline text-primary-dark">
+      <a href="" class="font-semibold no-underline text-primary-400">
         {{ product.name }}</a
       >
       <div class="flex items-center">
