@@ -1,6 +1,7 @@
 // main.js
 
 import { createApp } from "vue";
+import Tabs from "vue3-tabs";
 import { createPinia } from "pinia";
 import VueCarousel from "vue-carousel";
 import Toast from "vue-toastification";
@@ -13,6 +14,7 @@ const app = createApp(App);
 const pinia = createPinia();
 // Vue.use(VueCarousel);
 app.use(router); // Use Vue Router
+app.use(Tabs);
 app.use(Toast);
 app.use(pinia);
 app.mount("#app");

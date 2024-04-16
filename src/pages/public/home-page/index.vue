@@ -1,95 +1,99 @@
 <template>
   <div id="main-parent" class="">
-    <div id="banner" class="">
-      <!-- <img src="/home-page/homepage-banner.png" alt="banner" /> -->
-      <CarousalBanner />
-    </div>
+    <router-link :to="{ name: 'ProductList' }">
+      <div id="banner" class="">
+        <!-- <img src="/home-page/homepage-banner.png" alt="banner" /> -->
+        <CarousalBanner />
+      </div>
+    </router-link>
+
     <div class="container">
       <div class="sm:py-9">
         <div class="py-5 text-xl"><h3>Shop By Category</h3></div>
-        <div id="category" class="flex space-x-3 bg-primary-offBlack">
-          <div class="relative bg-overlay">
-            <img src="/home-page/category-img-1.png" alt="card-1" />
-            <div class="absolute z-20 space-y-3 bottom-10 left-5">
-              <h2 class="text-base text-white sm:text-5xl">Pants</h2>
-              <p class="text-xs text-white sm:text-2xl">Shop Now</p>
-            </div>
-          </div>
-          <div class="space-y-3">
+        <router-link :to="{ name: 'ProductList' }">
+          <div id="category" class="flex space-x-3 bg-primary-offBlack">
             <div class="relative bg-overlay">
-              <img src="/home-page/category-img-2.png" alt="card-2" />
+              <img src="/home-page/category-img-1.png" alt="card-1" />
               <div class="absolute z-20 space-y-3 bottom-10 left-5">
-                <h2 class="text-base text-white sm:text-5xl">Trouser</h2>
+                <h2 class="text-base text-white sm:text-5xl">Pants</h2>
                 <p class="text-xs text-white sm:text-2xl">Shop Now</p>
               </div>
             </div>
-            <div class="relative bg-overlay">
-              <img src="/home-page/category-img-3.png" alt="card-3" />
-              <div class="absolute z-20 space-y-3 bottom-10 left-5">
-                <h2 class="text-base text-white sm:text-5xl">T-shirts</h2>
-                <p class="text-xs text-white sm:text-2xl">Shop Now</p>
+            <div class="space-y-3">
+              <div class="relative bg-overlay">
+                <img src="/home-page/category-img-2.png" alt="card-2" />
+                <div class="absolute z-20 space-y-3 bottom-10 left-5">
+                  <h2 class="text-base text-white sm:text-5xl">Trouser</h2>
+                  <p class="text-xs text-white sm:text-2xl">Shop Now</p>
+                </div>
+              </div>
+              <div class="relative bg-overlay">
+                <img src="/home-page/category-img-3.png" alt="card-3" />
+                <div class="absolute z-20 space-y-3 bottom-10 left-5">
+                  <h2 class="text-base text-white sm:text-5xl">T-shirts</h2>
+                  <p class="text-xs text-white sm:text-2xl">Shop Now</p>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        </router-link>
       </div>
 
       <div class="sm:pt-9">
         <div class="py-5 text-xl"><h3>Deal of the day</h3></div>
-        <div id="category" class="flex space-x-3 bg-primary-offBlack space-x-">
-          <div id="col-1" class="space-y-3">
-            <div class="relative bg-overlay">
-              <img src="/public/home-page/deals-img-1.png" alt="card-1" />
-              <div class="absolute z-20 space-y-3 bottom-10 left-5">
-                <h2 class="text-base text-white sm:text-5xl">UPTO 40% OFF</h2>
-                <p class="text-xs text-white sm:text-2xl">Explore more</p>
+        <router-link :to="{ name: 'ProductList' }">
+          <div
+            id="category"
+            class="flex space-x-3 bg-primary-offBlack space-x-"
+          >
+            <div id="col-1" class="space-y-3">
+              <div class="relative bg-overlay">
+                <img src="/public/home-page/deals-img-1.png" alt="card-1" />
+                <div class="absolute z-20 space-y-3 bottom-10 left-5">
+                  <h2 class="text-base text-white sm:text-5xl">UPTO 40% OFF</h2>
+                  <p class="text-xs text-white sm:text-2xl">Explore more</p>
+                </div>
+              </div>
+              <div class="relative bg-overlay">
+                <img src="/public/home-page/deals-img-2.png" alt="card-1" />
+                <div class="absolute z-20 space-y-3 bottom-10 left-5">
+                  <h2 class="text-base text-white sm:text-5xl">UPTO 40% OFF</h2>
+                  <p class="text-xs text-white sm:text-2xl">Explore more</p>
+                </div>
               </div>
             </div>
-            <div class="relative bg-overlay">
-              <img src="/public/home-page/deals-img-2.png" alt="card-1" />
-              <div class="absolute z-20 space-y-3 bottom-10 left-5">
-                <h2 class="text-base text-white sm:text-5xl">UPTO 40% OFF</h2>
-                <p class="text-xs text-white sm:text-2xl">Explore more</p>
+            <div id="col-2" class="pt-16 space-y-3">
+              <div class="relative bg-overlay">
+                <img src="/public/home-page/deals-img-3.png" alt="card-2" />
+                <div class="absolute z-20 space-y-3 bottom-10 left-5">
+                  <h2 class="text-base text-white sm:text-5xl">UPTO 40% OFF</h2>
+                  <p class="text-xs text-white sm:text-2xl">Explore more</p>
+                </div>
+              </div>
+              <div class="relative bg-overlay">
+                <img src="/public/home-page/deals-img-4.png" alt="card-3" />
+                <div class="absolute z-20 space-y-3 bottom-10 left-5">
+                  <h2 class="text-base text-white sm:text-5xl">UPTO 40% OFF</h2>
+                  <p class="text-xs text-white sm:text-2xl">Explore more</p>
+                </div>
               </div>
             </div>
           </div>
-          <div id="col-2" class="pt-16 space-y-3">
-            <div class="relative bg-overlay">
-              <img src="/public/home-page/deals-img-3.png" alt="card-2" />
-              <div class="absolute z-20 space-y-3 bottom-10 left-5">
-                <h2 class="text-base text-white sm:text-5xl">UPTO 40% OFF</h2>
-                <p class="text-xs text-white sm:text-2xl">Explore more</p>
-              </div>
-            </div>
-            <div class="relative bg-overlay">
-              <img src="/public/home-page/deals-img-4.png" alt="card-3" />
-              <div class="absolute z-20 space-y-3 bottom-10 left-5">
-                <h2 class="text-base text-white sm:text-5xl">UPTO 40% OFF</h2>
-                <p class="text-xs text-white sm:text-2xl">Explore more</p>
-              </div>
-            </div>
-          </div>
-        </div>
+        </router-link>
       </div>
 
       <div class="pt-14">
-        <div>New Arrivals</div>
+        <div class="py-5 text-xl">New Arrivals</div>
         <div id="parent-card">
-          <!-- <div
-            class="border rounded-md border-neutral-200 hover:shadow-lg h-fit"
+          <div
+            class="grid grid-cols-2 grid-rows-4 gap-5 md:gap-8 md:grid-cols-4 md:grid-rows-2"
           >
-            <div class="relative">
-              <a href="#" class="block">
-                <img
-                  alt="Great product"
-                  class="block object-cover h-[386px] rounded-md aspect-square"
-                />
-              </a>
-              <button class="absolute top-0 right-0 mt-2 mb-2 mr-2">
-                <img src="/src/assets/product-img/icon.svg" alt="" />
-              </button>
-            </div>
-          </div> -->
+            <ProductCard
+              v-for="(product, index) in productData"
+              :key="index"
+              :product="product"
+            />
+          </div>
         </div>
       </div>
 
@@ -116,7 +120,7 @@
         <div class="py-2 text-xl"><h2>Customer Reviews</h2></div>
         <div class="flex items-center justify-center space-x-3">
           <div
-            class="flex flex-col items-center py-4 border card-1 sm:max-h-52 sm:max-w-md max-w-40"
+            class="flex flex-col items-center px-4 py-12 border card-1 sm:max-h-52 sm:max-w-md max-w-40"
           >
             <img src="/public/home-page/semi-colon.svg" alt="" />
             <p class="text-xs sm:text-base">
@@ -126,7 +130,7 @@
           </div>
 
           <div
-            class="flex flex-col items-center justify-center py-4 sm:max-w-md card-2 sm:max-h-52 max-w-40"
+            class="flex flex-col items-center justify-center px-4 py-12 border sm:max-w-md card-2 sm:max-h-52 max-w-40"
           >
             <img src="/public/home-page/semi-colon.svg" alt="" />
             <p class="text-xs sm:text-base">
@@ -136,7 +140,7 @@
           </div>
 
           <div
-            class="flex flex-col items-center justify-center py-4 sm:max-w-md card-3 sm:max-h-52 max-w-40"
+            class="flex flex-col items-center justify-center px-4 py-12 border sm:max-w-md card-3 sm:max-h-52 max-w-40"
           >
             <img src="/public/home-page/semi-colon.svg" alt="" />
             <p class="text-xs sm:text-base">
@@ -163,11 +167,31 @@
 <script>
 import CarousalBanner from "@/components/home-page/carousal-banner.vue";
 import CarousalReview from "@/components/home-page/carousal-review.vue";
+import axios from "axios";
+import ProductCard from "../../../components/card/product-card.vue";
 
 export default {
+  data() {
+    return {
+      productData: [],
+    };
+  },
   components: {
     CarousalBanner,
     CarousalReview,
+    ProductCard,
+  },
+  mounted() {
+    axios
+      .get("http://13.233.85.16/api/v1/product")
+      .then((response) => {
+        console.log("Products fetched successfully:", response);
+        this.productData = response.data.product;
+        this.productData.splice(0, 4);
+      })
+      .catch((error) => {
+        console.error("Error fetching products:", error);
+      });
   },
 };
 </script>

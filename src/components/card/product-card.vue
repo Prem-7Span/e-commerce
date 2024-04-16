@@ -2,21 +2,18 @@
   <div class="rounded-md shadow-md hover:shadow-lg">
     <div class="relative">
       <!-- <img src="/src/assets/product-img/img1.png" class="object-cover w-full h-auto rounded-t-md" /> -->
-   <div class="img-container relative">
-
-     <img
-       v-if="product.images.length > 0"
-       :src="product.images[0].imageUrl"
-       class="object-cover  rounded-t-md absolute inset-0 w-full h-full"
-     />
-     <img
-        v-else
-        src="/public/img/Black.jpg"
-        class="object-cover w-full h-full rounded-t-md absolute inset-0"
-      />  
-   </div>
-    
-      
+      <div class="relative img-container">
+        <img
+          v-if="product.images.length > 0"
+          :src="product.images[0].imageUrl"
+          class="absolute inset-0 object-cover w-full h-full rounded-t-md"
+        />
+        <img
+          v-else
+          src="/public/img/Black.jpg"
+          class="absolute inset-0 object-cover w-full h-full rounded-t-md"
+        />
+      </div>
 
       <button class="absolute top-0 right-0 mt-2 mb-2 mr-2">
         <img src="/public/img/icon.svg" alt="" />
@@ -52,11 +49,13 @@
           </p>
         </div>
 
-        <button
-          class="px-2 py-1 text-xs text-white rounded bg-primary-300 md:text-sm md:py-3 md:px-4"
-        >
-          Add to bag
-        </button>
+        <router-link :to="{ name: 'ProductDetail' }">
+          <button
+            class="px-2 py-1 text-xs text-white rounded bg-primary-300 md:text-sm md:py-3 md:px-4"
+          >
+            Add to bag
+          </button>
+        </router-link>
       </div>
     </div>
   </div>
