@@ -1,6 +1,18 @@
 <template>
   <div id="main parent" class="container h-fit">
-    <div id="upper-section" class="flex gap-20">
+    <div class="flex py-4 md:px-8 text-primary-300">
+      <div>
+        <button class="space-x-1 text-primary-300">Home</button>
+      </div>
+      <div>
+        <h2 class="gap-1 text-primary-300">/ All Products</h2>
+      </div>
+      <div>
+        <h2 class="gap-1 font-bold text-primary-300">/ Product name</h2>
+      </div>
+    </div>
+    <hr class="px-8 m-1 text-grey" />
+    <div id="upper-section" class="flex gap-20 py-3">
       <div id="img-section" class="flex gap-9">
         <div class="space-y-3">
           <img src="/public/product-details/product-img-1.png" alt="img-1" />
@@ -111,7 +123,7 @@
       </div>
     </div>
     <div id="lower-section">
-      <div>
+      <!-- <div>
         <tabs v-model="selectedTab">
           <tab
             class="tab"
@@ -127,12 +139,24 @@
             {{ tab.description }}
           </tab-panel>
         </tab-panels>
+      </div> -->
+    </div>
+    <div class="py-8">
+      <p class="py-4 text-xl">You might also like</p>
+      <div
+        class="grid grid-cols-2 grid-rows-4 gap-5 md:gap-8 md:grid-cols-4 md:grid-rows-1"
+      >
+        <ProductCard
+          v-for="(product, index) in productData"
+          :key="index"
+          :product="product"
+        />
       </div>
     </div>
   </div>
 </template>
 
-<script>
+<!-- <script>
 import { defineComponent, reactive, toRefs } from "vue";
 
 const tabs = [
@@ -163,4 +187,31 @@ export default defineComponent({
     };
   },
 });
+</script> -->
+<script>
+import axios from "axios";
+import ProductCard from "../../../components/card/product-card.vue";
+
+export default {
+  data() {
+    return {
+      productData: [],
+    };
+  },
+  components: {
+    ProductCard,
+  },
+  mounted() {
+    axios
+      .get("http://13.233.85.16/api/v1/product")
+      .then((response) => {
+        console.log("Products fetched successfully:", response);
+        this.productData = response.data.product;
+        this.productData.splice(0, 8);
+      })
+      .catch((error) => {
+        console.error("Error fetching products:", error);
+      });
+  },
+};
 </script>

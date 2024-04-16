@@ -23,7 +23,7 @@
         <p>444 Products</p>
       </div>
       <div class="block md:hidden">
-        <button class="block mt-2 mx-2 md:hidden" @click="open()">
+        <button class="block mx-2 mt-2 md:hidden" @click="open()">
           <img src="/public/img/Vector.svg" alt="" />
         </button>
       </div>
@@ -148,9 +148,9 @@
       <!-- div 2 -->
 
       <div
-        class="grid grid-cols-2 grid-rows-4 gap-5 md:gap-8 md:grid-cols-3 md:grid-rows-3"
+        class="grid grid-cols-2 grid-rows-4 gap-5 py-4 md:gap-8 md:grid-cols-3 md:grid-rows-3"
       >
-        <productcard
+        <ProductCard
           v-for="(product, index) in productData"
           :key="index"
           :product="product"
@@ -162,12 +162,12 @@
 
 <script>
 import axios from "axios";
-import productcard from "@/components/card/product-card.vue";
+import ProductCard from "../../../components/card/product-card.vue";
 
 export default {
   name: "product",
   components: {
-    productcard,
+    ProductCard,
   },
   data() {
     return {

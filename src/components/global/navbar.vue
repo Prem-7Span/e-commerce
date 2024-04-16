@@ -9,15 +9,24 @@
       <nav
         class="flex-col hidden space-x-4 space-y-4 md:flex md:flex-row md:space-y-0 md:space-x-4"
       >
-        <a href="#" class="text-gray-600 hover:text-gray-800 hover:underline"
-          >Men</a
+        <router-link
+          :to="{ name: 'ProductList' }"
+          class="text-gray-600 hover:text-gray-800 hover:underline"
         >
-        <a href="#" class="text-gray-600 hover:text-gray-800 hover:underline"
-          >Women</a
+          Men
+        </router-link>
+        <router-link
+          :to="{ name: 'ProductList' }"
+          class="text-gray-600 hover:text-gray-800 hover:underline"
         >
-        <a href="#" class="text-gray-600 hover:text-gray-800 hover:underline"
-          >More</a
+          Women
+        </router-link>
+        <router-link
+          :to="{ name: 'ProductList' }"
+          class="text-gray-600 hover:text-gray-800 hover:underline"
         >
+          More
+        </router-link>
         <a href="#" class="text-gray-600 hover:text-gray-800 hover:underline"
           >Studio</a
         >
