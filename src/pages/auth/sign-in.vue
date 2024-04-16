@@ -35,7 +35,7 @@
         :disabled="!termsAccepted"
         type="button"
         class="w-full px-4 py-2 font-medium text-center text-white transition duration-200 ease-in-out rounded-md bg-primary-100 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-indigo-700 focus:ring-opacity-50"
-        @click="submitForm"
+        @click="checkPhoneNumberAvailability"
       >
         Continue
       </button>
@@ -44,7 +44,9 @@
       <div class="mt-6 text-sm text-center text-gray-500">
         Don’t have an account?
 
-        <router-link to="/signup" class="text-primary-200">Sign Up</router-link>
+        <router-link :to="{ name: 'SignUp' }" class="text-primary-200"
+          >Sign Up</router-link
+        >
       </div>
     </div>
   </div>
@@ -53,8 +55,10 @@
 <script>
 import axios from "axios";
 import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
-import authentication from "/src/components/config.js"; // Assuming a Firebase authentication config
+import authentication from "@/plugins/firebase.js"; // Assuming a Firebase authentication config
 import { useToast } from "vue-toastification";
+import SignUp from "@/pages/auth/sign-up.vue";
+import { RouterLink } from "vue-router";
 
 export default {
   setup() {
@@ -90,26 +94,26 @@ export default {
       }
 
       try {
-        // Make API request to check if phone number is available
         const response = await axios.post("http://13.233.85.16/api/v1/login", {
           mobileNo: this.phoneNumber,
         });
 
+        console.log(":in error:,", response);
         if (response.data.sucess) {
-          // Phone number is available, proceed with verification
           this.errors.phoneNumber = undefined;
           console.log("Phone number is available:", this.phoneNumber);
-          this.submitForm(); // Proceed with phone number verification
+          this.submitForm();
         } else {
-          // Phone number is not available, display error
-          this.errors.phoneNumber =
-            "Phone Number is not available. Please sign up.";
+          console.log(":in error:");
+          this.toast.error("Account not available, Please sign up");
+          this.errors.phoneNumber = this.$router.push({ name: "SignUp" });
+          //   // "Phone Number is not available. Please sign up.";
         }
       } catch (error) {
-        this.errors.phoneNumber =
-          "Phone Number is not available. Please sign up.";
+        this.toast.error("Account not available, please sign up");
+        this.errors.phoneNumber = this.$router.push({ name: "SignUp" });
+        //   "Phone Number is not available. Please sign up.";
         console.error("Error checking phone number availability:", error);
-        // Handle error appropriately, e.g., display an error message to the user
       }
     },
     submitForm() {
