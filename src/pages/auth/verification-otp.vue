@@ -172,7 +172,7 @@ export default {
 </template>
 
 <script>
-import authentication from "/src/components/config.js";
+import authentication from "@/plugins/firebase.js";
 import { PhoneAuthProvider, signInWithCredential } from "firebase/auth";
 import { getAuth } from "firebase/auth";
 import axios from "axios"; // Import axios for making HTTP requests
