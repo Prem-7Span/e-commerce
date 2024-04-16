@@ -23,12 +23,12 @@
         <p>444 Products</p>
       </div>
       <div class="block md:hidden">
-        <button class="block md:hidden" @click="open()">
-          <!-- <img src="/src/assets/product-img/1icons.svg" alt="" /> -->
+        <button class="block mt-2 mx-2 md:hidden" @click="open()">
+          <img src="/public/img/Vector.svg" alt="" />
         </button>
       </div>
     </div>
-    <div class="grid px-2 mt-5 md: md:gap-6 xl:gap-20 product-wrap">
+    <div class="px-2 mt-5 md:gap-6 xl:gap-16 product-wrap">
       <!-- div 1 -->
       <div
         :class="sidebar ? 'block' : 'hidden'"
