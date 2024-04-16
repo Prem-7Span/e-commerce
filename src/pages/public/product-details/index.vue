@@ -75,6 +75,12 @@
             >
               XL
             </div>
+
+            <div
+              class="flex items-center justify-center w-12 h-12 text-center border rounded-full"
+            >
+              XXL
+            </div>
           </div>
         </div>
 
@@ -88,8 +94,73 @@
           <p class="text-gray-500">Free for orders above Rs. 500</p>
         </div>
 
-        <div></div>
+        <div class="flex gap-3 py-4">
+          <div></div>
+          <button
+            class="px-6 py-2 text-base text-white rounded-md bg-primary-offBlack"
+          >
+            Add to bag
+          </button>
+          <button
+            class="px-6 py-2 text-base text-white rounded-md bg-primary-offBlack"
+          >
+            Add to wishlist
+          </button>
+        </div>
+        <div class="divide-y"></div>
+      </div>
+    </div>
+    <div id="lower-section">
+      <div>
+        <tabs v-model="selectedTab">
+          <tab
+            class="tab"
+            v-for="(tab, i) in tabs"
+            :key="`t${i}`"
+            :val="tab.title"
+            :label="tab.title"
+            :indicator="true"
+          />
+        </tabs>
+        <tab-panels v-model="selectedTab" :animate="true">
+          <tab-panel v-for="(tab, i) in tabs" :key="`tp${i}`" :val="tab.title">
+            {{ tab.description }}
+          </tab-panel>
+        </tab-panels>
       </div>
     </div>
   </div>
 </template>
+
+<script>
+import { defineComponent, reactive, toRefs } from "vue";
+
+const tabs = [
+  {
+    title: "Description",
+    description:
+      "Lorem ipsum dolor sit amet consectetur. Nunc commodo odio metus donec est diam lectus at vel. Tortor mauris purus blandit vitae pretium dui commodo in. Tempus cursus praesent dolor integer mauris. Neque amet pretium curabitur condimentum elementum tincidunt sit. Lorem ipsum dolor sit amet consectetur. Nunc commodo odio metus donec est diam lectus at vel. Tortor mauris purus blandit vitae pretium dui commodo in. Tempus cursus praesent dolor integer mauris. Neque amet pretium curabitur condimentum elementum tincidunt sit",
+  },
+  {
+    title: "Additional info",
+    description: "info",
+  },
+  {
+    title: "Reviews",
+    description: "review.",
+  },
+];
+
+export default defineComponent({
+  name: "Example",
+  setup() {
+    const state = reactive({
+      selectedTab: tabs[1],
+    });
+    return {
+      tabs,
+      ...toRefs(state),
+    };
+  },
+});
+</script>
