@@ -178,7 +178,7 @@ export default {
     async registerUser() {
       try {
         const response = await axios.post(
-          "http://13.233.85.16/api/v1/register",
+          "https://api.8orbit.shop/api/v1/register",
           {
             firstName: this.firstname,
             lastName: this.lastname,
