@@ -178,7 +178,7 @@ export default {
   },
   mounted() {
     axios
-      .get("http://13.233.85.16/api/v1/product")
+      .get("https://api.8orbit.shop/api/v1/product")
       .then((response) => {
         console.log("Products fetched successfully:", response);
         this.productData = response.data.product;
