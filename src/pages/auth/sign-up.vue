@@ -143,16 +143,6 @@ export default {
             "Form submitted successfully (client-side validation passed)"
           );
           this.registerUser();
-          if (!this.recaptchaVerifier && this.isUserValid) {
-            console.log("Generating Captcha...");
-            this.generateCaptcha();
-          } else {
-            console.log(
-              "RecaptchaVerifier already created:",
-              this.recaptchaVerifier
-            );
-          }
-          this.verifyPhoneNumber();
       }
     },
     async verifyPhoneNumber() {
@@ -190,7 +180,16 @@ export default {
         this.isUserValid = true;
         // Handle response, e.g., show success message, redirect user, etc.
         console.log("Signup successful:", response.data);
-        this.toast.success("Sign-up successful");
+        if (!this.recaptchaVerifier && this.isUserValid) {
+          console.log("Generating Captcha...");
+          this.generateCaptcha();
+        } else {
+          console.log(
+            "RecaptchaVerifier already created:",
+            this.recaptchaVerifier
+          );
+        }
+        this.verifyPhoneNumber();
       } catch (error) {
         this.isUserValid = false;
         console.error("Error during signup:", error);

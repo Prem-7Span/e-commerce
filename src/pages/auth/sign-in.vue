@@ -132,7 +132,6 @@ export default {
           this.recaptchaVerifier
         );
       }
-      this.toast.success("Sign-in successful");
       this.verifyPhoneNumber();
     },
     async verifyPhoneNumber() {
