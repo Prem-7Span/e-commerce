@@ -11,7 +11,10 @@
       <div class="sm:py-9">
         <div class="py-5 text-xl"><h3>Shop By Category</h3></div>
         <router-link :to="{ name: 'ProductList' }">
-          <div id="category" class="flex space-x-3 bg-primary-offBlack">
+          <div
+            id="category"
+            class="flex space-x-3 overflow-hidden bg-primary-offBlack rounded-3xl"
+          >
             <div class="relative bg-overlay">
               <img src="/home-page/category-img-1.png" alt="card-1" />
               <div class="absolute z-20 space-y-3 bottom-10 left-5">
@@ -44,7 +47,7 @@
         <router-link :to="{ name: 'ProductList' }">
           <div
             id="category"
-            class="flex space-x-3 bg-primary-offBlack space-x-"
+            class="flex space-x-3 overflow-hidden bg-primary-offBlack rounded-3xl"
           >
             <div id="col-1" class="space-y-3">
               <div class="relative bg-overlay">
