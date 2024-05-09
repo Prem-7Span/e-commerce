@@ -2,7 +2,7 @@
   <div id="main-container" class="grid-cols-1 md:grid md:grid-cols-2">
     <div
       id="container-1"
-      class="md:bg-[url('public/auth/bg-signup.png')] md:bg-no-repeat md:h-screen md:max-w-full md:max-h-full hidden lg:block"
+      class="md:bg-[url('/auth/bg-signup.png')] md:bg-no-repeat md:h-screen md:max-w-full md:max-h-full hidden lg:block"
     >
       <div class="flex flex-col items-center justify-between h-full py-10">
         <img src="/public/auth/Logo.svg" class="md:max-w-96" alt="" />

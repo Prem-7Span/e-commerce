@@ -127,8 +127,22 @@
         </div>
       </div>
     </div>
-    <h2 class="p-4 mt-5 text-center text-white md:hidden">
-      Copyright 2024. All rights reserved.
-    </h2>
+    <div class="p-4">
+      <div class="text-xs text-white">Version: {{ version }}</div>
+      <h2 class="text-center text-white md:hidden">
+        Copyright 2024. All rights reserved.
+      </h2>
+    </div>
   </footer>
 </template>
+
+<script>
+import { version } from "../../../package.json";
+export default {
+  data() {
+    return {
+      version: version,
+    };
+  },
+};
+</script>

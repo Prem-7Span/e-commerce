@@ -94,9 +94,12 @@ export default {
       }
 
       try {
-        const response = await axios.post("http://13.233.85.16/api/v1/login", {
-          mobileNo: this.phoneNumber,
-        });
+        const response = await axios.post(
+          "https://api.8orbit.shop/api/v1/login",
+          {
+            mobileNo: this.phoneNumber,
+          }
+        );
 
         console.log(":in error:,", response);
         if (response.data.sucess) {
@@ -129,7 +132,6 @@ export default {
           this.recaptchaVerifier
         );
       }
-      this.toast.success("Sign-in successful");
       this.verifyPhoneNumber();
     },
     async verifyPhoneNumber() {

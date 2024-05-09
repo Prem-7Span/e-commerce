@@ -143,16 +143,6 @@ export default {
             "Form submitted successfully (client-side validation passed)"
           );
           this.registerUser();
-          if (!this.recaptchaVerifier && this.isUserValid) {
-            console.log("Generating Captcha...");
-            this.generateCaptcha();
-          } else {
-            console.log(
-              "RecaptchaVerifier already created:",
-              this.recaptchaVerifier
-            );
-          }
-          this.verifyPhoneNumber();
       }
     },
     async verifyPhoneNumber() {
@@ -178,7 +168,7 @@ export default {
     async registerUser() {
       try {
         const response = await axios.post(
-          "http://13.233.85.16/api/v1/register",
+          "https://api.8orbit.shop/api/v1/register",
           {
             firstName: this.firstname,
             lastName: this.lastname,
@@ -190,7 +180,16 @@ export default {
         this.isUserValid = true;
         // Handle response, e.g., show success message, redirect user, etc.
         console.log("Signup successful:", response.data);
-        this.toast.success("Sign-up successful");
+        if (!this.recaptchaVerifier && this.isUserValid) {
+          console.log("Generating Captcha...");
+          this.generateCaptcha();
+        } else {
+          console.log(
+            "RecaptchaVerifier already created:",
+            this.recaptchaVerifier
+          );
+        }
+        this.verifyPhoneNumber();
       } catch (error) {
         this.isUserValid = false;
         console.error("Error during signup:", error);
