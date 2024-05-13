@@ -108,28 +108,44 @@
           <div class="w-full sm:order-2">
             <img src="/public/home-page/highlights-img-1.png" alt="" />
           </div>
-          <div class="pt-3 text-xs md:px-6 md:text-lg">
-            <p>
+          <div class="pt-3 text-xs md:text-lg">
+            <p class="px-3">
               Lorem ipsum dolor sit amet consectetur. Elementum senectus ante
               orci at eget gravida fringilla sed. Mi lectus imperdiet auctor ut
               faucibus sem odio. Arcu fermentum faucibus donec et lorem nunc
               morbi. Vulputate blandit quam est vitae aliquet eget blandit.
             </p>
+            <div class="flex px-2 py-3">
+              <img src="/public/stars/yellow-star.svg" alt="yellow-star" />
+              <img src="/public/stars/yellow-star.svg" alt="yellow-star" />
+              <img src="/public/stars/yellow-star.svg" alt="yellow-star" />
+              <img src="/public/stars/yellow-star.svg" alt="yellow-star" />
+              <img src="/public/stars/black-star.svg" alt="black-star" />
+            </div>
           </div>
         </div>
       </div>
 
       <div class="sm:pt-14">
-        <div class="py-2 text-xl"><h2>Customer Reviews</h2></div>
+        <!-- <CarousalReview /> -->
+
+        <!-- <div class="py-2 text-xl"><h2>Customer Reviews</h2></div>
         <div class="flex items-center justify-center space-x-3">
           <div
-            class="flex flex-col items-center px-4 py-12 border card-1 sm:max-h-52 sm:max-w-md max-w-40"
+            class="flex flex-col items-center justify-center px-4 py-12 border sm:max-w-md card-2 sm:max-h-52 max-w-40"
           >
             <img src="/public/home-page/semi-colon.svg" alt="" />
             <p class="text-xs sm:text-base">
               Lorem ipsum dolor sit amet consectetur. Leo volutpat elit quam
               egestas placerat adipiscing faucibus sodales.
             </p>
+            <div class="flex px-2 py-3">
+              <img src="/public/stars/yellow-star.svg" alt="yellow-star" />
+              <img src="/public/stars/yellow-star.svg" alt="yellow-star" />
+              <img src="/public/stars/yellow-star.svg" alt="yellow-star" />
+              <img src="/public/stars/yellow-star.svg" alt="yellow-star" />
+              <img src="/public/stars/black-star.svg" alt="black-star" />
+            </div>
           </div>
 
           <div
@@ -140,6 +156,13 @@
               Lorem ipsum dolor sit amet consectetur. Leo volutpat elit quam
               egestas placerat adipiscing faucibus sodales.
             </p>
+            <div class="flex px-2 py-3">
+              <img src="/public/stars/yellow-star.svg" alt="yellow-star" />
+              <img src="/public/stars/yellow-star.svg" alt="yellow-star" />
+              <img src="/public/stars/yellow-star.svg" alt="yellow-star" />
+              <img src="/public/stars/yellow-star.svg" alt="yellow-star" />
+              <img src="/public/stars/black-star.svg" alt="black-star" />
+            </div>
           </div>
 
           <div
@@ -150,8 +173,15 @@
               Lorem ipsum dolor sit amet consectetur. Leo volutpat elit quam
               egestas placerat adipiscing faucibus sodales.
             </p>
+            <div class="flex px-2 py-3">
+              <img src="/public/stars/yellow-star.svg" alt="yellow-star" />
+              <img src="/public/stars/yellow-star.svg" alt="yellow-star" />
+              <img src="/public/stars/yellow-star.svg" alt="yellow-star" />
+              <img src="/public/stars/yellow-star.svg" alt="yellow-star" />
+              <img src="/public/stars/black-star.svg" alt="black-star" />
+            </div>
           </div>
-        </div>
+        </div> -->
       </div>
 
       <div class="py-14">
@@ -181,8 +211,8 @@ export default {
   },
   components: {
     CarousalBanner,
-    CarousalReview,
     ProductCard,
+    CarousalReview,
   },
   mounted() {
     axios
