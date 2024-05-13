@@ -51,14 +51,14 @@
           >
             <div id="col-1" class="space-y-3">
               <div class="relative bg-overlay">
-                <img src="/public/home-page/deals-img-1.png" alt="card-1" />
+                <img src="/home-page/deals-img-1.png" alt="card-1" />
                 <div class="absolute z-20 space-y-3 bottom-10 left-5">
                   <h2 class="text-base text-white sm:text-5xl">UPTO 40% OFF</h2>
                   <p class="text-xs text-white sm:text-2xl">Explore more</p>
                 </div>
               </div>
               <div class="relative bg-overlay">
-                <img src="/public/home-page/deals-img-2.png" alt="card-1" />
+                <img src="/home-page/deals-img-2.png" alt="card-1" />
                 <div class="absolute z-20 space-y-3 bottom-10 left-5">
                   <h2 class="text-base text-white sm:text-5xl">UPTO 40% OFF</h2>
                   <p class="text-xs text-white sm:text-2xl">Explore more</p>
@@ -67,14 +67,14 @@
             </div>
             <div id="col-2" class="pt-16 space-y-3">
               <div class="relative bg-overlay">
-                <img src="/public/home-page/deals-img-3.png" alt="card-2" />
+                <img src="/home-page/deals-img-3.png" alt="card-2" />
                 <div class="absolute z-20 space-y-3 bottom-10 left-5">
                   <h2 class="text-base text-white sm:text-5xl">UPTO 40% OFF</h2>
                   <p class="text-xs text-white sm:text-2xl">Explore more</p>
                 </div>
               </div>
               <div class="relative bg-overlay">
-                <img src="/public/home-page/deals-img-4.png" alt="card-3" />
+                <img src="/home-page/deals-img-4.png" alt="card-3" />
                 <div class="absolute z-20 space-y-3 bottom-10 left-5">
                   <h2 class="text-base text-white sm:text-5xl">UPTO 40% OFF</h2>
                   <p class="text-xs text-white sm:text-2xl">Explore more</p>
@@ -106,7 +106,7 @@
           class="flex flex-col items-center justify-between space-x-5 sm:flex-row bg-gray-50"
         >
           <div class="w-full sm:order-2">
-            <img src="/public/home-page/highlights-img-1.png" alt="" />
+            <img src="/home-page/highlights-img-1.png" alt="" />
           </div>
           <div class="pt-3 text-xs md:text-lg">
             <p class="px-3">
@@ -134,7 +134,7 @@
           <div
             class="flex flex-col items-center justify-center px-4 py-12 border sm:max-w-md card-2 sm:max-h-52 max-w-40"
           >
-            <img src="/public/home-page/semi-colon.svg" alt="" />
+            <img src="/home-page/semi-colon.svg" alt="" />
             <p class="text-xs sm:text-base">
               Lorem ipsum dolor sit amet consectetur. Leo volutpat elit quam
               egestas placerat adipiscing faucibus sodales.
@@ -151,7 +151,7 @@
           <div
             class="flex flex-col items-center justify-center px-4 py-12 border sm:max-w-md card-2 sm:max-h-52 max-w-40"
           >
-            <img src="/public/home-page/semi-colon.svg" alt="" />
+            <img src="/home-page/semi-colon.svg" alt="" />
             <p class="text-xs sm:text-base">
               Lorem ipsum dolor sit amet consectetur. Leo volutpat elit quam
               egestas placerat adipiscing faucibus sodales.
@@ -168,7 +168,7 @@
           <div
             class="flex flex-col items-center justify-center px-4 py-12 border sm:max-w-md card-3 sm:max-h-52 max-w-40"
           >
-            <img src="/public/home-page/semi-colon.svg" alt="" />
+            <img src="/home-page/semi-colon.svg" alt="" />
             <p class="text-xs sm:text-base">
               Lorem ipsum dolor sit amet consectetur. Leo volutpat elit quam
               egestas placerat adipiscing faucibus sodales.
@@ -187,10 +187,10 @@
       <div class="py-14">
         <div class="py-2 text-xl"><h2>Check us out on Instagram</h2></div>
         <div class="flex items-center justify-between space-x-3">
-          <div><img src="/public/home-page/instagram-img-1.png" alt="" /></div>
-          <div><img src="/public/home-page/instagram-img-2.png" alt="" /></div>
-          <div><img src="/public/home-page/instagram-img-3.png" alt="" /></div>
-          <div><img src="/public/home-page/instagram-img-4.png" alt="" /></div>
+          <div><img src="/home-page/instagram-img-1.png" alt="" /></div>
+          <div><img src="/home-page/instagram-img-2.png" alt="" /></div>
+          <div><img src="/home-page/instagram-img-3.png" alt="" /></div>
+          <div><img src="/home-page/instagram-img-4.png" alt="" /></div>
         </div>
       </div>
     </div>

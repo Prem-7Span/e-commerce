@@ -14,6 +14,10 @@
           class="absolute inset-0 object-cover w-full h-full rounded-t-md"
         />
       </div>
+      <button class="absolute top-0 right-0 mt-2 mb-2 mr-2 active:text-red-500  focus:outline-none">
+
+  <MdiHeartOutline class="active:text-red-800" />
+</button>
 
       <button
         class="absolute top-0 right-0 px-2 py-2 mt-2 mb-2 mr-2 bg-white rounded-full"
@@ -76,7 +80,11 @@
   </div>
 </template>
 <script>
+import MdiHeartOutline from "../../assets/icons/MdiHeartOutline.vue"
 export default {
+  components:{
+    MdiHeartOutline
+  },
   props: {
     product: Object,
   },

@@ -1,7 +1,11 @@
 <template>
-  <Navbar />
-  <router-view></router-view>
-  <Footer />
+  <div>
+    <Navbar v-if="!$route.path.startsWith('/checkout')" />
+
+    <router-view />
+
+    <Footer v-if="!$route.path.startsWith('/checkout')" />
+  </div>
 </template>
 
 <script>

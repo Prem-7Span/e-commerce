@@ -15,14 +15,14 @@
     <div id="upper-section" class="flex gap-20 py-3">
       <div id="img-section" class="flex gap-9">
         <div class="space-y-3">
-          <img src="/public/product-details/product-img-1.png" alt="img-1" />
-          <img src="/public/product-details/product-img-2.png" alt="img-2" />
-          <img src="/public/product-details/product-img-3.png" alt="img-3" />
-          <img src="/public/product-details/product-img-4.png" alt="img-4" />
+          <img src="/product-details/product-img-1.png" alt="img-1" />
+          <img src="/product-details/product-img-2.png" alt="img-2" />
+          <img src="/product-details/product-img-3.png" alt="img-3" />
+          <img src="/product-details/product-img-4.png" alt="img-4" />
         </div>
         <div class="w-[459px]">
           <img
-            src="/public/product-details/product-img-main.png"
+            src="/product-details/product-img-main.png"
             class="object-fill"
             alt="main-img"
           />
@@ -38,11 +38,11 @@
           pretium curabitur condimentum elementum tincidunt sit.
         </p>
         <div class="flex py-3">
-          <div><img src="/public/stars/yellow-star.svg" alt="" /></div>
-          <div><img src="/public/stars/yellow-star.svg" alt="" /></div>
-          <div><img src="/public/stars/yellow-star.svg" alt="" /></div>
-          <div><img src="/public/stars/yellow-star.svg" alt="" /></div>
-          <div><img src="/public/stars/black-star.svg" alt="" /></div>
+          <div><img src="/stars/yellow-star.svg" alt="" /></div>
+          <div><img src="/stars/yellow-star.svg" alt="" /></div>
+          <div><img src="/stars/yellow-star.svg" alt="" /></div>
+          <div><img src="/stars/yellow-star.svg" alt="" /></div>
+          <div><img src="/stars/black-star.svg" alt="" /></div>
         </div>
         <div class="flex gap-2 py-2">
           <p class="text-xl text-bold">$799</p>
@@ -108,11 +108,13 @@
 
         <div class="flex gap-3 py-4">
           <div></div>
+          <router-link :to="{ name: 'Checkout' }">
           <button
             class="px-6 py-2 text-base text-white rounded-md bg-primary-offBlack"
           >
             Add to bag
           </button>
+          </router-link>
           <button
             class="px-6 py-2 text-base text-white rounded-md bg-primary-offBlack"
           >

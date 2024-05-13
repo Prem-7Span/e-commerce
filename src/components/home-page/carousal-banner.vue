@@ -2,7 +2,7 @@
   <Carousel :autoplay="2000" :wrap-around="true">
     <Slide v-for="slide in 10" :key="slide">
       <div class="carousel__item">
-        <img src="/public/home-page/homepage-banner.png" alt="" />
+        <img src="/home-page/homepage-banner.png" alt="" />
       </div>
     </Slide>
   </Carousel>

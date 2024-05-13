@@ -37,6 +37,12 @@ export default {
           blackShade:
             "background: linear-gradient(180deg, rgba(0, 0, 0, 0.3) 0%, rgba(102, 102, 102, 0.3) 100%)",
         },
+        secondary:{
+          red:'#754F23',
+          100:'#616161',
+          200:'#212121',
+          300:'#3E9A63'
+        }
       },
     },
   },
