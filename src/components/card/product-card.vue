@@ -1,5 +1,8 @@
 <template>
-  <div class="rounded-md shadow-md hover:shadow-lg">
+  <div
+    class="rounded-md shadow-md hover:shadow-lg"
+    @click="$router.push(`/product-list/${product.slug}`)"
+  >
     <div class="relative">
       <!-- <img src="/src/assets/product-img/img1.png" class="object-cover w-full h-auto rounded-t-md" /> -->
       <div class="relative img-container">
@@ -67,12 +70,11 @@
           </p>
         </div>
       </div>
-      <router-link
-        :to="{ name: 'ProductDetail' }"
+      <button
         class="block w-full max-w-full px-5 py-2 my-4 text-base text-center text-black bg-transparent border border-gray-600 rounded hover:bg-gray-900 hover:text-white"
       >
         Add to bag
-      </router-link>
+      </button>
     </div>
   </div>
 </template>

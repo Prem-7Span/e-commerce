@@ -16,20 +16,32 @@ const routes = [
     component: Default,
     children: [
       {
-        name: "HomePage",
+        name: "home",
         path: "",
         component: HomePage,
       },
       {
-        name: "ProductList",
-        path: "product-list",
-        component: ProductList,
+        name: "product-list",
+        path: "/product-list",
+        redirectTo: { name: "list" },
+        children: [
+          {
+            name: "list",
+            path: "/",
+            component: ProductList,
+          },
+          {
+            name: "product-details",
+            path: ":slug",
+            component: ProductDetail,
+          },
+        ],
       },
-      {
-        name: "ProductDetail",
-        path: "product-details",
-        component: ProductDetail,
-      },
+      // {
+      //   name: "ProductDetail",
+      //   path: "product-details",
+      //   component: ProductDetail,
+      // },
       {
         name: "Checkout",
         path: "Checkout",
