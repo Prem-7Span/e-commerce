@@ -1,59 +1,88 @@
 <template>
-  
-   <div class="py-3 px-3 md:hidden block logo shadow-md w-full">
-        <router-link :to="{ name: 'HomePage' }">
-          <img src="/default/logo-navbar.svg" alt="logo" />
-        </router-link>
-      </div>
-  <div class="md:mx-5 cursor-pointer">
-    <div class="flex md:px-8 px-2 py-4 md:flex-row md:space-x-4 justify-between">
-      <div class="py-2 md:block hidden logo">
-        <router-link :to="{ name: 'HomePage' }">
+  <div class="block w-full px-3 py-3 shadow-md md:hidden logo">
+    <router-link :to="{ name: 'home' }">
+      <img src="/default/logo-navbar.svg" alt="logo" />
+    </router-link>
+  </div>
+  <div class="cursor-pointer md:mx-5">
+    <div
+      class="flex justify-between px-2 py-4 md:px-8 md:flex-row md:space-x-4"
+    >
+      <div class="hidden py-2 md:block logo">
+        <router-link :to="{ name: 'home' }">
           <img src="/default/logo-navbar.svg" alt="logo" />
         </router-link>
       </div>
 
-      <div class="flex md:w-fit w-44 text-center min-w-fit mx-auto">
-        <div @click="tab='bag'" :class="{ 'bg-primary-300': tab === 'bag', 'text-white': tab === 'bag', 'text-black': tab !== 'bag' }" class="flex items-center font-bold justify-center md:w-12 w-8 h-8 md:h-12 text-center border rounded-full">
+      <div class="flex mx-auto text-center md:w-fit w-44 min-w-fit">
+        <div
+          @click="tab = 'bag'"
+          :class="{
+            'bg-primary-300': tab === 'bag',
+            'text-white': tab === 'bag',
+            'text-black': tab !== 'bag',
+          }"
+          class="flex items-center justify-center w-8 h-8 font-bold text-center border rounded-full md:w-12 md:h-12"
+        >
           1
         </div>
 
-        <div class="md:mt-3 mt-2 mx-1 md:text-base text-xs md:px-2 font-bold">Bag</div>
-        <hr class="md:mt-6 mt-4 text-primary-300 px-4 m-1 mx-1 md:px-7 md:m-1 md:mx-2 flex">
+        <div class="mx-1 mt-2 text-xs font-bold md:mt-3 md:text-base md:px-2">
+          Bag
+        </div>
+        <hr
+          class="flex px-4 m-1 mx-1 mt-4 md:mt-6 text-primary-300 md:px-7 md:m-1 md:mx-2"
+        />
 
-        <div @click="tab='address'" :class="{ 'bg-primary-300': tab === 'address', 'text-white': tab === 'address', 'text-black': tab !== 'address' }" class="flex items-center font-bold justify-center md:w-12 w-8 h-8 md:h-12 text-center border rounded-full">
+        <div
+          @click="tab = 'address'"
+          :class="{
+            'bg-primary-300': tab === 'address',
+            'text-white': tab === 'address',
+            'text-black': tab !== 'address',
+          }"
+          class="flex items-center justify-center w-8 h-8 font-bold text-center border rounded-full md:w-12 md:h-12"
+        >
           2
         </div>
 
-        <label class="md:mt-3 mt-2 mx-1 md:text-base text-xs md:px-2 font-bold">Address</label>
-        <hr class="md:mt-6 mt-4 text-primary-300 px-4 m-1 mx-1 md:px-7 md:m-1 md:mx-2 flex">
+        <label class="mx-1 mt-2 text-xs font-bold md:mt-3 md:text-base md:px-2"
+          >Address</label
+        >
+        <hr
+          class="flex px-4 m-1 mx-1 mt-4 md:mt-6 text-primary-300 md:px-7 md:m-1 md:mx-2"
+        />
 
-        <div class="flex items-center font-bold justify-center text-black md:w-12 w-8 h-8 md:h-12 text-center border rounded-full">
+        <div
+          class="flex items-center justify-center w-8 h-8 font-bold text-center text-black border rounded-full md:w-12 md:h-12"
+        >
           3
         </div>
-        <label class="md:mt-3 mt-2 mx-1 md:text-base text-xs md:px-2 font-bold">Payment</label>
+        <label class="mx-1 mt-2 text-xs font-bold md:mt-3 md:text-base md:px-2"
+          >Payment</label
+        >
       </div>
       <div></div>
     </div>
-    <hr class="w-full md:m-2 md:mb-2 flex text-primary-300">
+    <hr class="flex w-full md:m-2 md:mb-2 text-primary-300" />
 
     <component :is="tab" />
   </div>
 </template>
 
 <script>
-import bag from '../../../components/bag/index.vue'
-import address from '../../../components/address/index.vue'
+import bag from "../../../components/bag/index.vue";
+import address from "../../../components/address/index.vue";
 
 export default {
   data() {
     return {
-      tab: "bag"
-    }
+      tab: "bag",
+    };
   },
   components: {
     bag,
     address,
-  }
-}
+  },
+};
 </script>

@@ -1,7 +1,7 @@
 <template>
-  <div class="flex md:px-8 px-2 py-4 md:flex-row md:space-x-4 font-bold">
+  <div class="flex px-2 py-4 font-bold md:px-8 md:flex-row md:space-x-4">
     <div class="py-2 logo">
-      <router-link :to="{ name: 'HomePage' }">
+      <router-link :to="{ name: 'home' }">
         <img src="/default/logo-navbar.svg" alt="logo" />
       </router-link>
     </div>
