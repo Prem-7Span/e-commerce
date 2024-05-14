@@ -1,8 +1,8 @@
 <template>
-  <div class="flex px-4 py-4 md:flex-row md:space-x-4">
+  <div class="flex md:px-8 px-2 py-4 md:flex-row md:space-x-4 font-bold">
     <div class="py-2 logo">
-      <router-link :to="{ name: 'home' }">
-        <img src="/public/default/logo-navbar.svg" alt="logo" />
+      <router-link :to="{ name: 'HomePage' }">
+        <img src="/default/logo-navbar.svg" alt="logo" />
       </router-link>
     </div>
     <div class="flex py-2 page">
@@ -41,12 +41,12 @@
     </div>
     <div class="flex items-center space-x-2">
       <img
-        src="/public/default/like-navbar.svg"
+        src="/default/like-navbar.svg"
         class="hidden py-2 sm:inline"
         alt="like"
       />
       <img
-        src="/public/default/cart-navbar.svg"
+        src="/default/cart-navbar.svg"
         class="hidden py-2 sm:inline"
         alt="cart"
       />
@@ -62,4 +62,4 @@
   </div>
 </template>
 
-<!-- <img src="/public/default/logo-navbar.svg" alt="logo" /> -->
+<!-- <img src="/default/logo-navbar.svg" alt="logo" /> -->

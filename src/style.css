@@ -24,3 +24,30 @@ grid-template-columns: auto 1fr;
 
 padding-bottom: 132%;
 }
+
+.sidebar{
+
+  height: calc(100vh - 20vh);
+  overflow: auto;
+}
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+ width:20px;
+ background-color: white;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+ 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  
+}
+
+
