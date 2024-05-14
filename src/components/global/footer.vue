@@ -59,18 +59,18 @@
               class="flex space-x-4 font-medium text-white dark:text-gray-400"
             >
               <li class="mt-2">
-                <img src="/public/default/visa-footer.svg" alt="visa-logo" />
+                <img src="/default/visa-footer.svg" alt="visa-logo" />
               </li>
 
               <li class="mt-1">
                 <img
-                  src="/public/default/mastercard-footer.svg"
+                  src="/default/mastercard-footer.svg"
                   alt="mastercard-logo"
                 />
               </li>
 
               <li class="mt-2">
-                <img src="/public/default/upi-footer.svg" alt="upi-logo" />
+                <img src="/default/upi-footer.svg" alt="upi-logo" />
               </li>
             </ul>
           </div>
@@ -110,19 +110,19 @@
           class="flex space-x-4 font-medium text-gray-500 dark:text-gray-400"
         >
           <div class="mb-2">
-            <img src="/public/default/fb-footer.svg" alt="fb-logo" />
+            <img src="/default/fb-footer.svg" alt="fb-logo" />
           </div>
 
           <div class="mb-2">
-            <img src="/public/default/insta-footer.svg" alt="insta-logo" />
+            <img src="/default/insta-footer.svg" alt="insta-logo" />
           </div>
 
           <div class="mb-2">
-            <img src="/public/default/x-footer.svg" alt="x-logo" />
+            <img src="/default/x-footer.svg" alt="x-logo" />
           </div>
 
           <div class="mb-2">
-            <img src="/public/default/yt-footer.svg" alt="yt-logo" />
+            <img src="/default/yt-footer.svg" alt="yt-logo" />
           </div>
         </div>
       </div>

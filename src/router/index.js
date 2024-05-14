@@ -7,6 +7,9 @@ import HomePage from "@/pages/public/home-page/index.vue";
 import ProductDetail from "@/pages/public/products/products-details.vue";
 import ProductList from "@/pages/public/products/products-list.vue";
 import Default from "@/layouts/default.vue";
+import Checkout from "../pages/public/product-checkout/index.vue";
+import ProductCard from "@/components/card/product-card.vue";
+import address from "../components/address/index.vue";
 const routes = [
   {
     path: "/",
@@ -33,6 +36,16 @@ const routes = [
             component: ProductDetail,
           },
         ],
+      },
+      {
+        name: "Checkout",
+        path: "Checkout",
+        component: Checkout,
+      },
+      {
+        name: "address",
+        path: "address",
+        component: address,
       },
       {
         name: "auth",

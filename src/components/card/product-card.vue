@@ -17,6 +17,7 @@
           class="absolute inset-0 object-cover w-full h-full rounded-t-md"
         />
       </div>
+     
 
       <button
         class="absolute top-0 right-0 px-2 py-2 mt-2 mb-2 mr-2 bg-white rounded-full"
