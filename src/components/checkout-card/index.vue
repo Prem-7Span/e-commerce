@@ -12,7 +12,9 @@
       <div class="md:flex grid grid-cols-2 grid-rows-1 md:items-center md:justify-between  md:gap-2 md:mb-2">
         <div class="md:mr-2   text-sm text-primary-400">Size: <span class="text-primary-300 font-semibold">M</span> </div>
         <div class="md:mr-2  text-sm text-gray-700"> Color:   <span class="font-semibold">Black</span></div>
-        <div class="md:mr-2 mt-1 md:mt-0 text-sm  text-primary-400 "> Qty:span 1</div>
+        <div class="md:mr-2 mt-1 md:mt-0 text-sm  text-primary-400 "> Qty: <span><div>
+          
+        </div></span></div>
       </div>
       <div class="flex gap-6 md:mt-0 mt-1 md:gap-7">
         <p class="text-primary-300 font-medium ">₹799</p>

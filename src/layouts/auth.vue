@@ -5,7 +5,7 @@
       class="md:bg-[url('/auth/bg-signup.png')] md:bg-no-repeat md:h-screen md:max-w-full md:max-h-full hidden lg:block"
     >
       <div class="flex flex-col items-center justify-between h-full py-10">
-        <img src="/auth/Logo.svg" class="md:max-w-96" alt="" />
+        <img src="/public/auth/Logo.svg" class="md:max-w-96" alt="" />
         <h1 class="text-6xl text-white">Your fashion,your way!</h1>
       </div>
     </div>

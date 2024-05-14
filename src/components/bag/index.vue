@@ -19,7 +19,7 @@
 <div
 class="grid grid-cols-2 grid-rows-4 gap-5 md:gap-8 md:grid-cols-4 md:grid-rows-1 mt-5"
         >
-          <ProductCard
+        <ProductCard
             v-for="(product, index) in productData"
             :key="index"
             :product="product"
@@ -36,11 +36,13 @@ import axios from "axios";
 import ProductCard from "../../components/card/product-card.vue";
 import ordercard from "../../components/order-summary/order-card.vue";
 import checkoutcard from "../../components/checkout-card/index.vue"
+import { useProductStore } from "/src/store/product.js";
 
 export default {
   data() {
     return {
       productData: [],
+      productStore: useProductStore(),
     };
   },
   components: {
@@ -48,17 +50,11 @@ export default {
     ordercard,
     checkoutcard
   },
-  mounted() {
-    axios
-      .get("https://api.8orbit.shop/api/v1/product")
-      .then((response) => {
-        console.log("Products fetched successfully:", response);
-        this.productData = response.data.product;
-        this.productData.splice(0, 10);
-      })
-      .catch((error) => {
-        console.error("Error fetching products:", error);
-      });
+  async mounted() {
+     this.productStore.fetchProductList();
+     this.productData = this.productStore.productData.splice(0, 4);
+
+  
   },
 };
 </script>

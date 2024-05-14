@@ -148,11 +148,11 @@
       <div
         class="grid grid-cols-2 grid-rows-4 gap-5 md:gap-8 md:grid-cols-4 md:grid-rows-1"
       >
-        <ProductCard
-          v-for="(product, index) in productData"
-          :key="index"
-          :product="product"
-        />
+      <ProductCard
+            v-for="(product, index) in productData"
+            :key="index"
+            :product="product"
+          />
       </div>
     </div>
   </div>
@@ -193,27 +193,22 @@ export default defineComponent({
 <script>
 import axios from "axios";
 import ProductCard from "../../../components/card/product-card.vue";
+import { useProductStore } from "/src/store/product.js";
+
 
 export default {
   data() {
     return {
       productData: [],
+      productStore: useProductStore(),
     };
   },
   components: {
     ProductCard,
   },
-  mounted() {
-    axios
-      .get("https://api.8orbit.shop/api/v1/product")
-      .then((response) => {
-        console.log("Products fetched successfully:", response);
-        this.productData = response.data.product;
-        this.productData.splice(0, 8);
-      })
-      .catch((error) => {
-        console.error("Error fetching products:", error);
-      });
+  async mounted() {
+    await this.productStore.fetchProductList();
+    this.productData = this.productStore.productData.splice(0, 4);
   },
 };
 </script>

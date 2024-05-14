@@ -89,23 +89,22 @@
         <div class="py-5 text-xl">New Arrivals</div>
         <div id="parent-card">
           <div
-            class="grid grid-cols-2 grid-rows-4 gap-5 md:gap-8 md:grid-cols-4 md:grid-rows-2"
+            class="grid grid-cols-2 grid-rows-2 gap-5 md:gap-8 md:grid-cols-4 md:grid-rows-1"
           >
-            <ProductCard
-              v-for="(product, index) in productData"
-              :key="index"
-              :product="product"
-            />
+          <ProductCard
+            v-for="(product, index) in productData"
+            :key="index"
+            :product="product"
+          />
           </div>
         </div>
       </div>
-
       <div class="pt-14">
         <div class="py-2 text-xl"><h2>Highlights</h2></div>
         <div
           class="flex flex-col items-center justify-between space-x-5 sm:flex-row bg-gray-50"
         >
-          <div class="w-full sm:order-2">
+                  <div class="w-full sm:order-2">
             <img src="/home-page/highlights-img-1.png" alt="" />
           </div>
           <div class="pt-3 text-xs md:text-lg">
@@ -200,12 +199,12 @@
 <script>
 import CarousalBanner from "@/components/home-page/carousal-banner.vue";
 import CarousalReview from "@/components/home-page/carousal-review.vue";
-import axios from "axios";
 import ProductCard from "../../../components/card/product-card.vue";
-
+import { useProductStore } from "/src/store/product.js";
 export default {
   data() {
     return {
+      productStore: useProductStore(),
       productData: [],
     };
   },
@@ -214,17 +213,9 @@ export default {
     ProductCard,
     CarousalReview,
   },
-  mounted() {
-    axios
-      .get("https://api.8orbit.shop/api/v1/product")
-      .then((response) => {
-        console.log("Products fetched successfully:", response);
-        this.productData = response.data.product;
-        this.productData.splice(0, 4);
-      })
-      .catch((error) => {
-        console.error("Error fetching products:", error);
-      });
+  async mounted() {
+    await this.productStore.fetchProductList();
+    this.productData = this.productStore.productData.splice(0, 4);
   },
-};
+  }
 </script>

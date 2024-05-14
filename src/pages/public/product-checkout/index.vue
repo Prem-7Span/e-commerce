@@ -1,4 +1,5 @@
 <template>
+  
    <div class="py-3 px-3 md:hidden block logo shadow-md w-full">
         <router-link :to="{ name: 'HomePage' }">
           <img src="/default/logo-navbar.svg" alt="logo" />
@@ -11,8 +12,6 @@
           <img src="/default/logo-navbar.svg" alt="logo" />
         </router-link>
       </div>
-
-     
 
       <div class="flex md:w-fit w-44 text-center min-w-fit mx-auto">
         <div @click="tab='bag'" :class="{ 'bg-primary-300': tab === 'bag', 'text-white': tab === 'bag', 'text-black': tab !== 'bag' }" class="flex items-center font-bold justify-center md:w-12 w-8 h-8 md:h-12 text-center border rounded-full">

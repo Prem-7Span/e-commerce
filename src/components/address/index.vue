@@ -73,7 +73,7 @@
 </div>
 
 <div class=" mb-8">
-  <button class="bg-primary-300 w-full text-center text-white rounded-md p-2" >Place Order</button>
+  <button class="bg-primary-300 w-full text-center text-white rounded-md p-2" >Add Address</button>
 </div>
 
 </div>

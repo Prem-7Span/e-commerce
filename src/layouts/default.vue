@@ -1,10 +1,10 @@
 <template>
   <div>
-    <Navbar v-if="!$route.path.startsWith('/checkout')" />
+    <Navbar v-if="!$route.path.startsWith('/Checkout')" />
 
     <router-view />
 
-    <Footer v-if="!$route.path.startsWith('/checkout')" />
+    <Footer v-if="!$route.path.startsWith('/Checkout')" />
   </div>
 </template>
 
