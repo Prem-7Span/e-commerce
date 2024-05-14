@@ -1,7 +1,7 @@
 <template>
   <div class="flex px-4 py-4 md:flex-row md:space-x-4">
     <div class="py-2 logo">
-      <router-link :to="{ name: 'HomePage' }">
+      <router-link :to="{ name: 'home' }">
         <img src="/public/default/logo-navbar.svg" alt="logo" />
       </router-link>
     </div>
@@ -10,19 +10,19 @@
         class="flex-col hidden space-x-4 space-y-4 md:flex md:flex-row md:space-y-0 md:space-x-4"
       >
         <router-link
-          :to="{ name: 'ProductList' }"
+          :to="{ name: 'product-list' }"
           class="text-gray-600 hover:text-gray-800 hover:underline"
         >
           Men
         </router-link>
         <router-link
-          :to="{ name: 'ProductList' }"
+          :to="{ name: 'product-list' }"
           class="text-gray-600 hover:text-gray-800 hover:underline"
         >
           Women
         </router-link>
         <router-link
-          :to="{ name: 'ProductList' }"
+          :to="{ name: 'product-list' }"
           class="text-gray-600 hover:text-gray-800 hover:underline"
         >
           More

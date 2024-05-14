@@ -122,26 +122,8 @@
         <div class="divide-y"></div>
       </div>
     </div>
-    <div id="lower-section">
-      <!-- <div>
-        <tabs v-model="selectedTab">
-          <tab
-            class="tab"
-            v-for="(tab, i) in tabs"
-            :key="`t${i}`"
-            :val="tab.title"
-            :label="tab.title"
-            :indicator="true"
-          />
-        </tabs>
-        <tab-panels v-model="selectedTab" :animate="true">
-          <tab-panel v-for="(tab, i) in tabs" :key="`tp${i}`" :val="tab.title">
-            {{ tab.description }}
-          </tab-panel>
-        </tab-panels>
-      </div> -->
-    </div>
-    <div class="py-8">
+    <div id="lower-section"></div>
+    <!-- <div class="py-8">
       <p class="py-4 text-xl">You might also like</p>
       <div
         class="grid grid-cols-2 grid-rows-4 gap-5 md:gap-8 md:grid-cols-4 md:grid-rows-1"
@@ -152,43 +134,13 @@
           :product="product"
         />
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 
+<script lang="ts"></script>
+
 <!-- <script>
-import { defineComponent, reactive, toRefs } from "vue";
-
-const tabs = [
-  {
-    title: "Description",
-    description:
-      "Lorem ipsum dolor sit amet consectetur. Nunc commodo odio metus donec est diam lectus at vel. Tortor mauris purus blandit vitae pretium dui commodo in. Tempus cursus praesent dolor integer mauris. Neque amet pretium curabitur condimentum elementum tincidunt sit. Lorem ipsum dolor sit amet consectetur. Nunc commodo odio metus donec est diam lectus at vel. Tortor mauris purus blandit vitae pretium dui commodo in. Tempus cursus praesent dolor integer mauris. Neque amet pretium curabitur condimentum elementum tincidunt sit",
-  },
-  {
-    title: "Additional info",
-    description: "info",
-  },
-  {
-    title: "Reviews",
-    description: "review.",
-  },
-];
-
-export default defineComponent({
-  name: "Example",
-  setup() {
-    const state = reactive({
-      selectedTab: tabs[1],
-    });
-    return {
-      tabs,
-      ...toRefs(state),
-    };
-  },
-});
-</script> -->
-<script>
 import axios from "axios";
 import ProductCard from "../../../components/card/product-card.vue";
 
@@ -214,4 +166,19 @@ export default {
       });
   },
 };
-</script>
+</script> -->
+
+<!-- <script setup>
+import { useProductStore } from "/st";
+import { onMounted } from "vue";
+import { storeToRefs } from "pinia";
+
+const productStore = useProductStore();
+const slug = "your-custom-slug-here"; // Replace this with the dynamic slug as needed
+
+onMounted(() => {
+  productStore.fetchProduct(slug);
+});
+
+const { product, loading, error } = storeToRefs(productStore);
+</script> -->

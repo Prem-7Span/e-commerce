@@ -93,7 +93,7 @@ export default {
           .then((res) => {
             console.log(res);
             this.toast.success("Verification successful!");
-            this.$router.push({ name: "HomePage" });
+            this.$router.push({ name: "home" });
             // this.successMessage = "Verification successful!";
 
             // Send mobile number to backend API
