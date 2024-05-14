@@ -1,6 +1,6 @@
 <template>
   <div id="main-parent" class="">
-    <router-link :to="{ name: 'product-list' }">
+    <router-link :to="{ name: 'list' }">
       <div id="banner" class="">
         <!-- <img src="/home-page/homepage-banner.png" alt="banner" /> -->
         <CarousalBanner />
@@ -10,7 +10,7 @@
     <div class="container">
       <div class="sm:py-9">
         <div class="py-5 text-xl"><h3>Shop By Category</h3></div>
-        <router-link :to="{ name: 'product-list' }">
+        <router-link :to="{ name: 'list' }">
           <div
             id="category"
             class="flex space-x-3 overflow-hidden bg-primary-offBlack rounded-3xl"
@@ -44,7 +44,7 @@
 
       <div class="sm:pt-9">
         <div class="py-5 text-xl"><h3>Deal of the day</h3></div>
-        <router-link :to="{ name: 'product-list' }">
+        <router-link :to="{ name: 'list' }">
           <div
             id="category"
             class="flex space-x-3 overflow-hidden bg-primary-offBlack rounded-3xl"

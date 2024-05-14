@@ -4,10 +4,9 @@ import SignIn from "@/pages/auth/sign-in.vue";
 import VerificationOtp from "@/pages/auth/verification-otp.vue"; // Make sure to include the correct file extension (.vue)
 import Auth from "@/layouts/auth.vue";
 import HomePage from "@/pages/public/home-page/index.vue";
-import ProductDetail from "@/pages/public/product-details/index.vue";
-import ProductList from "@/pages/public/product-list/index.vue";
+import ProductDetail from "@/pages/public/products/products-details.vue";
+import ProductList from "@/pages/public/products/products-list.vue";
 import Default from "@/layouts/default.vue";
-import ProductCard from "@/components/card/product-card.vue";
 const routes = [
   {
     path: "/",
@@ -19,27 +18,22 @@ const routes = [
         component: HomePage,
       },
       {
-        name: "product-list",
-        path: "/product-list",
-        redirectTo: { name: "list" },
+        name: "products",
+        path: "",
+        redirect: { name: "list" },
         children: [
           {
             name: "list",
-            path: "/",
+            path: "/products",
             component: ProductList,
           },
           {
-            name: "product-details",
-            path: ":slug",
+            name: "details",
+            path: "/products/:slug",
             component: ProductDetail,
           },
         ],
       },
-      // {
-      //   name: "ProductDetail",
-      //   path: "product-details",
-      //   component: ProductDetail,
-      // },
       {
         name: "auth",
         path: "auth",

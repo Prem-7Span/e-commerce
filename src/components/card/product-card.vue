@@ -1,7 +1,7 @@
 <template>
-  <div
+  <router-link
     class="rounded-md shadow-md hover:shadow-lg"
-    @click="$router.push(`/product-list/${product.slug}`)"
+    :to="{ name: 'details', params: { slug: product.slug } }"
   >
     <div class="relative">
       <!-- <img src="/src/assets/product-img/img1.png" class="object-cover w-full h-auto rounded-t-md" /> -->
@@ -75,7 +75,7 @@
         Add to bag
       </button>
     </div>
-  </div>
+  </router-link>
 </template>
 <script>
 export default {
