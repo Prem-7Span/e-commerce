@@ -17,7 +17,6 @@
           class="absolute inset-0 object-cover w-full h-full rounded-t-md"
         />
       </div>
-     
 
       <button
         class="absolute top-0 right-0 px-2 py-2 mt-2 mb-2 mr-2 bg-white rounded-full"
@@ -78,21 +77,28 @@
     </div>
   </router-link>
 </template>
+
 <script>
+import { ref, computed } from "vue";
+
 export default {
   props: {
     product: Object,
   },
-  computed: {
-    defaultVariantPrice() {
-      if (!this.product || !this.product.productVariants) {
+  setup(props) {
+    const defaultVariantPrice = computed(() => {
+      if (!props.product || !props.product.productVariants) {
         return null;
       }
-      const defaultVariant = this.product.productVariants.find(
-        (variant) => variant.isDefult === true
+      const defaultVariant = props.product.productVariants.find(
+        (variant) => variant.isDefault === true
       );
       return defaultVariant ? defaultVariant.price : null;
-    },
+    });
+
+    return {
+      defaultVariantPrice,
+    };
   },
 };
 </script>
