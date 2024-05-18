@@ -40,11 +40,11 @@
 </template>
 
 <script>
-import authentication from "@/plugins/firebase.js";
 import { PhoneAuthProvider, signInWithCredential } from "firebase/auth";
 import { getAuth } from "firebase/auth";
 import axios from "axios"; // Import axios for making HTTP requests
 import { useToast } from "vue-toastification";
+import authentication from "@/plugins/firebase.js";
 
 export default {
   setup() {
@@ -96,10 +96,11 @@ export default {
             console.log(res);
             this.toast.success("Verification successful!");
             this.$router.push({ name: "home" });
-            // this.successMessage = "Verification successful!";
 
-            // Send mobile number to backend API
-            // this.sendMobileNumber(res.user.phoneNumber);
+            // Store the token in localStorage
+            res.user.getIdToken().then((token) => {
+              localStorage.setItem("authToken", token);
+            });
           })
           .catch((error) => {
             if (error.code === "auth/invalid-verification-code") {

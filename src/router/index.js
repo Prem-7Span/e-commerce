@@ -41,6 +41,11 @@ const routes = [
           },
         ],
       },
+      {
+        name: "check-out",
+        path: "/checkout",
+        component: CheckOut,
+      },
 
       {
         name: "auth",

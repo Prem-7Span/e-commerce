@@ -1,5 +1,8 @@
 <template>
-  <div class="text-primary-300 px-2 md:px-6 scrollbar-hide">
+  <div class="px-2 md:px-6 scrollbar-hide">
+    <!-- Breadcrumb -->
+    <Breadcrumb :items="breadcrumbItems" />
+    <!-- 
     <div class="flex md:px-3 text-primary-300">
       <div>
         
@@ -8,8 +11,8 @@
       <div>
         <h2 class="gap-1 font-bold text-primary-300">/ All Products</h2>
       </div>
-    </div>
-    <hr class="px-8 m-1 text-grey" />
+    </div> -->
+    <hr class="px-8 m-1 text-gray-300" />
 
     <div class="flex justify-between md:px-3">
       <div class="flex gap-8 md:gap-32">
@@ -24,7 +27,7 @@
         <p>{{ productStore.productData.length }} Products</p>
       </div>
       <div class="block md:hidden">
-        <button class="block mx-2 mt-2 md:hidden" @click="open()">
+        <button class="block mx-2 mt-2 md:hidden" @click="openSidebar">
           <img src="/img/Vector.svg" alt="" />
         </button>
       </div>
@@ -192,7 +195,7 @@ import MultiRangeSlider from "multi-range-slider-vue";
 
 
 export default {
-  name: "product",
+  name: "ProductList",
   components: {
     ProductCard,
     MultiRangeSlider

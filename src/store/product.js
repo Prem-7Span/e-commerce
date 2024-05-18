@@ -61,3 +61,30 @@ export const useProductStore = defineStore("product", {
   },
   persist: true,
 });
+
+// In case you want to use this store in a setup function, you can provide a function to create a reactive reference
+export function useProductStoreComposition() {
+  const productStore = useProductStore();
+
+  // Expose reactive references
+  const productData = ref(productStore.productData);
+  const selectedCategories = ref(productStore.selectedCategories);
+  const selectedGender = ref(productStore.selectedGender);
+  const selectedPrice = ref(productStore.selectedPrice);
+  const selectedColor = ref(productStore.selectedColor);
+  const selectedSize = ref(productStore.selectedSize);
+  const selectedSort = ref(productStore.selectedSort);
+
+  return {
+    productData,
+    selectedCategories,
+    selectedGender,
+    selectedPrice,
+    selectedColor,
+    selectedSize,
+    selectedSort,
+    fetchProductList: productStore.fetchProductList,
+    applyFiltersAndFetch: productStore.applyFiltersAndFetch,
+    filterProducts: productStore.filterProducts,
+  };
+}
