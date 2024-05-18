@@ -91,11 +91,11 @@
           <div
             class="grid grid-cols-2 grid-rows-2 gap-5 md:gap-8 md:grid-cols-4 md:grid-rows-1"
           >
-          <ProductCard
-            v-for="(product, index) in productData"
-            :key="index"
-            :product="product"
-          />
+            <ProductCard
+              v-for="(product, index) in productData"
+              :key="index"
+              :product="product"
+            />
           </div>
         </div>
       </div>
@@ -104,7 +104,7 @@
         <div
           class="flex flex-col items-center justify-between space-x-5 sm:flex-row bg-gray-50"
         >
-                  <div class="w-full sm:order-2">
+          <div class="w-full sm:order-2">
             <img src="/home-page/highlights-img-1.png" alt="" />
           </div>
           <div class="pt-3 text-xs md:text-lg">
@@ -217,5 +217,5 @@ export default {
     await this.productStore.fetchProductList();
     this.productData = this.productStore.productData.splice(0, 4);
   },
-  }
+};
 </script>

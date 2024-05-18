@@ -1,5 +1,8 @@
 <template>
-  <div class="px-2 text-primary-300 md:px-6 scrollbar-hide">
+  <div class="px-2 md:px-6 scrollbar-hide">
+    <!-- Breadcrumb -->
+    <Breadcrumb :items="breadcrumbItems" />
+    <!-- 
     <div class="flex md:px-3 text-primary-300">
       <div>
         <button class="space-x-1 text-primary-300">Home</button>
@@ -7,8 +10,8 @@
       <div>
         <h2 class="gap-1 font-bold text-primary-300">/ All Products</h2>
       </div>
-    </div>
-    <hr class="px-8 m-1 text-grey" />
+    </div> -->
+    <hr class="px-8 m-1 text-gray-300" />
 
     <div class="flex justify-between md:px-3">
       <div class="flex gap-5">
@@ -23,7 +26,7 @@
         <p>{{ productStore.productData.length }} Products</p>
       </div>
       <div class="block md:hidden">
-        <button class="block mx-2 mt-2 md:hidden" @click="open()">
+        <button class="block mx-2 mt-2 md:hidden" @click="openSidebar">
           <img src="/img/Vector.svg" alt="" />
         </button>
       </div>
@@ -31,8 +34,9 @@
     <div class="px-2 mt-5 md:gap-6 xl:gap-16 product-wrap">
       <div
         :class="sidebar ? 'block' : 'hidden'"
-        class="px-1 md:w-60 w-full xl:w-64 md:!block z-10 md:relative absolute bg-white sidebar"
+        class="absolute z-10 w-full px-1 bg-white md:w-60 xl:w-64 md:block md:relative sidebar"
       >
+        <!-- Filters here -->
         <div>
           <h2 class="font-bold">Gender</h2>
           <hr class="p-1 px-20" />
@@ -272,7 +276,7 @@
         </div>
       </div>
 
-      <div class="">
+      <div>
         <div
           class="grid grid-cols-2 grid-rows-4 gap-5 py-4 md:gap-8 md:grid-cols-3 md:grid-rows-3"
         >
@@ -288,56 +292,68 @@
 </template>
 
 <script>
+import { ref, onMounted, onUnmounted, computed } from "vue";
 import { useProductStore } from "/src/store/product.js";
 import ProductCard from "@/components/card/product-card.vue";
+import Breadcrumb from "@/components/global/bread-crumb.vue";
 
 export default {
-  name: "product",
+  name: "ProductList",
   components: {
     ProductCard,
+    Breadcrumb,
   },
-  data() {
-    return {
-      sidebar: false,
-      isMobile: false,
-      productStore: useProductStore(),
+  setup() {
+    const productStore = useProductStore();
+    const sidebar = ref(false);
+
+    const breadcrumbItems = ref([
+      { name: "Home", path: "/" },
+      { name: "All Products", path: "/products" },
+    ]);
+
+    const openSidebar = () => {
+      sidebar.value = !sidebar.value;
     };
-  },
-  mounted() {
-    this.productStore.fetchProductList();
-    this.handleResize();
-    window.addEventListener("resize", this.handleResize);
-  },
-  beforeUnmount() {
-    window.removeEventListener("resize", this.handleResize);
-  },
-  methods: {
-    handleResize() {
-      this.isMobile = window.innerWidth >= 768;
-    },
-    open() {
-      this.sidebar = !this.sidebar;
-    },
-    applyFilters() {
-      // Simulate slow update with a delay of 1 second (1000 milliseconds)
-      setTimeout(() => {
-        this.productStore.applyFiltersAndFetch();
-      }, 1000);
-    },
-    clearFilters() {
-      this.productStore.selectedCategories = [];
-      this.productStore.selectedGender = [];
-      this.productStore.selectedPrice = [];
-      this.productStore.selectedColor = [];
-      this.productStore.selectedSize = [];
-      this.productStore.selectedSort = [];
-      this.productStore.fetchProductList();
-    },
-  },
-  computed: {
-    filteredProducts() {
-      return this.productStore.getProductData;
-    },
+
+    const clearFilters = () => {
+      productStore.selectedCategories = [];
+      productStore.selectedGender = [];
+      productStore.selectedPrice = [];
+      productStore.selectedColor = [];
+      productStore.selectedSize = [];
+      productStore.selectedSort = [];
+      productStore.fetchProductList();
+    };
+
+    onMounted(() => {
+      productStore.fetchProductList();
+      handleResize();
+      window.addEventListener("resize", handleResize);
+    });
+
+    const handleResize = () => {
+      sidebar.value = window.innerWidth >= 768;
+    };
+
+    onUnmounted(() => {
+      window.removeEventListener("resize", handleResize);
+    });
+
+    const filteredProducts = computed(() => productStore.getProductData);
+
+    return {
+      productStore,
+      sidebar,
+      breadcrumbItems,
+      openSidebar,
+      clearFilters,
+      filteredProducts,
+    };
   },
 };
 </script>
+
+<style scoped>
+/* Add any additional styling you need here */
+</style>

@@ -1,16 +1,8 @@
 <template>
   <div id="main parent" class="container h-fit">
-    <div class="flex py-4 md:px-8 text-primary-300">
-      <div>
-        <button class="space-x-1 text-primary-300">Home</button>
-      </div>
-      <div>
-        <h2 class="gap-1 text-primary-300">/ All Products</h2>
-      </div>
-      <div>
-        <h2 class="gap-1 font-bold text-primary-300">/ Product name</h2>
-      </div>
-    </div>
+    <!-- Breadcrumb -->
+    <Breadcrumb :items="breadcrumbItems" />
+
     <hr class="px-8 m-1 text-grey" />
     <div id="upper-section" class="gap-20 py-3 md:flex">
       <div id="img-section" class="flex gap-9">
@@ -72,7 +64,6 @@
           </div>
         </div>
 
-        <!-- Size Selector Component -->
         <div class="py-3">
           <p>Sizes</p>
           <div id="size-section" class="flex gap-3">
@@ -112,8 +103,6 @@
           <p class="text-gray-500">Free for orders above Rs. 500</p>
         </div>
 
-        <!-- ADD TO CARD || ADD TO wishlist -->
-
         <div class="flex gap-3 py-4">
           <div class="flex items-center w-24 border rounded-lg">
             <button
@@ -146,7 +135,6 @@
     </div>
     <div id="lower-section">
       <hr />
-      <!-- Dynamic Components -->
       <div class="px-3 pt-16 pb-5">
         <ul class="flex">
           <li
@@ -169,7 +157,6 @@
       </div>
     </div>
 
-    <!-- Product Card -->
     <div>
       <p class="py-5 text-xl">You might also like</p>
       <div
@@ -187,18 +174,17 @@
 
 <script setup>
 import axios from "axios";
-import { ref, onMounted, computed, watch } from "vue";
+import { ref, onMounted, computed, watchEffect } from "vue";
 import { useRoute } from "vue-router";
 import { useProductDetailsStore } from "../../../store/productDetails"; // Import your Pinia store
 import { useProductStore } from "/src/store/product.js";
 import ProductCard from "@/components/card/product-card.vue";
+import Breadcrumb from "@/components/global/bread-crumb.vue"; // Import the Breadcrumb component
 
-// Tab related imports
 import Description from "../../../components/product-details/description.vue";
 import AdditionalInfo from "../../../components/product-details/additional-info.vue";
 import Reviews from "../../../components/product-details/reviews.vue";
 
-// Initialize tab state
 const activeTab = ref("Description");
 
 const currentTabComponent = computed(() => {
@@ -219,7 +205,6 @@ const tabClass = (tab) => {
     : "cursor-pointer py-2 px-4 text-gray-600";
 };
 
-// Product details related logic
 const route = useRoute();
 const productDetailsStore = useProductDetailsStore(); // Initialize your Pinia store
 
@@ -229,6 +214,7 @@ const selectedColor = ref("");
 const selectedSize = ref("");
 const productDetails = ref({});
 const productVariants = ref([]);
+const quantity = ref(1);
 
 const mainImageUrl = computed(() => {
   return fetchedImages.value.length > 0
@@ -240,7 +226,6 @@ const availableColors = computed(() => {
   return [...new Set(productVariants.value.map((variant) => variant.color))];
 });
 
-// Define all possible sizes (you can customize this list based on your needs)
 const allSizes = ["S", "M", "L", "XL", "XXL"];
 
 const availableSizes = computed(() => {
@@ -262,10 +247,14 @@ const selectedVariant = computed(() => {
 const getColorClass = (color) => {
   const colorMap = {
     red: "bg-red-500",
+    yellow: "bg-yellow-500",
     black: "bg-black",
-    cyan: "bg-cyan-500",
+    blue: "bg-cyan-500",
     orange: "bg-orange-600",
     purple: "bg-purple-500",
+    pink: "bg-pink-500",
+    green: "bg-green-500",
+    white: "bg-white-500",
   };
   return colorMap[color] || "bg-gray-500";
 };
@@ -279,12 +268,26 @@ const decrement = () => {
     quantity.value--;
   }
 };
+
 const addToCart = async () => {
   try {
-    const response = await axios.post("https://api.8orbit.shop/api/v1/cart", {
-      productVariantId: selectedVariant.value.id,
-      quantity: quantity.value,
-    });
+    const token = localStorage.getItem("authToken");
+    if (!token) {
+      throw new Error("No authentication token found");
+    }
+
+    const response = await axios.post(
+      "https://api.8orbit.shop/api/v1/cart",
+      {
+        productVariantId: selectedVariant.value.id,
+        quantity: quantity.value,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
     console.log("Added to cart:", response.data);
   } catch (error) {
     console.error("Error adding to cart:", error);
@@ -311,13 +314,27 @@ onMounted(() => {
     });
 });
 
-// ProductCard
+const breadcrumbItems = ref([
+  { name: "Home", path: "/" },
+  { name: "All Products", path: "/products" },
+  { name: "" },
+]);
+
+watchEffect(() => {
+  if (productDetails.value.name) {
+    breadcrumbItems.value[2].name = productDetails.value.name;
+  }
+});
+
 const productStore = useProductStore();
 const productData = ref([]);
 
-// Fetch the product list on component mount
 onMounted(async () => {
   await productStore.fetchProductList();
-  productData.value = productStore.productData.slice(0, 4); // Use slice instead of splice to keep the original data intact
+  productData.value = productStore.productData.slice(0, 4);
 });
 </script>
+
+<style scoped>
+/* Add any additional styling you need here */
+</style>
