@@ -56,7 +56,7 @@
       >
         <div class="flex flex-row items-center justify-center gap-2">
           <div class="flex gap-1">
-            <p>₹</p>
+            <p>₹{{ product.price }}</p>
             <p
               class="text-lg font-semibold text-primary-300 md:text-lg xl:text-2xl"
             >

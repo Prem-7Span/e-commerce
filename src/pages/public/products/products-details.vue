@@ -108,11 +108,15 @@
 
         <div class="flex gap-3 py-4">
           <div></div>
+          <router-link :to="{ name: 'Checkout' }">
           <button
+          
             class="px-6 py-2 text-base text-white rounded-md bg-primary-offBlack"
           >
+          
             Add to bag
           </button>
+          </router-link>
           <button
             class="px-6 py-2 text-base text-white rounded-md bg-primary-offBlack"
           >
