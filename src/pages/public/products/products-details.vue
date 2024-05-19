@@ -104,6 +104,8 @@
         </div>
 
         <div class="flex gap-3 py-4">
+          <div></div>
+          <router-link :to="{ name: 'Checkout' }">
           <div class="flex items-center w-24 border rounded-lg">
             <button
               @click="decrement"
@@ -120,11 +122,14 @@
             </button>
           </div>
           <button
+          
             @click="addToCart"
             class="px-6 py-2 text-base text-white rounded-md bg-primary-offBlack"
           >
+          
             Add to bag
           </button>
+          </router-link>
           <button
             class="px-6 py-2 text-base text-white rounded-md bg-primary-offBlack"
           >

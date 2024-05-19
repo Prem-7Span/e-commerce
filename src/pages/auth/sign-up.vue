@@ -1,4 +1,5 @@
 <template>
+  <div class="main">
   <div
     class="flex flex-col items-center justify-center min-h-screen px-4 py-12 sign-up-page"
   >
@@ -80,7 +81,13 @@
           Sign in
         </router-link>
       </div>
+
+      
+
+
+      
     </div>
+  </div>
   </div>
 </template>
 
@@ -205,3 +212,13 @@ export default {
   },
 };
 </script>
+
+
+<style>
+.main{
+  position: fixed;
+  background:transparent;
+  inset: 0;
+  margin: auto;
+}
+</style>
