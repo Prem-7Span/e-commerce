@@ -50,11 +50,13 @@
           class="hidden py-2 sm:inline"
           alt="like"
         />
-        <img
-          src="/default/cart-navbar.svg"
-          class="hidden py-2 sm:inline"
-          alt="cart"
-        />
+        <router-link :to="{ name: 'check-out' }">
+          <img
+            src="/default/cart-navbar.svg"
+            class="hidden py-2 sm:inline"
+            alt="cart"
+          />
+        </router-link>
         <button
           @click="openModal"
           class="px-4 py-2 text-white rounded-lg bg-primary-100"
