@@ -1,38 +1,40 @@
 <template>
-  <div class="flex items-center justify-center min-h-screen bg-white">
-    <div
-      class="w-full px-8 py-6 text-center bg-white rounded-lg shadow-md md:text-left md:max-w-md"
-    >
-      <h3 class="text-xl font-semibold text-gray-700">OTP Verification</h3>
-      <p class="mt-6 text-sm text-gray-600">
-        Please enter OTP here to continue
-      </p>
-      <div class="flex justify-center gap-2 mt-5">
-        <input
-          v-for="(input, index) in 6"
-          :key="index"
-          v-model="verificationOtp[index]"
-          type="text"
-          maxlength="1"
-          class="w-8 text-center border border-gray-300 rounded md:px-3 md:py-2 md:w-16 focus:outline-none focus:ring-1 focus:ring-indigo-500"
-          @input="handleInput(index)"
-          :ref="`otpBox${index}`"
-        />
+  <div class="main">
+    <div class="flex items-center justify-center min-h-screen bg-white">
+      <div
+        class="w-full px-8 py-6 text-center bg-white rounded-lg shadow-md md:text-left md:max-w-md"
+      >
+        <h3 class="text-xl font-semibold text-gray-700">OTP Verification</h3>
+        <p class="mt-6 text-sm text-gray-600">
+          Please enter OTP here to continue
+        </p>
+        <div class="flex justify-center gap-2 mt-5">
+          <input
+            v-for="(input, index) in 6"
+            :key="index"
+            v-model="verificationOtp[index]"
+            type="text"
+            maxlength="1"
+            class="w-8 text-center border border-gray-300 rounded md:px-3 md:py-2 md:w-16 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+            @input="handleInput(index)"
+            :ref="`otpBox${index}`"
+          />
+        </div>
+        <button
+          class="block mt-4 text-sm text-gray-400 hover:underline"
+          @click="resendOTP"
+        >
+          Resend OTP
+        </button>
+        <button
+          class="w-full py-2 mt-6 font-bold text-white rounded-md md:w-full md:px-3 bg-primary-100 hover:bg-primary-100 focus:outline-none focus:ring-1 focus:bg-primary-100"
+          @click="submitForm"
+        >
+          Continue
+        </button>
+        <p class="mt-4 text-sm text-red-500">{{ errorMessage }}</p>
+        <p class="mt-4 text-sm text-green-500">{{ successMessage }}</p>
       </div>
-      <button
-        class="block mt-4 text-sm text-gray-400 hover:underline"
-        @click="resendOTP"
-      >
-        Resend OTP
-      </button>
-      <button
-        class="w-full py-2 mt-6 font-bold text-white rounded-md md:w-full md:px-3 bg-primary-100 hover:bg-primary-100 focus:outline-none focus:ring-1 focus:bg-primary-100"
-        @click="submitForm"
-      >
-        Continue
-      </button>
-      <p class="mt-4 text-sm text-red-500">{{ errorMessage }}</p>
-      <p class="mt-4 text-sm text-green-500">{{ successMessage }}</p>
     </div>
   </div>
 </template>
@@ -73,7 +75,6 @@ export default {
     },
     async submitForm() {
       const otp = this.verificationOtp.join("");
-      console.log("OTP::", otp);
 
       this.errorMessage = ""; // Reset error message
 
@@ -124,3 +125,12 @@ export default {
   },
 };
 </script>
+
+<style>
+.main {
+  position: fixed;
+  background: transparent;
+  inset: 0;
+  margin: auto;
+}
+</style>

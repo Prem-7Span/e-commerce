@@ -1,25 +1,24 @@
 import { defineStore } from "pinia";
 import axios from "axios";
-import { ref } from "vue";
 
 export const useProductStore = defineStore("product", {
   state: () => ({
     productData: [],
-    selectedCategories: [],
-    selectedGender: [],
-    selectedPrice: [],
-    selectedColor: [],
-    selectedSize: [],
-    selectedSort: [],
+    parentCategory: [],
+    categoryName: [],
+    minPrice: 0,
+    maxPrice: 1500,
+    color: [],
+    size: [],
   }),
   actions: {
-    async fetchProductList(filters = {}) {
+    async fetchProductList() {
       try {
+        if (this.productData && this.productData.length > 0) {
+          return this.productData;
+        }
         const response = await axios.get(
-          "https://api.8orbit.shop/api/v1/product",
-          {
-            params: filters,
-          }
+          "https://api.8orbit.shop/api/v1/product"
         );
         this.productData = response.data.product;
       } catch (error) {
@@ -28,34 +27,34 @@ export const useProductStore = defineStore("product", {
     },
     async applyFiltersAndFetch() {
       try {
-        const filters = {
-          categories: this.selectedCategories,
-          gender: this.selectedGender,
-          price: this.selectedPrice,
-          color: this.selectedColor,
-          size: this.selectedSize,
-          sort: this.selectedSort,
-        };
         const response = await axios.get(
           "https://api.8orbit.shop/api/v1/product",
           {
-            params: filters,
+            params: {
+              categoryName: this.categoryName,
+              parentCategory: this.parentCategory,
+              color: this.color,
+              size: this.size,
+              minPrice: this.minPrice,
+              maxPrice: this.maxPrice,
+            },
           }
         );
+        console.log({ response });
+        this.productData = response.data;
+        return response.data;
       } catch (error) {
         console.error("Error applying filters and fetching products:", error);
       }
     },
-    filterProducts() {
-      const filters = {
-        categories: this.selectedCategories,
-        gender: this.selectedGender,
-        price: this.selectedPrice,
-        color: this.selectedColor,
-        size: this.selectedSize,
-        sort: this.selectedSort,
-      };
-      this.fetchProductList(filters);
+    clearFilters() {
+      this.categoryName = [];
+      this.parentCategory = [];
+      this.color = [];
+      this.size = [];
+      this.minPrice = 0;
+      this.maxPrice = 1500;
+      this.fetchProductList();
     },
   },
   getters: {
@@ -63,6 +62,7 @@ export const useProductStore = defineStore("product", {
       return this.productData;
     },
   },
+  persist: true,
 });
 
 // In case you want to use this store in a setup function, you can provide a function to create a reactive reference

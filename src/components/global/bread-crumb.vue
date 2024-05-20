@@ -1,4 +1,4 @@
-<!-- src/components/Breadcrumb.vue -->
+<!-- src/components/global/bread-crumb.vue -->
 <template>
   <nav class="py-2 breadcrumb">
     <ul class="flex items-center space-x-2">
