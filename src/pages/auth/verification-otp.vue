@@ -1,5 +1,4 @@
 <template>
-  <div class="main">
   <div class="flex items-center justify-center min-h-screen bg-white">
     <div
       class="w-full px-8 py-6 text-center bg-white rounded-lg shadow-md md:text-left md:max-w-md"
@@ -36,7 +35,6 @@
       <p class="mt-4 text-sm text-green-500">{{ successMessage }}</p>
     </div>
   </div>
-</div>
 </template>
 
 <script>
@@ -126,12 +124,3 @@ export default {
   },
 };
 </script>
-
-<style>
-.main{
-  position: fixed;
-  background:transparent;
-  inset: 0;
-  margin: auto;
-}
-</style>

@@ -197,12 +197,10 @@
 </template>
 
 <script>
-import signIn from "../../auth/sign-in.vue";
 import CarousalBanner from "@/components/home-page/carousal-banner.vue";
 import CarousalReview from "@/components/home-page/carousal-review.vue";
 import ProductCard from "../../../components/card/product-card.vue";
 import { useProductStore } from "/src/store/product.js";
-
 export default {
   data() {
     return {
@@ -214,12 +212,10 @@ export default {
     CarousalBanner,
     ProductCard,
     CarousalReview,
-    signIn
   },
   async mounted() {
-  await this.productStore.fetchProductList();
-  this.productData = this.productStore.productData.slice(0, 4);
-}
-
-  }
+    await this.productStore.fetchProductList();
+    this.productData = this.productStore.productData.splice(0, 4);
+  },
+};
 </script>
