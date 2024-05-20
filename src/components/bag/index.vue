@@ -51,10 +51,12 @@ export default {
     checkoutcard
   },
   async mounted() {
-  await this.productStore.fetchProductList();
-  this.productData = this.productStore.productData.slice(0, 4);
-}
-  }
+     this.productStore.fetchProductList();
+     this.productData = this.productStore.productData.splice(0, 4);
+
+  
+  },
+};
 </script>
 
 <style>
