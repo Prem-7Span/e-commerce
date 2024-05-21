@@ -60,7 +60,6 @@
 
 <script>
 import axios from "axios";
-import signUp from "./sign-up.vue";
 import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
 import authentication from "@/plugins/firebase.js"; // Assuming a Firebase authentication config
 import { useToast } from "vue-toastification";
@@ -68,28 +67,19 @@ import SignUp from "@/pages/auth/sign-up.vue";
 import { ref } from "vue";
 
 export default {
-  components: {
-    signUp,
-  },
   setup() {
     const toast = useToast();
     return { toast };
   },
+
   data() {
     return {
       phoneNumber: undefined,
       termsAccepted: false,
-      isModalOpen: false,
       errors: {},
     };
   },
   methods: {
-    openModal() {
-      this.isModalOpen = true;
-    },
-    closeModal() {
-      this.isModalOpen = false;
-    },
     generateCaptcha() {
       console.log("Entering generateCaptcha method");
       this.recaptchaVerifier = new RecaptchaVerifier(
@@ -104,17 +94,24 @@ export default {
       );
     },
     async checkPhoneNumberAvailability() {
+      this.errors = {}; // Clear previous errors
       if (!this.phoneNumber) {
         this.errors.phoneNumber = "Phone Number is required";
+        return;
+      }
+      if (this.phoneNumber.length !== 10) {
+        this.errors.phoneNumber = "Phone Number must be exactly 10 digits";
+        return;
+      }
+      if (!/^\d{10}$/.test(this.phoneNumber)) {
+        this.errors.phoneNumber = "Phone Number must be numeric";
         return;
       }
 
       try {
         const response = await axios.post(
           "https://api.8orbit.shop/api/v1/login",
-          {
-            mobileNo: this.phoneNumber,
-          }
+          { mobileNo: this.phoneNumber }
         );
 
         console.log(":in error:,", response);
@@ -126,15 +123,12 @@ export default {
           console.log("Phone number is available:", this.phoneNumber);
           this.submitForm();
         } else {
-          console.log(":in error:");
           this.toast.error("Account not available, Please sign up");
-          this.errors.phoneNumber = this.$router.push({ name: "SignUp" });
-          //   // "Phone Number is not available. Please sign up.";
+          this.$router.push({ name: "SignUp" });
         }
       } catch (error) {
         this.toast.error("Account not available, please sign up");
-        this.errors.phoneNumber = this.$router.push({ name: "SignUp" });
-        //   "Phone Number is not available. Please sign up.";
+        this.$router.push({ name: "SignUp" });
         console.error("Error checking phone number availability:", error);
       }
     },
@@ -170,22 +164,12 @@ export default {
         });
       } catch (error) {
         console.error("Error during phone number verification:", error);
-        // Handle the error appropriately, e.g., display an error message to the user
       }
-    },
-    isValidEmail(email) {
-      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
     },
   },
 };
 </script>
 
-<style>
-.main {
-  text-align: center;
-
-  background: transparent;
-  inset: 0;
-  margin: auto;
-}
+<style scoped>
+/* Add any necessary styles here */
 </style>

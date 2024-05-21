@@ -17,6 +17,7 @@
             maxlength="1"
             class="w-8 text-center border border-gray-300 rounded md:px-3 md:py-2 md:w-16 focus:outline-none focus:ring-1 focus:ring-indigo-500"
             @input="handleInput(index)"
+            @keydown="handleKeydown($event, index)"
             :ref="`otpBox${index}`"
           />
         </div>
@@ -73,6 +74,13 @@ export default {
         ""
       );
     },
+    handleKeydown(event, index) {
+      if (event.key === 'Backspace' && this.verificationOtp[index] === '') {
+        if (index > 0) {
+          this.$refs[`otpBox${index - 1}`][0].focus();
+        }
+      }
+    },
     async submitForm() {
       const otp = this.verificationOtp.join("");
 
@@ -125,12 +133,3 @@ export default {
   },
 };
 </script>
-
-<style>
-.main {
-  position: fixed;
-  background: transparent;
-  inset: 0;
-  margin: auto;
-}
-</style>

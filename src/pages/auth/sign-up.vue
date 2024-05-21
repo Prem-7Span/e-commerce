@@ -1,86 +1,84 @@
 <template>
-  <div class="main">
+  <div
+    class="flex flex-col items-center justify-center min-h-screen px-4 py-12 sign-up-page"
+  >
     <div
-      class="flex flex-col items-center justify-center min-h-screen px-4 py-12 sign-up-page"
+      class="w-full max-w-md px-8 py-6 space-y-5 text-center bg-white rounded-lg shadow-md md:text-left md:max-w-md"
     >
-      <div
-        class="w-full max-w-md px-8 py-6 space-y-5 text-center bg-white rounded-lg shadow-md md:text-left md:max-w-md"
+      <div class="text-2xl animate_animated animate_fadeIn">Sign Up</div>
+
+      <div class="flex flex-col space-y-2">
+        <input
+          v-model="firstname"
+          type="text"
+          placeholder="First Name"
+          class="px-3 py-2 text-gray-700 transition duration-200 ease-in-out border border-gray-300 rounded-md appearance-none focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-700 hover:border-indigo-500"
+        />
+        <p class="mt-2 text-primary-200">{{ errors.firstname }}</p>
+      </div>
+
+      <div class="flex flex-col space-y-2">
+        <input
+          v-model="lastname"
+          type="text"
+          placeholder="Last Name"
+          class="px-3 py-2 text-gray-700 transition duration-200 ease-in-out border border-gray-300 rounded-md appearance-none focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-700 hover:border-indigo-500"
+        />
+        <p class="mt-2 text-primary-200">{{ errors.lastname }}</p>
+      </div>
+
+      <div class="flex flex-col space-y-2">
+        <input
+          v-model="email"
+          type="email"
+          placeholder="Email"
+          class="px-3 py-2 text-gray-700 transition duration-200 ease-in-out border border-gray-300 rounded-md appearance-none focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-700 hover:border-indigo-500"
+        />
+        <p class="mt-2 text-primary-200">{{ errors.email }}</p>
+      </div>
+
+      <div class="flex flex-col space-y-2">
+        <input
+          v-model="phoneNumber"
+          type="text"
+          maxlength="10"
+          placeholder="Mobile Number"
+          class="px-3 py-2 text-gray-700 transition duration-200 ease-in-out border border-gray-300 rounded-md appearance-none focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-700 hover:border-indigo-500"
+        />
+        <p class="mt-2 text-primary-200">{{ errors.phoneNumber }}</p>
+      </div>
+
+      <div class="flex  space-x-2">
+        <input
+          v-model="termsAccepted"
+          type="checkbox"
+          id="terms"
+          class="w-4 h-4 mt-1 accent-indigo-500 focus:ring-2 focus:ring-indigo-500"
+        />
+        <label for="terms" class="text-sm text-gray-700">
+          By continuing you agree to website's Terms & Conditions and Privacy
+          Policy
+        </label>
+      </div>
+
+      <button
+        :disabled="!termsAccepted"
+        type="button"
+        class="w-full px-4 py-2 font-medium text-center text-white transition duration-200 ease-in-out rounded-md bg-primary-100 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-indigo-700 focus:ring-opacity-50"
+        @click="submitForm"
       >
-        <div class="text-2xl animate_animated animate_fadeIn">Sign Up</div>
+        Continue
+      </button>
+      <div id="recaptcha-container"></div>
 
-        <div class="flex flex-col space-y-2">
-          <input
-            v-model="firstname"
-            type="text"
-            placeholder="First Name"
-            class="px-3 py-2 text-gray-700 transition duration-200 ease-in-out border border-gray-300 rounded-md appearance-none focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-700 hover:border-indigo-500"
-          />
-          <p class="mt-2 text-primary-200">{{ errors.firstname }}</p>
-        </div>
-
-        <div class="flex flex-col space-y-2">
-          <input
-            v-model="lastname"
-            type="text"
-            placeholder="Last Name"
-            class="px-3 py-2 text-gray-700 transition duration-200 ease-in-out border border-gray-300 rounded-md appearance-none focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-700 hover:border-indigo-500"
-          />
-          <p class="mt-2 text-primary-200">{{ errors.lastname }}</p>
-        </div>
-
-        <div class="flex flex-col space-y-2">
-          <input
-            v-model="email"
-            type="email"
-            placeholder="Email"
-            class="px-3 py-2 text-gray-700 transition duration-200 ease-in-out border border-gray-300 rounded-md appearance-none focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-700 hover:border-indigo-500"
-          />
-          <p class="mt-2 text-primary-200">{{ errors.email }}</p>
-        </div>
-
-        <div class="flex flex-col space-y-2">
-          <input
-            v-model="phoneNumber"
-            type="text"
-            maxlength="10"
-            placeholder="Mobile Number"
-            class="px-3 py-2 text-gray-700 transition duration-200 ease-in-out border border-gray-300 rounded-md appearance-none focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-700 hover:border-indigo-500"
-          />
-          <p class="mt-2 text-primary-200">{{ errors.phoneNumber }}</p>
-        </div>
-
-        <div class="flex items-center space-x-2">
-          <input
-            v-model="termsAccepted"
-            type="checkbox"
-            id="terms"
-            class="w-4 h-4 accent-indigo-500 focus:ring-2 focus:ring-indigo-500"
-          />
-          <label for="terms" class="text-sm text-gray-700">
-            By continuing you agree to website's Terms & Conditions and Privacy
-            Policy
-          </label>
-        </div>
-
-        <button
-          :disabled="!termsAccepted"
-          type="button"
-          class="w-full px-4 py-2 font-medium text-center text-white transition duration-200 ease-in-out rounded-md bg-primary-100 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-indigo-700 focus:ring-opacity-50"
-          @click="submitForm"
+      <div class="text-sm text-center text-gray-500">
+        Already have an account?
+        <router-link
+          :to="{ name: 'SignIn' }"
+          class="text-primary-200 hover:text-primary-100"
         >
-          Continue
-        </button>
-        <div id="recaptcha-container"></div>
-
-        <div class="text-sm text-center text-gray-500">
-          Already have an account?
-          <router-link
-            :to="{ name: 'SignIn' }"
-            class="text-primary-200 hover:text-primary-100"
-          >
-            Sign in
-          </router-link>
-        </div>
+          Sign in
+        </router-link>
       </div>
     </div>
   </div>
@@ -207,12 +205,3 @@ export default {
   },
 };
 </script>
-
-<style>
-.main {
-  position: fixed;
-  background: transparent;
-  inset: 0;
-  margin: auto;
-}
-</style>
