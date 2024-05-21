@@ -4,7 +4,6 @@
     :to="{ name: 'details', params: { slug: product.slug } }"
   >
     <div class="relative">
-      <!-- <img src="/src/assets/product-img/img1.png" class="object-cover w-full h-auto rounded-t-md" /> -->
       <div class="relative img-container">
         <img
           v-if="product.images.length > 0"
@@ -17,12 +16,14 @@
           class="absolute inset-0 object-cover w-full h-full rounded-t-md"
         />
       </div>
-
-      <button
-        class="absolute top-0 right-0 px-2 py-2 mt-2 mb-2 mr-2 bg-white rounded-full"
-      >
-        <img src="/img/icon.svg" alt="" class="" />
-      </button>
+      <div id="wishlist">
+        <button
+          @click.stop="handleAddToWishlist"
+          class="absolute top-0 right-0 px-2 py-2 mt-2 mb-2 mr-2 bg-white rounded-full"
+        >
+          <img src="/img/icon.svg" alt="" class="" />
+        </button>
+      </div>
       <button
         class="absolute top-0 left-0 px-3 py-3 m-1 mx-2 mt-2 mb-2 text-white rounded-lg px- md:mx-3 bg-primary-300 md:p-2 md:w-20 md:m-6"
       >
@@ -39,17 +40,7 @@
             {{ product.name }}</a
           >
         </div>
-        <!-- <div class="flex">
-          <img src="/public/stars/yellow-star.svg" alt="yellow-star" />
-          <p>4.2</p>
-        </div> -->
       </div>
-      <!-- Subtitle button will get updated in future
-      <div class="flex items-center">
-        <div class="text-primary-dark">
-          <span class="text-primary-300">Sub title</span>
-        </div>
-      </div> -->
       <div
         class="flex flex-col items-start justify-between gap-1 mt-2 sm:gap-4 md:mt-0"
       >
@@ -80,12 +71,15 @@
 
 <script>
 import { ref, computed } from "vue";
+import { useProductStore } from "@/store/product";
 
 export default {
   props: {
     product: Object,
   },
   setup(props) {
+    const productStore = useProductStore();
+
     const defaultVariantPrice = computed(() => {
       if (!props.product || !props.product.productVariants) {
         return null;
@@ -96,8 +90,13 @@ export default {
       return defaultVariant ? defaultVariant.price : null;
     });
 
+    const handleAddToWishlist = () => {
+      productStore.addToWishlist(props.product);
+    };
+
     return {
       defaultVariantPrice,
+      handleAddToWishlist,
     };
   },
 };

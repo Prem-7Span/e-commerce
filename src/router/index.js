@@ -8,6 +8,8 @@ import ProductDetail from "@/pages/public/products/products-details.vue";
 import ProductList from "@/pages/public/products/products-list.vue";
 import Default from "@/layouts/default.vue";
 import CheckOut from "../pages/public/product-checkout/index.vue";
+import wishList from "@/pages/public/wish-list/index.vue";
+import profile from "@/pages/private/profile.vue";
 import address from "../components/address/index.vue";
 const routes = [
   {
@@ -40,6 +42,16 @@ const routes = [
         name: "check-out",
         path: "/checkout",
         component: CheckOut,
+      },
+      {
+        name: "wish-list",
+        path: "/wishlist",
+        component: wishList,
+      },
+      {
+        name: "profile",
+        path: "/profile",
+        component: profile,
       },
 
       {

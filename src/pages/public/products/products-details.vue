@@ -271,7 +271,8 @@ const decrement = () => {
 
 const addToCart = async () => {
   try {
-    const token = localStorage.getItem("authToken");
+    const token = localStorage.getItem("token");
+    console.log("token", token);
     if (!token) {
       throw new Error("No authentication token found");
     }

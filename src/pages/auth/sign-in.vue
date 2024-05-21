@@ -118,8 +118,11 @@ export default {
         );
 
         console.log(":in error:,", response);
-        if (response.data.sucess) {
+        if (response.data.success) {
           this.errors.phoneNumber = undefined;
+          // Store the token in localStorage
+          const token = response.userData.accessToken;
+          localStorage.setItem("token", token);
           console.log("Phone number is available:", this.phoneNumber);
           this.submitForm();
         } else {

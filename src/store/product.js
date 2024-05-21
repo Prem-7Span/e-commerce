@@ -1,6 +1,8 @@
 import { defineStore } from "pinia";
 import axios from "axios";
 
+const baseURL = "https://api.8orbit.shop/api"; // Replace with your actual base URL
+
 export const useProductStore = defineStore("product", {
   state: () => ({
     productData: [],
@@ -10,6 +12,7 @@ export const useProductStore = defineStore("product", {
     maxPrice: 1500,
     color: [],
     size: [],
+    wishlist: [], // Add wishlist state
   }),
   actions: {
     async fetchProductList() {
@@ -17,9 +20,7 @@ export const useProductStore = defineStore("product", {
         if (this.productData && this.productData.length > 0) {
           return this.productData;
         }
-        const response = await axios.get(
-          "https://api.8orbit.shop/api/v1/product"
-        );
+        const response = await axios.get(`${baseURL}/v1/product`);
         this.productData = response.data.product;
       } catch (error) {
         console.error("Error fetching products:", error);
@@ -27,19 +28,16 @@ export const useProductStore = defineStore("product", {
     },
     async applyFiltersAndFetch() {
       try {
-        const response = await axios.get(
-          "https://api.8orbit.shop/api/v1/product",
-          {
-            params: {
-              categoryName: this.categoryName,
-              parentCategory: this.parentCategory,
-              color: this.color,
-              size: this.size,
-              minPrice: this.minPrice,
-              maxPrice: this.maxPrice,
-            },
-          }
-        );
+        const response = await axios.get(`${baseURL}/v1/product`, {
+          params: {
+            categoryName: this.categoryName,
+            parentCategory: this.parentCategory,
+            color: this.color,
+            size: this.size,
+            minPrice: this.minPrice,
+            maxPrice: this.maxPrice,
+          },
+        });
         console.log({ response });
         this.productData = response.data;
         return response.data;
@@ -56,10 +54,32 @@ export const useProductStore = defineStore("product", {
       this.maxPrice = 1500;
       this.fetchProductList();
     },
+    async addToWishlist(product) {
+      try {
+        const response = await axios.post(`${baseURL}/v1/wishlist`, {
+          productId: product.id,
+        });
+        if (response.status === 200) {
+          this.wishlist.push(product);
+        } else {
+          console.error("Failed to add product to wishlist");
+        }
+      } catch (error) {
+        console.error("Error adding product to wishlist:", error);
+      }
+    },
+    removeFromWishlist(productId) {
+      this.wishlist = this.wishlist.filter(
+        (product) => product.id !== productId
+      );
+    },
   },
   getters: {
     getProductData() {
       return this.productData;
+    },
+    getWishlist() {
+      return this.wishlist;
     },
   },
   persist: true,
@@ -77,6 +97,7 @@ export function useProductStoreComposition() {
   const selectedColor = ref(productStore.selectedColor);
   const selectedSize = ref(productStore.selectedSize);
   const selectedSort = ref(productStore.selectedSort);
+  const wishlist = ref(productStore.wishlist);
 
   return {
     productData,
@@ -86,8 +107,11 @@ export function useProductStoreComposition() {
     selectedColor,
     selectedSize,
     selectedSort,
+    wishlist,
     fetchProductList: productStore.fetchProductList,
     applyFiltersAndFetch: productStore.applyFiltersAndFetch,
     filterProducts: productStore.filterProducts,
+    addToWishlist: productStore.addToWishlist,
+    removeFromWishlist: productStore.removeFromWishlist,
   };
 }

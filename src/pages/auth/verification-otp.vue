@@ -95,11 +95,11 @@ export default {
             console.log(res);
             this.toast.success("Verification successful!");
             this.$router.push({ name: "home" });
-
+            console.log(res.user.accessToken);
             // Store the token in localStorage
-            res.user.getIdToken().then((token) => {
-              localStorage.setItem("authToken", token);
-            });
+            // res.user.getIdToken().then((token) => {
+            //   localStorage.setItem("authToken", token);
+            // });
           })
           .catch((error) => {
             if (error.code === "auth/invalid-verification-code") {
