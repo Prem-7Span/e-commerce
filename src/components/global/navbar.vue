@@ -57,61 +57,18 @@
             alt="cart"
           />
         </router-link>
-        <button
-          @click="openModal"
-          class="px-4 py-2 text-white rounded-lg bg-primary-100"
-        >
-          Login
+        
+        <router-link :to="{ name: 'SignIn' }">
+        <button class="px-4 py-2 text-white rounded-lg bg-primary-100">
+          login
         </button>
+      </router-link>
       </div>
     </div>
 
-    <div
-      v-if="isModalOpen"
-      class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur"
-      @click.self="closeModal"
-    >
-      <div class="main">
-        <sign-in />
-      </div>
+   
     </div>
-  </div>
+
 </template>
 
-<script>
-import { ref } from "vue";
-import signIn from "../../pages/auth/sign-in.vue";
 
-export default {
-  components: {
-    signIn,
-  },
-  setup() {
-    const isModalOpen = ref(false);
-
-    const openModal = () => {
-      isModalOpen.value = true;
-    };
-
-    const closeModal = () => {
-      isModalOpen.value = false;
-    };
-
-    return {
-      isModalOpen,
-      openModal,
-      closeModal,
-    };
-  },
-};
-</script>
-
-<style>
-.backdrop-blur {
-  backdrop-filter: blur(10px);
-}
-.main {
-  text-align: center;
-  position: relative;
-}
-</style>

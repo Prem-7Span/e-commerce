@@ -247,8 +247,12 @@
             :key="index"
             :product="product"
           />
+        
         </div>
+        
+        
       </div>
+      
     </div>
   </div>
 </template>
@@ -347,13 +351,11 @@ export default {
 .sidebar {
   width: 100%;
 }
-
 .multi-range-slider {
   border-radius: none;
   box-shadow: none;
   border: none;
 }
-
 .multi-range-slider .bar-inner {
   background-color: blue;
 }
