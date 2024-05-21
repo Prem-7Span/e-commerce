@@ -1,10 +1,6 @@
 <template>
-  <div
-    class="flex flex-col items-center justify-center min-h-screen px-4 py-12 sign-up-page"
-  >
-    <div
-      class="w-full max-w-md px-8 py-6 space-y-5 text-center bg-white rounded-lg shadow-md md:text-left md:max-w-md"
-    >
+  <div class="flex flex-col items-center justify-center min-h-screen px-4 py-12 sign-up-page">
+    <div class="w-full max-w-md px-8 py-6 space-y-5 text-center bg-white rounded-lg shadow-md md:text-left md:max-w-md">
       <div class="text-2xl animate_animated animate_fadeIn">Sign Up</div>
 
       <div class="flex flex-col space-y-2">
@@ -12,6 +8,7 @@
           v-model="firstname"
           type="text"
           placeholder="First Name"
+          @input="validateField('firstname')"
           class="px-3 py-2 text-gray-700 transition duration-200 ease-in-out border border-gray-300 rounded-md appearance-none focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-700 hover:border-indigo-500"
         />
         <p class="mt-2 text-primary-200">{{ errors.firstname }}</p>
@@ -22,6 +19,7 @@
           v-model="lastname"
           type="text"
           placeholder="Last Name"
+          @input="validateField('lastname')"
           class="px-3 py-2 text-gray-700 transition duration-200 ease-in-out border border-gray-300 rounded-md appearance-none focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-700 hover:border-indigo-500"
         />
         <p class="mt-2 text-primary-200">{{ errors.lastname }}</p>
@@ -31,7 +29,8 @@
         <input
           v-model="email"
           type="email"
-          placeholder="Email"
+          placeholder="email"
+          @input="validateField('email')"
           class="px-3 py-2 text-gray-700 transition duration-200 ease-in-out border border-gray-300 rounded-md appearance-none focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-700 hover:border-indigo-500"
         />
         <p class="mt-2 text-primary-200">{{ errors.email }}</p>
@@ -43,12 +42,13 @@
           type="text"
           maxlength="10"
           placeholder="Mobile Number"
+          @input="validateField('phoneNumber')"
           class="px-3 py-2 text-gray-700 transition duration-200 ease-in-out border border-gray-300 rounded-md appearance-none focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-700 hover:border-indigo-500"
         />
         <p class="mt-2 text-primary-200">{{ errors.phoneNumber }}</p>
       </div>
 
-      <div class="flex  space-x-2">
+      <div class="flex space-x-2">
         <input
           v-model="termsAccepted"
           type="checkbox"
@@ -56,8 +56,7 @@
           class="w-4 h-4 mt-1 accent-indigo-500 focus:ring-2 focus:ring-indigo-500"
         />
         <label for="terms" class="text-sm text-gray-700">
-          By continuing you agree to website's Terms & Conditions and Privacy
-          Policy
+          By continuing you agree to website's Terms & Conditions and Privacy Policy
         </label>
       </div>
 
@@ -73,10 +72,7 @@
 
       <div class="text-sm text-center text-gray-500">
         Already have an account?
-        <router-link
-          :to="{ name: 'SignIn' }"
-          class="text-primary-200 hover:text-primary-100"
-        >
+        <router-link :to="{ name: 'SignIn' }" class="text-primary-200 hover:text-primary-100">
           Sign in
         </router-link>
       </div>
@@ -89,6 +85,7 @@ import axios from "axios";
 import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
 import authentication from "@/plugins/firebase.js"; // Assuming a Firebase authentication config
 import { useToast } from "vue-toastification";
+
 export default {
   setup() {
     const toast = useToast();
@@ -102,54 +99,60 @@ export default {
       email: "",
       phoneNumber: "",
       recaptchaVerifier: undefined,
-      errors: {},
+      errors: {
+        firstname: '',
+        lastname: '',
+        email: '',
+        phoneNumber: ''
+      },
       isUserValid: false,
       termsAccepted: false,
     };
   },
   methods: {
-    generateCaptcha() {
-      console.log("Entering generateCaptcha method");
-      this.recaptchaVerifier = new RecaptchaVerifier(
-        authentication,
-        "recaptcha-container",
-        {
-          size: "invisible",
-          callback: (response) => {
-            console.log("Recaptcha response:", response);
-          },
-        }
-      );
+    isValidEmail(email) {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    },
+    validateField(field) {
+      switch (field) {
+        case 'firstname':
+          this.errors.firstname = this.firstname ? '' : 'First Name is required';
+          break;
+        case 'lastname':
+          this.errors.lastname = this.lastname ? '' : 'Last Name is required';
+          break;
+        case 'email':
+          if (!this.email) {
+            this.errors.email = 'Email is required';
+          } else if (!this.isValidEmail(this.email)) {
+            this.errors.email = 'Invalid email address';
+          } else {
+            this.errors.email = '';
+          }
+          break;
+        case 'phoneNumber':
+          this.errors.phoneNumber = this.phoneNumber ? '' : 'Phone Number is required';
+          break;
+      }
     },
     submitForm() {
-      switch (true) {
-        case !this.firstname:
-          this.errors.firstname = "First Name is required";
+      // Validate all fields before submitting
+      this.validateField('firstname');
+      this.validateField('lastname');
+      this.validateField('email');
+      this.validateField('phoneNumber');
 
-        case !this.lastname:
-          this.errors.lastname = "Last Name is required";
-
-        case !this.email:
-          this.errors.email = "Email is required";
-
-        case !this.isValidEmail(this.email):
-          this.errors.email = "Invalid email address";
-
-        case !this.phoneNumber:
-          this.errors.phoneNumber = "Phone Number is required";
-          break;
-        default:
-          console.log(
-            "Form submitted successfully (client-side validation passed)"
-          );
-          this.registerUser();
+      // Check if there are any errors
+      if (!this.errors.firstname && !this.errors.lastname && !this.errors.email && !this.errors.phoneNumber) {
+        console.log("Form submitted successfully (client-side validation passed)");
+        this.registerUser();
       }
     },
     async verifyPhoneNumber() {
       try {
         const phoneNumberVerification = await signInWithPhoneNumber(
           authentication,
-          `+91${this.phoneNumber}`,
+        `+91${this.phoneNumber}`,
           this.recaptchaVerifier
         );
         console.log(
@@ -199,9 +202,19 @@ export default {
         console.error("Error checking phone number availability:", error);
       }
     },
-    isValidEmail(email) {
-      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-    },
-  },
+    generateCaptcha() {
+      console.log("Entering generateCaptcha method");
+      this.recaptchaVerifier = new RecaptchaVerifier(
+        authentication,
+        "recaptcha-container",
+        {
+          size: "invisible",
+          callback: (response) => {
+            console.log("Recaptcha response:", response);
+          },
+        }
+      );
+    }
+  }
 };
 </script>
