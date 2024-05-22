@@ -12,6 +12,8 @@
 import Navbar from "@/components/global/navbar.vue";
 import Footer from "@/components/global/footer.vue";
 
+console.log(localStorage.getItem("token"));
+
 export default {
   name: "navbar",
   components: {

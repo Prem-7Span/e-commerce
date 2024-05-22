@@ -1,6 +1,6 @@
 <template>
-  <div class="flex items-center justify-center h-screen bg-white md:px-5">
-    <div class="container w-full px-8 py-6 text-center bg-white rounded-lg shadow-md md:text-left md:max-w-md">
+  <div class="flex items-center justify-center min-h-screen lg:min-h-screen px-4 py-12  bg-white md:px-5">
+    <div class="container w-fit  px-8 py-6 text-center bg-white rounded-lg shadow-md md:text-left md:max-w-md">
       <div class="text-2xl animate_animated animate_fadeIn">Sign In</div>
 
       <div class="flex flex-col mt-2 space-y-2">
@@ -105,7 +105,11 @@ export default {
           { mobileNo: this.phoneNumber }
         );
         
-        if (response.data.sucess) {
+        if (response.status === 200) {
+          console.log("response", response);
+          const token = response.data.userData.accessToken;
+          localStorage.setItem("token", token);
+          console.log("Phone number is available:", this.phoneNumber);
           this.submitForm();
         } else {
           this.toast.error("Account not available, Please sign up");

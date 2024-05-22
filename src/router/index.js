@@ -9,9 +9,9 @@ import ProductList from "@/pages/public/products/products-list.vue";
 import Default from "@/layouts/default.vue";
 import CheckOut from "../pages/public/product-checkout/index.vue";
 import wishList from "@/pages/public/wish-list/index.vue";
-import profile from "@/pages/private/profile.vue";
-import address from "../components/address/index.vue";
-const routes = [
+import edit from "@/pages/private/edit.vue";
+import profile from "../pages/private/profile.vue"
+  const routes = [
   {
     path: "/",
     component: Default,
@@ -49,12 +49,6 @@ const routes = [
         component: wishList,
       },
       {
-        name: "profile",
-        path: "/profile",
-        component: profile,
-      },
-
-      {
         name: "auth",
         path: "auth",
         component: Auth,
@@ -75,6 +69,16 @@ const routes = [
             name: "VerificationOtp",
             path: "verification-otp",
             component: VerificationOtp,
+          },
+          {
+            name: "editprofile",
+            path: "edit",
+            component: edit,
+          },
+          {
+            name: "profile",
+            path: "profile",
+            component: profile,
           },
         ],
       },
