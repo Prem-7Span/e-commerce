@@ -3,7 +3,7 @@
     class="rounded-md shadow-md hover:shadow-lg"
     :to="{ name: 'details', params: { slug: product.slug } }"
   >
-    <div class="relative">
+    <div class="relative w-92 h-92">
       <div class="relative img-container">
         <img
           v-if="product.images.length > 0"
@@ -45,18 +45,17 @@
         class="flex flex-col items-start justify-between gap-1 mt-2 sm:gap-4 md:mt-0"
       >
         <div class="flex flex-row items-center justify-center gap-2">
-          <div class="flex gap-1">
-            <p>₹{{  }}</p>
+          <div class="flex gap-1 text-2xl font-semibold">
+            <p>₹{{ defaultVariant.price }}</p>
             <p
               class="text-lg font-semibold text-primary-300 md:text-lg xl:text-2xl"
             >
-              {{ defaultVariantPrice }}
             </p>
           </div>
           <p
             class="text-sm font-normal line-through text-slate-500 md:text-lg xl:text-lg"
           >
-            999
+          {{ defaultVariant.regularPrice }}
           </p>
         </div>
       </div>
@@ -80,22 +79,18 @@ export default {
   setup(props) {
     const productStore = useProductStore();
 
-    const defaultVariantPrice = computed(() => {
+    const defaultVariant = computed(() => {
       if (!props.product || !props.product.productVariants) {
         return null;
       }
-      const defaultVariant = props.product.productVariants.find(
-        (variant) => variant.isDefault === true
-      );
-      return defaultVariant ? defaultVariant.price : null;
+      return props.product.productVariants[0]
+      
     });
-
     const handleAddToWishlist = () => {
       productStore.addToWishlist(props.product);
     };
-
     return {
-      defaultVariantPrice,
+      defaultVariant,
       handleAddToWishlist,
     };
   },

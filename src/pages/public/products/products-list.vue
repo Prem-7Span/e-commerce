@@ -59,14 +59,14 @@
             value="Casual"
             v-model="productStore.categoryName"
           />
-          <label for="Casual"> T-shirts</label><br />
+          <label for="Casual"> Casual</label><br />
           <input
             type="checkbox"
             id="Sports"
             value="Sports"
             v-model="productStore.categoryName"
           />
-          <label for="Sports"> shirts</label><br />
+          <label for="Sports"> Sports</label><br />
           <input
             type="checkbox"
             id="Pant"
@@ -227,7 +227,7 @@
         </div>
 
         <div
-          class="sticky bottom-0 w-64 p-4 text-center bg-white left-9 right-9"
+          class="sticky bottom-5 w-72 p-5 text-center bg-white left-9 right-9"
         >
           <button
             @click="applyFilters"
@@ -240,7 +240,7 @@
 
       <div>
         <div
-          class="grid grid-cols-2 grid-rows-4 gap-5 py-4 md:gap-8 md:grid-cols-3 md:grid-rows-3"
+          class="grid grid-cols-2  gap-5 py-4 md:gap-8 md:grid-cols-3 "
         >
           <ProductCard
             v-for="(product, index) in filteredProducts"
