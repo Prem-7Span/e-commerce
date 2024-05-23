@@ -16,7 +16,9 @@
         </div>
       </div>
       <div class="hidden font-bold md:block text-primary-300">
-        <p>{{ filteredProducts.length }} Products</p>
+        <p v-if="filteredProducts && filteredProducts.length">
+          {{ filteredProducts.length }} Products
+        </p>
       </div>
       <div class="block md:hidden">
         <button class="block mx-2 mt-2 md:hidden" @click="openSidebar">
@@ -227,7 +229,7 @@
         </div>
 
         <div
-          class="sticky bottom-5 w-72 p-5 text-center bg-white left-9 right-9"
+          class="sticky p-5 text-center bg-white bottom-5 w-72 left-9 right-9"
         >
           <button
             @click="applyFilters"
@@ -247,32 +249,32 @@
           />
         </div>
         <div class="flex justify-center mt-4 mb-8">
-  <button 
-    @click="previousPage" 
-    :disabled="currentPage === 1"
-    class="pagination-arrow"
-  >
-    &laquo;
-  </button>
-  <button 
-    v-for="page in totalPages" 
-    :key="page" 
-    @click="goToPage(page)" 
-    :class="['pagination-button', { 'active': page === currentPage }]"
-  >
-    {{ page }}
-  </button>
-  <button 
-    @click="nextPage" 
-    :disabled="currentPage === totalPages"
-    class="pagination-arrow"
-  >
-    &raquo;
-  </button>
-</div>
-</div>
-</div>
-</div>
+          <button
+            @click="previousPage"
+            :disabled="currentPage === 1"
+            class="pagination-arrow"
+          >
+            &laquo;
+          </button>
+          <button
+            v-for="page in totalPages"
+            :key="page"
+            @click="goToPage(page)"
+            :class="['pagination-button', { active: page === currentPage }]"
+          >
+            {{ page }}
+          </button>
+          <button
+            @click="nextPage"
+            :disabled="currentPage === totalPages"
+            class="pagination-arrow"
+          >
+            &raquo;
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -321,7 +323,7 @@ export default {
       }
     };
 
-    const clearFilters = () => {
+    const clearFilters = async () => {
       productStore.productData = [];
       productStore.categoryName = [];
       productStore.parentCategory = [];
@@ -336,10 +338,8 @@ export default {
       });
     };
 
-    onMounted(() => {
-      productStore.fetchProductList().then(() => {
-        filteredProducts.value = productStore.productData;
-      });
+    onMounted(async () => {
+      filteredProducts.value = await productStore.fetchProductList();
       handleResize();
       window.addEventListener("resize", handleResize);
     });
@@ -396,7 +396,6 @@ export default {
 };
 </script>
 
-
 <style scoped>
 .sidebar {
   width: 100%;
@@ -406,18 +405,18 @@ export default {
   box-shadow: none;
   border: none;
 }
-.multi-range-slider .bar-inner{
-  background-color: #2F2F2F;
+.multi-range-slider .bar-inner {
+  background-color: #2f2f2f;
 }
 .multi-range-slider .bar-inner {
-    background-color: #2F2F2F;
-    display: flex;
-    flex-grow: 1;
-    flex-shrink: 1;
-    position: relative;
-    border: solid 1px black;
-    justify-content: space-between;
-    box-shadow: inset 0px 0px 5px black;
+  background-color: #2f2f2f;
+  display: flex;
+  flex-grow: 1;
+  flex-shrink: 1;
+  position: relative;
+  border: solid 1px black;
+  justify-content: space-between;
+  box-shadow: inset 0px 0px 5px black;
 }
 .pagination-button {
   background-color: #f3f3f3;
@@ -463,17 +462,15 @@ export default {
 }
 
 .pagination-button.active {
-  background-color: #2F2F2F;
+  background-color: #2f2f2f;
   color: white;
 }
 
 .pagination-button.active:hover {
-  background-color: #2F2F2F;
+  background-color: #2f2f2f;
 }
 
 .pagination-button:not(.active):hover {
   background-color: #f1f1f1;
 }
-
 </style>
-

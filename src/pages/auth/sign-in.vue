@@ -1,6 +1,10 @@
 <template>
-  <div class="flex items-center justify-center min-h-screen lg:min-h-screen px-4 py-12  bg-white md:px-5">
-    <div class="container w-fit  px-8 py-6 text-center bg-white rounded-lg shadow-md md:text-left md:max-w-md">
+  <div
+    class="flex items-center justify-center min-h-screen px-4 py-12 bg-white lg:min-h-screen md:px-5"
+  >
+    <div
+      class="container px-8 py-6 text-center bg-white rounded-lg shadow-md w-fit md:text-left md:max-w-md"
+    >
       <div class="text-2xl animate_animated animate_fadeIn">Sign In</div>
 
       <div class="flex flex-col mt-2 space-y-2">
@@ -20,10 +24,11 @@
           v-model="termsAccepted"
           type="checkbox"
           id="terms"
-          class="w-4 h-4 mt-1 px-2 text-end accent-indigo-500 focus:ring-2 focus:ring-indigo-500"
+          class="w-4 h-4 px-2 mt-1 text-end accent-indigo-500 focus:ring-2 focus:ring-indigo-500"
         />
         <label for="terms" class="mb-2 ml-2 text-sm text-gray-700">
-          By continuing you agree to website's Terms & Conditions and Privacy Policy
+          By continuing you agree to website's Terms & Conditions and Privacy
+          Policy
         </label>
       </div>
 
@@ -31,7 +36,7 @@
         :disabled="!canSubmit"
         :class="{
           'bg-gray-300 cursor-not-allowed': !canSubmit,
-          'bg-primary-100 hover:scale-105': canSubmit
+          'bg-primary-100 hover:scale-105': canSubmit,
         }"
         type="button"
         class="w-full px-4 py-2 font-medium text-center text-white transition duration-200 ease-in-out rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-700 focus:ring-opacity-50"
@@ -43,7 +48,9 @@
 
       <div class="mt-6 text-sm text-center text-gray-500">
         Don’t have an account?
-        <router-link :to="{ name: 'SignUp' }" class="text-primary-200">Sign Up</router-link>
+        <router-link :to="{ name: 'SignUp' }" class="text-primary-200"
+          >Sign Up</router-link
+        >
       </div>
     </div>
   </div>
@@ -63,28 +70,28 @@ export default {
 
   data() {
     return {
-      phoneNumber: '',
+      phoneNumber: "",
       termsAccepted: false,
       errors: {
-        phoneNumber: ''
+        phoneNumber: "",
       },
-      recaptchaVerifier: null
+      recaptchaVerifier: null,
     };
   },
   computed: {
     canSubmit() {
       return !this.errors.phoneNumber && this.termsAccepted;
-    }
+    },
   },
   methods: {
     validateField(field) {
-      if (field === 'phoneNumber') {
+      if (field === "phoneNumber") {
         if (!this.phoneNumber) {
-          this.errors.phoneNumber = 'Phone Number is required';
+          this.errors.phoneNumber = "Phone Number is required";
         } else if (!/^\d{10}$/.test(this.phoneNumber)) {
-          this.errors.phoneNumber = 'Correct Phone Number is required';
+          this.errors.phoneNumber = "Correct Phone Number is required";
         } else {
-          this.errors.phoneNumber = '';
+          this.errors.phoneNumber = "";
         }
       }
     },
@@ -101,18 +108,18 @@ export default {
       );
     },
     async checkPhoneNumberAvailability() {
-      this.validateField('phoneNumber');
-      
+      this.validateField("phoneNumber");
+
       if (this.errors.phoneNumber) {
         return;
       }
-      
+
       try {
         const response = await axios.post(
           "https://api.8orbit.shop/api/v1/login",
           { mobileNo: this.phoneNumber }
         );
-        
+
         if (response.status === 200) {
           console.log("response", response);
           const token = response.data.userData.accessToken;

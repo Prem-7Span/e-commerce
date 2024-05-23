@@ -10,8 +10,8 @@ import Default from "@/layouts/default.vue";
 import CheckOut from "../pages/public/product-checkout/index.vue";
 import wishList from "@/pages/public/wish-list/index.vue";
 import edit from "@/pages/private/edit.vue";
-import profile from "../pages/private/profile.vue"
-  const routes = [
+import profile from "../pages/private/profile.vue";
+const routes = [
   {
     path: "/",
     component: Default,

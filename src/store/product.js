@@ -17,11 +17,12 @@ export const useProductStore = defineStore("product", {
   actions: {
     async fetchProductList() {
       try {
-        if (this.productData && this.productData.length > 0) {
+        if (this.productData.length > 0) {
           return this.productData;
         }
         const response = await axios.get(`${baseURL}/v1/product`);
         this.productData = response.data.product;
+        return this.productData;
       } catch (error) {
         console.error("Error fetching products:", error);
       }
@@ -38,7 +39,6 @@ export const useProductStore = defineStore("product", {
             maxPrice: this.maxPrice,
           },
         });
-        console.log({ response });
         this.productData = response.data;
         return response.data;
       } catch (error) {
@@ -56,10 +56,18 @@ export const useProductStore = defineStore("product", {
     },
     async addToWishlist(product) {
       try {
-        const response = await axios.post(`${baseURL}/v1/wishlist`, {
-          productId: product.id,
-        });
-        if (response.status === 200) {
+        const token = localStorage.getItem("token");
+        if (!token) {
+          throw new Error("No authentication token found");
+        }
+
+        const response = await axios.post(
+          `${baseURL}/v1/wishlist`,
+          { productId: product.id },
+          { headers: { Authorization: `Bearer ${token}` } }
+        );
+
+        if (response.status === 201) {
           this.wishlist.push(product);
         } else {
           console.error("Failed to add product to wishlist");
@@ -68,50 +76,11 @@ export const useProductStore = defineStore("product", {
         console.error("Error adding product to wishlist:", error);
       }
     },
-    removeFromWishlist(productId) {
-      this.wishlist = this.wishlist.filter(
-        (product) => product.id !== productId
-      );
-    },
   },
   getters: {
     getProductData() {
       return this.productData;
     },
-    getWishlist() {
-      return this.wishlist;
-    },
   },
   persist: true,
 });
-
-// In case you want to use this store in a setup function, you can provide a function to create a reactive reference
-export function useProductStoreComposition() {
-  const productStore = useProductStore();
-
-  // Expose reactive references
-  const productData = ref(productStore.productData);
-  const selectedCategories = ref(productStore.selectedCategories);
-  const selectedGender = ref(productStore.selectedGender);
-  const selectedPrice = ref(productStore.selectedPrice);
-  const selectedColor = ref(productStore.selectedColor);
-  const selectedSize = ref(productStore.selectedSize);
-  const selectedSort = ref(productStore.selectedSort);
-  const wishlist = ref(productStore.wishlist);
-
-  return {
-    productData,
-    selectedCategories,
-    selectedGender,
-    selectedPrice,
-    selectedColor,
-    selectedSize,
-    selectedSort,
-    wishlist,
-    fetchProductList: productStore.fetchProductList,
-    applyFiltersAndFetch: productStore.applyFiltersAndFetch,
-    filterProducts: productStore.filterProducts,
-    addToWishlist: productStore.addToWishlist,
-    removeFromWishlist: productStore.removeFromWishlist,
-  };
-}

@@ -1,58 +1,106 @@
 <template>
   <div class="cursor-pointer">
-    <div class="flex justify-between px-2 py-4 font-bold md:px-8 md:flex-row md:space-x-4">
+    <div
+      class="flex justify-between px-2 py-4 font-bold md:px-8 md:flex-row md:space-x-4"
+    >
       <div class="flex gap-5">
         <div class="py-2 logo">
           <router-link :to="{ name: 'home' }">
-            <img src="/default/logo-navbar.svg" alt="logo" />
+            <img
+              src="/default/8-orbit-logo-homepage.png"
+              alt="logo"
+              class="max-w-28"
+            />
           </router-link>
         </div>
-        <div class="flex py-2 page">
-          <nav class="flex-col hidden space-x-4 space-y-4 md:flex md:flex-row md:space-y-0 md:space-x-4">
-            <router-link to="/products" class="text-gray-600 hover:text-gray-800 hover:underline">
+        <div class="flex items-center py-2 page">
+          <nav
+            class="flex-col hidden space-x-4 space-y-4 md:flex md:flex-row md:space-y-0 md:space-x-4"
+          >
+            <router-link
+              to="/products"
+              class="text-gray-600 hover:text-gray-800 hover:underline"
+            >
               Men
             </router-link>
-            <router-link to="/products" class="text-gray-600 hover:text-gray-800 hover:underline">
+            <router-link
+              to="/products"
+              class="text-gray-600 hover:text-gray-800 hover:underline"
+            >
               Women
             </router-link>
           </nav>
         </div>
-        <form class="max-w-md mx-auto" @submit.prevent="searchProducts">
+        <form
+          class="flex items-center max-w-md mx-auto"
+          @submit.prevent="searchProducts"
+        >
           <div class="relative">
-            <div class="absolute md:inset-y-0 inset-y-1 flex items-center pointer-events-none start-0 ps-3">
+            <div
+              class="absolute flex items-center pointer-events-none md:inset-y-0 inset-y-1 start-0 ps-3"
+            >
               <img src="/public/home-page/Vector.svg" alt="Search Icon" />
             </div>
-            <input type="search" id="default-search" v-model="searchQuery"
-              class="hidden p-2 pl-8 cursor-pointer mb-4 border border-gray-300 rounded-md shadow-sm sm:inline md:mb-0 md:w-96 focus:outline-none focus:ring focus:ring-blue-500 focus:ring-opacity-50"
-              placeholder="Search" />
+            <input
+              type="search"
+              id="default-search"
+              v-model="searchQuery"
+              class="hidden p-2 pl-8 mb-4 border border-gray-300 rounded-md shadow-sm cursor-pointer sm:inline md:mb-0 md:w-96 focus:outline-none focus:ring focus:ring-blue-500 focus:ring-opacity-50"
+              placeholder="Search"
+            />
           </div>
         </form>
       </div>
       <div class="flex items-center space-x-2">
-        <img src="/default/like-navbar.svg" class="hidden py-2 sm:inline" alt="like" />
+        <img
+          src="/default/like-navbar.svg"
+          class="hidden py-2 sm:inline"
+          alt="like"
+        />
         <router-link :to="{ name: 'check-out' }">
-          <img src="/default/cart-navbar.svg" class="hidden py-2 sm:inline" alt="cart" />
+          <img
+            src="/default/cart-navbar.svg"
+            class="hidden py-2 sm:inline"
+            alt="cart"
+          />
         </router-link>
         <div>
           <div v-if="userDetail">
             <div class="relative inline-block text-left">
               <div>
-                <button @click="toggleDropdown"
+                <button
+                  @click="toggleDropdown"
                   class="inline-flex justify-center w-full px-4 py-2 text-sm font-medium text-gray-700"
-                  aria-haspopup="true" aria-expanded="true">
-                  <img src="/home-page/profileicons.svg" alt="Profile" class="w-6 h-6" />
+                  aria-haspopup="true"
+                  aria-expanded="true"
+                >
+                  <img
+                    src="/home-page/profileicons.svg"
+                    alt="Profile"
+                    class="w-6 h-6"
+                  />
                 </button>
               </div>
-              <div v-show="dropdownOpen"
+              <div
+                v-show="dropdownOpen"
                 class="absolute right-0 z-10 w-56 mt-2 origin-top-right bg-white border border-gray-200 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
-                role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
+                role="menu"
+                aria-orientation="vertical"
+                aria-labelledby="options-menu"
+              >
                 <div class="py-1">
-                  <router-link :to="{ name: 'editprofile' }"
-                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">
+                  <router-link
+                    :to="{ name: 'editprofile' }"
+                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    role="menuitem"
+                  >
                     Edit Profile
                   </router-link>
-                  <button @click="logout"
-                    class="block w-full px-4 py-2 text-sm text-left text-gray-700 hover:bg-gray-100" role="menuitem">
+                  <button
+                    @click="logout"
+                    class="block w-full px-4 py-2 text-sm text-left text-gray-700 hover:bg-gray-100"
+                    role="menuitem"
+                  >
                     Logout
                   </button>
                 </div>
@@ -72,7 +120,9 @@
     <div v-if="searchResults.length > 0">
       <h2 class="mt-4 text-xl font-bold">Search Results</h2>
       <ul>
-        <li v-for="result in searchResults" :key="result.id">{{ result.name }}</li>
+        <li v-for="result in searchResults" :key="result.id">
+          {{ result.name }}
+        </li>
       </ul>
     </div>
   </div>
@@ -80,7 +130,7 @@
 
 <script>
 import { useUserStore } from "@/store/user";
-import axios from 'axios';
+import axios from "axios";
 
 export default {
   setup() {
@@ -91,14 +141,14 @@ export default {
     return {
       dropdownOpen: false,
       token: localStorage.getItem("token"),
-      searchQuery: '',
+      searchQuery: "",
       searchResults: [],
     };
   },
   computed: {
     userDetail() {
       return this.userStore.getToken;
-    }
+    },
   },
   watch: {
     userDetail(nv) {
@@ -118,15 +168,17 @@ export default {
       this.$router.push({ name: "home" });
     },
     async searchProducts() {
-      if (this.searchQuery.trim() !== '') {
+      if (this.searchQuery.trim() !== "") {
         try {
-          const response = await axios.get(`https://api.8orbit.shop/api/v1/product?search=${this.searchQuery}`);
+          const response = await axios.get(
+            `https://api.8orbit.shop/api/v1/product?search=${this.searchQuery}`
+          );
           this.searchResults = response.data;
         } catch (error) {
-          console.error('Error fetching search results:', error);
+          console.error("Error fetching search results:", error);
         }
       }
-    }
+    },
   },
 };
 </script>
