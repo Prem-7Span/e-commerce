@@ -17,7 +17,7 @@
 <div class="mx-3 mt-5">
 <h1 class="font-bold text-lg">You might also like</h1>
 <div
-class="grid grid-cols-2 grid-rows-4 gap-5 md:gap-8 md:grid-cols-4 md:grid-rows-1 mt-5"
+class="grid grid-cols-2 grid-rows-4  md:gap-8 md:grid-cols-4 md:grid-rows-1 mt-5"
         >
         <ProductCard
             v-for="(product, index) in productData"
@@ -50,6 +50,7 @@ export default {
     ordercard,
     checkoutcard
   },
+
   async mounted() {
      this.productStore.fetchProductList();
      this.productData = this.productStore.productData.splice(0, 4);
