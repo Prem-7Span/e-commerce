@@ -55,22 +55,22 @@
           <hr class="p-1 px-20" />
           <input
             type="checkbox"
-            id="Casual"
-            value="Casual"
+            id="t-shirt"
+            value="t-shirt"
             v-model="productStore.categoryName"
           />
-          <label for="Casual"> Casual</label><br />
+          <label for="Casual"> T-shirts</label><br />
           <input
             type="checkbox"
-            id="Sports"
-            value="Sports"
+            id="trousers"
+            value="trousers"
             v-model="productStore.categoryName"
           />
-          <label for="Sports"> Sports</label><br />
+          <label for="Sports"> Trousers</label><br />
           <input
             type="checkbox"
-            id="Pant"
-            value="Pant"
+            id="Pants"
+            value="Pants"
             v-model="productStore.categoryName"
           />
           <label for="Pant"> Pant</label><br />
@@ -239,22 +239,40 @@
       </div>
 
       <div>
-        <div
-          class="grid grid-cols-2  gap-5 py-4 md:gap-8 md:grid-cols-3 "
-        >
+        <div class="grid grid-cols-2 gap-5 py-4 md:gap-8 md:grid-cols-3">
           <ProductCard
-            v-for="(product, index) in filteredProducts"
+            v-for="(product, index) in paginatedProducts"
             :key="index"
             :product="product"
           />
-        
         </div>
-        
-        
-      </div>
-      
-    </div>
-  </div>
+        <div class="flex justify-center mt-4 mb-8">
+  <button 
+    @click="previousPage" 
+    :disabled="currentPage === 1"
+    class="pagination-arrow"
+  >
+    &laquo;
+  </button>
+  <button 
+    v-for="page in totalPages" 
+    :key="page" 
+    @click="goToPage(page)" 
+    :class="['pagination-button', { 'active': page === currentPage }]"
+  >
+    {{ page }}
+  </button>
+  <button 
+    @click="nextPage" 
+    :disabled="currentPage === totalPages"
+    class="pagination-arrow"
+  >
+    &raquo;
+  </button>
+</div>
+</div>
+</div>
+</div>
 </template>
 
 <script>
@@ -276,6 +294,8 @@ export default {
     const sidebar = ref(false);
     const isMobile = ref(false);
     const filteredProducts = ref([]);
+    const currentPage = ref(1);
+    const productsPerPage = 6;
 
     const handleResize = () => {
       isMobile.value = window.innerWidth >= 768;
@@ -294,6 +314,7 @@ export default {
       try {
         const filteredData = await productStore.applyFiltersAndFetch();
         filteredProducts.value = filteredData;
+        currentPage.value = 1; // Reset to first page
         console.log("Filtered products:", filteredProducts.value);
       } catch (error) {
         console.error("Error applying filters:", error);
@@ -311,6 +332,7 @@ export default {
       productStore.maxPrice = 1500;
       productStore.fetchProductList().then(() => {
         filteredProducts.value = productStore.productData;
+        currentPage.value = 1; // Reset to first page
       });
     };
 
@@ -325,6 +347,28 @@ export default {
     onBeforeUnmount(() => {
       window.removeEventListener("resize", handleResize);
     });
+
+    const paginatedProducts = computed(() => {
+      const start = (currentPage.value - 1) * productsPerPage;
+      const end = start + productsPerPage;
+      return filteredProducts.value.slice(start, end);
+    });
+
+    const totalPages = computed(() => {
+      return Math.ceil(filteredProducts.value.length / productsPerPage);
+    });
+
+    const nextPage = () => {
+      if (currentPage.value < totalPages.value) {
+        currentPage.value++;
+      }
+    };
+
+    const previousPage = () => {
+      if (currentPage.value > 1) {
+        currentPage.value--;
+      }
+    };
 
     const breadcrumbItems = computed(() => [
       { name: "Home", path: "/" },
@@ -342,10 +386,16 @@ export default {
       applyFilters,
       clearFilters,
       breadcrumbItems,
+      paginatedProducts,
+      currentPage,
+      totalPages,
+      nextPage,
+      previousPage,
     };
   },
 };
 </script>
+
 
 <style scoped>
 .sidebar {
@@ -356,7 +406,74 @@ export default {
   box-shadow: none;
   border: none;
 }
-.multi-range-slider .bar-inner {
-  background-color: blue;
+.multi-range-slider .bar-inner{
+  background-color: #2F2F2F;
 }
+.multi-range-slider .bar-inner {
+    background-color: #2F2F2F;
+    display: flex;
+    flex-grow: 1;
+    flex-shrink: 1;
+    position: relative;
+    border: solid 1px black;
+    justify-content: space-between;
+    box-shadow: inset 0px 0px 5px black;
+}
+.pagination-button {
+  background-color: #f3f3f3;
+  border: 1px solid #ddd;
+  padding: 0.5rem 1rem;
+  margin: 0 0.25rem;
+  cursor: pointer;
+}
+.pagination-button[disabled] {
+  background-color: #e0e0e0;
+  cursor: not-allowed;
+}
+.flex {
+  display: flex;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.mt-4 {
+  margin-top: 1rem;
+}
+
+.mb-8 {
+  margin-bottom: 2rem;
+}
+
+.pagination-arrow,
+.pagination-button {
+  padding: 0.5rem 1rem;
+  margin: 0 0.25rem;
+  border: 1px solid #ccc;
+  background-color: white;
+  cursor: pointer;
+  transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+.pagination-arrow:disabled,
+.pagination-button:disabled {
+  cursor: not-allowed;
+  background-color: #f0f0f0;
+}
+
+.pagination-button.active {
+  background-color: #2F2F2F;
+  color: white;
+}
+
+.pagination-button.active:hover {
+  background-color: #2F2F2F;
+}
+
+.pagination-button:not(.active):hover {
+  background-color: #f1f1f1;
+}
+
 </style>
+

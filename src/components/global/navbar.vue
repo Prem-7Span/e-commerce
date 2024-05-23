@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="cursor-pointer">
     <div class="flex justify-between px-2 py-4 font-bold md:px-8 md:flex-row md:space-x-4">
       <div class="flex gap-5">
         <div class="py-2 logo">
@@ -17,13 +17,13 @@
             </router-link>
           </nav>
         </div>
-        <form class="max-w-md mx-auto">
+        <form class="max-w-md mx-auto" @submit.prevent="searchProducts">
           <div class="relative">
-            <div class="absolute md:inset-y-0  inset-y-1   flex items-center pointer-events-none start-0 ps-3">
+            <div class="absolute md:inset-y-0 inset-y-1 flex items-center pointer-events-none start-0 ps-3">
               <img src="/public/home-page/Vector.svg" alt="Search Icon" />
             </div>
-            <input type="search" id="default-search"
-              class="hidden p-2 pl-8 mb-4 border border-gray-300 rounded-md shadow-sm sm:inline md:mb-0 md:w-96 focus:outline-none focus:ring focus:ring-blue-500 focus:ring-opacity-50"
+            <input type="search" id="default-search" v-model="searchQuery"
+              class="hidden p-2 pl-8 cursor-pointer mb-4 border border-gray-300 rounded-md shadow-sm sm:inline md:mb-0 md:w-96 focus:outline-none focus:ring focus:ring-blue-500 focus:ring-opacity-50"
               placeholder="Search" />
           </div>
         </form>
@@ -69,26 +69,36 @@
         </div>
       </div>
     </div>
+    <div v-if="searchResults.length > 0">
+      <h2 class="mt-4 text-xl font-bold">Search Results</h2>
+      <ul>
+        <li v-for="result in searchResults" :key="result.id">{{ result.name }}</li>
+      </ul>
+    </div>
   </div>
 </template>
 
 <script>
 import { useUserStore } from "@/store/user";
+import axios from 'axios';
+
 export default {
   setup() {
     const userStore = useUserStore();
     return { userStore };
   },
-  computed: {
-    userDetail() {
-      return this.userStore.getToken
-    }
-  },
   data() {
     return {
       dropdownOpen: false,
       token: localStorage.getItem("token"),
+      searchQuery: '',
+      searchResults: [],
     };
+  },
+  computed: {
+    userDetail() {
+      return this.userStore.getToken;
+    }
   },
   watch: {
     userDetail(nv) {
@@ -102,12 +112,25 @@ export default {
       this.dropdownOpen = !this.dropdownOpen;
     },
     logout() {
-        localStorage.removeItem("token");
-        localStorage.removeItem("user");
-        this.userStore.setToken(null); // Update token in store
-        this.$router.push({ name: "home" });
+      localStorage.removeItem("token");
+      localStorage.removeItem("user");
+      this.userStore.setToken(null); // Update token in store
+      this.$router.push({ name: "home" });
+    },
+    async searchProducts() {
+      if (this.searchQuery.trim() !== '') {
+        try {
+          const response = await axios.get(`https://api.8orbit.shop/api/v1/product?search=${this.searchQuery}`);
+          this.searchResults = response.data;
+        } catch (error) {
+          console.error('Error fetching search results:', error);
+        }
+      }
     }
-
   },
 };
 </script>
+
+<style scoped>
+/* Add any scoped styles here */
+</style>

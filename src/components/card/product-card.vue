@@ -27,7 +27,8 @@
       <button
         class="absolute top-0 left-0 px-3 py-3 m-1 mx-2 mt-2 mb-2 text-white rounded-lg px- md:mx-3 bg-primary-300 md:p-2 md:w-20 md:m-6"
       >
-        -30%
+      {{ ((defaultVariant.regularPrice -  defaultVariant.price) / defaultVariant.regularPrice )*100 | round }}%
+
       </button>
     </div>
     <div class="p-3">
