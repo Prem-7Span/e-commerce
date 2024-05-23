@@ -16,7 +16,9 @@
         </div>
       </div>
       <div class="hidden font-bold md:block text-primary-300">
-        <p>{{ filteredProducts.length }} Products</p>
+        <p v-if="filteredProducts && filteredProducts.length">
+          {{ filteredProducts.length }} Products
+        </p>
       </div>
       <div class="block md:hidden">
         <button class="block mx-2 mt-2 md:hidden" @click="openSidebar">
@@ -247,12 +249,8 @@
             :key="index"
             :product="product"
           />
-        
         </div>
-        
-        
       </div>
-      
     </div>
   </div>
 </template>
@@ -292,15 +290,13 @@ export default {
 
     const applyFilters = async () => {
       try {
-        const filteredData = await productStore.applyFiltersAndFetch();
-        filteredProducts.value = filteredData;
-        console.log("Filtered products:", filteredProducts.value);
+        filteredProducts.value = await productStore.applyFiltersAndFetch();
       } catch (error) {
         console.error("Error applying filters:", error);
       }
     };
 
-    const clearFilters = () => {
+    const clearFilters = async () => {
       productStore.productData = [];
       productStore.categoryName = [];
       productStore.parentCategory = [];
@@ -309,15 +305,11 @@ export default {
       productStore.size = [];
       productStore.minPrice = 0;
       productStore.maxPrice = 1500;
-      productStore.fetchProductList().then(() => {
-        filteredProducts.value = productStore.productData;
-      });
+      filteredProducts.value = await productStore.fetchProductList();
     };
 
-    onMounted(() => {
-      productStore.fetchProductList().then(() => {
-        filteredProducts.value = productStore.productData;
-      });
+    onMounted(async () => {
+      filteredProducts.value = await productStore.fetchProductList();
       handleResize();
       window.addEventListener("resize", handleResize);
     });

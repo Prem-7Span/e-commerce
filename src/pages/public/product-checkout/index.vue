@@ -16,11 +16,11 @@
 
       <div class="flex mx-auto text-center md:w-fit w-44 min-w-fit">
         <div
-          @click="tab = 'bag'"
+          @click="tab = 'Bag'"
           :class="{
-            'bg-primary-300': tab === 'bag',
-            'text-white': tab === 'bag',
-            'text-black': tab !== 'bag',
+            'bg-primary-300': tab === 'Bag',
+            'text-white': tab === 'Bag',
+            'text-black': tab !== 'Bag',
           }"
           class="flex items-center justify-center w-8 h-8 font-bold text-center border rounded-full md:w-12 md:h-12"
         >
@@ -35,11 +35,11 @@
         />
 
         <div
-          @click="tab = 'address'"
+          @click="tab = 'TheAddress'"
           :class="{
-            'bg-primary-300': tab === 'address',
-            'text-white': tab === 'address',
-            'text-black': tab !== 'address',
+            'bg-primary-300': tab === 'TheAddress',
+            'text-white': tab === 'TheAddress',
+            'text-black': tab !== 'TheAddress',
           }"
           class="flex items-center justify-center w-8 h-8 font-bold text-center border rounded-full md:w-12 md:h-12"
         >
@@ -71,18 +71,18 @@
 </template>
 
 <script>
-import bag from "../../../components/bag/index.vue";
-import address from "../../../components/address/index.vue";
+import Bag from "../../../components/bag/index.vue";
+import TheAddress from "../../../components/the-address/index.vue";
 
 export default {
   data() {
     return {
-      tab: "bag",
+      tab: "Bag",
     };
   },
   components: {
-    bag,
-    address,
+    Bag,
+    TheAddress,
   },
 };
 </script>

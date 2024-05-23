@@ -1,42 +1,89 @@
 <template>
-  <div>
-    <h1>Wishlist</h1>
-    <div v-if="wishlist.length === 0">
-      <p>Your wishlist is empty.</p>
+  <div class="px-2 md:px-6 scrollbar-hide">
+    <!-- Breadcrumb -->
+    <Breadcrumb :items="breadcrumbItems" />
+    <hr class="px-8 m-1 text-gray-300" />
+    <h1 class="py-3 text-xl">Your Wishlist</h1>
+    <div v-if="isLoading">
+      <p>Loading your wishlist...</p>
+    </div>
+    <div v-else-if="error">
+      <p>{{ error }}</p>
     </div>
     <div v-else>
-      <div v-for="product in wishlist" :key="product.id" class="wishlist-item">
-        <img
-          :src="product.images[0]?.imageUrl || '/img/Black.jpg'"
-          :alt="product.name"
-          class="wishlist-image"
+      <div v-if="wishlist && wishlist.length === 0">
+        <p>Your wishlist is empty.</p>
+      </div>
+      <div
+        v-else
+        class="grid grid-cols-2 grid-rows-4 gap-5 py-4 md:gap-8 md:grid-cols-3 md:grid-rows-3"
+      >
+        <ProductCard
+          v-for="(product, index) in wishlist"
+          :key="index"
+          :product="product.products"
+          :isWishlist="true"
+          @remove-from-wishlist="removeFromWishlist(product.id)"
         />
-        <div class="wishlist-details">
-          <h3>{{ product.name }}</h3>
-          <p>₹{{ product.price }}</p>
-          <button @click="removeFromWishlist(product.id)">Remove</button>
-        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { useProductStore } from "@/store/product";
+import { computed, onMounted, ref } from "vue";
+import { useWishlistStore } from "@/store/wishlist";
+import ProductCard from "@/components/card/product-card.vue";
+import Breadcrumb from "@/components/global/bread-crumb.vue";
 
 export default {
-  name: "wish-list",
+  name: "Wishlist",
+  components: {
+    ProductCard,
+    Breadcrumb,
+  },
   setup() {
-    const productStore = useProductStore();
+    const wishlistStore = useWishlistStore();
+    let wishlist = ref([]);
+    const isLoading = computed(() => wishlistStore.isLoading);
+    const error = computed(() => wishlistStore.getError);
 
-    const removeFromWishlist = (productId) => {
-      productStore.removeFromWishlist(productId);
+    const fetchWishlist = async () => {
+      try {
+        await wishlistStore.fetchWishlist();
+        wishlist.value = wishlistStore.getWishlist;
+      } catch (error) {
+        console.error("Error fetching wishlist:", error);
+      }
     };
 
+    const removeFromWishlist = async (productId) => {
+      try {
+        await wishlistStore.removeFromWishlist(productId);
+        await fetchWishlist(); // Refresh the wishlist after removal
+      } catch (error) {
+        console.error("Error removing product from wishlist:", error);
+      }
+    };
+    const breadcrumbItems = computed(() => [
+      { name: "Home", path: "/" },
+      { name: "Wishlist", path: "/wish-list" },
+    ]);
+
+    onMounted(() => {
+      fetchWishlist();
+    });
+
     return {
-      wishlist: productStore.getWishlist,
+      wishlist,
+      isLoading,
+      error,
       removeFromWishlist,
     };
   },
 };
 </script>
+
+<style scoped>
+/* Add any specific styles for the wishlist page here */
+</style>

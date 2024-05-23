@@ -10,7 +10,7 @@ import Default from "@/layouts/default.vue";
 import CheckOut from "../pages/public/product-checkout/index.vue";
 import wishList from "@/pages/public/wish-list/index.vue";
 import profile from "@/pages/private/profile.vue";
-import address from "../components/address/index.vue";
+// import address from "../components/the-address/index.vue";
 const routes = [
   {
     path: "/",
