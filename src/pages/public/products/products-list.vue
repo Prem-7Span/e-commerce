@@ -55,22 +55,22 @@
           <hr class="p-1 px-20" />
           <input
             type="checkbox"
-            id="Casual"
-            value="Casual"
+            id="t-shirt"
+            value="t-shirt"
             v-model="productStore.categoryName"
           />
-          <label for="Casual"> Casual</label><br />
+          <label for="Casual"> T-shirts</label><br />
           <input
             type="checkbox"
-            id="Sports"
-            value="Sports"
+            id="trousers"
+            value="trousers"
             v-model="productStore.categoryName"
           />
-          <label for="Sports"> Sports</label><br />
+          <label for="Sports"> Trousers</label><br />
           <input
             type="checkbox"
-            id="Pant"
-            value="Pant"
+            id="Pants"
+            value="Pants"
             v-model="productStore.categoryName"
           />
           <label for="Pant"> Pant</label><br />
@@ -406,8 +406,18 @@ export default {
   box-shadow: none;
   border: none;
 }
+.multi-range-slider .bar-inner{
+  background-color: #2F2F2F;
+}
 .multi-range-slider .bar-inner {
-  background-color: blue;
+    background-color: #2F2F2F;
+    display: flex;
+    flex-grow: 1;
+    flex-shrink: 1;
+    position: relative;
+    border: solid 1px black;
+    justify-content: space-between;
+    box-shadow: inset 0px 0px 5px black;
 }
 .pagination-button {
   background-color: #f3f3f3;

@@ -28,9 +28,13 @@
       </div>
 
       <button
-        :disabled="!termsAccepted"
+        :disabled="!canSubmit"
+        :class="{
+          'bg-gray-300 cursor-not-allowed': !canSubmit,
+          'bg-primary-100 hover:scale-105': canSubmit
+        }"
         type="button"
-        class="w-full px-4 py-2 font-medium text-center text-white transition duration-200 ease-in-out rounded-md bg-primary-100 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-indigo-700 focus:ring-opacity-50"
+        class="w-full px-4 py-2 font-medium text-center text-white transition duration-200 ease-in-out rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-700 focus:ring-opacity-50"
         @click="checkPhoneNumberAvailability"
       >
         Continue
@@ -50,7 +54,6 @@ import axios from "axios";
 import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
 import authentication from "@/plugins/firebase.js"; // Assuming a Firebase authentication config
 import { useToast } from "vue-toastification";
-import { RouterLink } from "vue-router";
 
 export default {
   setup() {
@@ -67,6 +70,11 @@ export default {
       },
       recaptchaVerifier: null
     };
+  },
+  computed: {
+    canSubmit() {
+      return !this.errors.phoneNumber && this.termsAccepted;
+    }
   },
   methods: {
     validateField(field) {
