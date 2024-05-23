@@ -1,8 +1,5 @@
 <template>
-  <router-link
-    class="rounded-md shadow-md hover:shadow-lg"
-    :to="{ name: 'details', params: { slug: product.slug } }"
-  >
+  <div class="rounded-md shadow-md hover:shadow-lg">
     <div class="relative w-92 h-92">
       <div class="relative img-container">
         <img
@@ -27,8 +24,7 @@
       <button
         class="absolute top-0 left-0 px-3 py-3 m-1 mx-2 mt-2 mb-2 text-white rounded-lg md:mx-3 bg-primary-300 md:p-2 md:w-20 md:m-6"
       >
-      {{ ((defaultVariant.regularPrice -  defaultVariant.price) / defaultVariant.regularPrice )*100 | round }}%
-
+        {{ round(discount) }}%
       </button>
     </div>
     <div class="p-3">
@@ -52,13 +48,12 @@
             <p>₹{{ defaultVariant.price }}</p>
             <p
               class="text-lg font-semibold text-primary-300 md:text-lg xl:text-2xl"
-            >
-            </p>
+            ></p>
           </div>
           <p
             class="text-sm font-normal line-through text-slate-500 md:text-lg xl:text-lg"
           >
-          {{ defaultVariant.regularPrice }}
+            {{ defaultVariant.regularPrice }}
           </p>
         </div>
       </div>
@@ -105,14 +100,29 @@ export default {
       if (!props.product || !props.product.productVariants) {
         return null;
       }
-      return props.product.productVariants[0]
-      
+      return props.product.productVariants[0];
     });
+
+    const discount = computed(() => {
+      const variant = defaultVariant.value;
+      if (!variant) {
+        return 0;
+      }
+      return (
+        ((variant.regularPrice - variant.price) / variant.regularPrice) * 100
+      );
+    });
+
+    const round = (value) => Math.round(value);
+
     const handleAddToWishlist = () => {
       wishlistStore.addToWishlist(props.product);
     };
+
     return {
       defaultVariant,
+      discount,
+      round,
       handleAddToWishlist,
     };
   },

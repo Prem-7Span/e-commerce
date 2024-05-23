@@ -6,10 +6,14 @@
       <div class="flex gap-5">
         <div class="py-2 logo">
           <router-link :to="{ name: 'home' }">
-            <img src="/default/logo-navbar.svg" alt="logo" />
+            <img
+              src="/default/8-orbit-logo-homepage.png"
+              alt="logo"
+              class="max-w-28"
+            />
           </router-link>
         </div>
-        <div class="flex py-2 page">
+        <div class="flex items-center py-2 page">
           <nav
             class="flex-col hidden space-x-4 space-y-4 md:flex md:flex-row md:space-y-0 md:space-x-4"
           >
@@ -27,7 +31,10 @@
             </router-link>
           </nav>
         </div>
-        <form class="max-w-md mx-auto" @submit.prevent="searchProducts">
+        <form
+          class="flex items-center max-w-md mx-auto"
+          @submit.prevent="searchProducts"
+        >
           <div class="relative">
             <div
               class="absolute flex items-center pointer-events-none md:inset-y-0 inset-y-1 start-0 ps-3"
