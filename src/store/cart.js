@@ -1,5 +1,6 @@
 import { defineStore } from "pinia";
 import axios from "axios";
+import { useRouter } from "vue-router";
 
 const baseURL = "https://api.8orbit.shop/api";
 
@@ -13,6 +14,7 @@ export const useCartStore = defineStore("cart", {
     async fetchCart() {
       this.loading = true;
       this.error = null;
+      const router = useRouter();
       try {
         const token = localStorage.getItem("token");
         if (!token) {
@@ -30,13 +32,17 @@ export const useCartStore = defineStore("cart", {
         }
       } catch (error) {
         this.error = error.message;
+        if (error.message === "No authentication token found") {
+          router.push("auth/sign-in"); // Redirect to sign-in page
+        }
       } finally {
         this.loading = false;
       }
     },
-    async updateCartItemQuantity(productVariantId, quantity) {
+    async updateCartItemQuantity(productVariantId, quantity, checkoutId) {
       this.loading = true;
       this.error = null;
+      const router = useRouter();
       try {
         const token = localStorage.getItem("token");
         if (!token) {
@@ -44,7 +50,7 @@ export const useCartStore = defineStore("cart", {
         }
 
         const response = await axios.put(
-          `${baseURL}/v1/cart/update`,
+          `${baseURL}/v1/cart/${checkoutId}`,
           {
             productVariantId,
             quantity,
@@ -66,9 +72,50 @@ export const useCartStore = defineStore("cart", {
         }
       } catch (error) {
         this.error = error.message;
+        if (error.message === "No authentication token found") {
+          router.push("auth/sign-in"); // Redirect to sign-in page
+        }
       } finally {
         this.loading = false;
       }
+    },
+    async removeCartItem(checkoutId) {
+      this.loading = true;
+      this.error = null;
+      const router = useRouter();
+      try {
+        const token = localStorage.getItem("token");
+        if (!token) {
+          throw new Error("No authentication token found");
+        }
+
+        const response = await axios.delete(
+          `${baseURL}/v1/cart/${checkoutId}`,
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
+
+        if (response.status === 200) {
+          this.cartItems = this.cartItems.filter(
+            (item) => item.id !== checkoutId
+          );
+        } else {
+          this.error = "Failed to delete cart item";
+        }
+      } catch (error) {
+        this.error = error.message;
+        if (error.message === "No authentication token found") {
+          router.push("auth/sign-in"); // Redirect to sign-in page
+        }
+      } finally {
+        this.loading = false;
+      }
+    },
+  },
+  getters: {
+    cartItemCount: (state) => {
+      return state.cartItems.reduce((total, item) => total + item.quantity, 0);
     },
   },
 });

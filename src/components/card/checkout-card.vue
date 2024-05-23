@@ -1,16 +1,18 @@
 <template>
   <div class="flex justify-between bg-white rounded-lg shadow-md sm:flex-wrap">
-    <div class="flex gap-2 p-2 md:p-4 md:gap-5">
-      <img
-        :src="productImage"
-        class="h-40 rounded-2xl md:w-32 w-fit"
-        :alt="productName"
-      />
+    <div class="flex items-center gap-2 p-2 md:p-4 md:gap-5">
+      <div class="item-center">
+        <img
+          :src="productImage"
+          class="max-h-46 rounded-2xl md:w-32 max-w-24"
+          :alt="productName"
+        />
+      </div>
       <div>
         <div class="flex">
           <div>
             <h5
-              class="items-center text-sm font-bold md:text-2xl md:mb-2 text-primary-300 line-clamp-2 max-w-80"
+              class="items-center text-sm font-bold md:text-lg md:mb-2 text-primary-300 line-clamp-2 max-w-72"
             >
               {{ productName }}
             </h5>
@@ -67,8 +69,17 @@
         </div>
         <p class="text-sm text-secondary-300">inclusive of all taxes</p>
         <div class="flex justify-end gap-3 mt-4 md:hidden">
-          <img src="/product-checkout/deletecheckout.svg" alt="Delete icon" />
-          <p class="text-sm text-secondary-red text-end">Move to Wishlist</p>
+          <img
+            src="/product-checkout/deletecheckout.svg"
+            alt="Delete icon"
+            @click="removeFromCart"
+          />
+          <!-- <p
+            class="text-sm cursor-pointer text-secondary-red text-end"
+            @click="moveToWishlist"
+          >
+            Move to Wishlist
+          </p> -->
         </div>
         <div class="items-center hidden mt-3 md:block">
           <img
@@ -85,11 +96,17 @@
     </div>
     <div class="hidden mx-3 mt-3 bg-white rounded-lg md:block md:flex-col">
       <div class="flex justify-end">
-        <img src="/product-checkout/deletecheckout.svg" alt="Delete icon" />
+        <img
+          src="/product-checkout/deletecheckout.svg"
+          alt="Delete icon"
+          @click="removeFromCart"
+        />
       </div>
-      <div class="md:mt-32 text-secondary-red">
-        <p class="text-center">Move to Wishlist</p>
-      </div>
+      <!-- <div class="md:mt-32 text-secondary-red">
+        <p class="text-center cursor-pointer" @click="moveToWishlist">
+          Move to Wishlist
+        </p>
+      </div> -->
     </div>
   </div>
 </template>
@@ -97,6 +114,7 @@
 <script setup>
 import { ref, computed } from "vue";
 import { useCartStore } from "@/store/cart";
+import { useWishlistStore } from "@/store/wishlist";
 
 const props = defineProps({
   productVariantId: String,
@@ -104,6 +122,7 @@ const props = defineProps({
 });
 
 const cartStore = useCartStore();
+const wishlistStore = useWishlistStore();
 
 const cartItem = computed(() => {
   return cartStore.cartItems.find(
@@ -122,18 +141,39 @@ const productRegularPrice = computed(
 );
 const productColor = computed(() => productVariant.value?.color || "N/A");
 const productSize = computed(() => productVariant.value?.size || "N/A");
+const checkoutId = computed(() => cartItem.value?.id || "N/A");
 
 const quantity = ref(props.quantity);
 
+const updateCartItemQuantity = (quantity) => {
+  cartStore.updateCartItemQuantity(
+    props.productVariantId,
+    quantity,
+    checkoutId.value
+  );
+};
+
 const increment = () => {
   quantity.value++;
-  cartStore.updateCartItemQuantity(props.productVariantId, quantity.value);
+  updateCartItemQuantity(quantity.value);
 };
 
 const decrement = () => {
   if (quantity.value > 1) {
     quantity.value--;
-    cartStore.updateCartItemQuantity(props.productVariantId, quantity.value);
+    updateCartItemQuantity(quantity.value);
+  }
+};
+
+const removeFromCart = () => {
+  cartStore.removeCartItem(checkoutId.value);
+};
+
+const moveToWishlist = () => {
+  const productData = cartItem.value;
+  if (productData) {
+    wishlistStore.addToWishlist(productData);
+    cartStore.removeCartItem(checkoutId.value);
   }
 };
 </script>

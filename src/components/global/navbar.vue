@@ -20,18 +20,16 @@
             <router-link
               to="/products"
               class="text-gray-600 hover:text-gray-800 hover:underline"
+              >Men</router-link
             >
-              Men
-            </router-link>
             <router-link
               to="/products"
               class="text-gray-600 hover:text-gray-800 hover:underline"
+              >Women</router-link
             >
-              Women
-            </router-link>
           </nav>
         </div>
-        <form
+        <!-- <form
           class="flex items-center max-w-md mx-auto"
           @submit.prevent="searchProducts"
         >
@@ -49,21 +47,37 @@
               placeholder="Search"
             />
           </div>
-        </form>
+        </form> -->
       </div>
       <div class="flex items-center space-x-2">
-        <img
-          src="/default/like-navbar.svg"
-          class="hidden py-2 sm:inline"
-          alt="like"
-        />
-        <router-link :to="{ name: 'check-out' }">
-          <img
-            src="/default/cart-navbar.svg"
-            class="hidden py-2 sm:inline"
-            alt="cart"
-          />
-        </router-link>
+        <div class="relative">
+          <router-link :to="{ name: 'wish-list' }">
+            <img
+              src="/default/like-navbar.svg"
+              class="hidden py-2 sm:inline"
+              alt="like"
+            />
+          </router-link>
+          <span
+            v-if="wishlistItemCount > 0"
+            class="absolute right-0 inline-block w-4 h-4 text-xs text-center text-white bg-red-600 rounded-full top-2"
+            >{{ wishlistItemCount }}</span
+          >
+        </div>
+        <div class="relative">
+          <router-link :to="{ name: 'check-out' }">
+            <img
+              src="/default/cart-navbar.svg"
+              class="hidden py-2 sm:inline"
+              alt="cart"
+            />
+          </router-link>
+          <span
+            v-if="cartItemCount > 0"
+            class="absolute right-0 inline-block w-4 h-4 text-xs text-center text-white bg-red-600 rounded-full top-2"
+            >{{ cartItemCount }}</span
+          >
+        </div>
         <div>
           <div v-if="userDetail">
             <div class="relative inline-block text-left">
@@ -130,12 +144,16 @@
 
 <script>
 import { useUserStore } from "@/store/user";
+import { useCartStore } from "@/store/cart.js";
+import { useWishlistStore } from "@/store/wishlist.js"; // Import the wishlist store
 import axios from "axios";
 
 export default {
   setup() {
     const userStore = useUserStore();
-    return { userStore };
+    const cartStore = useCartStore();
+    const wishlistStore = useWishlistStore(); // Use the wishlist store
+    return { userStore, cartStore, wishlistStore };
   },
   data() {
     return {
@@ -148,6 +166,12 @@ export default {
   computed: {
     userDetail() {
       return this.userStore.getToken;
+    },
+    cartItemCount() {
+      return this.cartStore.cartItemCount;
+    },
+    wishlistItemCount() {
+      return this.wishlistStore.wishlistCount; // Access the wishlist item count from the store
     },
   },
   watch: {

@@ -121,12 +121,12 @@
           </div>
           <button
             @click="addToCart"
-            class="px-6 py-2 text-base text-white rounded-md bg-primary-offBlack"
+            class="px-6 py-2 text-base text-gray-900 bg-white border-2 border-gray-700 rounded-md hover:bg-gray-900 hover:text-white"
           >
             Add to bag
           </button>
           <button
-            class="px-6 py-2 text-base text-white rounded-md bg-primary-offBlack"
+            class="px-6 py-2 text-base text-gray-900 bg-white border-2 border-gray-700 rounded-md hover:bg-gray-900 hover:text-white"
           >
             Add to wishlist
           </button>
@@ -175,7 +175,7 @@
 <script setup>
 import axios from "axios";
 import { ref, onMounted, computed, watchEffect } from "vue";
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router"; // Import useRouter
 import { useProductDetailsStore } from "../../../store/productDetails"; // Import your Pinia store
 import { useProductStore } from "/src/store/product.js";
 import ProductCard from "@/components/card/product-card.vue";
@@ -206,6 +206,7 @@ const tabClass = (tab) => {
 };
 
 const route = useRoute();
+const router = useRouter(); // Initialize useRouter
 const productDetailsStore = useProductDetailsStore(); // Initialize your Pinia store
 
 const fetchedImages = ref([]);
@@ -254,7 +255,7 @@ const getColorClass = (color) => {
     purple: "bg-purple-500",
     pink: "bg-pink-500",
     green: "bg-green-500",
-    white: "bg-white-500",
+    white: "bg-white",
   };
   return colorMap[color] || "bg-gray-500";
 };
@@ -274,7 +275,8 @@ const addToCart = async () => {
     const token = localStorage.getItem("token");
     console.log("token", token);
     if (!token) {
-      throw new Error("No authentication token found");
+      router.push({ name: "SignIn" }); // Redirect to the sign-in page
+      return;
     }
 
     const response = await axios.post(
@@ -292,6 +294,32 @@ const addToCart = async () => {
     console.log("Added to cart:", response.data);
   } catch (error) {
     console.error("Error adding to cart:", error);
+  }
+};
+
+const addToWishlist = async () => {
+  try {
+    const token = localStorage.getItem("token");
+    console.log("token", token);
+    if (!token) {
+      router.push({ name: "SignIn" }); // Redirect to the sign-in page
+      return;
+    }
+
+    const response = await axios.post(
+      "https://api.8orbit.shop/api/v1/wishlist",
+      {
+        productVariantId: selectedVariant.value.id,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    console.log("Added to wishlist:", response.data);
+  } catch (error) {
+    console.error("Error adding to wishlist:", error);
   }
 };
 
@@ -335,7 +363,3 @@ onMounted(async () => {
   productData.value = productStore.productData.slice(0, 4);
 });
 </script>
-
-<style scoped>
-/* Add any additional styling you need here */
-</style>

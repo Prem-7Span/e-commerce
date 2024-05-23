@@ -16,7 +16,7 @@
       </div>
       <div
         v-else
-        class="grid grid-cols-2 grid-rows-4 gap-5 py-4 md:gap-8 md:grid-cols-3 md:grid-rows-3"
+        class="grid grid-cols-2 grid-rows-4 gap-5 py-4 md:gap-8 md:grid-cols-4 md:grid-rows-3"
       >
         <ProductCard
           v-for="(product, index) in wishlist"
@@ -35,6 +35,7 @@ import { computed, onMounted, ref } from "vue";
 import { useWishlistStore } from "@/store/wishlist";
 import ProductCard from "@/components/card/product-card.vue";
 import Breadcrumb from "@/components/global/bread-crumb.vue";
+import { useRouter } from "vue-router";
 
 export default {
   name: "Wishlist",
@@ -44,13 +45,14 @@ export default {
   },
   setup() {
     const wishlistStore = useWishlistStore();
-    let wishlist = ref([]);
+    const router = useRouter();
+    const wishlist = ref([]);
     const isLoading = computed(() => wishlistStore.isLoading);
     const error = computed(() => wishlistStore.getError);
 
     const fetchWishlist = async () => {
       try {
-        await wishlistStore.fetchWishlist();
+        await wishlistStore.fetchWishlist(router);
         wishlist.value = wishlistStore.getWishlist;
       } catch (error) {
         console.error("Error fetching wishlist:", error);
@@ -59,12 +61,13 @@ export default {
 
     const removeFromWishlist = async (productId) => {
       try {
-        await wishlistStore.removeFromWishlist(productId);
+        await wishlistStore.removeFromWishlist(productId, router);
         await fetchWishlist(); // Refresh the wishlist after removal
       } catch (error) {
         console.error("Error removing product from wishlist:", error);
       }
     };
+
     const breadcrumbItems = computed(() => [
       { name: "Home", path: "/" },
       { name: "Wishlist", path: "/wish-list" },
@@ -79,6 +82,7 @@ export default {
       isLoading,
       error,
       removeFromWishlist,
+      breadcrumbItems,
     };
   },
 };

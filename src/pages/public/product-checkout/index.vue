@@ -1,16 +1,16 @@
 <template>
-  <div class="block w-full px-3 py-3 shadow-md md:hidden logo">
+  <div class="block w-full px-3 py-3 shadow-md md:hidden logo max-w-20">
     <router-link :to="{ name: 'home' }">
-      <img src="/default/logo-navbar.svg" alt="logo" />
+      <img src="/public/default/8-orbit-logo-homepage.png" alt="logo" />
     </router-link>
   </div>
   <div class="cursor-pointer md:mx-5">
     <div
       class="flex justify-between px-2 py-4 md:px-8 md:flex-row md:space-x-4"
     >
-      <div class="hidden py-2 md:block logo">
+      <div class="hidden py-2 md:block logo max-w-24">
         <router-link :to="{ name: 'home' }">
-          <img src="/default/logo-navbar.svg" alt="logo" />
+          <img src="/public/default/8-orbit-logo-homepage.png" alt="logo" />
         </router-link>
       </div>
 

@@ -104,83 +104,50 @@
         <div
           class="flex flex-col items-center justify-between space-x-5 sm:flex-row bg-gray-50"
         >
-          <div class="w-full sm:order-2">
-            <img src="/home-page/highlights-img-1.png" alt="" />
+          <div class="w-full sm:order-2" style="position: relative">
+            <a
+              href="https://youtu.be/vUIUFhOLwSg?si=MrXp5To4JBHloBap"
+              target="_blank"
+            >
+              <img
+                src="https://img.youtube.com/vi/vUIUFhOLwSg/hqdefault.jpg"
+                alt="Video Thumbnail"
+              />
+              <div
+                style="
+                  position: absolute;
+                  top: 50%;
+                  left: 50%;
+                  transform: translate(-50%, -50%);
+                "
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  width="72"
+                  height="72"
+                  fill="white"
+                >
+                  <path d="M8 5v14l11-7z" />
+                  <path d="M0 0h24v24H0z" fill="none" />
+                </svg>
+              </div>
+            </a>
           </div>
-          <div class="pt-3 text-xs md:text-lg">
+          <div class="pt-3 text-xs md:text-lg md:max-w-5xl">
             <p class="px-3">
-              Lorem ipsum dolor sit amet consectetur. Elementum senectus ante
-              orci at eget gravida fringilla sed. Mi lectus imperdiet auctor ut
-              faucibus sem odio. Arcu fermentum faucibus donec et lorem nunc
-              morbi. Vulputate blandit quam est vitae aliquet eget blandit.
+              Fashion brands cater to various price points, from mass-market
+              options at retailers like Walmart and Target to luxury garments at
+              high-end stores such as Neiman Marcus and Bloomingdale's. Haute
+              couture, meaning "high fashion" in French, exemplifies the
+              pinnacle of high-end fashion. It involves the creation of
+              custom-fitted clothing made from premium fabrics, crafted with
+              meticulous attention to detail by skilled artisans. Haute couture
+              represents both the exclusive designs and the prestigious fashion
+              houses that produce them.
             </p>
-            <div class="flex px-2 py-3">
-              <img src="/public/stars/yellow-star.svg" alt="yellow-star" />
-              <img src="/public/stars/yellow-star.svg" alt="yellow-star" />
-              <img src="/public/stars/yellow-star.svg" alt="yellow-star" />
-              <img src="/public/stars/yellow-star.svg" alt="yellow-star" />
-              <img src="/public/stars/black-star.svg" alt="black-star" />
-            </div>
           </div>
         </div>
-      </div>
-
-      <div class="sm:pt-14">
-        <!-- <CarousalReview /> -->
-
-        <!-- <div class="py-2 text-xl"><h2>Customer Reviews</h2></div>
-        <div class="flex items-center justify-center space-x-3">
-          <div
-            class="flex flex-col items-center justify-center px-4 py-12 border sm:max-w-md card-2 sm:max-h-52 max-w-40"
-          >
-            <img src="/home-page/semi-colon.svg" alt="" />
-            <p class="text-xs sm:text-base">
-              Lorem ipsum dolor sit amet consectetur. Leo volutpat elit quam
-              egestas placerat adipiscing faucibus sodales.
-            </p>
-            <div class="flex px-2 py-3">
-              <img src="/public/stars/yellow-star.svg" alt="yellow-star" />
-              <img src="/public/stars/yellow-star.svg" alt="yellow-star" />
-              <img src="/public/stars/yellow-star.svg" alt="yellow-star" />
-              <img src="/public/stars/yellow-star.svg" alt="yellow-star" />
-              <img src="/public/stars/black-star.svg" alt="black-star" />
-            </div>
-          </div>
-
-          <div
-            class="flex flex-col items-center justify-center px-4 py-12 border sm:max-w-md card-2 sm:max-h-52 max-w-40"
-          >
-            <img src="/home-page/semi-colon.svg" alt="" />
-            <p class="text-xs sm:text-base">
-              Lorem ipsum dolor sit amet consectetur. Leo volutpat elit quam
-              egestas placerat adipiscing faucibus sodales.
-            </p>
-            <div class="flex px-2 py-3">
-              <img src="/public/stars/yellow-star.svg" alt="yellow-star" />
-              <img src="/public/stars/yellow-star.svg" alt="yellow-star" />
-              <img src="/public/stars/yellow-star.svg" alt="yellow-star" />
-              <img src="/public/stars/yellow-star.svg" alt="yellow-star" />
-              <img src="/public/stars/black-star.svg" alt="black-star" />
-            </div>
-          </div>
-
-          <div
-            class="flex flex-col items-center justify-center px-4 py-12 border sm:max-w-md card-3 sm:max-h-52 max-w-40"
-          >
-            <img src="/home-page/semi-colon.svg" alt="" />
-            <p class="text-xs sm:text-base">
-              Lorem ipsum dolor sit amet consectetur. Leo volutpat elit quam
-              egestas placerat adipiscing faucibus sodales.
-            </p>
-            <div class="flex px-2 py-3">
-              <img src="/public/stars/yellow-star.svg" alt="yellow-star" />
-              <img src="/public/stars/yellow-star.svg" alt="yellow-star" />
-              <img src="/public/stars/yellow-star.svg" alt="yellow-star" />
-              <img src="/public/stars/yellow-star.svg" alt="yellow-star" />
-              <img src="/public/stars/black-star.svg" alt="black-star" />
-            </div>
-          </div>
-        </div> -->
       </div>
 
       <div class="py-14">
