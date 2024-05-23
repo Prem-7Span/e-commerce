@@ -1,7 +1,9 @@
 <template>
-  <div class="flex items-center justify-center h-screen bg-white md:px-5">
+  <div
+    class="flex items-center justify-center min-h-screen px-4 py-12 bg-white lg:min-h-screen md:px-5"
+  >
     <div
-      class="container w-full px-8 py-6 text-center bg-white rounded-lg shadow-md md:text-left md:max-w-md"
+      class="container px-8 py-6 text-center bg-white rounded-lg shadow-md w-fit md:text-left md:max-w-md"
     >
       <div class="text-2xl animate_animated animate_fadeIn">Sign In</div>
 
@@ -31,9 +33,13 @@
       </div>
 
       <button
-        :disabled="!termsAccepted"
+        :disabled="!canSubmit"
+        :class="{
+          'bg-gray-300 cursor-not-allowed': !canSubmit,
+          'bg-primary-100 hover:scale-105': canSubmit,
+        }"
         type="button"
-        class="w-full px-4 py-2 font-medium text-center text-white transition duration-200 ease-in-out rounded-md bg-primary-100 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-indigo-700 focus:ring-opacity-50"
+        class="w-full px-4 py-2 font-medium text-center text-white transition duration-200 ease-in-out rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-700 focus:ring-opacity-50"
         @click="checkPhoneNumberAvailability"
       >
         Continue
@@ -55,7 +61,6 @@ import axios from "axios";
 import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
 import authentication from "@/plugins/firebase.js"; // Assuming a Firebase authentication config
 import { useToast } from "vue-toastification";
-import { RouterLink } from "vue-router";
 
 export default {
   setup() {
@@ -72,6 +77,11 @@ export default {
       },
       recaptchaVerifier: null,
     };
+  },
+  computed: {
+    canSubmit() {
+      return !this.errors.phoneNumber && this.termsAccepted;
+    },
   },
   methods: {
     validateField(field) {

@@ -1,6 +1,9 @@
 <template>
-  <div class="rounded-md shadow-md hover:shadow-lg">
-    <div class="relative">
+  <router-link
+    class="rounded-md shadow-md hover:shadow-lg"
+    :to="{ name: 'details', params: { slug: product.slug } }"
+  >
+    <div class="relative w-92 h-92">
       <div class="relative img-container">
         <img
           v-if="product.images && product.images.length > 0"
@@ -24,7 +27,8 @@
       <button
         class="absolute top-0 left-0 px-3 py-3 m-1 mx-2 mt-2 mb-2 text-white rounded-lg md:mx-3 bg-primary-300 md:p-2 md:w-20 md:m-6"
       >
-        -30%
+      {{ ((defaultVariant.regularPrice -  defaultVariant.price) / defaultVariant.regularPrice )*100 | round }}%
+
       </button>
     </div>
     <div class="p-3">
@@ -44,18 +48,17 @@
         class="flex flex-col items-start justify-between gap-1 mt-2 sm:gap-4 md:mt-0"
       >
         <div class="flex flex-row items-center justify-center gap-2">
-          <div class="flex gap-1">
-            <p>₹{{}}</p>
+          <div class="flex gap-1 text-2xl font-semibold">
+            <p>₹{{ defaultVariant.price }}</p>
             <p
               class="text-lg font-semibold text-primary-300 md:text-lg xl:text-2xl"
             >
-              {{ defaultVariantPrice }}
             </p>
           </div>
           <p
             class="text-sm font-normal line-through text-slate-500 md:text-lg xl:text-lg"
           >
-            999
+          {{ defaultVariant.regularPrice }}
           </p>
         </div>
       </div>
@@ -98,22 +101,18 @@ export default {
   setup(props) {
     const wishlistStore = useWishlistStore();
 
-    const defaultVariantPrice = computed(() => {
+    const defaultVariant = computed(() => {
       if (!props.product || !props.product.productVariants) {
         return null;
       }
-      const defaultVariant = props.product.productVariants.find(
-        (variant) => variant.isDefault === true
-      );
-      return defaultVariant ? defaultVariant.price : null;
+      return props.product.productVariants[0]
+      
     });
-
     const handleAddToWishlist = () => {
       wishlistStore.addToWishlist(props.product);
     };
-
     return {
-      defaultVariantPrice,
+      defaultVariant,
       handleAddToWishlist,
     };
   },
