@@ -1,8 +1,23 @@
 <template>
   <Carousel :autoplay="2000" :wrap-around="true">
-    <Slide v-for="slide in 10" :key="slide">
+    <Slide v-for="slide in 1" :key="slide">
       <div class="carousel__item">
-        <img src="/public/home-page/homepage-banner.png" alt="" />
+        <img src="/public/home-page/home-banner-1.png" alt="" />
+      </div>
+    </Slide>
+    <Slide v-for="slide in 1" :key="slide">
+      <div class="carousel__item">
+        <img src="/public/home-page/home-banner-2.png" alt="" />
+      </div>
+    </Slide>
+    <Slide v-for="slide in 1" :key="slide">
+      <div class="carousel__item">
+        <img src="/public/home-page/home-banner-3.png" alt="" />
+      </div>
+    </Slide>
+    <Slide v-for="slide in 1" :key="slide">
+      <div class="carousel__item">
+        <img src="/public/home-page/home-banner-4.png" alt="" />
       </div>
     </Slide>
   </Carousel>

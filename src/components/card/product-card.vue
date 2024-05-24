@@ -1,12 +1,11 @@
 <template>
   <div class="rounded-md shadow-md hover:shadow-lg">
-    <div class="relative">
-      <!-- <img src="/src/assets/product-img/img1.png" class="object-cover w-full h-auto rounded-t-md" /> -->
+    <div class="relative w-92 h-92">
       <div class="relative img-container">
         <img
-          v-if="product.images.length > 0"
+          v-if="product.images && product.images.length > 0"
           :src="product.images[0].imageUrl"
-          class="absolute inset-0 object-cover w-full selection: h-full rounded-t-md"
+          class="absolute inset-0 object-cover w-full h-full rounded-t-md"
         />
         <img
           v-else
@@ -14,67 +13,123 @@
           class="absolute inset-0 object-cover w-full h-full rounded-t-md"
         />
       </div>
-
-      <button class="absolute top-0 right-0 mt-2 mb-2 mr-2">
-        <img src="/img/icon.svg" alt="" />
-      </button>
+      <div id="wishlist" v-if="!isWishlist">
+        <button
+          @click.stop="handleAddToWishlist"
+          class="absolute top-0 right-0 px-2 py-2 mt-2 mb-2 mr-2 bg-white rounded-full"
+        >
+          <img src="/img/icon.svg" alt="Wishlist Icon" />
+        </button>
+      </div>
       <button
-        class="absolute top-0 left-0 p-1 m-1 mx-2 mt-2 mb-2 text-white rounded-md md:mx-3 bg-primary-300 md:p-2 md:w-20 md:m-6"
+        class="absolute top-0 left-0 px-3 py-3 m-1 mx-2 mt-2 mb-2 text-white rounded-lg md:mx-3 bg-primary-300 md:p-2 md:w-20 md:m-6"
       >
-        -30%
+        {{ round(discount) }}%
       </button>
     </div>
     <div class="p-3">
-      <a href="" class="font-semibold no-underline text-primary-400">
-        {{ product.name }}</a
-      >
-      <div class="flex items-center">
-        <div class="text-primary-dark">
-          <span class="text-primary-300">Sub title</span>
-        </div>
-      </div>
-      <div
-        class="flex items-center justify-between gap-1 mt-2 sm:gap-4 md:mt-0"
-      >
-        <div class="flex items-center justify-center gap-2">
-          <!-- <img
-            src="/src/assets/product-img/Vector.svg"
-            alt="400"
-            class="w-3 mt-1"
-          /> -->
-          <!-- <img :src="/src/assets/product-img/Vector.svg" alt="400" class="w-3 mt-1"> -->
-
-          <p class="text-sm font-bold text-primary-300 md:text-lg xl:text-2xl">
-            {{ defaultVariantPrice }}
-          </p>
-        </div>
-
-        <router-link :to="{ name: 'ProductDetail' }">
-          <button
-            class="px-2 py-1 text-xs text-white rounded bg-primary-300 md:text-sm md:py-3 md:px-4"
-          >
-            Add to bag
-          </button>
+      <div class="flex justify-between">
+        <router-link :to="{ name: 'details', params: { slug: product.slug } }">
+          <div>
+            <a
+              href=""
+              class="text-xl font-normal text-black no-underline line-clamp-1"
+            >
+              {{ product.name }}
+            </a>
+          </div>
         </router-link>
       </div>
+      <div
+        class="flex flex-col items-start justify-between gap-1 mt-2 sm:gap-4 md:mt-0"
+      >
+        <div class="flex flex-row items-center justify-center gap-2">
+          <div class="flex gap-1 text-2xl font-semibold">
+            <p>₹{{ defaultVariant.price }}</p>
+            <p
+              class="text-lg font-semibold text-primary-300 md:text-lg xl:text-2xl"
+            ></p>
+          </div>
+          <p
+            class="text-sm font-normal line-through text-slate-500 md:text-lg xl:text-lg"
+          >
+            {{ defaultVariant.regularPrice }}
+          </p>
+        </div>
+      </div>
+      <div v-if="isWishlist" class="flex space-x-2 md:mt-4">
+        <button
+          @click="$emit('remove-from-wishlist')"
+          class="w-1/2 px-5 py-2 text-xs text-center text-black bg-transparent border border-gray-600 rounded md:text-base hover:bg-gray-900 hover:text-white"
+        >
+          Remove
+        </button>
+        <router-link
+          :to="{ name: 'details', params: { slug: product.slug } }"
+          class="w-1/2 px-5 py-2 text-xs text-center text-black bg-transparent border border-gray-600 rounded md:text-base hover:bg-gray-900 hover:text-white"
+        >
+          View Product
+        </router-link>
+      </div>
+      <router-link
+        v-else
+        :to="{ name: 'details', params: { slug: product.slug } }"
+        class="block w-full max-w-full px-5 py-2 my-2 text-base text-center text-black bg-transparent border border-gray-600 rounded hover:bg-gray-900 hover:text-white"
+      >
+        View Product
+      </router-link>
     </div>
   </div>
 </template>
+
 <script>
+import { ref, computed } from "vue";
+import { useWishlistStore } from "@/store/wishlist";
+
 export default {
   props: {
     product: Object,
+    isWishlist: {
+      type: Boolean,
+      default: false,
+    },
   },
-  computed: {
-    defaultVariantPrice() {
-      if (!this.product || !this.product.productVariants) {
+  setup(props) {
+    const wishlistStore = useWishlistStore();
+
+    const defaultVariant = computed(() => {
+      if (!props.product || !props.product.productVariants) {
         return null;
       }
-      const defaultVariant = this.product.productVariants.find(
-        (variant) => variant.isDefult === true
+      return props.product.productVariants[0];
+    });
+
+    const discount = computed(() => {
+      const variant = defaultVariant.value;
+      if (!variant) {
+        return 0;
+      }
+      return (
+        ((variant.regularPrice - variant.price) / variant.regularPrice) * 100
       );
-      return defaultVariant ? defaultVariant.price : null;
-    },
+    });
+
+    const round = (value) => Math.round(value);
+
+    const handleAddToWishlist = () => {
+      wishlistStore.addToWishlist(props.product);
+    };
+
+    return {
+      defaultVariant,
+      discount,
+      round,
+      handleAddToWishlist,
+    };
   },
 };
 </script>
+
+<style scoped>
+/* Add any specific styles for the product card component here */
+</style>

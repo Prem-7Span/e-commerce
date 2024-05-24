@@ -1,53 +1,60 @@
 <template>
-  <div class="flex items-center justify-center min-h-screen bg-white">
-    <div
-      class="w-full px-8 py-6 text-center bg-white rounded-lg shadow-md md:text-left md:max-w-md"
-    >
-      <h3 class="text-xl font-semibold text-gray-700">OTP Verification</h3>
-      <p class="mt-6 text-sm text-gray-600">
-        Please enter OTP here to continue
-      </p>
-      <div class="flex justify-center gap-2 mt-5">
-        <input
-          v-for="(input, index) in 6"
-          :key="index"
-          v-model="verificationOtp[index]"
-          type="text"
-          maxlength="1"
-          class="w-8 text-center border border-gray-300 rounded md:px-3 md:py-2 md:w-16 focus:outline-none focus:ring-1 focus:ring-indigo-500"
-          @input="handleInput(index)"
-          :ref="`otpBox${index}`"
-        />
+  <div class="main">
+    <div class="flex items-center justify-center min-h-screen bg-white">
+      <div
+        class="w-full px-8 py-6 text-center bg-white rounded-lg shadow-md md:text-left md:max-w-md"
+      >
+        <h3 class="text-xl font-semibold text-gray-700">OTP Verification</h3>
+        <p class="mt-6 text-sm text-gray-600">
+          Please enter OTP here to continue
+        </p>
+        <div class="flex justify-center gap-2 mt-5">
+          <input
+            v-for="(input, index) in 6"
+            :key="index"
+            v-model="verificationOtp[index]"
+            type="text"
+            maxlength="1"
+            class="w-8 text-center border border-gray-300 rounded md:px-3 md:py-2 md:w-16 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+            @input="handleInput(index)"
+            @keydown="handleKeydown($event, index)"
+            :ref="`otpBox${index}`"
+          />
+        </div>
+        <button
+          class="block mt-4 text-sm text-gray-400 hover:underline"
+          @click="resendOTP"
+        >
+          Resend OTP
+        </button>
+        <button
+          class="w-full py-2 mt-6 font-bold text-white rounded-md md:w-full md:px-3 bg-primary-100 hover:bg-primary-100 focus:outline-none focus:ring-1 focus:bg-primary-100"
+          @click="submitForm"
+        >
+          Continue
+        </button>
+        <p class="mt-4 text-sm text-red-500">{{ errorMessage }}</p>
+        <p class="mt-4 text-sm text-green-500">{{ successMessage }}</p>
       </div>
-      <button
-        class="block mt-4 text-sm text-gray-400 hover:underline"
-        @click="resendOTP"
-      >
-        Resend OTP
-      </button>
-      <button
-        class="w-full py-2 mt-6 font-bold text-white rounded-md md:w-full md:px-3 bg-primary-100 hover:bg-primary-100 focus:outline-none focus:ring-1 focus:bg-primary-100"
-        @click="submitForm"
-      >
-        Continue
-      </button>
-      <p class="mt-4 text-sm text-red-500">{{ errorMessage }}</p>
-      <p class="mt-4 text-sm text-green-500">{{ successMessage }}</p>
     </div>
   </div>
 </template>
 
 <script>
-import authentication from "@/plugins/firebase.js";
 import { PhoneAuthProvider, signInWithCredential } from "firebase/auth";
 import { getAuth } from "firebase/auth";
 import axios from "axios"; // Import axios for making HTTP requests
 import { useToast } from "vue-toastification";
+import authentication from "@/plugins/firebase.js";
+import { useUserStore } from "@/store/user";
+import { useCartStore } from "@/store/cart.js";
 
 export default {
   setup() {
+    const cartStore = useCartStore();
     const toast = useToast();
-    return { toast };
+    const userStore = useUserStore();
+    return { toast, userStore, cartStore };
   },
 
   data() {
@@ -71,9 +78,15 @@ export default {
         ""
       );
     },
+    handleKeydown(event, index) {
+      if (event.key === "Backspace" && this.verificationOtp[index] === "") {
+        if (index > 0) {
+          this.$refs[`otpBox${index - 1}`][0].focus();
+        }
+      }
+    },
     async submitForm() {
       const otp = this.verificationOtp.join("");
-      console.log("OTP::", otp);
 
       this.errorMessage = ""; // Reset error message
 
@@ -91,13 +104,17 @@ export default {
 
         await signInWithCredential(authentication, credential) // Assuming firebase is imported elsewhere
           .then((res) => {
-            console.log(res);
+            // console.log(res);
+            this.userStore.setToken(res.user.accessToken);
             this.toast.success("Verification successful!");
-            this.$router.push({ name: "HomePage" });
-            // this.successMessage = "Verification successful!";
+            this.$router.push({ name: "home" });
+            this.fetchCartItems();
+            // console.log(res.user.accessToken);
 
-            // Send mobile number to backend API
-            // this.sendMobileNumber(res.user.phoneNumber);
+            // Store the token in localStorage
+            // res.user.getIdToken().then((token) => {
+            //   localStorage.setItem("authToken", token);
+            // });
           })
           .catch((error) => {
             if (error.code === "auth/invalid-verification-code") {
@@ -117,13 +134,14 @@ export default {
       console.log("Resending OTP...");
       // Add logic to resend OTP if needed
     },
+    async fetchCartItems() {
+      await this.cartStore.fetchCart();
+    },
   },
   mounted() {
-    this.$refs.otpBox0[0].focus();
+    this.$nextTick(() => {
+      this.$refs.otpBox0[0].focus();
+    });
   },
 };
 </script>
-
-<style scoped>
-/* Add your component-specific styles here */
-</style>
