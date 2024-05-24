@@ -54,7 +54,13 @@
         />
 
         <div
-          class="flex items-center justify-center w-8 h-8 font-bold text-center text-black border rounded-full md:w-12 md:h-12"
+          @click="tab = 'ThePayment'"
+          :class="{
+            'bg-primary-300': tab === 'ThePayment',
+            'text-white': tab === 'ThePayment',
+            'text-black': tab !== 'ThePayment',
+          }"
+          class="flex items-center justify-center w-8 h-8 font-bold text-center border rounded-full md:w-12 md:h-12"
         >
           3
         </div>
@@ -66,13 +72,18 @@
     </div>
     <hr class="flex w-full md:m-2 md:mb-2 text-primary-300" />
 
-    <component :is="tab" />
+    <component
+      :is="tab"
+      @changeTab="changeTab"
+      @placeOrder="changeToPaymentTab"
+    />
   </div>
 </template>
 
 <script>
 import Bag from "../../../components/bag/index.vue";
 import TheAddress from "../../../components/the-address/index.vue";
+import ThePayment from "../../../components/payment-gateway/index.vue";
 
 export default {
   data() {
@@ -83,6 +94,15 @@ export default {
   components: {
     Bag,
     TheAddress,
+    ThePayment,
+  },
+  methods: {
+    changeTab(newTab) {
+      this.tab = newTab;
+    },
+    changeToPaymentTab() {
+      this.tab = "ThePayment";
+    },
   },
 };
 </script>

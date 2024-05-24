@@ -54,7 +54,7 @@
           <router-link :to="{ name: 'wish-list' }">
             <img
               src="/default/like-navbar.svg"
-              class="hidden py-2 sm:inline"
+              class="py-2 sm:inline"
               alt="like"
             />
           </router-link>
@@ -68,7 +68,7 @@
           <router-link :to="{ name: 'check-out' }">
             <img
               src="/default/cart-navbar.svg"
-              class="hidden py-2 sm:inline"
+              class="py-2 sm:inline"
               alt="cart"
             />
           </router-link>

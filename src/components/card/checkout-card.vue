@@ -1,6 +1,6 @@
 <template>
   <div class="flex justify-between bg-white rounded-lg shadow-md sm:flex-wrap">
-    <div class="flex items-center gap-2 p-2 md:p-4 md:gap-5">
+    <div class="flex items-start gap-2 p-2 md:p-4 md:gap-5">
       <div class="item-center">
         <img
           :src="productImage"
@@ -29,7 +29,7 @@
           </div>
           <div class="flex gap-2">
             <div class="text-sm text-gray-700 md:mr-2">Color:</div>
-            <div class="text-sm font-semibol text-primary-300">
+            <div class="text-sm font-semibold text-primary-300">
               {{ productColor }}
             </div>
           </div>
@@ -68,7 +68,7 @@
           </p>
         </div>
         <p class="text-sm text-secondary-300">inclusive of all taxes</p>
-        <div class="flex justify-end gap-3 mt-4 md:hidden">
+        <div class="flex items-center justify-center gap-3 mt-4 md:hidden">
           <img
             src="/product-checkout/deletecheckout.svg"
             alt="Delete icon"
@@ -81,21 +81,23 @@
             Move to Wishlist
           </p> -->
         </div>
-        <div class="items-center hidden mt-3 md:block">
-          <img
-            class="mt-1"
-            src="/product-checkout/return.svg"
-            alt="Return icon"
-          />
-          <p class="text-sm text-gray-700">
+        <div class="items-center hidden gap-1 mt-3 md:flex">
+          <div>
+            <img
+              class="mt-1"
+              src="/product-checkout/return.svg"
+              alt="Return icon"
+            />
+          </div>
+          <div class="text-sm text-gray-700">
             <span class="text-lg text-primary-300">14 days</span> return
             available
-          </p>
+          </div>
         </div>
       </div>
     </div>
     <div class="hidden mx-3 mt-3 bg-white rounded-lg md:block md:flex-col">
-      <div class="flex justify-end">
+      <div class="flex">
         <img
           src="/product-checkout/deletecheckout.svg"
           alt="Delete icon"

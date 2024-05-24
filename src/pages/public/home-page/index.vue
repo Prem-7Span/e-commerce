@@ -16,7 +16,11 @@
             class="flex space-x-3 overflow-hidden bg-primary-offBlack rounded-3xl"
           >
             <div class="relative bg-overlay">
-              <img src="/home-page/category-img-1.png" alt="card-1" />
+              <img
+                src="/home-page/category-img-1.png"
+                alt="card-1"
+                class="height:100%"
+              />
               <div class="absolute z-20 space-y-3 bottom-10 left-5">
                 <h2 class="text-base text-white sm:text-5xl">Pants</h2>
                 <p class="text-xs text-white sm:text-2xl">Shop Now</p>
@@ -182,7 +186,7 @@ export default {
   },
   async mounted() {
     await this.productStore.fetchProductList();
-    this.productData = this.productStore.productData.splice(0, 4);
+    this.productData = productStore.productData.splice(0, 4);
   },
 };
 </script>
