@@ -19,7 +19,11 @@
         </div>
       </div>
       <div class="grid">
-        <OrderCard />
+        <OrderCard
+          @next="goToAddress"
+          @placeOrder="goToPayment"
+          :showNextButton="true"
+        />
       </div>
     </div>
     <div class="mx-3 mt-5">
@@ -38,10 +42,9 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue";
-import axios from "axios";
+import { ref, onMounted, defineEmits } from "vue";
 import { useCartStore } from "@/store/cart";
-import { useProductStore } from "/src/store/product.js";
+import { useProductStore } from "@/store/product";
 import CheckoutCard from "@/components/card/checkout-card.vue";
 import OrderCard from "../../components/order-summary/order-card.vue";
 import ProductCard from "../../components/card/product-card.vue";
@@ -56,11 +59,14 @@ onMounted(async () => {
   await productStore.fetchProductList();
   productData.value = productStore.productData.splice(0, 4);
 });
-</script>
 
-<style scoped>
-.vl {
-  border-left: 2px solid whitesmoke;
-  height: 400px;
-}
-</style>
+const emit = defineEmits(["changeTab"]);
+
+const goToAddress = () => {
+  emit("changeTab", "TheAddress");
+};
+
+const goToPayment = () => {
+  emit("changeTab", "ThePayment");
+};
+</script>

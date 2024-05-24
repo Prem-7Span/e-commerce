@@ -1,16 +1,16 @@
 import { defineStore } from "pinia";
 import axios from "axios";
 
-const baseURL = "https://api.8orbit.shop/api"; // Replace with your actual base URL
+const baseURL = "https://api.8orbit.shop/api";
 
 export const useWishlistStore = defineStore("wishlist", {
   state: () => ({
-    wishlist: null,
+    wishlist: [],
     loading: false,
     error: null,
   }),
   actions: {
-    async fetchWishlist() {
+    async fetchWishlist(router) {
       this.loading = true;
       this.error = null;
       try {
@@ -32,11 +32,14 @@ export const useWishlistStore = defineStore("wishlist", {
       } catch (error) {
         this.error = error.message;
         console.error("Error fetching wishlist:", error);
+        if (error.message === "No authentication token found" && router) {
+          router.push("/auth/sign-in"); // Redirect to sign-in page
+        }
       } finally {
         this.loading = false;
       }
     },
-    async addToWishlist(product) {
+    async addToWishlist(product, router) {
       this.error = null;
       try {
         const token = localStorage.getItem("token");
@@ -46,7 +49,7 @@ export const useWishlistStore = defineStore("wishlist", {
 
         const response = await axios.post(
           `${baseURL}/v1/wishlist`,
-          { productId: product.id },
+          { productId: product.productVariantId },
           { headers: { Authorization: `Bearer ${token}` } }
         );
 
@@ -59,9 +62,12 @@ export const useWishlistStore = defineStore("wishlist", {
       } catch (error) {
         this.error = error.message;
         console.error("Error adding product to wishlist:", error);
+        if (error.message === "No authentication token found" && router) {
+          router.push("/auth/sign-in"); // Redirect to sign-in page
+        }
       }
     },
-    async removeFromWishlist(productId) {
+    async removeFromWishlist(productId, router) {
       this.error = null;
       try {
         const token = localStorage.getItem("token");
@@ -87,6 +93,9 @@ export const useWishlistStore = defineStore("wishlist", {
       } catch (error) {
         this.error = error.message;
         console.error("Error removing product from wishlist:", error);
+        if (error.message === "No authentication token found" && router) {
+          router.push("/auth/sign-in"); // Redirect to sign-in page
+        }
       }
     },
   },
@@ -94,11 +103,11 @@ export const useWishlistStore = defineStore("wishlist", {
     getWishlist(state) {
       return state.wishlist;
     },
-    isLoading() {
-      return this.loading;
+    isLoading(state) {
+      return state.loading;
     },
-    getError() {
-      return this.error;
+    getError(state) {
+      return state.error;
     },
   },
   persist: true,

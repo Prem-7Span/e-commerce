@@ -57,26 +57,27 @@
           </p>
         </div>
       </div>
-      <div v-if="isWishlist" class="flex mt-4 space-x-2">
+      <div v-if="isWishlist" class="flex space-x-2 md:mt-4">
         <button
           @click="$emit('remove-from-wishlist')"
-          class="w-1/2 px-5 py-2 text-base text-center text-black bg-transparent border border-gray-600 rounded hover:bg-gray-900 hover:text-white"
+          class="w-1/2 px-5 py-2 text-xs text-center text-black bg-transparent border border-gray-600 rounded md:text-base hover:bg-gray-900 hover:text-white"
         >
-          Remove from Wishlist
+          Remove
         </button>
         <router-link
           :to="{ name: 'details', params: { slug: product.slug } }"
-          class="w-1/2 px-5 py-2 text-base text-center text-black bg-transparent border border-gray-600 rounded hover:bg-gray-900 hover:text-white"
+          class="w-1/2 px-5 py-2 text-xs text-center text-black bg-transparent border border-gray-600 rounded md:text-base hover:bg-gray-900 hover:text-white"
         >
           View Product
         </router-link>
       </div>
-      <button
+      <router-link
         v-else
-        class="block w-full max-w-full px-5 py-2 my-4 text-base text-center text-black bg-transparent border border-gray-600 rounded hover:bg-gray-900 hover:text-white"
+        :to="{ name: 'details', params: { slug: product.slug } }"
+        class="block w-full max-w-full px-5 py-2 my-2 text-base text-center text-black bg-transparent border border-gray-600 rounded hover:bg-gray-900 hover:text-white"
       >
         View Product
-      </button>
+      </router-link>
     </div>
   </div>
 </template>

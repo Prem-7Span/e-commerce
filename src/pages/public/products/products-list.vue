@@ -5,7 +5,7 @@
     <hr class="px-8 m-1 text-gray-300" />
 
     <div class="flex justify-between md:px-3">
-      <div class="flex gap-8 md:gap-32">
+      <div class="flex gap-12 md:gap-32">
         <div>
           <h2 class="font-bold">Filters</h2>
         </div>
@@ -158,9 +158,9 @@
             />
             <label for="Grey"> Grey</label><br />
           </div>
-          <button class="text-sm hover:text-red-900 text-start">
+          <!-- <button class="text-sm hover:text-red-900 text-start">
             + 3 more
-          </button>
+          </button> -->
         </div>
 
         <h2 class="font-bold">Size</h2>
@@ -229,7 +229,7 @@
         </div>
 
         <div
-          class="sticky p-5 text-center bg-white bottom-5 w-72 left-9 right-9"
+          class="sticky bottom-0 p-10 text-center bg-white w-72 left-9 right-9"
         >
           <button
             @click="applyFilters"

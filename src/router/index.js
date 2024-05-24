@@ -1,4 +1,4 @@
-import { createRouter, createWebHashHistory } from "vue-router"; // Import createRouter and createWebHashHistory from vue-router
+import { createRouter, createWebHistory } from "vue-router"; // Import createRouter and createWebHashHistory from vue-router
 import SignUp from "@/pages/auth/sign-up.vue";
 import SignIn from "@/pages/auth/sign-in.vue";
 import VerificationOtp from "@/pages/auth/verification-otp.vue"; // Make sure to include the correct file extension (.vue)
@@ -87,7 +87,7 @@ const routes = [
 ];
 
 const router = createRouter({
-  history: createWebHashHistory(),
+  history: createWebHistory(),
   routes,
 });
 

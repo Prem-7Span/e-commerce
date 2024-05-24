@@ -1,16 +1,16 @@
 <template>
-  <div class="block w-full px-3 py-3 shadow-md md:hidden logo">
+  <div class="block w-full px-3 py-3 shadow-md md:hidden logo max-w-20">
     <router-link :to="{ name: 'home' }">
-      <img src="/default/logo-navbar.svg" alt="logo" />
+      <img src="/public/default/8-orbit-logo-homepage.png" alt="logo" />
     </router-link>
   </div>
   <div class="cursor-pointer md:mx-5">
     <div
       class="flex justify-between px-2 py-4 md:px-8 md:flex-row md:space-x-4"
     >
-      <div class="hidden py-2 md:block logo">
+      <div class="hidden py-2 md:block logo max-w-24">
         <router-link :to="{ name: 'home' }">
-          <img src="/default/logo-navbar.svg" alt="logo" />
+          <img src="/public/default/8-orbit-logo-homepage.png" alt="logo" />
         </router-link>
       </div>
 
@@ -54,7 +54,13 @@
         />
 
         <div
-          class="flex items-center justify-center w-8 h-8 font-bold text-center text-black border rounded-full md:w-12 md:h-12"
+          @click="tab = 'ThePayment'"
+          :class="{
+            'bg-primary-300': tab === 'ThePayment',
+            'text-white': tab === 'ThePayment',
+            'text-black': tab !== 'ThePayment',
+          }"
+          class="flex items-center justify-center w-8 h-8 font-bold text-center border rounded-full md:w-12 md:h-12"
         >
           3
         </div>
@@ -66,13 +72,18 @@
     </div>
     <hr class="flex w-full md:m-2 md:mb-2 text-primary-300" />
 
-    <component :is="tab" />
+    <component
+      :is="tab"
+      @changeTab="changeTab"
+      @placeOrder="changeToPaymentTab"
+    />
   </div>
 </template>
 
 <script>
 import Bag from "../../../components/bag/index.vue";
 import TheAddress from "../../../components/the-address/index.vue";
+import ThePayment from "../../../components/payment-gateway/index.vue";
 
 export default {
   data() {
@@ -83,6 +94,15 @@ export default {
   components: {
     Bag,
     TheAddress,
+    ThePayment,
+  },
+  methods: {
+    changeTab(newTab) {
+      this.tab = newTab;
+    },
+    changeToPaymentTab() {
+      this.tab = "ThePayment";
+    },
   },
 };
 </script>
