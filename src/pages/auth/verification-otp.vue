@@ -96,7 +96,7 @@ export default {
       }
 
       try {
-        console.log(this.verificationOtp);
+     
         const credential = PhoneAuthProvider.credential(
           this.confirmationResult,
           otp
@@ -104,12 +104,12 @@ export default {
 
         await signInWithCredential(authentication, credential) // Assuming firebase is imported elsewhere
           .then((res) => {
-            // console.log(res);
+          
             this.userStore.setToken(res.user.accessToken);
             this.toast.success("Verification successful!");
             this.$router.push({ name: "home" });
             this.fetchCartItems();
-            // console.log(res.user.accessToken);
+        
 
             // Store the token in localStorage
             // res.user.getIdToken().then((token) => {
@@ -131,7 +131,7 @@ export default {
       }
     },
     resendOTP() {
-      console.log("Resending OTP...");
+    
       // Add logic to resend OTP if needed
     },
     async fetchCartItems() {

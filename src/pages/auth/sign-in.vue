@@ -102,7 +102,7 @@ export default {
         {
           size: "invisible",
           callback: (response) => {
-            console.log("Recaptcha response:", response);
+           
           },
         }
       );
@@ -121,10 +121,10 @@ export default {
         );
 
         if (response.status === 200) {
-          console.log("response", response);
+         
           const token = response.data.userData.accessToken;
           localStorage.setItem("token", token);
-          console.log("Phone number is available:", this.phoneNumber);
+         
           this.submitForm();
         } else {
           this.toast.error("Account not available, Please sign up");
