@@ -1,7 +1,5 @@
 <template>
   <div>
-
-
     <div v-if="addressStore.error" class="mt-5 px-2 text-red-500 rounded-md">
       <!-- Error: {{ addressStore.error.message }} -->
       please add to address 
@@ -34,9 +32,10 @@
       <div class="mt-4 mb-2 flex gap-4 justify-end">
         <button @click="deleteAddress(address.id)">
           <img src="/address/Vector.svg" alt="delete">
-          <!-- delete the address -->
         </button>
-        <img src="/address/EditVector.svg" alt="edit">
+        <button @click="editData(address)">
+          <img src="/address/EditVector.svg" alt="edit">
+        </button>
       </div>
     </div>
   </div>
@@ -44,10 +43,11 @@
 
 <script>
 import { useAddressStore } from '../../store/address.js';
+import { defineComponent } from 'vue';
 
-export default {
+export default defineComponent({
   name: 'AddressComponent',
-  setup() {
+  setup(props, { emit }) {
     const addressStore = useAddressStore();
 
     // Fetch addresses when the component is mounted
@@ -58,14 +58,17 @@ export default {
       await addressStore.deleteAddress(addressId);
     };
 
+    // Method to emit the address data to the parent component
+    const editData = (address) => {
+      emit('editaddress', address);
+    };
+
     return {
       addressStore,
       deleteAddress,
+      editData,
     };
   },
-};
+});
 </script>
 
-<style scoped>
-/* Add your styles here */
-</style>

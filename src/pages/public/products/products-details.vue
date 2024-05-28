@@ -52,7 +52,7 @@
               <input
                 type="radio"
                 name="color"
-                class="hidden peer"
+                class="hidden peer boeder-red-200"
                 :value="color"
                 v-model="selectedColor"
               />
@@ -361,5 +361,8 @@ const productData = ref([]);
 onMounted(async () => {
   await productStore.fetchProductList();
   productData.value = productStore.productData.slice(0, 4);
+});
+onMounted(() => {
+  window.scrollTo(0, 0);
 });
 </script>

@@ -180,6 +180,3 @@ const moveToWishlist = () => {
 };
 </script>
 
-<style scoped>
-/* Add any specific styles for the checkout card component here */
-</style>
