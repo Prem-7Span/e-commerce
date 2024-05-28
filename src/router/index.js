@@ -50,7 +50,7 @@ const routes = [
       },
       {
         name: "auth",
-        path: "auth",
+        path: "/",
         component: Auth,
         children: [
           {
@@ -71,7 +71,7 @@ const routes = [
             component: VerificationOtp,
           },
           {
-            name: "editprofile",
+            name: "editProfile",
             path: "edit",
             component: edit,
           },

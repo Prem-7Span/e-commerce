@@ -114,7 +114,7 @@
 </template>
 
 <script setup>
-import { ref, computed } from "vue";
+import { ref, computed, onMounted, defineProps } from "vue";
 import { useCartStore } from "@/store/cart";
 import { useWishlistStore } from "@/store/wishlist";
 
@@ -179,4 +179,3 @@ const moveToWishlist = () => {
   }
 };
 </script>
-
