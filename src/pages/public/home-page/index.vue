@@ -13,20 +13,20 @@
         <router-link :to="{ name: 'list' }">
           <div
             id="category"
-            class="flex space-x-3 overflow-hidden bg-primary-offBlack rounded-3xl"
+            class="flex space-x-1 overflow-hidden md:space-x-3 bg-primary-offBlack rounded-3xl"
           >
-            <div class="relative bg-overlay">
+            <div class="relative items-end bg-overlay">
               <img
                 src="/home-page/category-img-1.png"
                 alt="card-1"
-                class="height:100%"
+                class="h-100%"
               />
               <div class="absolute z-20 space-y-3 bottom-10 left-5">
                 <h2 class="text-base text-white sm:text-5xl">Pants</h2>
                 <p class="text-xs text-white sm:text-2xl">Shop Now</p>
               </div>
             </div>
-            <div class="space-y-3">
+            <div class="items-end space-y-1 md:space-y-3">
               <div class="relative bg-overlay">
                 <img src="/home-page/category-img-2.png" alt="card-2" />
                 <div class="absolute z-20 space-y-3 bottom-10 left-5">
@@ -51,9 +51,9 @@
         <router-link :to="{ name: 'list' }">
           <div
             id="category"
-            class="flex space-x-3 overflow-hidden bg-primary-offBlack rounded-3xl"
+            class="flex space-x-1 overflow-hidden md:space-x-3 bg-primary-offBlack rounded-3xl"
           >
-            <div id="col-1" class="space-y-3">
+            <div id="col-1" class="space-y-1 md:space-y-3">
               <div class="relative bg-overlay">
                 <img src="/home-page/deals-img-1.png" alt="card-1" />
                 <div class="absolute z-20 space-y-3 bottom-10 left-5">
@@ -69,7 +69,7 @@
                 </div>
               </div>
             </div>
-            <div id="col-2" class="pt-16 space-y-3">
+            <div id="col-2" class="pt-5 space-y-1 md:space-y-3 md:pt-16">
               <div class="relative bg-overlay">
                 <img src="/home-page/deals-img-3.png" alt="card-2" />
                 <div class="absolute z-20 space-y-3 bottom-10 left-5">
@@ -168,7 +168,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted } from "vue";
 import CarousalBanner from "@/components/home-page/carousal-banner.vue";
 import CarousalReview from "@/components/home-page/carousal-review.vue";
 import ProductCard from "@/components/card/product-card.vue";
