@@ -90,7 +90,7 @@
               <input
                 type="text"
                 class="h-10 mt-5 text-white bg-transparent border-2 border-gray-500 rounded-md bg- w-72"
-                placeholder=" mail"
+                placeholder=" Enter Your Email Id"
               />
               <button class="p-2 m-2 mt-5 rounded-md bg-primary-100">
                 Subscribe
@@ -128,7 +128,7 @@
       </div>
     </div>
     <div class="p-4">
-      <div class="text-xs text-white">Version: {{ version }}</div>
+      <div class="text-1xl  text-white">Version: {{ version }}</div>
       <h2 class="text-center text-white md:hidden">
         Copyright 2024. All rights reserved.
       </h2>
