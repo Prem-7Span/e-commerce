@@ -98,6 +98,9 @@ export const useWishlistStore = defineStore("wishlist", {
         }
       }
     },
+    clearWishlist() {
+      this.wishlist = [];
+    },
   },
   getters: {
     getWishlist(state) {
@@ -108,6 +111,10 @@ export const useWishlistStore = defineStore("wishlist", {
     },
     getError(state) {
       return state.error;
+    },
+    wishlistCount(state) {
+      // Add this getter
+      return state.wishlist.length;
     },
   },
   persist: true,
