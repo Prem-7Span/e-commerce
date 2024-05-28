@@ -1,4 +1,5 @@
 <template>
+  <address-component @edit-address="editAddress"></address-component>
   <div class="flex flex-col mb-5 space-y-4">
     <label class="text-lg font-medium text-secondary-200">Personal details</label>
     
@@ -40,6 +41,7 @@
       <input 
         type="tel" 
         id="mobileNumber" 
+        maxlength="10"
         v-model="newAddress.mobileNumber" 
         @input="validateField('mobileNumber')"
         class="border-gray-300 pl-3 py-2 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 text-gray-900 block px-2.5 pb-2.5 pt-4 w-full text-sm rounded-lg border-1 appearance-none focus:ring-0 peer" 
@@ -130,11 +132,10 @@
           {{ state.stateName }}
         </option>
       </select>
-      <label for="states" class="absolute text-sm duration-300 transform -translate-y-4 scale-80 top-2 z-10 origin-[0] focus:ring-indigo-500 bg-white px-2 peer-focus:px-2 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-1 peer-focus:left-3 peer-focus:scale-80 peer-focus:-translate-y-4 text-secondary-100">States</label>
+      <label for="states" class="absolute text-sm duration-300 transform -translate-y-4 scale-80 top-2 z-10 origin-[0] focus:ring-indigo-500 bg-white px-2 peer-focus:px-2 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-1 peer-focus:left-3 peer-focus:scale-80 peer-focus:-translate-y-4 text-secondary-100">State</label>
       <p class="mt-2 text-primary-200"></p>
-     
+    
     </div>
-
     <p class="text-red-500 ">
       {{ errors.stateId }}
       </p>
@@ -156,9 +157,9 @@
           {{ city.cityName }}
         </option>
       </select>
-      <label for="cities" class="absolute text-sm duration-300 transform -translate-y-4 scale-80 top-2 z-10 origin-[0] focus:ring-indigo-500 bg-white px-2 peer-focus:px-2 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-1 peer-focus:left-3 peer-focus:scale-80 peer-focus:-translate-y-4 text-secondary-100">Cities</label>
+      <label for="cities" class="absolute text-sm duration-300 transform -translate-y-4 scale-80 top-2 z-10 origin-[0] focus:ring-indigo-500 bg-white px-2 peer-focus:px-2 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-1 peer-focus:left-3 peer-focus:scale-80 peer-focus:-translate-y-4 text-secondary-100">City</label>
       <p class="mt-2 text-primary-200"></p>
-     
+    
     </div>
     <p class="text-red-500 ">
       {{ errors.cityId }}
@@ -166,7 +167,7 @@
     
     <div class="relative border rounded-md">
       <input 
-        type="tel" 
+        type="text" 
         id="pincode" 
         v-model="newAddress.pincode" 
         @input="validateField('pincode')"
@@ -214,6 +215,9 @@ export default {
       pincode: ''
     });
 
+
+    
+
     const errors = ref({
       firstName: '',
       lastName: '',
@@ -225,6 +229,11 @@ export default {
       cityId: '',
       pincode: ''
     });
+
+ const editAddress = (address) => {
+      newAddress.value = { ...address };
+      console.log("edit",editAddress);
+    };
 
     onMounted(async () => {
       await addressStore.fetchCountries();
@@ -293,6 +302,7 @@ export default {
     const submitAddress = async () => {
       try {
         await addressStore.createAddress(newAddress.value);
+        await addressStore.fetchAddresses();
         newAddress.value = {
           firstName: '',
           lastName: '',
@@ -324,7 +334,3 @@ export default {
   }
 };
 </script>
-
-<style scoped>
-/* Your styles here */
-</style>

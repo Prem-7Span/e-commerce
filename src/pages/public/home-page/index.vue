@@ -167,26 +167,21 @@
   </div>
 </template>
 
-<script>
+<script setup>
+import { ref, onMounted } from 'vue';
 import CarousalBanner from "@/components/home-page/carousal-banner.vue";
 import CarousalReview from "@/components/home-page/carousal-review.vue";
-import ProductCard from "../../../components/card/product-card.vue";
+import ProductCard from "@/components/card/product-card.vue";
 import { useProductStore } from "/src/store/product.js";
-export default {
-  data() {
-    return {
-      productStore: useProductStore(),
-      productData: [],
-    };
-  },
-  components: {
-    CarousalBanner,
-    ProductCard,
-    CarousalReview,
-  },
-  async mounted() {
-    await this.productStore.fetchProductList();
-    this.productData = productStore.productData.splice(0, 4);
-  },
-};
+
+const productStore = useProductStore();
+const productData = ref([]);
+
+onMounted(async () => {
+  await productStore.fetchProductList();
+  productData.value = productStore.productData.slice(0, 4);
+});
+onMounted(() => {
+  window.scrollTo(0, 0);
+});
 </script>

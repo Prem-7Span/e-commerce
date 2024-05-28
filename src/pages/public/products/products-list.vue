@@ -215,13 +215,7 @@
               v-model="productStore.size"
             />
             <label for="3XL"> 3XL</label><br />
-            <input
-              type="checkbox"
-              id="4XL"
-              value="4XL"
-              v-model="productStore.size"
-            />
-            <label for="4XL"> 4XL</label><br />
+          
           </div>
         </div>
 
@@ -315,6 +309,8 @@ export default {
       sidebar.value = !sidebar.value;
     };
 
+
+    
     const UpdateValues = (value) => {
       productStore.minPrice = value.minValue;
       productStore.maxPrice = value.maxValue;
@@ -356,6 +352,10 @@ export default {
       window.addEventListener("resize", handleResize);
     });
 
+    onMounted(() => {
+  window.scrollTo(0, 0);
+});
+
     onBeforeUnmount(() => {
       window.removeEventListener("resize", handleResize);
     });
@@ -363,6 +363,7 @@ export default {
     const paginatedProducts = computed(() => {
       const start = (currentPage.value - 1) * productsPerPage;
       const end = start + productsPerPage;
+      window.scrollTo(0, 0);
       return filteredProducts.value.slice(start, end);
     });
 
@@ -373,12 +374,14 @@ export default {
     const nextPage = () => {
       if (currentPage.value < totalPages.value) {
         currentPage.value++;
+        window.scrollTo(0, 0);
       }
     };
 
     const previousPage = () => {
       if (currentPage.value > 1) {
         currentPage.value--;
+        window.scrollTo(0, 0);
       }
     };
 

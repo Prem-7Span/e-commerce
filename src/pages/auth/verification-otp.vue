@@ -88,7 +88,7 @@ export default {
     async submitForm() {
       const otp = this.verificationOtp.join("");
 
-      this.errorMessage = ""; // Reset error message
+      this.errorMessage = ""; // Reset
 
       if (!otp) {
         this.errorMessage = "OTP is required";
@@ -102,7 +102,7 @@ export default {
           otp
         );
 
-        await signInWithCredential(authentication, credential) // Assuming firebase is imported elsewhere
+        await signInWithCredential(authentication, credential) // Assuming firebase is imported 
           .then((res) => {
           
             this.userStore.setToken(res.user.accessToken);
@@ -132,7 +132,7 @@ export default {
     },
     resendOTP() {
     
-      // Add logic to resend OTP if needed
+     z
     },
     async fetchCartItems() {
       await this.cartStore.fetchCart();
