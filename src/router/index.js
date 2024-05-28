@@ -89,7 +89,22 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(),
   routes,
-  
+  scrollBehavior() {
+    document.querySelector("body").scrollIntoView({ behavior: "smooth" });
+  },
+});
+
+// Before each
+router.beforeEach((to, from, next) => {
+  if (to.meta.requiresAuth) {
+    if (localStorage.getItem("token")) {
+      next();
+    } else {
+      next({ name: "SignIn" });
+    }
+  } else {
+    next();
+  }
 });
 
 export default router;
