@@ -18,12 +18,12 @@
             class="flex-col hidden space-x-4 space-y-4 md:flex md:flex-row md:space-y-0 md:space-x-4"
           >
             <router-link
-            :to="{ name: 'products', query: { gender: 'Men' } }"
+              :to="{ name: 'products', query: { gender: 'Men' } }"
               class="text-gray-600 hover:text-gray-800 hover:underline"
               >Men</router-link
             >
             <router-link
-            :to="{ name: 'products', query: { gender: 'Women' } }"
+              :to="{ name: 'products', query: { gender: 'Women' } }"
               class="text-gray-600 hover:text-gray-800 hover:underline"
               >Women</router-link
             >
@@ -104,7 +104,7 @@
               >
                 <div class="py-1">
                   <router-link
-                    :to="{ name: 'editprofile' }"
+                    :to="{ name: 'editProfile' }"
                     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                     role="menuitem"
                   >
@@ -121,7 +121,7 @@
               </div>
             </div>
           </div>
-          <div v-else-if="windowLocationPathname !== '/auth/sign-in'">
+          <div v-else-if="windowLocationPathname !== '/sign-in'">
             <router-link :to="{ name: 'SignIn' }">
               <button class="px-4 py-2 text-white rounded-lg bg-primary-100">
                 Login

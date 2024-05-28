@@ -33,7 +33,7 @@ export const useWishlistStore = defineStore("wishlist", {
         this.error = error.message;
         console.error("Error fetching wishlist:", error);
         if (error.message === "No authentication token found" && router) {
-          router.push("/auth/sign-in"); // Redirect to sign-in page
+          router.push("/sign-in"); // Redirect to sign-in page
         }
       } finally {
         this.loading = false;
@@ -63,7 +63,7 @@ export const useWishlistStore = defineStore("wishlist", {
         this.error = error.message;
         console.error("Error adding product to wishlist:", error);
         if (error.message === "No authentication token found" && router) {
-          router.push("/auth/sign-in"); // Redirect to sign-in page
+          router.push("/sign-in"); // Redirect to sign-in page
         }
       }
     },
@@ -94,7 +94,7 @@ export const useWishlistStore = defineStore("wishlist", {
         this.error = error.message;
         console.error("Error removing product from wishlist:", error);
         if (error.message === "No authentication token found" && router) {
-          router.push("/auth/sign-in"); // Redirect to sign-in page
+          router.push("/sign-in"); // Redirect to sign-in page
         }
       }
     },
