@@ -121,7 +121,7 @@
               </div>
             </div>
           </div>
-          <div v-else>
+          <div v-else-if="windowLocationPathname !== '/auth/sign-in'">
             <router-link :to="{ name: 'SignIn' }">
               <button class="px-4 py-2 text-white rounded-lg bg-primary-100">
                 Login
@@ -161,6 +161,7 @@ export default {
       token: localStorage.getItem("token"),
       searchQuery: "",
       searchResults: [],
+      windowLocationPathname: window.location.pathname,
     };
   },
   computed: {
