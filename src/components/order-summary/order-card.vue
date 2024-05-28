@@ -6,27 +6,33 @@
     <div>
       <div class="flex justify-between px-4 py-4">
         <p class="text-base text-gray-700">Total MRP</p>
-        <p class="text-base font-medium text-gray-900">₹{{ data.totalMrp }}</p>
+        <p class="text-base font-medium text-gray-900">
+          ₹{{ orderSummaryStore.totalMrp }}
+        </p>
       </div>
       <div class="flex justify-between px-4 py-4">
         <p class="text-base text-gray-700">Discount</p>
-        <p class="text-base font-medium text-green-500">₹{{ data.discount }}</p>
+        <p class="text-base font-medium text-green-500">
+          ₹{{ orderSummaryStore.discount }}
+        </p>
       </div>
       <div class="flex justify-between px-4 py-4">
         <p class="text-base text-gray-700">Platform Fee</p>
         <p class="text-base font-medium text-green-500">
-          ₹{{ data.totalPlatformCharges }}
+          ₹{{ orderSummaryStore.totalPlatformCharges }}
         </p>
       </div>
       <div class="flex justify-between px-4 py-4 pb-4 border-b border-gray-200">
         <p class="text-base text-gray-700">Shipping Fee</p>
         <p class="text-base font-medium text-green-500">
-          ₹{{ data.shippingCharges }}
+          ₹{{ orderSummaryStore.shippingCharges }}
         </p>
       </div>
       <div class="flex justify-between px-4 py-4">
         <p class="text-base text-gray-700">Total Amount</p>
-        <p class="text-base font-medium text-green-500">₹{{ data.total }}</p>
+        <p class="text-base font-medium text-green-500">
+          ₹{{ orderSummaryStore.total }}
+        </p>
       </div>
       <div class="mx-5 mb-8">
         <button

@@ -45,5 +45,30 @@ export const useOrderSummaryStore = defineStore("orderSummary", {
         this.loading = false;
       }
     },
+    calculateOrderSummary(cartItems) {
+      let totalMrp = 0;
+      let discount = 0;
+      let totalPlatformCharges = 0;
+      let shippingCharges = 0;
+      let total = 0;
+
+      cartItems.forEach((item) => {
+        totalMrp += item.quantity * item.productVarient.regularPrice;
+        discount +=
+          (item.productVarient.regularPrice - item.productVarient.price) *
+          item.quantity;
+        total += item.quantity * item.productVarient.price;
+      });
+
+      // Example calculations
+      totalPlatformCharges = total * 0.1; // Assume 10% platform charges
+      shippingCharges = total > 1000 ? 0 : 50; // Free shipping for orders above 1000
+
+      this.totalMrp = totalMrp;
+      this.discount = discount;
+      this.totalPlatformCharges = totalPlatformCharges;
+      this.shippingCharges = shippingCharges;
+      this.total = total + totalPlatformCharges + shippingCharges;
+    },
   },
 });
