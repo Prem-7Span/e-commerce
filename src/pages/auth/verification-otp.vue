@@ -21,12 +21,12 @@
             :ref="`otpBox${index}`"
           />
         </div>
-        <button
+        <!-- <button
           class="block mt-4 text-sm text-gray-400 hover:underline"
           @click="resendOTP"
         >
           Resend OTP
-        </button>
+        </button> -->
         <button
           class="w-full py-2 mt-6 font-bold text-white rounded-md md:w-full md:px-3 bg-primary-100 hover:bg-primary-100 focus:outline-none focus:ring-1 focus:bg-primary-100"
           @click="submitForm"
@@ -96,20 +96,17 @@ export default {
       }
 
       try {
-     
         const credential = PhoneAuthProvider.credential(
           this.confirmationResult,
           otp
         );
 
-        await signInWithCredential(authentication, credential) // Assuming firebase is imported 
+        await signInWithCredential(authentication, credential) // Assuming firebase is imported
           .then((res) => {
-          
             this.userStore.setToken(res.user.accessToken);
             this.toast.success("Verification successful!");
             this.$router.push({ name: "home" });
             this.fetchCartItems();
-        
 
             // Store the token in localStorage
             // res.user.getIdToken().then((token) => {
@@ -131,8 +128,7 @@ export default {
       }
     },
     resendOTP() {
-    
-     z
+      z;
     },
     async fetchCartItems() {
       await this.cartStore.fetchCart();
