@@ -48,9 +48,7 @@
       <div class="flex flex-col space-y-2">
         <div class="animate__animated animate__fadeIn">Address 1</div>
         <div v-if="userDetails.addresses && userDetails.addresses.length">
-          <h1
-            class="px-3 py-5 text-gray-700 transition duration-200 ease-in-out border border-gray-300 rounded-md appearance-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-500"
-          >
+          <h1 class="px-3 py-6  text-gray-700 transition duration-200 ease-in-out border border-gray-300 rounded-md appearance-none focus:outline-none focus:ring-2 focus:ring-indigo-500 cursor-pointer">
             <!-- {{ userDetails.addresses }} -->
           </h1>
         </div>

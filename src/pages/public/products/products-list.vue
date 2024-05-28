@@ -158,9 +158,6 @@
             />
             <label for="Grey"> Grey</label><br />
           </div>
-          <!-- <button class="text-sm hover:text-red-900 text-start">
-            + 3 more
-          </button> -->
         </div>
 
         <h2 class="font-bold">Size</h2>
@@ -218,18 +215,23 @@
               v-model="productStore.size"
             />
             <label for="3XL"> 3XL</label><br />
-            <input
-              type="checkbox"
-              id="4XL"
-              value="4XL"
-              v-model="productStore.size"
-            />
-            <label for="4XL"> 4XL</label><br />
+          
           </div>
         </div>
 
         <div
-          class="sticky bottom-0 p-10 text-center bg-white w-72 left-9 right-9"
+          class="sticky bottom-0 p-10 text-center bg-white w-72 left-9 right-9 md:hidden"
+        >
+          <button
+            @click="applyFiltersAndCloseSidebar"
+            class="w-full p-1 text-center text-white rounded-md bg-primary-300"
+          >
+            Apply Filters
+          </button>
+        </div>
+
+        <div
+          class="sticky bottom-0 p-10 text-center bg-white w-72 left-9 right-9 hidden md:block"
         >
           <button
             @click="applyFilters"
@@ -254,7 +256,7 @@
             :disabled="currentPage === 1"
             class="pagination-arrow"
           >
-            &laquo;
+            <
           </button>
           <button
             v-for="page in totalPages"
@@ -269,7 +271,7 @@
             :disabled="currentPage === totalPages"
             class="pagination-arrow"
           >
-            &raquo;
+            >
           </button>
         </div>
       </div>
@@ -278,18 +280,18 @@
 </template>
 
 <script>
+
 import { ref, computed, onMounted, onBeforeUnmount } from "vue";
 import { useProductStore } from "/src/store/product.js";
 import ProductCard from "@/components/card/product-card.vue";
 import Breadcrumb from "@/components/global/bread-crumb.vue";
-import MultiRangeSlider from "multi-range-slider-vue";
+import MultiRangeSlider from "multi-range-slider-vue"; 
 
 export default {
-  name: "ProductList",
   components: {
-    ProductCard,
     Breadcrumb,
     MultiRangeSlider,
+    ProductCard,
   },
   setup() {
     const productStore = useProductStore();
@@ -300,13 +302,15 @@ export default {
     const productsPerPage = 6;
 
     const handleResize = () => {
-      isMobile.value = window.innerWidth >= 768;
+      isMobile.value = window.innerWidth < 768;
     };
 
     const openSidebar = () => {
       sidebar.value = !sidebar.value;
     };
 
+
+    
     const UpdateValues = (value) => {
       productStore.minPrice = value.minValue;
       productStore.maxPrice = value.maxValue;
@@ -317,10 +321,14 @@ export default {
         const filteredData = await productStore.applyFiltersAndFetch();
         filteredProducts.value = filteredData;
         currentPage.value = 1; // Reset to first page
-        console.log("Filtered products:", filteredProducts.value);
       } catch (error) {
         console.error("Error applying filters:", error);
       }
+    };
+
+    const applyFiltersAndCloseSidebar = async () => {
+      await applyFilters();
+      sidebar.value = false;
     };
 
     const clearFilters = async () => {
@@ -344,6 +352,10 @@ export default {
       window.addEventListener("resize", handleResize);
     });
 
+    onMounted(() => {
+  window.scrollTo(0, 0);
+});
+
     onBeforeUnmount(() => {
       window.removeEventListener("resize", handleResize);
     });
@@ -351,6 +363,7 @@ export default {
     const paginatedProducts = computed(() => {
       const start = (currentPage.value - 1) * productsPerPage;
       const end = start + productsPerPage;
+      window.scrollTo(0, 0);
       return filteredProducts.value.slice(start, end);
     });
 
@@ -361,13 +374,19 @@ export default {
     const nextPage = () => {
       if (currentPage.value < totalPages.value) {
         currentPage.value++;
+        window.scrollTo(0, 0);
       }
     };
 
     const previousPage = () => {
       if (currentPage.value > 1) {
         currentPage.value--;
+        window.scrollTo(0, 0);
       }
+    };
+
+    const goToPage = (page) => {
+      currentPage.value = page;
     };
 
     const breadcrumbItems = computed(() => [
@@ -384,6 +403,7 @@ export default {
       openSidebar,
       UpdateValues,
       applyFilters,
+      applyFiltersAndCloseSidebar,
       clearFilters,
       breadcrumbItems,
       paginatedProducts,
@@ -391,60 +411,14 @@ export default {
       totalPages,
       nextPage,
       previousPage,
+      goToPage,
     };
   },
 };
 </script>
 
 <style scoped>
-.sidebar {
-  width: 100%;
-}
-.multi-range-slider {
-  border-radius: none;
-  box-shadow: none;
-  border: none;
-}
-.multi-range-slider .bar-inner {
-  background-color: #2f2f2f;
-}
-.multi-range-slider .bar-inner {
-  background-color: #2f2f2f;
-  display: flex;
-  flex-grow: 1;
-  flex-shrink: 1;
-  position: relative;
-  border: solid 1px black;
-  justify-content: space-between;
-  box-shadow: inset 0px 0px 5px black;
-}
-.pagination-button {
-  background-color: #f3f3f3;
-  border: 1px solid #ddd;
-  padding: 0.5rem 1rem;
-  margin: 0 0.25rem;
-  cursor: pointer;
-}
-.pagination-button[disabled] {
-  background-color: #e0e0e0;
-  cursor: not-allowed;
-}
-.flex {
-  display: flex;
-}
-
-.justify-center {
-  justify-content: center;
-}
-
-.mt-4 {
-  margin-top: 1rem;
-}
-
-.mb-8 {
-  margin-bottom: 2rem;
-}
-
+/* Pagination styles and other necessary styles */
 .pagination-arrow,
 .pagination-button {
   padding: 0.5rem 1rem;
@@ -452,7 +426,7 @@ export default {
   border: 1px solid #ccc;
   background-color: white;
   cursor: pointer;
-  transition: background-color 0.5s ease, color 0.5s ease;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .pagination-arrow:disabled,
@@ -473,4 +447,19 @@ export default {
 .pagination-button:not(.active):hover {
   background-color: #f1f1f1;
 }
+
+/* Rest of your styles */
+.sidebar {
+  width: 100%;
+}
+.multi-range-slider {
+  border-radius: none;
+  box-shadow: none;
+  border: none;
+}
+.multi-range-slider .bar-inner {
+  background-color: #2f2f2f;
+}
 </style>
+
+

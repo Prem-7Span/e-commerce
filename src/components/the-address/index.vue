@@ -3,7 +3,7 @@
     <div
       class="grid mb-4 grid-cols-1 grid-rows-1 gap-8 mt-5 md:grid-cols-1 md:grid-rows-1 md:w-auto md:gap-1"
     >
-     <addAddress />
+     <addAddress @addressSubmitted="AddressSubmitted" />
      <ShowAddress />
     </div>
 
@@ -26,5 +26,14 @@ export default {
     addAddress,
     ShowAddress
   },
+  methods:{
+    AddressSubmitted(newAddress) {
+      console.log('Address submitted:', newAddress);
+    }
+    }
 };
 </script>
+
+
+
+

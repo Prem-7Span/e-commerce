@@ -57,8 +57,10 @@ const productData = ref([]);
 onMounted(async () => {
   await cartStore.fetchCart();
   await productStore.fetchProductList();
-  productData.value = productStore.productData.splice(0, 4);
+  productData.value = productStore.productData.slice(0, 4);
 });
+
+
 
 const emit = defineEmits(["changeTab"]);
 

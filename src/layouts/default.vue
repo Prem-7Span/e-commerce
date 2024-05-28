@@ -1,10 +1,8 @@
 <template>
   <div>
-    <Navbar v-if="!$route.path.startsWith('/checkout')" />
-
+    <Navbar v-if="!isCheckoutPage" />
     <router-view />
-
-    <Footer v-if="!$route.path.startsWith('/checkout')" />
+    <Footer v-if="showFooter" />
   </div>
 </template>
 
@@ -12,13 +10,22 @@
 import Navbar from "@/components/global/navbar.vue";
 import Footer from "@/components/global/footer.vue";
 
-console.log(localStorage.getItem("token"));
-
 export default {
-  name: "navbar",
+  name: "MainLayout",
   components: {
     Navbar,
     Footer,
   },
+  computed: {
+    isCheckoutPage() {
+      return this.$route.path.startsWith('/checkout');
+    },
+    showFooter() {
+      const excludedPaths = [
+        '/auth'
+      ];
+      return !excludedPaths.some(path => this.$route.path.startsWith(path));
+    }
+  }
 };
 </script>
