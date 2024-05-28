@@ -168,9 +168,7 @@ export default {
       this.validateField("phoneNumber");
 
       if (this.canSubmit) {
-        console.log(
-          "Form submitted successfully (client-side validation passed)"
-        );
+       
         this.registerUser();
       }
     },
@@ -185,9 +183,7 @@ export default {
             mobileNo: this.phoneNumber,
           }
         );
-        console.log("response", response);
-
-        console.log("Signup successful:", response.data);
+     
         this.toast.success("Signup successful");
         this.$router.push({ name: "SignIn" });
       } catch (error) {
