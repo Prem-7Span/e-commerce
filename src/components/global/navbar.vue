@@ -153,6 +153,11 @@ export default {
     const userStore = useUserStore();
     const cartStore = useCartStore();
     const wishlistStore = useWishlistStore(); // Use the wishlist store
+
+    if (localStorage.getItem("token")) {
+      wishlistStore.fetchWishlist(); // Fetch wishlist on login
+    }
+
     return { userStore, cartStore, wishlistStore };
   },
   data() {
@@ -190,6 +195,7 @@ export default {
       localStorage.removeItem("token");
       localStorage.removeItem("user");
       this.userStore.setToken(null); // Update token in store
+      this.wishlistStore.clearWishlist(); // Clear the wishlist on logout
       this.$router.push({ name: "home" });
     },
     async searchProducts() {
