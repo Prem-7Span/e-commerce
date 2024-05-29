@@ -22,7 +22,7 @@ export default {
     },
     showFooter() {
       const excludedPaths = [
-        '/auth'
+        '/'
       ];
       return !excludedPaths.some(path => this.$route.path.startsWith(path));
     }

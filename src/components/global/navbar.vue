@@ -43,12 +43,14 @@
                   <img src="/home-page/profileicons.svg" alt="Profile" class="w-6 h-6" />
                 </button>
               </div>
-              <div v-show="dropdownOpen" class="absolute right-0 z-10 w-56 mt-2 origin-top-right bg-white border border-gray-200 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
-                <div class="py-1">
-                  <router-link :to="{ name: 'editProfile' }" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Edit Profile</router-link>
-                  <button @click="logout" class="block w-full px-4 py-2 text-sm text-left text-gray-700 hover:bg-gray-100" role="menuitem">Logout</button>
+              <transition name="fade" mode="out-in">
+                <div v-show="dropdownOpen" class="absolute right-0 z-10 w-56 mt-2 origin-top-right bg-white border border-gray-200 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
+                  <div class="py-1">
+                    <router-link :to="{ name: 'editProfile' }" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Edit Profile</router-link>
+                    <button @click="logout" class="block w-full px-4 py-2 text-sm text-left text-gray-700 hover:bg-gray-100" role="menuitem">Logout</button>
+                  </div>
                 </div>
-              </div>
+              </transition>
             </div>
           </div>
           <div v-else-if="windowLocationPathname !== '/sign-in'">
@@ -89,7 +91,6 @@ export default {
     const filterByGender = async (gender) => {
       productStore.parentCategory = [gender];
       await productStore.applyFiltersAndFetch();
-      // Navigate to the products page with the appropriate query parameter after fetching data
       window.location.href = `/products?gender=${gender}`;
     };
 

@@ -70,6 +70,8 @@ export default {
       // Focus on the next input if current one is filled
       if (this.verificationOtp[index].length === 1 && index < 5) {
         this.$refs[`otpBox${index + 1}`][0].focus();
+        // console.log("xyz",this.$refs[`otpBox${index + 1}`]);
+        // console.log("0", this.$refs[`otpBox${index + 1}`][0]);
       }
 
       // Limit input to numbers only
