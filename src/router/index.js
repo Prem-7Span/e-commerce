@@ -7,10 +7,10 @@ import HomePage from "@/pages/public/home-page/index.vue";
 import ProductDetail from "@/pages/public/products/products-details.vue";
 import ProductList from "@/pages/public/products/products-list.vue";
 import Default from "@/layouts/default.vue";
-import CheckOut from "../pages/public/product-checkout/index.vue";
-import wishList from "@/pages/public/wish-list/index.vue";
-import edit from "@/pages/private/edit.vue";
-import profile from "../pages/private/profile.vue";
+import CheckOut from "../pages/private/product-checkout/index.vue";
+import wishList from "@/pages/private/wish-list/index.vue";
+import edit from "@/pages/private/profile/edit.vue";
+import profile from "../pages/private/profile/index.vue";
 const routes = [
   {
     path: "/",

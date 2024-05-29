@@ -46,7 +46,7 @@ import { ref, onMounted, defineEmits } from "vue";
 import { useCartStore } from "@/store/cart";
 import { useProductStore } from "@/store/product";
 import CheckoutCard from "@/components/card/checkout-card.vue";
-import OrderCard from "../../components/order-summary/order-card.vue";
+import OrderCard from "../card/order-card.vue";
 import ProductCard from "../../components/card/product-card.vue";
 
 const cartStore = useCartStore();
@@ -59,8 +59,6 @@ onMounted(async () => {
   await productStore.fetchProductList();
   productData.value = productStore.productData.slice(0, 4);
 });
-
-
 
 const emit = defineEmits(["changeTab"]);
 
