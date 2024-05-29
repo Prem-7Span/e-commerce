@@ -215,7 +215,6 @@
               v-model="productStore.size"
             />
             <label for="3XL"> 3XL</label><br />
-          
           </div>
         </div>
 
@@ -231,7 +230,7 @@
         </div>
 
         <div
-          class="sticky bottom-0 p-10 text-center bg-white w-72 left-9 right-9 hidden md:block"
+          class="sticky bottom-0 hidden p-10 text-center bg-white w-72 left-9 right-9 md:block"
         >
           <button
             @click="applyFilters"
@@ -243,7 +242,7 @@
       </div>
 
       <div>
-        <div class="grid grid-cols-2 gap-5 py-4 md:gap-8 md:grid-cols-3">
+        <div class="grid grid-cols-2 gap-5 py-4 md:gap-8 md:grid-cols-4">
           <ProductCard
             v-for="(product, index) in paginatedProducts"
             :key="index"
@@ -280,12 +279,11 @@
 </template>
 
 <script>
-
 import { ref, computed, onMounted, onBeforeUnmount } from "vue";
 import { useProductStore } from "/src/store/product.js";
 import ProductCard from "@/components/card/product-card.vue";
 import Breadcrumb from "@/components/global/bread-crumb.vue";
-import MultiRangeSlider from "multi-range-slider-vue"; 
+import MultiRangeSlider from "multi-range-slider-vue";
 
 export default {
   components: {
@@ -309,8 +307,6 @@ export default {
       sidebar.value = !sidebar.value;
     };
 
-
-    
     const UpdateValues = (value) => {
       productStore.minPrice = value.minValue;
       productStore.maxPrice = value.maxValue;
@@ -353,8 +349,8 @@ export default {
     });
 
     onMounted(() => {
-  window.scrollTo(0, 0);
-});
+      window.scrollTo(0, 0);
+    });
 
     onBeforeUnmount(() => {
       window.removeEventListener("resize", handleResize);
@@ -461,5 +457,3 @@ export default {
   background-color: #2f2f2f;
 }
 </style>
-
-
