@@ -48,17 +48,24 @@
         <div class="py-4">
           <p>Colors</p>
           <div id="color-section" class="flex gap-3">
-            <label v-for="color in availableColors" :key="color">
+            <label
+              v-for="color in availableColors"
+              :key="color"
+              class="relative"
+            >
               <input
                 type="radio"
                 name="color"
-                class="hidden peer boeder-red-200"
+                class="hidden peer"
                 :value="color"
                 v-model="selectedColor"
               />
               <div
                 :class="getColorClass(color)"
-                class="w-12 h-12 border-2 border-transparent rounded-full cursor-pointer peer-checked:border-gray-800"
+                class="w-12 h-12 border-2 border-transparent rounded-full cursor-pointer"
+              ></div>
+              <div
+                class="absolute inset-0 border-2 border-transparent rounded-full pointer-events-none peer-checked:border-gray-800"
               ></div>
             </label>
           </div>

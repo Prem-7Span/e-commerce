@@ -70,7 +70,7 @@ export default {
 
     const breadcrumbItems = computed(() => [
       { name: "Home", path: "/" },
-      { name: "Wishlist", path: "/wish-list" },
+      { name: "Wishlist", path: "/wishlist" },
     ]);
 
     onMounted(() => {

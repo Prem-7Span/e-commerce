@@ -5,5 +5,5 @@
 </template>
 
 <script setup>
-import orderSuccessful from "../order-summary/order-successful.vue";
+import orderSuccessful from "./payment-successful.vue";
 </script>

@@ -55,7 +55,7 @@
         <div v-else class="text-gray-400">Add Your Address</div>
       </div>
 
-      <router-link :to="{ name: 'editProfile' }">
+      <router-link :to="{ name: 'editprofile' }">
         <button
           type="button"
           class="w-full px-4 py-2 mt-4 font-medium text-center text-white transition duration-200 ease-in-out rounded-md bg-primary-100 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-indigo-700 focus:ring-opacity-50"
