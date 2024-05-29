@@ -297,7 +297,7 @@ export default {
     const isMobile = ref(false);
     const filteredProducts = ref([]);
     const currentPage = ref(1);
-    const productsPerPage = 6;
+    const productsPerPage = 8;
 
     const handleResize = () => {
       isMobile.value = window.innerWidth < 768;

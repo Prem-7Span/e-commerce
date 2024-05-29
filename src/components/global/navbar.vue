@@ -156,6 +156,7 @@ export default {
 
     if (localStorage.getItem("token")) {
       wishlistStore.fetchWishlist(); // Fetch wishlist on login
+      cartStore.fetchCart(); // Fetch cart on login
     }
 
     return { userStore, cartStore, wishlistStore };
@@ -174,7 +175,7 @@ export default {
       return this.userStore.getToken;
     },
     cartItemCount() {
-      return this.cartStore.cartItemCount;
+      return this.cartStore.cartItemCount; // Updated to reflect the number of items in the cart
     },
     wishlistItemCount() {
       return this.wishlistStore.wishlistCount; // Access the wishlist item count from the store
@@ -196,6 +197,7 @@ export default {
       localStorage.removeItem("user");
       this.userStore.setToken(null); // Update token in store
       this.wishlistStore.clearWishlist(); // Clear the wishlist on logout
+      this.cartStore.clearCart(); // Clear the cart on logout
       this.$router.push({ name: "home" });
     },
     async searchProducts() {
