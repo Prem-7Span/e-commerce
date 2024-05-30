@@ -12,20 +12,20 @@
       </div>
       <div class="flex justify-between px-4 py-4">
         <p class="text-base text-gray-700">Discount</p>
-        <p class="text-base font-medium text-green-500">
-          ₹{{ orderSummaryStore.discount }}
+        <p class="text-base font-medium text-red-500">
+          - ₹{{ orderSummaryStore.discount }}
         </p>
       </div>
       <div class="flex justify-between px-4 py-4">
         <p class="text-base text-gray-700">Platform Fee</p>
         <p class="text-base font-medium text-green-500">
-          ₹{{ orderSummaryStore.totalPlatformCharges }}
+          + ₹{{ orderSummaryStore.totalPlatformCharges }}
         </p>
       </div>
       <div class="flex justify-between px-4 py-4 pb-4 border-b border-gray-200">
         <p class="text-base text-gray-700">Shipping Fee</p>
         <p class="text-base font-medium text-green-500">
-          ₹{{ orderSummaryStore.shippingCharges }}
+          + ₹{{ orderSummaryStore.shippingCharges }}
         </p>
       </div>
       <div class="flex justify-between px-4 py-4">
@@ -57,6 +57,7 @@
 <script setup>
 import { computed, onMounted, defineProps, defineEmits } from "vue";
 import { useOrderSummaryStore } from "@/store/order-summary";
+import { useAddressStore } from "../../store/address.js"; // Import address store
 
 const props = defineProps({
   showNextButton: {
@@ -68,9 +69,11 @@ const props = defineProps({
 const emit = defineEmits(["next", "placeOrder"]);
 
 const orderSummaryStore = useOrderSummaryStore();
+const addressStore = useAddressStore(); // Initialize address store
 
 onMounted(() => {
   orderSummaryStore.fetchOrderSummary();
+  addressStore.fetchAddresses(); // Fetch addresses when the component is mounted
 });
 
 const data = computed(() => orderSummaryStore);

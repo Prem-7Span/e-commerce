@@ -20,11 +20,13 @@
             <router-link
               :to="{ name: 'products', query: { gender: 'Men' } }"
               class="text-gray-600 hover:text-gray-800 hover:underline"
+              @click.prevent="filterByGender('Men')"
               >Men</router-link
             >
             <router-link
               :to="{ name: 'products', query: { gender: 'Women' } }"
               class="text-gray-600 hover:text-gray-800 hover:underline"
+              @click.prevent="filterByGender('Women')"
               >Women</router-link
             >
           </nav>
@@ -146,6 +148,7 @@
 import { useUserStore } from "@/store/user";
 import { useCartStore } from "@/store/cart.js";
 import { useWishlistStore } from "@/store/wishlist.js"; // Import the wishlist store
+import { useProductStore } from "@/store/product.js";
 import axios from "axios";
 
 export default {
@@ -153,13 +156,21 @@ export default {
     const userStore = useUserStore();
     const cartStore = useCartStore();
     const wishlistStore = useWishlistStore(); // Use the wishlist store
+    const productStore = useProductStore();
+
+    const filterByGender = async (gender) => {
+      productStore.parentCategory = [gender];
+      await productStore.applyFiltersAndFetch();
+      // Navigate to the products page with the appropriate query parameter after fetching data
+      window.location.href = `/products?gender=${gender}`;
+    };
 
     if (localStorage.getItem("token")) {
       wishlistStore.fetchWishlist(); // Fetch wishlist on login
       cartStore.fetchCart(); // Fetch cart on login
     }
 
-    return { userStore, cartStore, wishlistStore };
+    return { userStore, cartStore, wishlistStore, filterByGender };
   },
   data() {
     return {
