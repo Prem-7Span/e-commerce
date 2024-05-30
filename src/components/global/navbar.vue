@@ -20,11 +20,13 @@
             <router-link
               :to="{ name: 'products', query: { gender: 'Men' } }"
               class="text-gray-600 hover:text-gray-800 hover:underline"
+              @click.prevent="filterByGender('Men')"
               >Men</router-link
             >
             <router-link
               :to="{ name: 'products', query: { gender: 'Women' } }"
               class="text-gray-600 hover:text-gray-800 hover:underline"
+              @click.prevent="filterByGender('Women')"
               >Women</router-link
             >
           </nav>
@@ -146,6 +148,7 @@
 import { useUserStore } from "@/store/user";
 import { useCartStore } from "@/store/cart.js";
 import { useWishlistStore } from "@/store/wishlist.js"; // Import the wishlist store
+import { useProductStore } from "@/store/product.js";
 import axios from "axios";
 
 export default {
@@ -153,12 +156,21 @@ export default {
     const userStore = useUserStore();
     const cartStore = useCartStore();
     const wishlistStore = useWishlistStore(); // Use the wishlist store
+    const productStore = useProductStore();
+
+    const filterByGender = async (gender) => {
+      productStore.parentCategory = [gender];
+      await productStore.applyFiltersAndFetch();
+      // Navigate to the products page with the appropriate query parameter after fetching data
+      window.location.href = `/products?gender=${gender}`;
+    };
 
     if (localStorage.getItem("token")) {
       wishlistStore.fetchWishlist(); // Fetch wishlist on login
+      cartStore.fetchCart(); // Fetch cart on login
     }
 
-    return { userStore, cartStore, wishlistStore };
+    return { userStore, cartStore, wishlistStore, filterByGender };
   },
   data() {
     return {
@@ -174,7 +186,7 @@ export default {
       return this.userStore.getToken;
     },
     cartItemCount() {
-      return this.cartStore.cartItemCount;
+      return this.cartStore.cartItemCount; // Updated to reflect the number of items in the cart
     },
     wishlistItemCount() {
       return this.wishlistStore.wishlistCount; // Access the wishlist item count from the store
@@ -196,6 +208,7 @@ export default {
       localStorage.removeItem("user");
       this.userStore.setToken(null); // Update token in store
       this.wishlistStore.clearWishlist(); // Clear the wishlist on logout
+      this.cartStore.clearCart(); // Clear the cart on logout
       this.$router.push({ name: "home" });
     },
     async searchProducts() {

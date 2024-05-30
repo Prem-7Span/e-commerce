@@ -32,7 +32,8 @@
           v-model="userDetails.mobileNo"
           type="text"
           placeholder="Mobile number"
-          class="px-3 py-2 text-gray-700 transition duration-200 ease-in-out border border-gray-300 rounded-md appearance-none focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-700 hover:border-indigo-500"
+          readonly
+          class="px-3 py-2 text-gray-700 transition duration-200 ease-in-out bg-gray-200 border border-gray-300 rounded-md outline-none appearance-none cursor-not-allowed"
         />
       </div>
       <div class="flex flex-col space-y-2">
@@ -48,12 +49,9 @@
         <div class="animate__animated animate__fadeIn">Address 1</div>
         <textarea
           v-model="userDetails.addresses[0]"
-          type="text"
-          id="1"
           placeholder="Address"
           class="px-3 py-2 text-gray-700 transition duration-200 ease-in-out border border-gray-300 rounded-md appearance-none focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-700 hover:border-indigo-500"
-        >
-        </textarea>
+        ></textarea>
       </div>
 
       <router-link :to="{ name: 'profile' }">

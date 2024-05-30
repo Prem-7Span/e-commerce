@@ -89,7 +89,7 @@
         </router-link>
       </div>
 
-      <div class="pt-14">
+      <div class="md:pt-14">
         <div class="py-5 text-3xl">New Arrivals</div>
         <div id="parent-card">
           <div
@@ -103,7 +103,7 @@
           </div>
         </div>
       </div>
-      <div class="pt-14">
+      <div class="md:pt-14">
         <div class="py-4 text-3xl"><h2 class="text-3xl">Highlights</h2></div>
         <div
           class="flex flex-col items-center justify-between space-x-5 sm:flex-row bg-gray-50"
@@ -154,7 +154,7 @@
         </div>
       </div>
 
-      <div class="py-14">
+      <div class="md:py-14">
         <div class="py-4 text-xl">
           <h2 class="text-3xl">Check us out on Instagram</h2>
         </div>

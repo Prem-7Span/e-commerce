@@ -1,19 +1,24 @@
 <template>
   <div>
-    <div v-if="addressStore.error" class="mt-5 px-2 text-red-500 rounded-md">
+    <div v-if="addressStore.error" class="px-2 mt-5 text-red-500 rounded-md">
       <!-- Error: {{ addressStore.error.message }} -->
-      please add to address 
+      please add to address
     </div>
 
-    <div v-for="address in addressStore.addresses" :key="address.id" class="mt-2 px-5 border rounded-md">
-      <div class="justify-between flex">
+    <div
+      v-for="address in addressStore.addresses"
+      :key="address.id"
+      class="px-5 mt-2 border rounded-md"
+    >
+      <div class="flex justify-between">
         <div class="mt-5">
+          <h2>{{ address.id }}</h2>
           <h2>{{ address.firstName }}</h2>
           <h2>{{ address.mobileNumber }}</h2>
           <h2>{{ address.addressLine1 }}</h2>
           <h2>{{ address.addressLine2 }}</h2>
         </div>
-        <div><input type="radio"></div>
+        <div><input type="radio" /></div>
       </div>
 
       <div class="mt-4">
@@ -29,12 +34,12 @@
         <p>{{ address.pincode }}</p>
       </div>
 
-      <div class="mt-4 mb-2 flex gap-4 justify-end">
+      <div class="flex justify-end gap-4 mt-4 mb-2">
         <button @click="deleteAddress(address.id)">
-          <img src="/address/Vector.svg" alt="delete">
+          <img src="/address/Vector.svg" alt="delete" />
         </button>
         <button @click="editData(address)">
-          <img src="/address/EditVector.svg" alt="edit">
+          <img src="/address/EditVector.svg" alt="edit" />
         </button>
       </div>
     </div>
@@ -42,11 +47,11 @@
 </template>
 
 <script>
-import { useAddressStore } from '../../store/address.js';
-import { defineComponent } from 'vue';
+import { useAddressStore } from "../../store/address.js";
+import { defineComponent } from "vue";
 
 export default defineComponent({
-  name: 'AddressComponent',
+  name: "AddressComponent",
   setup(props, { emit }) {
     const addressStore = useAddressStore();
 
@@ -60,7 +65,7 @@ export default defineComponent({
 
     // Method to emit the address data to the parent component
     const editData = (address) => {
-      emit('editaddress', address);
+      emit("editaddress", address);
     };
 
     return {
@@ -71,4 +76,3 @@ export default defineComponent({
   },
 });
 </script>
-

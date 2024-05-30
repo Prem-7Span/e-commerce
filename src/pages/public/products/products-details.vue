@@ -133,6 +133,7 @@
             Add to bag
           </button>
           <button
+            @click="addToWishlist"
             class="px-6 py-2 text-base text-gray-900 bg-white border-2 border-gray-700 rounded-md hover:bg-gray-900 hover:text-white"
           >
             Add to wishlist
@@ -185,6 +186,7 @@ import { ref, onMounted, computed, watchEffect } from "vue";
 import { useRoute, useRouter } from "vue-router"; // Import useRouter
 import { useProductDetailsStore } from "../../../store/productDetails"; // Import your Pinia store
 import { useProductStore } from "/src/store/product.js";
+import { useCartStore } from "/src/store/cart"; // Import the Cart store
 import ProductCard from "@/components/card/product-card.vue";
 import Breadcrumb from "@/components/global/bread-crumb.vue"; // Import the Breadcrumb component
 
@@ -215,6 +217,7 @@ const tabClass = (tab) => {
 const route = useRoute();
 const router = useRouter(); // Initialize useRouter
 const productDetailsStore = useProductDetailsStore(); // Initialize your Pinia store
+const cartStore = useCartStore(); // Initialize the Cart store
 
 const fetchedImages = ref([]);
 const selectedImageIndex = ref(0);
@@ -299,6 +302,9 @@ const addToCart = async () => {
       }
     );
     console.log("Added to cart:", response.data);
+
+    // Update the cart items in the store
+    await cartStore.fetchCart();
   } catch (error) {
     console.error("Error adding to cart:", error);
   }

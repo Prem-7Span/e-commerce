@@ -76,7 +76,7 @@ export const useCartStore = defineStore("cart", {
       } catch (error) {
         this.error = error.message;
         if (error.message === "No authentication token found") {
-          router.push("nam"); // Redirect to sign-in page
+          router.push("/sign-in"); // Redirect to sign-in page
         }
       } finally {
         this.loading = false;
@@ -119,6 +119,9 @@ export const useCartStore = defineStore("cart", {
     updateOrderSummary() {
       const orderSummaryStore = useOrderSummaryStore();
       orderSummaryStore.calculateOrderSummary(this.cartItems); // Call the method to calculate order summary
+    },
+    clearCart() {
+      this.cartItems = [];
     },
   },
   getters: {
