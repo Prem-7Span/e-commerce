@@ -116,8 +116,16 @@ export default {
 
     const round = (value) => Math.round(value);
 
-    const handleAddToWishlist = () => {
-      wishlistStore.addToWishlist(props.product);
+    const handleAddToWishlist = async () => {
+      try {
+        await wishlistStore.addToWishlist(props.product);
+        console.log("Product added to wishlist successfully");
+      } catch (error) {
+        console.error("Failed to add product to wishlist:", error.message);
+        if (error.response && error.response.status === 403) {
+          console.error("You do not have permission to perform this action.");
+        }
+      }
     };
 
     return {

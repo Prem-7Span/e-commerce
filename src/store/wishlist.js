@@ -49,7 +49,7 @@ export const useWishlistStore = defineStore("wishlist", {
 
         const response = await axios.post(
           `${baseURL}/v1/wishlist`,
-          { productId: product.productVariantId },
+          { productId: product.id },
           { headers: { Authorization: `Bearer ${token}` } }
         );
 
@@ -60,7 +60,9 @@ export const useWishlistStore = defineStore("wishlist", {
           console.error("Failed to add product to wishlist");
         }
       } catch (error) {
-        this.error = error.message;
+        this.error = error.response
+          ? error.response.data.message
+          : error.message;
         console.error("Error adding product to wishlist:", error);
         if (error.message === "No authentication token found" && router) {
           router.push("/sign-in"); // Redirect to sign-in page
@@ -113,7 +115,6 @@ export const useWishlistStore = defineStore("wishlist", {
       return state.error;
     },
     wishlistCount(state) {
-      // Add this getter
       return state.wishlist.length;
     },
   },

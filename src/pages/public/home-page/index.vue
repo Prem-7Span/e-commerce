@@ -9,7 +9,7 @@
 
     <div class="container">
       <div class="sm:py-9">
-        <div class="py-5 text-xl"><h3>Shop By Category</h3></div>
+        <div class="py-5 text-3xl"><h3>Shop By Category</h3></div>
         <router-link :to="{ name: 'list' }">
           <div
             id="category"
@@ -47,7 +47,7 @@
       </div>
 
       <div class="sm:pt-9">
-        <div class="py-5 text-xl"><h3>Deal of the day</h3></div>
+        <div class="py-5 text-3xl"><h3>Deal of the day</h3></div>
         <router-link :to="{ name: 'list' }">
           <div
             id="category"
@@ -89,8 +89,8 @@
         </router-link>
       </div>
 
-      <div class="pt-14">
-        <div class="py-5 text-xl">New Arrivals</div>
+      <div class="md:pt-14">
+        <div class="py-5 text-3xl">New Arrivals</div>
         <div id="parent-card">
           <div
             class="grid grid-cols-2 grid-rows-2 gap-5 md:gap-8 md:grid-cols-4 md:grid-rows-1"
@@ -103,8 +103,8 @@
           </div>
         </div>
       </div>
-      <div class="pt-14">
-        <div class="py-2 text-xl"><h2>Highlights</h2></div>
+      <div class="md:pt-14">
+        <div class="py-4 text-3xl"><h2 class="text-3xl">Highlights</h2></div>
         <div
           class="flex flex-col items-center justify-between space-x-5 sm:flex-row bg-gray-50"
         >
@@ -154,8 +154,10 @@
         </div>
       </div>
 
-      <div class="py-14">
-        <div class="py-2 text-xl"><h2>Check us out on Instagram</h2></div>
+      <div class="md:py-14">
+        <div class="py-4 text-xl">
+          <h2 class="text-3xl">Check us out on Instagram</h2>
+        </div>
         <div class="flex items-center justify-between space-x-3">
           <div><img src="/home-page/instagram-img-1.png" alt="" /></div>
           <div><img src="/home-page/instagram-img-2.png" alt="" /></div>

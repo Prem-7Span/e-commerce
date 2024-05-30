@@ -48,17 +48,24 @@
         <div class="py-4">
           <p>Colors</p>
           <div id="color-section" class="flex gap-3">
-            <label v-for="color in availableColors" :key="color">
+            <label
+              v-for="color in availableColors"
+              :key="color"
+              class="relative"
+            >
               <input
                 type="radio"
                 name="color"
-                class="hidden peer boeder-red-200"
+                class="hidden peer"
                 :value="color"
                 v-model="selectedColor"
               />
               <div
                 :class="getColorClass(color)"
-                class="w-12 h-12 border-2 border-transparent rounded-full cursor-pointer peer-checked:border-gray-800"
+                class="w-12 h-12 border-2 border-transparent rounded-full cursor-pointer"
+              ></div>
+              <div
+                class="absolute inset-0 border-2 border-transparent rounded-full pointer-events-none peer-checked:border-gray-800"
               ></div>
             </label>
           </div>
@@ -126,6 +133,7 @@
             Add to bag
           </button>
           <button
+            @click="addToWishlist"
             class="px-6 py-2 text-base text-gray-900 bg-white border-2 border-gray-700 rounded-md hover:bg-gray-900 hover:text-white"
           >
             Add to wishlist
@@ -178,6 +186,7 @@ import { ref, onMounted, computed, watchEffect } from "vue";
 import { useRoute, useRouter } from "vue-router"; // Import useRouter
 import { useProductDetailsStore } from "../../../store/productDetails"; // Import your Pinia store
 import { useProductStore } from "/src/store/product.js";
+import { useCartStore } from "/src/store/cart"; // Import the Cart store
 import ProductCard from "@/components/card/product-card.vue";
 import Breadcrumb from "@/components/global/bread-crumb.vue"; // Import the Breadcrumb component
 
@@ -208,6 +217,7 @@ const tabClass = (tab) => {
 const route = useRoute();
 const router = useRouter(); // Initialize useRouter
 const productDetailsStore = useProductDetailsStore(); // Initialize your Pinia store
+const cartStore = useCartStore(); // Initialize the Cart store
 
 const fetchedImages = ref([]);
 const selectedImageIndex = ref(0);
@@ -292,6 +302,9 @@ const addToCart = async () => {
       }
     );
     console.log("Added to cart:", response.data);
+
+    // Update the cart items in the store
+    await cartStore.fetchCart();
   } catch (error) {
     console.error("Error adding to cart:", error);
   }

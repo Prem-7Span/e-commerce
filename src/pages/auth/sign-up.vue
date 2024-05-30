@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex flex-col items-center justify-center min-h-screen px-4 py-12 sign-up-page"
+    class="flex flex-col items-center justify-center min-h-screen px-4 py-12 sign-up-page h-full-screen-adjusted"
   >
     <div
       class="w-full max-w-md px-8 py-6 space-y-5 text-center bg-white rounded-lg shadow-md md:text-left md:max-w-md"
@@ -168,7 +168,6 @@ export default {
       this.validateField("phoneNumber");
 
       if (this.canSubmit) {
-       
         this.registerUser();
       }
     },
@@ -183,7 +182,7 @@ export default {
             mobileNo: this.phoneNumber,
           }
         );
-     
+
         this.toast.success("Signup successful");
         this.$router.push({ name: "SignIn" });
       } catch (error) {
@@ -197,5 +196,16 @@ export default {
 </script>
 
 <style scoped>
-/* Add your styles here */
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+.h-full-screen-adjusted {
+  height: calc(100vh - 87px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 </style>

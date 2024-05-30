@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex items-center justify-center min-h-screen px-4 py-12 bg-white lg:min-h-screen md:px-5"
+    class="flex items-center justify-center px-4 py-12 bg-white h-full-screen-adjusted md:px-5"
   >
     <div
       class="container px-8 py-6 text-center bg-white rounded-lg shadow-md w-fit md:text-left md:max-w-md"
@@ -102,7 +102,7 @@ export default {
         {
           size: "invisible",
           callback: (response) => {
-           
+            // Handle recaptcha response
           },
         }
       );
@@ -121,10 +121,8 @@ export default {
         );
 
         if (response.status === 200) {
-         
           const token = response.data.userData.accessToken;
           localStorage.setItem("token", token);
-         
           this.submitForm();
         } else {
           this.toast.error("Account not available, Please sign up");
@@ -162,5 +160,16 @@ export default {
 </script>
 
 <style scoped>
-/* Add any necessary styles here */
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+.h-full-screen-adjusted {
+  height: calc(100vh - 87px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 </style>
