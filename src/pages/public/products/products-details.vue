@@ -56,16 +56,16 @@
               <input
                 type="radio"
                 name="color"
-                class="hidden peer"
+                class="absolute inset-0 hidden w-full h-full rounded-full appearance-none cursor-pointer peer"
                 :value="color"
                 v-model="selectedColor"
               />
               <div
                 :class="getColorClass(color)"
-                class="w-12 h-12 border-2 border-transparent rounded-full cursor-pointer"
+                class="w-12 h-12 m-1 border-2 border-transparent rounded-full cursor-pointer"
               ></div>
               <div
-                class="absolute inset-0 border-2 border-transparent rounded-full pointer-events-none peer-checked:border-gray-800"
+                class="absolute inset-0 border-2 border-transparent rounded-full pointer-events-none w-14 h-14 peer-checked:border-gray-800"
               ></div>
             </label>
           </div>
