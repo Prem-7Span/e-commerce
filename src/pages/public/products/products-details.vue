@@ -183,13 +183,13 @@
 <script setup>
 import axios from "axios";
 import { ref, onMounted, computed, watchEffect } from "vue";
-import { useRoute, useRouter } from "vue-router"; // Import useRouter
-import { useProductDetailsStore } from "../../../store/productDetails"; // Import your Pinia store
+import { useRoute, useRouter } from "vue-router";
+import { useProductDetailsStore } from "../../../store/productDetails";
 import { useProductStore } from "/src/store/product.js";
-import { useCartStore } from "/src/store/cart"; // Import the Cart store
+import { useCartStore } from "/src/store/cart";
+import { useWishlistStore } from "/src/store/wishlist.js"; // Import the wishlist store
 import ProductCard from "@/components/card/product-card.vue";
-import Breadcrumb from "@/components/global/bread-crumb.vue"; // Import the Breadcrumb component
-
+import Breadcrumb from "@/components/global/bread-crumb.vue";
 import Description from "../../../components/product-details/description.vue";
 import AdditionalInfo from "../../../components/product-details/additional-info.vue";
 import Reviews from "../../../components/product-details/reviews.vue";
@@ -215,9 +215,10 @@ const tabClass = (tab) => {
 };
 
 const route = useRoute();
-const router = useRouter(); // Initialize useRouter
-const productDetailsStore = useProductDetailsStore(); // Initialize your Pinia store
-const cartStore = useCartStore(); // Initialize the Cart store
+const router = useRouter();
+const productDetailsStore = useProductDetailsStore();
+const cartStore = useCartStore();
+const wishlistStore = useWishlistStore(); // Initialize the wishlist store
 
 const fetchedImages = ref([]);
 const selectedImageIndex = ref(0);
@@ -319,18 +320,11 @@ const addToWishlist = async () => {
       return;
     }
 
-    const response = await axios.post(
-      "https://api.8orbit.shop/api/v1/wishlist",
-      {
-        productId: productDetails.value.id,
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
-    console.log("Added to wishlist:", response.data);
+    const product = productDetails.value;
+
+    await wishlistStore.addToWishlist(product, router);
+
+    console.log("Added to wishlist");
   } catch (error) {
     console.error("Error adding to wishlist:", error);
   }
