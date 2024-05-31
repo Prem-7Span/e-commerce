@@ -21,7 +21,7 @@ export const useProductStore = defineStore("product", {
           return this.productData;
         }
         const response = await axios.get(`${baseURL}/v1/product`);
-        this.productData = response.data.product;
+        this.productData = response.data;
         return this.productData;
       } catch (error) {
         console.error("Error fetching products:", error);
