@@ -6,8 +6,6 @@ import Auth from "@/layouts/auth.vue";
 import HomePage from "@/pages/public/home-page/index.vue";
 import ProductDetail from "@/pages/public/products/products-details.vue";
 import ProductList from "@/pages/public/products/products-list.vue";
-import paymentSuccessful from "../components/payment-gateway/payment-successful.vue";
-import paymentError from "../components/payment-gateway/payment-error.vue";
 import Default from "@/layouts/default.vue";
 import CheckOut from "../pages/private/product-checkout/index.vue";
 import wishList from "@/pages/private/wish-list/index.vue";
@@ -49,16 +47,6 @@ const routes = [
         name: "wish-list",
         path: "/wishlist",
         component: wishList,
-      },
-      {
-        name: "payment-error",
-        path: "/payment-failed",
-        component: paymentError,
-      },
-      {
-        name: "payment-successful",
-        path: "/payment-successful",
-        component: paymentSuccessful,
       },
       {
         name: "auth",
