@@ -49,11 +49,11 @@
         <label class="mx-1 mt-2 text-xs font-bold md:mt-3 md:text-base md:px-2"
           >Address</label
         >
-        <hr
+        <!-- <hr
           class="flex px-4 m-1 mx-1 mt-4 md:mt-6 text-primary-300 md:px-7 md:m-1 md:mx-2"
-        />
+        /> -->
 
-        <div
+        <!-- <div
           @click="tab = 'ThePayment'"
           :class="{
             'bg-primary-300': tab === 'ThePayment',
@@ -66,7 +66,7 @@
         </div>
         <label class="mx-1 mt-2 text-xs font-bold md:mt-3 md:text-base md:px-2"
           >Payment</label
-        >
+        > -->
       </div>
       <div></div>
     </div>

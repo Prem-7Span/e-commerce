@@ -56,16 +56,16 @@
               <input
                 type="radio"
                 name="color"
-                class="hidden peer"
+                class="absolute inset-0 hidden w-full h-full rounded-full appearance-none cursor-pointer peer"
                 :value="color"
                 v-model="selectedColor"
               />
               <div
                 :class="getColorClass(color)"
-                class="w-12 h-12 border-2 border-transparent rounded-full cursor-pointer"
+                class="w-12 h-12 m-1 border-2 border-transparent rounded-full cursor-pointer"
               ></div>
               <div
-                class="absolute inset-0 border-2 border-transparent rounded-full pointer-events-none peer-checked:border-gray-800"
+                class="absolute inset-0 border-2 border-transparent rounded-full pointer-events-none w-14 h-14 peer-checked:border-gray-800"
               ></div>
             </label>
           </div>
@@ -101,7 +101,7 @@
         <div class="flex py-3">
           <img src="/public/img/tickmark-delivery.svg" alt="" />
           <p class="">Delivery:</p>
-          <p class="text-gray-500">24-26 April, 2024</p>
+          <p class="text-gray-500">24-26 June, 2024</p>
         </div>
 
         <div class="flex py-3">
@@ -237,7 +237,7 @@ const availableColors = computed(() => {
   return [...new Set(productVariants.value.map((variant) => variant.color))];
 });
 
-const allSizes = ["S", "M", "L", "XL", "XXL"];
+const allSizes = ["XS", "S", "M", "L", "XL", "XXL", "XXXL"];
 
 const availableSizes = computed(() => {
   return productVariants.value
@@ -259,13 +259,14 @@ const getColorClass = (color) => {
   const colorMap = {
     red: "bg-red-500",
     yellow: "bg-yellow-500",
-    black: "bg-black",
+    black: "bg-gray-900",
     blue: "bg-cyan-500",
     orange: "bg-orange-600",
     purple: "bg-purple-500",
     pink: "bg-pink-500",
     green: "bg-green-500",
-    white: "bg-white",
+    white: "bg-slate-100",
+    brown: "bg-amber-950",
   };
   return colorMap[color] || "bg-gray-500";
 };
@@ -322,7 +323,7 @@ const addToWishlist = async () => {
     const response = await axios.post(
       "https://api.8orbit.shop/api/v1/wishlist",
       {
-        productVariantId: selectedVariant.value.id,
+        productId: productDetails.value.id,
       },
       {
         headers: {

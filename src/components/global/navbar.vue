@@ -150,6 +150,7 @@ import { useCartStore } from "@/store/cart.js";
 import { useWishlistStore } from "@/store/wishlist.js"; // Import the wishlist store
 import { useProductStore } from "@/store/product.js";
 import axios from "axios";
+import { ref } from "vue";
 
 export default {
   setup() {
