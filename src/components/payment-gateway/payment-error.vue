@@ -4,12 +4,9 @@
       id="container"
       class="flex flex-col items-center justify-center py-20 space-y-5 max-w-80"
     >
-      <div><img src="/default/order-success.png" alt="" /></div>
+      <div><img src="/default/order-cancel.svg" alt="" /></div>
       <div>
-        <p class="text-lg text-bold">
-          Order placed successfully! Sit back and relax while we take care of
-          the rest.
-        </p>
+        <p class="text-lg text-bold">Error Payment failed. try again</p>
       </div>
     </div>
   </div>

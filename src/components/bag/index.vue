@@ -13,6 +13,7 @@
             <CheckoutCard
               :productVariantId="item.productVariantId"
               :quantity="item.quantity"
+              @quantityChanged="updateOrderSummary"
               class="m-2"
             />
           </div>
@@ -45,12 +46,14 @@
 import { ref, onMounted, defineEmits } from "vue";
 import { useCartStore } from "@/store/cart";
 import { useProductStore } from "@/store/product";
+import { useOrderSummaryStore } from "@/store/order-summary";
 import CheckoutCard from "@/components/card/checkout-card.vue";
 import OrderCard from "../card/order-card.vue";
 import ProductCard from "../../components/card/product-card.vue";
 
 const cartStore = useCartStore();
 const productStore = useProductStore();
+const orderSummaryStore = useOrderSummaryStore();
 
 const productData = ref([]);
 
@@ -58,6 +61,7 @@ onMounted(async () => {
   await cartStore.fetchCart();
   await productStore.fetchProductList();
   productData.value = productStore.productData.slice(0, 4);
+  updateOrderSummary();
 });
 
 const emit = defineEmits(["changeTab"]);
@@ -68,5 +72,9 @@ const goToAddress = () => {
 
 const goToPayment = () => {
   emit("changeTab", "ThePayment");
+};
+
+const updateOrderSummary = () => {
+  orderSummaryStore.calculateOrderSummary(cartStore.cartItems); // Calculate order summary based on cart items
 };
 </script>
