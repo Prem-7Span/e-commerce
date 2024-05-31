@@ -237,7 +237,7 @@ const availableColors = computed(() => {
   return [...new Set(productVariants.value.map((variant) => variant.color))];
 });
 
-const allSizes = ["S", "M", "L", "XL", "XXL"];
+const allSizes = ["XS", "S", "M", "L", "XL", "XXL", "XXXL"];
 
 const availableSizes = computed(() => {
   return productVariants.value
@@ -323,7 +323,7 @@ const addToWishlist = async () => {
     const response = await axios.post(
       "https://api.8orbit.shop/api/v1/wishlist",
       {
-        productVariantId: selectedVariant.value.id,
+        productId: productDetails.value.id,
       },
       {
         headers: {
