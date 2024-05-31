@@ -360,6 +360,7 @@ export default {
       const start = (currentPage.value - 1) * productsPerPage;
       const end = start + productsPerPage;
       window.scrollTo(0, 0);
+      console.log("filteredProducts::", filteredProducts);
       return filteredProducts.value.slice(start, end);
     });
 
