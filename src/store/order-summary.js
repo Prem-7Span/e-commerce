@@ -10,12 +10,11 @@ export const useOrderSummaryStore = defineStore("orderSummary", {
     totalPlatformCharges: 0,
     shippingCharges: 0,
     total: 0,
-    itemCount: 0, // Assuming itemCount is included in the actual response
+    itemCount: 0, // Assuming you have itemCount in your actual response
     loading: false,
     error: null,
   }),
   actions: {
-    // Fetch order summary from API
     async fetchOrderSummary() {
       this.loading = true;
       this.error = null;
@@ -36,7 +35,7 @@ export const useOrderSummaryStore = defineStore("orderSummary", {
           this.totalPlatformCharges = data.TotalPlatformCharges;
           this.shippingCharges = data.shippingCharges;
           this.total = data.Total;
-          this.itemCount = data.itemCount; // Adjust if itemCount is in the response
+          this.itemCount = data.itemCount; // Adjust this if you have itemCount in the actual response
         } else {
           this.error = "Failed to fetch order summary";
         }
@@ -46,7 +45,6 @@ export const useOrderSummaryStore = defineStore("orderSummary", {
         this.loading = false;
       }
     },
-    // Calculate order summary locally based on cart items
     calculateOrderSummary(cartItems) {
       let totalMrp = 0;
       let discount = 0;

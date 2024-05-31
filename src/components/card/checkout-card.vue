@@ -10,17 +10,13 @@
       </div>
       <div>
         <div class="flex">
-          <router-link
-            :to="{ name: 'details', params: { slug: product.slug } }"
-          >
-            <div>
-              <h5
-                class="items-center text-sm font-bold md:text-lg md:mb-2 text-primary-300 line-clamp-2 max-w-72"
-              >
-                {{ productName }}
-              </h5>
-            </div>
-          </router-link>
+          <div>
+            <h5
+              class="items-center text-sm font-bold md:text-lg md:mb-2 text-primary-300 line-clamp-2 max-w-72"
+            >
+              {{ productName }}
+            </h5>
+          </div>
         </div>
         <div
           class="grid grid-cols-2 grid-rows-1 md:flex md:items-center md:justify-between md:gap-2 md:mb-2"
@@ -118,7 +114,7 @@
 </template>
 
 <script setup>
-import { ref, computed, defineProps, defineEmits } from "vue";
+import { ref, computed, onMounted, defineProps } from "vue";
 import { useCartStore } from "@/store/cart";
 import { useWishlistStore } from "@/store/wishlist";
 
@@ -126,8 +122,6 @@ const props = defineProps({
   productVariantId: String,
   quantity: Number,
 });
-
-const emit = defineEmits(["quantityChanged"]);
 
 const cartStore = useCartStore();
 const wishlistStore = useWishlistStore();
@@ -159,7 +153,6 @@ const updateCartItemQuantity = (quantity) => {
     quantity,
     checkoutId.value
   );
-  emit("quantityChanged"); // Emit event when quantity changes
 };
 
 const increment = () => {
