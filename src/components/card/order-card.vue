@@ -57,23 +57,25 @@
 <script setup>
 import { computed, onMounted, defineProps, defineEmits } from "vue";
 import { useOrderSummaryStore } from "@/store/order-summary";
-import { useAddressStore } from "../../store/address.js"; // Import address store
+import axios from "axios";
 
 const props = defineProps({
   showNextButton: {
     type: Boolean,
     default: false,
   },
+  selectedAddressId: {
+    type: Number,
+    required: true,
+  },
 });
 
-const emit = defineEmits(["next", "placeOrder"]);
+const emit = defineEmits(["next", "placeOrderEvent"]);
 
 const orderSummaryStore = useOrderSummaryStore();
-const addressStore = useAddressStore(); // Initialize address store
 
 onMounted(() => {
   orderSummaryStore.fetchOrderSummary();
-  addressStore.fetchAddresses(); // Fetch addresses when the component is mounted
 });
 
 const data = computed(() => orderSummaryStore);
@@ -82,7 +84,61 @@ const handleNext = () => {
   emit("next");
 };
 
-const placeOrder = () => {
-  emit("placeOrder");
+const placeOrder = async () => {
+  if (!props.selectedAddressId) {
+    console.error("No address selected");
+    return;
+  }
+  try {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      console.error("No token found in localStorage");
+      return;
+    }
+
+    const orderResponse = await axios.post(
+      "https://api.8orbit.shop/api/v1/order",
+      {
+        shippingAddressId: props.selectedAddressId,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    console.log("Order placed successfully:", orderResponse.data);
+
+    const orderId = orderResponse.data.orderId;
+    if (!orderId) {
+      console.error("No orderId found in order response");
+      return;
+    }
+
+    const paymentResponse = await axios.post(
+      `https://api.8orbit.shop/api/v1/payment/${orderId}`,
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    console.log("Payment initiated successfully:", paymentResponse.data);
+
+    const paymentUrl = paymentResponse.data;
+    if (paymentUrl) {
+      console.log("Redirecting to payment URL:", paymentUrl);
+      window.open(paymentUrl);
+    } else {
+      console.error("No URL found in payment response");
+    }
+
+    emit("placeOrderEvent", paymentResponse.data);
+  } catch (error) {
+    console.error("Error placing order or initiating payment:", error);
+  }
 };
 </script>
