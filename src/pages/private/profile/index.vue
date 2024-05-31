@@ -48,16 +48,14 @@
       <div class="flex flex-col space-y-2">
         <div class="animate__animated animate__fadeIn">Address 1</div>
         <div v-if="userDetails.addresses && userDetails.addresses.length">
-          <h1
-            class="px-3 py-6 text-gray-700 transition duration-200 ease-in-out border border-gray-300 rounded-md appearance-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-500"
-          >
+          <h1 class="px-3 py-6  text-gray-700 transition duration-200 ease-in-out border border-gray-300 rounded-md appearance-none focus:outline-none focus:ring-2 focus:ring-indigo-500 cursor-pointer">
             <!-- {{ userDetails.addresses }} -->
           </h1>
         </div>
         <div v-else class="text-gray-400">Add Your Address</div>
       </div>
 
-      <router-link :to="{ name: 'editProfile' }">
+      <router-link :to="{ name: 'editprofile' }">
         <button
           type="button"
           class="w-full px-4 py-2 mt-4 font-medium text-center text-white transition duration-200 ease-in-out rounded-md bg-primary-100 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-indigo-700 focus:ring-opacity-50"

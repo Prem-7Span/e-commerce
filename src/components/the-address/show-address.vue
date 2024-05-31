@@ -1,9 +1,10 @@
 <template>
   <div>
     <div v-if="addressStore.error" class="px-2 mt-5 text-red-500 rounded-md">
-      Please add an address
+      <!-- Error: {{ addressStore.error.message }} -->
+      please add to address
     </div>
-    <div><p class="font-bold text-md">Select the address</p></div>
+
     <div
       v-for="address in addressStore.addresses"
       :key="address.id"
@@ -11,19 +12,13 @@
     >
       <div class="flex justify-between">
         <div class="mt-5">
+          <h2>{{ address.id }}</h2>
           <h2>{{ address.firstName }}</h2>
           <h2>{{ address.mobileNumber }}</h2>
           <h2>{{ address.addressLine1 }}</h2>
           <h2>{{ address.addressLine2 }}</h2>
         </div>
-        <div>
-          <input
-            type="radio"
-            :value="address.id"
-            v-model="selectedAddressId"
-            @change="selectAddress(address.id)"
-          />
-        </div>
+        <div><input type="radio" /></div>
       </div>
 
       <div class="mt-4">
@@ -53,14 +48,12 @@
 
 <script>
 import { useAddressStore } from "../../store/address.js";
-import { defineComponent, ref } from "vue";
+import { defineComponent } from "vue";
 
 export default defineComponent({
   name: "AddressComponent",
-  emits: ["selectAddress"],
   setup(props, { emit }) {
     const addressStore = useAddressStore();
-    const selectedAddressId = ref(null);
 
     // Fetch addresses when the component is mounted
     addressStore.fetchAddresses();
@@ -75,17 +68,10 @@ export default defineComponent({
       emit("editaddress", address);
     };
 
-    const selectAddress = (addressId) => {
-      selectedAddressId.value = addressId;
-      emit("selectAddress", addressId); // Emit the selected address ID to the parent component
-    };
-
     return {
       addressStore,
       deleteAddress,
       editData,
-      selectedAddressId,
-      selectAddress,
     };
   },
 });

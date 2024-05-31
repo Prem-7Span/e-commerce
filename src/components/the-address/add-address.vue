@@ -1,222 +1,191 @@
 <template>
   <address-component @edit-address="editAddress"></address-component>
   <div class="flex flex-col mb-5 space-y-4">
-    <label class="text-lg font-medium text-secondary-200"
-      >Personal details</label
-    >
-
+    <label class="text-lg font-medium text-secondary-200">Personal details</label>
+    
     <div class="relative border rounded-md">
-      <input
-        type="text"
-        id="firstName"
-        v-model="newAddress.firstName"
+      <input 
+        type="text" 
+        id="firstName" 
+        v-model="newAddress.firstName" 
         @input="validateField('firstName')"
-        class="border-gray-300 pl-3 py-2 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 text-gray-900 block px-2.5 pb-2.5 pt-4 w-full text-sm rounded-lg border-1 appearance-none focus:ring-0 peer"
-        placeholder=" "
+        class="border-gray-300 pl-3 py-2 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 text-gray-900 block px-2.5 pb-2.5 pt-4 w-full text-sm rounded-lg border-1 appearance-none focus:ring-0 peer" 
+        placeholder=" " 
       />
-      <label
-        for="firstName"
-        class="absolute text-sm duration-300 transform -translate-y-4 scale-80 top-2 z-10 origin-[0] focus:ring-indigo-500 bg-white px-2 peer-focus:px-2 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-1 peer-focus:left-3 peer-focus:scale-80 peer-focus:-translate-y-4 text-secondary-100"
-        >First Name</label
-      >
+      <label for="firstName" class="absolute text-sm duration-300 transform -translate-y-4 scale-80 top-2 z-10 origin-[0] focus:ring-indigo-500 bg-white px-2 peer-focus:px-2 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-1 peer-focus:left-3 peer-focus:scale-80 peer-focus:-translate-y-4 text-secondary-100">First Name</label>
       <p class="mt-2 text-primary-200"></p>
+
     </div>
-    <p class="text-red-500">
+    <p class="text-red-500 ">
       {{ errors.firstName }}
     </p>
-
+    
     <div class="relative border rounded-md">
-      <input
-        type="text"
-        id="lastName"
-        v-model="newAddress.lastName"
+      <input 
+        type="text" 
+        id="lastName" 
+        v-model="newAddress.lastName" 
         @input="validateField('lastName')"
-        class="border-gray-300 pl-3 py-2 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 text-gray-900 block px-2.5 pb-2.5 pt-4 w-full text-sm rounded-lg border-1 appearance-none focus:ring-0 peer"
-        placeholder=" "
+        class="border-gray-300 pl-3 py-2 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 text-gray-900 block px-2.5 pb-2.5 pt-4 w-full text-sm rounded-lg border-1 appearance-none focus:ring-0 peer" 
+        placeholder=" " 
       />
-      <label
-        for="lastName"
-        class="absolute text-sm duration-300 transform -translate-y-4 scale-80 top-2 z-10 origin-[0] focus:ring-indigo-500 bg-white px-2 peer-focus:px-2 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-1 peer-focus:left-3 peer-focus:scale-80 peer-focus:-translate-y-4 text-secondary-100"
-        >Last Name</label
-      >
+      <label for="lastName" class="absolute text-sm duration-300 transform -translate-y-4 scale-80 top-2 z-10 origin-[0] focus:ring-indigo-500 bg-white px-2 peer-focus:px-2 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-1 peer-focus:left-3 peer-focus:scale-80 peer-focus:-translate-y-4 text-secondary-100">Last Name</label>
       <p class="mt-2 text-primary-200"></p>
+    
     </div>
-    <p class="text-red-500">
+    <p class="text-red-500 ">
       {{ errors.lastName }}
     </p>
-
+    
     <div class="relative border rounded-md">
-      <input
-        type="tel"
-        id="mobileNumber"
+      <input 
+        type="tel" 
+        id="mobileNumber" 
         maxlength="10"
-        v-model="newAddress.mobileNumber"
+        v-model="newAddress.mobileNumber" 
         @input="validateField('mobileNumber')"
-        class="border-gray-300 pl-3 py-2 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 text-gray-900 block px-2.5 pb-2.5 pt-4 w-full text-sm rounded-lg border-1 appearance-none focus:ring-0 peer"
-        placeholder=" "
+        class="border-gray-300 pl-3 py-2 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 text-gray-900 block px-2.5 pb-2.5 pt-4 w-full text-sm rounded-lg border-1 appearance-none focus:ring-0 peer" 
+        placeholder=" " 
       />
-      <label
-        for="mobileNumber"
-        class="absolute text-sm duration-300 transform -translate-y-4 scale-80 top-2 z-10 origin-[0] focus:ring-indigo-500 bg-white px-2 peer-focus:px-2 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-1 peer-focus:left-3 peer-focus:scale-80 peer-focus:-translate-y-4 text-secondary-100"
-        >Mobile Number</label
-      >
+      <label for="mobileNumber" class="absolute text-sm duration-300 transform -translate-y-4 scale-80 top-2 z-10 origin-[0] focus:ring-indigo-500 bg-white px-2 peer-focus:px-2 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-1 peer-focus:left-3 peer-focus:scale-80 peer-focus:-translate-y-4 text-secondary-100">Mobile Number</label>
       <p class="mt-2 text-primary-200"></p>
+     
     </div>
-    <p class="text-red-500">
+    <p class="text-red-500 ">
       {{ errors.mobileNumber }}
     </p>
-
-    <label class="text-lg font-medium text-secondary-200"
-      >Address details</label
-    >
-
+    
+    <label class="text-lg font-medium text-secondary-200">Address details</label>
+    
     <div class="relative border rounded-md">
-      <input
-        type="text"
-        id="addressLine1"
-        v-model="newAddress.addressLine1"
+      <input 
+        type="text" 
+        id="addressLine1" 
+        v-model="newAddress.addressLine1" 
         @input="validateField('addressLine1')"
-        class="border-gray-300 pl-3 py-2 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 text-gray-900 block px-2.5 pb-2.5 pt-4 w-full text-sm rounded-lg border-1 appearance-none focus:ring-0 peer"
-        placeholder=" "
+        class="border-gray-300 pl-3 py-2 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 text-gray-900 block px-2.5 pb-2.5 pt-4 w-full text-sm rounded-lg border-1 appearance-none focus:ring-0 peer" 
+        placeholder=" " 
       />
-      <label
-        for="addressLine1"
-        class="absolute text-sm duration-300 transform -translate-y-4 scale-80 top-2 z-10 origin-[0] focus:ring-indigo-500 bg-white px-2 peer-focus:px-2 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-1 peer-focus:left-3 peer-focus:scale-80 peer-focus:-translate-y-4 text-secondary-100"
-        >Address Line 1</label
-      >
+      <label for="addressLine1" class="absolute text-sm duration-300 transform -translate-y-4 scale-80 top-2 z-10 origin-[0] focus:ring-indigo-500 bg-white px-2 peer-focus:px-2 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-1 peer-focus:left-3 peer-focus:scale-80 peer-focus:-translate-y-4 text-secondary-100">Address Line 1</label>
       <p class="mt-2 text-primary-200"></p>
+    
     </div>
-    <p class="text-red-500">
+    <p class="text-red-500 ">
       {{ errors.addressLine1 }}
-    </p>
-
+      </p>
+    
     <div class="relative border rounded-md">
-      <input
-        type="text"
-        id="addressLine2"
+      <input 
+        type="text" 
+        id="addressLine2" 
         v-model="newAddress.addressLine2"
-        @input="validateField('addressLine2')"
-        class="border-gray-300 pl-3 py-2 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 text-gray-900 block px-2.5 pb-2.5 pt-4 w-full text-sm rounded-lg border-1 appearance-none focus:ring-0 peer"
-        placeholder=" "
+        @input="validateField('addressLine2')" 
+        class="border-gray-300 pl-3 py-2 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 text-gray-900 block px-2.5 pb-2.5 pt-4 w-full text-sm rounded-lg border-1 appearance-none focus:ring-0 peer" 
+        placeholder=" " 
       />
-      <label
-        for="addressLine2"
-        class="absolute text-sm duration-300 transform -translate-y-4 scale-80 top-2 z-10 origin-[0] focus:ring-indigo-500 bg-white px-2 peer-focus:px-2 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-1 peer-focus:left-3 peer-focus:scale-80 peer-focus:-translate-y-4 text-secondary-100"
-        >Address Line 2</label
-      >
+      <label for="addressLine2" class="absolute text-sm duration-300 transform -translate-y-4 scale-80 top-2 z-10 origin-[0] focus:ring-indigo-500 bg-white px-2 peer-focus:px-2 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-1 peer-focus:left-3 peer-focus:scale-80 peer-focus:-translate-y-4 text-secondary-100">Address Line 2</label>
       <p class="mt-2 text-primary-200"></p>
+   
     </div>
-    <p class="text-red-500">
+    <p class="text-red-500 ">
       {{ errors.addressLine2 }}
-    </p>
+      </p>
     <div class="relative border rounded-md">
-      <select
-        id="country"
-        v-model="newAddress.countryId"
+      <select 
+        id="country" 
+        v-model="newAddress.countryId" 
         @change="validateField('countryId')"
         class="border-gray-300 pl-3 py-2 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 text-gray-900 block px-2.5 pb-2.5 pt-4 w-full text-sm rounded-lg border-1 appearance-none focus:ring-0 peer"
       >
         <option selected disabled>Choose a country</option>
-        <option
-          v-for="(country, i) in allCountries"
-          :key="i"
-          :value="country.id"
+        <option 
+          v-for="(country, i) in allCountries" 
+          :key="i" 
+          :value="country.id" 
           class="text-primary-300"
         >
           {{ country.countryName }}
         </option>
       </select>
-      <label
-        for="country"
-        class="absolute text-sm duration-300 transform -translate-y-4 scale-80 top-2 z-10 origin-[0] focus:ring-indigo-500 bg-white px-2 peer-focus:px-2 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-1 peer-focus:left-3 peer-focus:scale-80 peer-focus:-translate-y-4 text-secondary-100"
-        >Country</label
-      >
+      <label for="country" class="absolute text-sm duration-300 transform -translate-y-4 scale-80 top-2 z-10 origin-[0] focus:ring-indigo-500 bg-white px-2 peer-focus:px-2 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-1 peer-focus:left-3 peer-focus:scale-80 peer-focus:-translate-y-4 text-secondary-100">Country</label>
       <p class="mt-2 text-primary-200"></p>
+    
     </div>
-    <p class="text-red-500">
+    <p class="text-red-500 ">
       {{ errors.countryId }}
-    </p>
-
+      </p>
+    
     <div class="relative border rounded-md">
-      <select
-        id="states"
-        v-model="newAddress.stateId"
+      <select 
+        id="states" 
+        v-model="newAddress.stateId" 
         @change="validateField('stateId')"
         class="border-gray-300 pl-3 py-2 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 text-gray-900 block px-2.5 pb-2.5 pt-4 w-full text-sm rounded-lg border-1 appearance-none focus:ring-0 peer"
       >
         <option selected disabled>Choose a state</option>
-        <option
-          v-for="(state, i) in allStates"
-          :key="i"
-          :value="state.id"
+        <option 
+          v-for="(state, i) in allStates" 
+          :key="i" 
+          :value="state.id" 
           class="text-primary-300"
         >
           {{ state.stateName }}
         </option>
       </select>
-      <label
-        for="states"
-        class="absolute text-sm duration-300 transform -translate-y-4 scale-80 top-2 z-10 origin-[0] focus:ring-indigo-500 bg-white px-2 peer-focus:px-2 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-1 peer-focus:left-3 peer-focus:scale-80 peer-focus:-translate-y-4 text-secondary-100"
-        >State</label
-      >
+      <label for="states" class="absolute text-sm duration-300 transform -translate-y-4 scale-80 top-2 z-10 origin-[0] focus:ring-indigo-500 bg-white px-2 peer-focus:px-2 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-1 peer-focus:left-3 peer-focus:scale-80 peer-focus:-translate-y-4 text-secondary-100">State</label>
       <p class="mt-2 text-primary-200"></p>
+    
     </div>
-    <p class="text-red-500">
+    <p class="text-red-500 ">
       {{ errors.stateId }}
-    </p>
-
+      </p>
+    
     <div class="relative border rounded-md">
-      <select
-        id="cities"
-        v-model="newAddress.cityId"
+      <select 
+        id="cities" 
+        v-model="newAddress.cityId" 
         @change="validateField('cityId')"
         class="border-gray-300 pl-3 py-2 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 text-gray-900 block px-2.5 pb-2.5 pt-4 w-full text-sm rounded-lg border-1 appearance-none focus:ring-0 peer"
       >
         <option selected disabled>Choose a city</option>
-        <option
-          v-for="(city, i) in allCities"
-          :key="i"
-          :value="city.id"
+        <option 
+          v-for="(city, i) in allCities" 
+          :key="i" 
+          :value="city.id" 
           class="text-primary-300"
         >
           {{ city.cityName }}
         </option>
       </select>
-      <label
-        for="cities"
-        class="absolute text-sm duration-300 transform -translate-y-4 scale-80 top-2 z-10 origin-[0] focus:ring-indigo-500 bg-white px-2 peer-focus:px-2 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-1 peer-focus:left-3 peer-focus:scale-80 peer-focus:-translate-y-4 text-secondary-100"
-        >City</label
-      >
+      <label for="cities" class="absolute text-sm duration-300 transform -translate-y-4 scale-80 top-2 z-10 origin-[0] focus:ring-indigo-500 bg-white px-2 peer-focus:px-2 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-1 peer-focus:left-3 peer-focus:scale-80 peer-focus:-translate-y-4 text-secondary-100">City</label>
       <p class="mt-2 text-primary-200"></p>
+    
     </div>
-    <p class="text-red-500">
+    <p class="text-red-500 ">
       {{ errors.cityId }}
-    </p>
-
+      </p>
+    
     <div class="relative border rounded-md">
-      <input
-        type="text"
-        id="pincode"
-        v-model="newAddress.pincode"
+      <input 
+        type="text" 
+        id="pincode" 
+        v-model="newAddress.pincode" 
         @input="validateField('pincode')"
-        class="border-gray-300 pl-3 py-2 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 text-gray-900 block px-2.5 pb-2.5 pt-4 w-full text-sm rounded-lg border-1 appearance-none focus:ring-0 peer"
-        placeholder=" "
+        class="border-gray-300 pl-3 py-2 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 text-gray-900 block px-2.5 pb-2.5 pt-4 w-full text-sm rounded-lg border-1 appearance-none focus:ring-0 peer" 
+        placeholder=" " 
       />
-      <label
-        for="pincode"
-        class="absolute text-sm duration-300 transform -translate-y-4 scale-80 top-2 z-10 origin-[0] focus:ring-indigo-500 bg-white px-2 peer-focus:px-2 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-1 peer-focus:left-3 peer-focus:scale-80 peer-focus:-translate-y-4 text-secondary-100"
-        >Pincode</label
-      >
+      <label for="pincode" class="absolute text-sm duration-300 transform -translate-y-4 scale-80 top-2 z-10 origin-[0] focus:ring-indigo-500 bg-white px-2 peer-focus:px-2 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-1 peer-focus:left-3 peer-focus:scale-80 peer-focus:-translate-y-4 text-secondary-100">Pincode</label>
       <p class="mt-2 text-primary-200"></p>
+    
     </div>
-    <p class="text-red-500">
+    <p class="text-red-500 ">
       {{ errors.pincode }}
-    </p>
-
-    <button
-      @click="submitAddress"
+      </p>
+    
+    <button 
+      @click="submitAddress" 
       :disabled="!canSubmit"
-      class="flex justify-center w-full px-4 py-2 text-sm font-medium text-white border border-transparent rounded-md shadow-sm bg-primary-300 hover:bg-primary-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed"
+      class="w-full flex justify-center bg-primary-300 border border-transparent rounded-md shadow-sm py-2 px-4 text-sm font-medium text-white hover:bg-primary-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed"
     >
       Add address
     </button>
@@ -224,8 +193,8 @@
 </template>
 
 <script>
-import { ref, computed, onMounted } from "vue";
-import { useAddressStore } from "../../store/address";
+import { ref, computed, onMounted } from 'vue';
+import { useAddressStore } from '../../store/address';
 
 export default {
   setup() {
@@ -235,32 +204,35 @@ export default {
     let allCountries = ref([]);
 
     const newAddress = ref({
-      firstName: "",
-      lastName: "",
-      mobileNumber: "",
-      addressLine1: "",
-      addressLine2: "",
-      countryId: "",
-      stateId: "",
-      cityId: "",
-      pincode: "",
+      firstName: '',
+      lastName: '',
+      mobileNumber: '',
+      addressLine1: '',
+      addressLine2: '',
+      countryId: '',
+      stateId: '',
+      cityId: '',
+      pincode: ''
     });
+
+
+    
 
     const errors = ref({
-      firstName: "",
-      lastName: "",
-      mobileNumber: "",
-      addressLine1: "",
-      addressLine2: "",
-      countryId: "",
-      stateId: "",
-      cityId: "",
-      pincode: "",
+      firstName: '',
+      lastName: '',
+      mobileNumber: '',
+      addressLine1: '',
+      addressLine2: '',
+      countryId: '',
+      stateId: '',
+      cityId: '',
+      pincode: ''
     });
 
-    const editAddress = (address) => {
+ const editAddress = (address) => {
       newAddress.value = { ...address };
-      console.log("edit", editAddress);
+      console.log("edit",editAddress);
     };
 
     onMounted(async () => {
@@ -274,50 +246,32 @@ export default {
 
     const validateField = (field) => {
       switch (field) {
-        case "firstName":
-          errors.value.firstName = newAddress.value.firstName
-            ? ""
-            : "First Name is required";
+        case 'firstName':
+          errors.value.firstName = newAddress.value.firstName ? '' : 'First Name is required';
           break;
-        case "lastName":
-          errors.value.lastName = newAddress.value.lastName
-            ? ""
-            : "Last Name is required";
+        case 'lastName':
+          errors.value.lastName = newAddress.value.lastName ? '' : 'Last Name is required';
           break;
-        case "mobileNumber":
-          errors.value.mobileNumber = newAddress.value.mobileNumber
-            ? ""
-            : "Mobile Number is required";
+        case 'mobileNumber':
+          errors.value.mobileNumber = newAddress.value.mobileNumber ? '' : 'Mobile Number is required';
           break;
-        case "addressLine1":
-          errors.value.addressLine1 = newAddress.value.addressLine1
-            ? ""
-            : "Address Line 1 is required";
+        case 'addressLine1':
+          errors.value.addressLine1 = newAddress.value.addressLine1 ? '' : 'Address Line 1 is required';
           break;
-        case "addressLine2":
-          errors.value.addressLine2 = newAddress.value.addressLine2
-            ? ""
-            : "Address Line 2 is required";
+        case 'addressLine2':
+          errors.value.addressLine2 = newAddress.value.addressLine2 ? '' : 'Address Line 2 is required';
           break;
-        case "countryId":
-          errors.value.countryId = newAddress.value.countryId
-            ? ""
-            : "Country is required";
+        case 'countryId':
+          errors.value.countryId = newAddress.value.countryId ? '' : 'Country is required';
           break;
-        case "stateId":
-          errors.value.stateId = newAddress.value.stateId
-            ? ""
-            : "State is required";
+        case 'stateId':
+          errors.value.stateId = newAddress.value.stateId ? '' : 'State is required';
           break;
-        case "cityId":
-          errors.value.cityId = newAddress.value.cityId
-            ? ""
-            : "City is required";
+        case 'cityId':
+          errors.value.cityId = newAddress.value.cityId ? '' : 'City is required';
           break;
-        case "pincode":
-          errors.value.pincode = newAddress.value.pincode
-            ? ""
-            : "Pincode is required";
+        case 'pincode':
+          errors.value.pincode = newAddress.value.pincode ? '' : 'Pincode is required';
           break;
       }
     };
@@ -350,18 +304,18 @@ export default {
         await addressStore.createAddress(newAddress.value);
         await addressStore.fetchAddresses();
         newAddress.value = {
-          firstName: "",
-          lastName: "",
-          mobileNumber: "",
-          addressLine1: "",
-          addressLine2: "",
-          countryId: "",
-          stateId: "",
-          cityId: "",
-          pincode: "",
+          firstName: '',
+          lastName: '',
+          mobileNumber: '',
+          addressLine1: '',
+          addressLine2: '',
+          countryId: '',
+          stateId: '',
+          cityId: '',
+          pincode: ''
         };
       } catch (error) {
-        console.error("Error submitting address:", error);
+        console.error('Error submitting address:', error);
       }
     };
 
@@ -375,8 +329,8 @@ export default {
       errors,
       validateField,
       canSubmit,
-      submitAddress,
+      submitAddress
     };
-  },
+  }
 };
 </script>
