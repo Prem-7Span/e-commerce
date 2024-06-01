@@ -8,6 +8,7 @@
     </router-link>
 
     <div class="container">
+      <h1>Hello World</h1>
       <div class="sm:py-9">
         <div class="py-5 text-3xl"><h3>Shop By Category</h3></div>
         <router-link :to="{ name: 'list' }">
