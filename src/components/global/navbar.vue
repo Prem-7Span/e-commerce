@@ -112,6 +112,13 @@
                   >
                     Edit Profile
                   </router-link>
+                  <router-link
+                    :to="{ name: 'dashboard' }"
+                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    role="menuitem"
+                  >
+                    Seller Panel
+                  </router-link>
                   <button
                     @click="logout"
                     class="block w-full px-4 py-2 text-sm text-left text-gray-700 hover:bg-gray-100"

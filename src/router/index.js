@@ -13,6 +13,8 @@ import CheckOut from "../pages/private/product-checkout/index.vue";
 import wishList from "@/pages/private/wish-list/index.vue";
 import edit from "@/pages/private/profile/edit.vue";
 import profile from "../pages/private/profile/index.vue";
+import dashBoard from "@/pages/private/dashboard/index.vue";
+import Analytics from "@/pages/private/dashboard/analytics.vue";
 const routes = [
   {
     path: "/",
@@ -59,6 +61,18 @@ const routes = [
         name: "payment-successful",
         path: "/payment-successful",
         component: paymentSuccessful,
+      },
+      {
+        name: "dashboard",
+        path: "/seller-panel",
+        component: dashBoard,
+        children: [
+          {
+            name: "analytics",
+            path: "/analytics",
+            component: Analytics,
+          },
+        ],
       },
       {
         name: "auth",
