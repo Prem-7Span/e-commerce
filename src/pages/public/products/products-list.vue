@@ -441,8 +441,7 @@ export default {
   background-color: #2f2f2f;
 }
 
-.pagination-button:not(.active):hover {
-  background-color: #f1f1f1;
+.pagination-button:not(.active):hover {n
 }
 
 /* Rest of your styles */
