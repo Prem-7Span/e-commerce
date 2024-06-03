@@ -44,18 +44,20 @@
           {{ userDetails.email }}
         </h1>
       </div>
-
+<!-- 
       <div class="flex flex-col space-y-2">
         <div class="animate__animated animate__fadeIn">Address 1</div>
         <div v-if="userDetails.addresses && userDetails.addresses.length">
           <h1
             class="px-3 py-6 text-gray-700 transition duration-200 ease-in-out border border-gray-300 rounded-md appearance-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-500"
           >
-            <!-- {{ userDetails.addresses }} -->
+            {{ userDetails.addresses }}
           </h1>
         </div>
         <div v-else class="text-gray-400">Add Your Address</div>
-      </div>
+
+        </div>
+       -->
 
       <router-link :to="{ name: 'editProfile' }">
         <button

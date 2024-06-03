@@ -22,7 +22,12 @@ export default {
     },
     showFooter() {
       const excludedPaths = [
-        '/'
+        '/sign-in',
+        '/sign-up',
+        '/VerificationOtp',
+        '/edit',
+        '/profile',
+        '/vieworder'
       ];
       return !excludedPaths.some(path => this.$route.path.startsWith(path));
     }

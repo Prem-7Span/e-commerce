@@ -21,9 +21,9 @@
               <p class="items-center mt-3 text-3xl font-bold md:text-lg md:mb-2 text-primary-300 line-clamp-2 max-w-72">
                   Solid black t-shirt
               </p>
-              <button class="mt-3 p-2 text-end text-white px-8 bg-primary-300 rounded-lg">
+              <!-- <button class="mt-3 p-2 text-end text-white px-8 bg-primary-300 rounded-lg">
                   Invoice
-              </button>
+              </button> -->
             </div>
           </div>
         </div>
