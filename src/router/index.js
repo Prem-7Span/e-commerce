@@ -13,6 +13,7 @@ import CheckOut from "../pages/private/product-checkout/index.vue";
 import wishList from "@/pages/private/wish-list/index.vue";
 import edit from "@/pages/private/profile/edit.vue";
 import profile from "../pages/private/profile/index.vue";
+import vieworder from "../pages/private/view-orders/index.vue";
 const routes = [
   {
     path: "/",
@@ -70,7 +71,6 @@ const routes = [
             path: "sign-in",
             component: SignIn,
           },
-
           {
             name: "SignUp",
             path: "sign-up",
@@ -91,6 +91,11 @@ const routes = [
             name: "profile",
             path: "profile",
             component: profile,
+          },
+          {
+            name: "vieworder",
+            path: "vieworder",
+            component: vieworder,
           },
         ],
       },

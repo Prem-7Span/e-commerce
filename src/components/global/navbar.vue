@@ -112,6 +112,13 @@
                   >
                     Edit Profile
                   </router-link>
+                  <router-link
+                    :to="{ name: 'vieworder' }"
+                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    role="menuitem"
+                  >
+                    View order
+                  </router-link>
                   <button
                     @click="logout"
                     class="block w-full px-4 py-2 text-sm text-left text-gray-700 hover:bg-gray-100"
@@ -187,7 +194,7 @@ export default {
       return this.userStore.getToken;
     },
     cartItemCount() {
-      return this.cartStore.cartItemCount; // Updated to reflect the number of items in the cart
+      return this.cartStore.cartItemCount;
     },
     wishlistItemCount() {
       return this.wishlistStore.wishlistCount; // Access the wishlist item count from the store
@@ -196,7 +203,7 @@ export default {
   watch: {
     userDetail(nv) {
       if (nv) {
-        console.log("New Value : ", nv);
+        // console.log("New Value : ", nv);
       }
     },
   },
@@ -209,7 +216,7 @@ export default {
       localStorage.removeItem("user");
       this.userStore.setToken(null); // Update token in store
       this.wishlistStore.clearWishlist(); // Clear the wishlist on logout
-      this.cartStore.clearCart(); // Clear the cart on logout
+      this.cartStore.clearCart();
       this.$router.push({ name: "home" });
     },
     async searchProducts() {
