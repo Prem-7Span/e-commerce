@@ -65,7 +65,7 @@ const routes = [
       },
       {
         name: "dashboard",
-        path: "/seller-panel",
+        path: "/admin",
         component: dashBoard,
         children: [
           {
