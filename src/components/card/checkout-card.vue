@@ -118,7 +118,7 @@
 </template>
 
 <script setup>
-import { ref, computed, defineProps, defineEmits } from "vue";
+import { ref, computed, onMounted, defineProps, defineEmits } from "vue";
 import { useCartStore } from "@/store/cart";
 import { useWishlistStore } from "@/store/wishlist";
 
@@ -159,7 +159,7 @@ const updateCartItemQuantity = (quantity) => {
     quantity,
     checkoutId.value
   );
-  emit("quantityChanged"); // Emit event when quantity changes
+  emit("quantityChanged");
 };
 
 const increment = () => {

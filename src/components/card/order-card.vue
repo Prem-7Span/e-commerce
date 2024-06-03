@@ -57,6 +57,7 @@
 <script setup>
 import { computed, onMounted, defineProps, defineEmits } from "vue";
 import { useOrderSummaryStore } from "@/store/order-summary";
+import { useAddressStore } from "../../store/address.js"; // Import address store
 import axios from "axios";
 
 const props = defineProps({
@@ -73,9 +74,11 @@ const props = defineProps({
 const emit = defineEmits(["next", "placeOrderEvent"]);
 
 const orderSummaryStore = useOrderSummaryStore();
+const addressStore = useAddressStore(); // Initialize address store
 
 onMounted(() => {
   orderSummaryStore.fetchOrderSummary();
+  addressStore.fetchAddresses(); // Fetch addresses when the component is mounted
 });
 
 const data = computed(() => orderSummaryStore);
