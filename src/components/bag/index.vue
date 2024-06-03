@@ -73,7 +73,6 @@ const goToAddress = () => {
 const goToPayment = () => {
   emit("changeTab", "ThePayment");
 };
-
 const updateOrderSummary = () => {
   orderSummaryStore.calculateOrderSummary(cartStore.cartItems); // Calculate order summary based on cart items
 };

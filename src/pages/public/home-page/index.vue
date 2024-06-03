@@ -6,7 +6,6 @@
         <CarousalBanner />
       </div>
     </router-link>
-
     <div class="container">
       <div class="sm:py-9">
         <div class="py-5 text-3xl"><h3>Shop By Category</h3></div>

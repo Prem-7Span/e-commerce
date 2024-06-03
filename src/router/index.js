@@ -15,6 +15,7 @@ import edit from "@/pages/private/profile/edit.vue";
 import profile from "../pages/private/profile/index.vue";
 import dashBoard from "@/pages/private/dashboard/index.vue";
 import Analytics from "@/pages/private/dashboard/analytics.vue";
+import vieworder from "../pages/private/view-orders/index.vue";
 const routes = [
   {
     path: "/",
@@ -84,7 +85,6 @@ const routes = [
             path: "sign-in",
             component: SignIn,
           },
-
           {
             name: "SignUp",
             path: "sign-up",
@@ -105,6 +105,11 @@ const routes = [
             name: "profile",
             path: "profile",
             component: profile,
+          },
+          {
+            name: "vieworder",
+            path: "vieworder",
+            component: vieworder,
           },
         ],
       },
