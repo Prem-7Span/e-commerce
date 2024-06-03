@@ -21,7 +21,7 @@
             >Women</router-link>
           </nav>
         </div>
-        <form class="flex items-center max-w-md mx-auto" @submit.prevent="searchProducts">
+        <!-- <form class="flex items-center max-w-md mx-auto" @submit.prevent="searchProducts">
           <div class="relative">
             <div class="absolute flex items-center pointer-events-none md:inset-y-0 inset-y-1 start-0 ps-3">
               <img src="/public/home-page/Vector.svg" alt="Search Icon" />
@@ -34,7 +34,7 @@
               placeholder="Search"
             />
           </div>
-        </form>
+        </form> -->
       </div>
       <div class="flex items-center space-x-2">
         <div class="relative">
