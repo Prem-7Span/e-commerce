@@ -210,6 +210,7 @@ export default {
   methods: {
     toggleDropdown() {
       this.dropdownOpen = !this.dropdownOpen;
+      // console.log("dropdownOpen", this.dropdownOpen);
     },
     logout() {
       localStorage.removeItem("token");
