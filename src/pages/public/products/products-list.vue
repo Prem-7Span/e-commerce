@@ -27,13 +27,13 @@
       </div>
     </div>
 
-    <div class="mt-5 md:px-2 md:gap-6 xl:gap-16 product-wrap">
+    <div class="mt-2 md:px-2 md:gap-6 xl:gap-16 product-wrap">
       <div
         :class="sidebar ? 'block' : 'hidden'"
         class="px-1 md:w-60 w-full xl:w-64 md:!block z-10 md:relative absolute bg-white sidebar"
       >
         <!-- Filters here -->
-        <div>
+         <div class="hidden">
           <h2 class="font-bold">Gender</h2>
           <hr class="p-1 px-20" />
           <input
@@ -218,6 +218,45 @@
           </div>
         </div>
 
+
+
+        <h2 class="font-bold">Discount</h2>
+    <hr class="p-1 px-20" />
+    <div class="grid grid-cols-2 mb-2 md:block">
+      <div>
+        <input
+          type="radio"
+          id="20"
+          value="20"
+          v-model="productStore.discount"
+        />
+        <label for="20">Upto 20%</label><br />
+        <input
+          type="radio"
+          id="40"
+          value="40"
+          v-model="productStore.discount"
+        />
+        <label for="40">Upto 40%</label><br />
+        <input
+          type="radio"
+          id="60"
+          value="60"
+          v-model="productStore.discount"
+        />
+        <label for="60">Upto 60%</label><br />
+        <input
+          type="radio"
+          id="80"
+          value="80"
+          v-model="productStore.discount"
+        />
+        <label for="80">Upto 80%</label><br />
+      </div>
+</div>
+
+
+
         <div
           class="sticky bottom-0 p-10 text-center bg-white w-72 left-9 right-9 md:hidden"
         >
@@ -230,7 +269,7 @@
         </div>
 
         <div
-          class="sticky bottom-0 hidden p-10 text-center bg-white w-72 left-9 right-9 md:block"
+          class="sticky bottom-0 hidden p-10 text-center bg-white w-full left-9 right-9 md:block"
         >
           <button
             @click="applyFilters"
@@ -242,7 +281,7 @@
       </div>
 
       <div>
-        <div class="grid grid-cols-2 gap-5 py-4 md:gap-8 md:grid-cols-4">
+        <div class="grid grid-cols-2 gap-5 py-4 md:gap-8 md:grid-cols-5">
           <ProductCard
             v-for="(product, index) in paginatedProducts"
             :key="index"
@@ -284,6 +323,7 @@ import { useProductStore } from "/src/store/product.js";
 import ProductCard from "@/components/card/product-card.vue";
 import Breadcrumb from "@/components/global/bread-crumb.vue";
 import MultiRangeSlider from "multi-range-slider-vue";
+import { useSearchStore } from "../../../store/search.js";  // Corrected import statement
 
 export default {
   components: {
@@ -293,11 +333,18 @@ export default {
   },
   setup() {
     const productStore = useProductStore();
+    const searchStore = useSearchStore();  // Use the search store
     const sidebar = ref(false);
     const isMobile = ref(false);
     const filteredProducts = ref([]);
     const currentPage = ref(1);
-    const productsPerPage = 8;
+    const productsPerPage = 10;
+
+    // Function to handle product search
+    const searchProducts = async (keyword) => {
+      await searchStore.searchProducts(keyword);
+      filteredProducts.value = searchStore.searchResults;
+    };
 
     const handleResize = () => {
       isMobile.value = window.innerWidth < 768;
@@ -307,7 +354,7 @@ export default {
       sidebar.value = !sidebar.value;
     };
 
-    const UpdateValues = (value) => {
+    const updateValues = (value) => {
       productStore.minPrice = value.minValue;
       productStore.maxPrice = value.maxValue;
     };
@@ -329,11 +376,12 @@ export default {
 
     const clearFilters = async () => {
       productStore.productData = [];
-      productStore.categoryName = [];
+      productStore.categoryName = []; 
       productStore.parentCategory = [];
       productStore.selectedPrice = [];
       productStore.color = [];
       productStore.size = [];
+      productStore.discount=[];
       productStore.minPrice = 0;
       productStore.maxPrice = 1500;
       productStore.fetchProductList().then(() => {
@@ -357,15 +405,22 @@ export default {
     });
 
     const paginatedProducts = computed(() => {
-      const start = (currentPage.value - 1) * productsPerPage;
-      const end = start + productsPerPage;
-      window.scrollTo(0, 0);
-      console.log("filteredProducts::", filteredProducts);
-      return filteredProducts.value.slice(start, end);
+      if (searchStore.searchResults.length > 0) {
+        return searchStore.searchResults; 
+      } else {
+        const start = (currentPage.value - 1) * productsPerPage;
+        const end = start + productsPerPage;
+        window.scrollTo(0, 0);
+        return filteredProducts.value.slice(start, end);
+      }
     });
 
     const totalPages = computed(() => {
-      return Math.ceil(filteredProducts.value.length / productsPerPage);
+      if (searchStore.searchResults.length > 0) {
+        return 1; // Only one page for search results
+      } else {
+        return Math.ceil(filteredProducts.value.length / productsPerPage);
+      }
     });
 
     const nextPage = () => {
@@ -395,10 +450,12 @@ export default {
       sidebar,
       isMobile,
       productStore,
+      searchStore,  // Expose searchStore
+      searchProducts,  // Expose searchProducts
       filteredProducts,
       handleResize,
       openSidebar,
-      UpdateValues,
+      updateValues,
       applyFilters,
       applyFiltersAndCloseSidebar,
       clearFilters,
@@ -414,7 +471,10 @@ export default {
 };
 </script>
 
-<style scoped>
+
+
+<style >
+
 /* Pagination styles and other necessary styles */
 .pagination-arrow,
 .pagination-button {
@@ -453,8 +513,12 @@ export default {
   border-radius: none;
   box-shadow: none;
   border: none;
+  color: #2f2f2f
 }
-.multi-range-slider .bar-inner {
-  background-color: #2f2f2f;
+.multi-range-slider .bar-inner-left{
+  background-color: #2f2f2f ;
+}
+.multi-range-slider .bar-inner-right{
+  background-color: #2f2f2f ;
 }
 </style>

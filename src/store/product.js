@@ -12,6 +12,7 @@ export const useProductStore = defineStore("product", {
     maxPrice: 1500,
     color: [],
     size: [],
+    discount:[],
     wishlist: [], // Add wishlist state
   }),
   actions: {
@@ -37,6 +38,7 @@ export const useProductStore = defineStore("product", {
             size: this.size,
             minPrice: this.minPrice,
             maxPrice: this.maxPrice,
+            discount:this.discount
           },
         });
         this.productData = response.data;
@@ -52,6 +54,7 @@ export const useProductStore = defineStore("product", {
       this.size = [];
       this.minPrice = 0;
       this.maxPrice = 1500;
+      this.discount = [];
       this.fetchProductList();
     },
     async addToWishlist(product) {
