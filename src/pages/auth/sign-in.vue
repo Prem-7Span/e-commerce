@@ -24,7 +24,7 @@
           v-model="termsAccepted"
           type="checkbox"
           id="terms"
-          class="w-4 h-4 px-2 mt-1 text-end accent-indigo-500 focus:ring-2 focus:ring-indigo-500"
+          class="w-4 h-4 px-2 mt-1 text-end accent-indigo-500 focus:ring-indigo-500"
         />
         <label for="terms" class="mb-2 ml-2 text-sm text-gray-700">
           By continuing you agree to website's Terms & Conditions and Privacy

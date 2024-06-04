@@ -39,7 +39,7 @@
           :disabled="orderSummaryStore.total <= 50"
           @click="handleNext"
           :class="{
-            'opacity-50 cursor-not-allowed': orderSummaryStore.total <= 50,
+            'opacity-80 cursor-not-allowed': orderSummaryStore.total <= 50,
             'opacity-100': orderSummaryStore.total > 50,
           }"
           class="w-full p-2 text-center text-white rounded-md bg-primary-300"
