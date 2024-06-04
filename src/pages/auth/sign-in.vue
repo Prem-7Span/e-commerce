@@ -19,7 +19,7 @@
         <p class="mt-2 text-primary-200">{{ errors.phoneNumber }}</p>
       </div>
 
-      <div class="flex">
+      <div class="flex py-3">
         <input
           v-model="termsAccepted"
           type="checkbox"

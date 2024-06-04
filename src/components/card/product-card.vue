@@ -1,18 +1,20 @@
 <template>
   <div class="rounded-md shadow-md hover:shadow-lg">
     <div class="relative w-92 h-92">
-      <div class="relative img-container">
-        <img
-          v-if="product.images && product.images.length > 0"
-          :src="product.images[0].imageUrl"
-          class="absolute inset-0 object-cover w-full h-full rounded-t-md"
-        />
-        <img
-          v-else
-          src="/img/Black.jpg"
-          class="absolute inset-0 object-cover w-full h-full rounded-t-md"
-        />
-      </div>
+      <router-link :to="{ name: 'details', params: { slug: product.slug } }">
+        <div class="relative img-container">
+          <img
+            v-if="product.images && product.images.length > 0"
+            :src="product.images[0].imageUrl"
+            class="absolute inset-0 object-cover w-full h-full rounded-t-md"
+          />
+          <img
+            v-else
+            src="/img/Black.jpg"
+            class="absolute inset-0 object-cover w-full h-full rounded-t-md"
+          />
+        </div>
+      </router-link>
       <div id="wishlist" v-if="!isWishlist">
         <button
           @click.stop="handleAddToWishlist"

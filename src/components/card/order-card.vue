@@ -36,18 +36,15 @@
       </div>
       <div class="mx-5 mb-8">
         <button
-          v-if="showNextButton"
+          :disabled="orderSummaryStore.total <= 50"
           @click="handleNext"
+          :class="{
+            'opacity-50 cursor-not-allowed': orderSummaryStore.total <= 50,
+            'opacity-100': orderSummaryStore.total > 50,
+          }"
           class="w-full p-2 text-center text-white rounded-md bg-primary-300"
         >
           Next
-        </button>
-        <button
-          v-else
-          @click="placeOrder"
-          class="w-full p-2 text-center text-white rounded-md bg-primary-300"
-        >
-          Place Order
         </button>
       </div>
     </div>
@@ -77,8 +74,6 @@ const orderSummaryStore = useOrderSummaryStore();
 onMounted(() => {
   orderSummaryStore.fetchOrderSummary();
 });
-
-const data = computed(() => orderSummaryStore);
 
 const handleNext = () => {
   emit("next");
@@ -142,3 +137,12 @@ const placeOrder = async () => {
   }
 };
 </script>
+
+<style>
+.opacity-50 {
+  opacity: 0.5;
+}
+.cursor-not-allowed {
+  cursor: not-allowed;
+}
+</style>
