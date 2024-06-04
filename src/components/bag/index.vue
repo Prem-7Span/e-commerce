@@ -9,13 +9,29 @@
           {{ cartStore.error }}
         </div>
         <div v-else>
-          <div v-for="item in cartStore.cartItems" :key="item.id">
-            <CheckoutCard
-              :productVariantId="item.productVariantId"
-              :quantity="item.quantity"
-              @quantityChanged="updateOrderSummary"
-              class="m-2"
-            />
+          <div v-if="cartStore.cartItems.length === 0" class="text-center">
+            <div class="py-4 item-center">
+              <p class="text-lg font-semibold">No products to checkout,</p>
+              <p class="text-lg">add the products</p>
+
+              <router-link :to="{ name: 'list' }" class="py-6 max-w-56">
+                <button
+                  class="w-full px-5 py-2 my-6 text-base text-center text-black bg-transparent border border-gray-600 rounded max-w-56 hover:bg-gray-900 hover:text-white"
+                >
+                  See Products
+                </button>
+              </router-link>
+            </div>
+          </div>
+          <div v-else>
+            <div v-for="item in cartStore.cartItems" :key="item.id">
+              <CheckoutCard
+                :productVariantId="item.productVariantId"
+                :quantity="item.quantity"
+                @quantityChanged="updateOrderSummary"
+                class="m-2"
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -73,6 +89,7 @@ const goToAddress = () => {
 const goToPayment = () => {
   emit("changeTab", "ThePayment");
 };
+
 const updateOrderSummary = () => {
   orderSummaryStore.calculateOrderSummary(cartStore.cartItems); // Calculate order summary based on cart items
 };

@@ -182,6 +182,7 @@
 
 <script setup>
 import axios from "axios";
+import { useToast } from "vue-toastification";
 import { ref, onMounted, computed, watchEffect } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { useProductDetailsStore } from "../../../store/productDetails";
@@ -193,6 +194,8 @@ import Breadcrumb from "@/components/global/bread-crumb.vue";
 import Description from "../../../components/product-details/description.vue";
 import AdditionalInfo from "../../../components/product-details/additional-info.vue";
 import Reviews from "../../../components/product-details/reviews.vue";
+
+const toast = useToast();
 
 const activeTab = ref("Description");
 
@@ -303,6 +306,7 @@ const addToCart = async () => {
         },
       }
     );
+    toast.success("Product added to cart");
     console.log("Added to cart:", response.data);
 
     // Update the cart items in the store
@@ -315,7 +319,6 @@ const addToCart = async () => {
 const addToWishlist = async () => {
   try {
     const token = localStorage.getItem("token");
-    console.log("token", token);
     if (!token) {
       router.push({ name: "SignIn" }); // Redirect to the sign-in page
       return;
@@ -332,6 +335,7 @@ const addToWishlist = async () => {
         },
       }
     );
+    toast.success("Product added to wishlist");
     console.log("Added to wishlist:", response.data);
   } catch (error) {
     console.error("Error adding to wishlist:", error);
