@@ -31,6 +31,7 @@
             >
           </nav>
         </div>
+        <!-- Search form can be uncommented and used if needed -->
         <!-- <form class="flex items-center max-w-md mx-auto" @submit.prevent="searchProducts">
           <div class="relative">
             <div class="absolute flex items-center pointer-events-none md:inset-y-0 inset-y-1 start-0 ps-3">
