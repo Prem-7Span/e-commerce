@@ -8,7 +8,7 @@
           </router-link>
         </div>
         <div class="flex items-center py-2 page">
-          <nav class="flex-col hidden space-x-4 space-y-4 md:flex md:flex-row md:space-y-0 md:space-x-4">
+          <nav class="flex-col hidden  active:underline space-x-4 space-y-4 md:flex md:flex-row md:space-y-0 md:space-x-4">
             <router-link :to="{ name: 'products', query: { gender: 'Men' } }"
               class="text-gray-600 hover:text-gray-800 hover:underline"
               @click.prevent="filterByGender('Men')">Men</router-link>
