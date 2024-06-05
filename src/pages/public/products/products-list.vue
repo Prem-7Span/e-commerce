@@ -343,7 +343,10 @@ export default {
     };
 
     onMounted(async () => {
-      filteredProducts.value = await productStore.fetchProductList();
+      filteredProducts.value = await productStore.fetchProductList(
+        localStorage.getItem("token")
+      );
+      console.log("==>Filtered", filteredProducts.value);
       handleResize();
       window.addEventListener("resize", handleResize);
     });
@@ -360,7 +363,7 @@ export default {
       const start = (currentPage.value - 1) * productsPerPage;
       const end = start + productsPerPage;
       window.scrollTo(0, 0);
-      console.log("filteredProducts::", filteredProducts);
+      // console.log("filteredProducts::", filteredProducts);
       return filteredProducts.value.slice(start, end);
     });
 
