@@ -1,13 +1,7 @@
 <template>
-  <div
-    class="flex flex-col items-center justify-center min-h-screen sign-up-page"
-  >
-    <div
-      class="w-full max-w-md px-8 py-6 space-y-3 text-center bg-white rounded-lg shadow-md md:text-left md:max-w-md"
-    >
-      <div class="text-2xl animate__animated animate__fadeIn">
-        Profile details
-      </div>
+  <div class="flex flex-col items-center justify-center min-h-screen sign-up-page">
+    <div class="w-full max-w-md px-8 py-6 space-y-3 text-center bg-white rounded-lg shadow-md md:text-left md:max-w-md">
+      <div class="text-2xl animate__animated animate__fadeIn">Profile details</div>
       <div class="flex flex-col space-y-2">
         <div class="animate__animated animate__fadeIn">First Name</div>
         <input
@@ -54,15 +48,13 @@
         ></textarea>
       </div> -->
 
-      <router-link :to="{ name: 'profile' }">
-        <button
-          type="button"
-          @click="saveChanges"
-          class="w-full px-4 py-2 mt-4 font-medium text-center text-white transition duration-200 ease-in-out rounded-md bg-primary-100 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-indigo-700 focus:ring-opacity-50"
-        >
-          Save
-        </button>
-      </router-link>
+      <button
+        type="button"
+        @click="saveChanges"
+        class="w-full px-4 py-2 mt-4 font-medium text-center text-white transition duration-200 ease-in-out rounded-md bg-primary-100 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-indigo-700 focus:ring-opacity-50"
+      >
+        Save
+      </button>
     </div>
   </div>
 </template>
@@ -70,6 +62,9 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import axios from "axios";
+import { useRouter } from "vue-router";
+
+const router = useRouter();
 
 const userDetails = ref({
   firstName: "",
@@ -114,6 +109,7 @@ const saveChanges = async () => {
       }
     );
     userDetails.value = response.data;
+    router.push({ name: 'profile' }); // Navigate to the profile route after successful update
   } catch (error) {
     console.error("Error updating user details:", error.message);
   } finally {

@@ -19,6 +19,7 @@
           class="absolute top-0 right-0 px-2 py-2 mt-2 mb-2 mr-2 bg-white rounded-full"
         >
           <img src="/img/icon.svg" alt="Wishlist Icon" />
+          <!-- clcik in red and dubole click red remove  -->
         </button>
       </div>
       <button

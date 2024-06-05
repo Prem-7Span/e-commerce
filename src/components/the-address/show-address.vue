@@ -1,7 +1,7 @@
 <template>
   <div>
-    <div v-if="addressStore.error" class="px-2 mt-5 text-red-500 rounded-md">
-      Please add an address
+    <!-- <div v-if="addressStore.error" class="px-2 mt-5 text-red-500 rounded-md"> -->
+      <!-- Please add an address -->
     </div>
     <div><p class="font-bold text-md">Select the address</p></div>
     <div
@@ -48,7 +48,7 @@
         </button>
       </div>
     </div>
-  </div>
+  
 </template>
 
 <script>

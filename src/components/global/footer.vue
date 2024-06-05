@@ -79,10 +79,10 @@
               Join Our Newsletter for Exclusive Deals & Updates!
             </p>
             <p class="mt-1 md:hidden">sub-title</p>
-            <div class="flex">
+            <div class="flex mb-1">
               <input
                 type="text"
-                class="h-8 mt-3 text-white bg-transparent border-2 border-gray-500 rounded-md bg- w-72"
+                class="h-8 mt-3 px-2 text-white bg-transparent border-2 border-gray-500 rounded-md bg- w-72"
                 placeholder="Enter Your Email Id"
               />
               <button class="p-1 m-1 mt-3 rounded-md bg-primary-100">

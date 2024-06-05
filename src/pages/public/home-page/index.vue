@@ -60,48 +60,57 @@
 
           <div id="category" class="flex space-x-1 overflow-hidden md:space-x-3 bg-primary-offBlack rounded-3xl">
             <div id="col-1" class="space-y-1 md:space-y-3">
-              <div class="relative bg-overlay">
-                <router-link :to="{ name: 'products', query: { Discount: '20' } }"
+              <router-link :to="{ name: 'products', query: { Discount: '20' } }"
                 @click.prevent="filterByDiscount('20')">
+              <div class="relative bg-overlay">
                 <img src="/home-page/deals-img-1.png" alt="card-1" />
                 <div class="absolute z-20 space-y-3 bottom-10 left-5">
                   <h2 class="text-base text-white sm:text-5xl">UPTO 20% OFF</h2>
                   <p class="text-xs text-white sm:text-2xl">Explore more</p>
                 </div>
-                </router-link>
               </div>
-              <div class="relative bg-overlay">
-                <router-link :to="{ name: 'products', query: { Discount: '60' } }"
+            </router-link>
+            <div>
+
+            
+            <router-link :to="{ name: 'products', query: { Discount: '60' } }"
                 @click.prevent="filterByDiscount('60')">
+              <div class="relative bg-overlay">
                 <img src="/home-page/deals-img-2.png" alt="card-1" />
                 <div class="absolute z-20 space-y-3 bottom-10 left-5">
                   <h2 class="text-base text-white sm:text-5xl">UPTO 60% OFF</h2>
                   <p class="text-xs text-white sm:text-2xl">Explore more</p>
                 </div>
+              </div>
                 </router-link>
               </div>
+              
         
             </div>
             <div id="col-2" class="pt-5 space-y-1 md:space-y-3 md:pt-16">
-              <div class="relative bg-overlay">
-                <router-link :to="{ name: 'products', query: { Discount: '40' } }"
+              <router-link :to="{ name: 'products', query: { Discount: '40' } }"
                 @click.prevent="filterByDiscount('40')">
+              <div class="relative bg-overlay">
                 <img src="/home-page/deals-img-3.png" alt="card-2" />
                 <div class="absolute z-20 space-y-3 bottom-10 left-5">
                   <h2 class="text-base text-white sm:text-5xl">UPTO 40% OFF</h2>
                   <p class="text-xs text-white sm:text-2xl">Explore more</p>
                 </div>
-                </router-link>
               </div>
+                </router-link>
+        <div>
 
-              <div class="relative bg-overlay">
+        
                 <router-link :to="{ name: 'products', query: { Discount: '80' } }"
                 @click.prevent="filterByDiscount('80')">
+              <div class="relative bg-overlay">
+                
                 <img src="/home-page/deals-img-4.png" alt="card-3" />
                 <div class="absolute z-20 space-y-3 bottom-10 left-5">
                   <h2 class="text-base text-white sm:text-5xl">UPTO 80% OFF</h2>
                   <p class="text-xs text-white sm:text-2xl">Explore more</p>
                 </div>
+              </div>
                 </router-link>
               </div>
             </div>
