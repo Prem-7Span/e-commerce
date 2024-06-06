@@ -129,7 +129,6 @@ import { useCartStore } from "@/store/cart.js";
 import { useWishlistStore } from "@/store/wishlist.js";
 import { useProductStore } from "@/store/product.js";
 import { useSearchStore } from "@/store/search.js"; // Import the search store
-import { useSearchStore } from "@/store/search.js";
 import axios from "axios";
 import { ref } from "vue";
 

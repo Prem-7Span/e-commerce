@@ -136,8 +136,6 @@ export default {
 
     return {
       defaultVariant,
-      discount,
-      round,
       toggleWishlist,
     };
   },

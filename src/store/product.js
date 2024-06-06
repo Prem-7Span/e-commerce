@@ -16,26 +16,18 @@ export const useProductStore = defineStore("product", {
     wishlist: [], // Add wishlist state
   }),
   actions: {
-    async fetchProductList(token) {
-      console.log("==>token", token);
+    async fetchProductList() {
       try {
-        // if (this.productData.length > 0) {
-        //   return this.productData;
-        // }
-
-        const headers = token ? { Authorization: `Bearer ${token}` } : {};
-        const response = await axios.get(`${baseURL}/v1/product`, { headers });
-        console.log("==>response", response);
-
+        if (this.productData.length > 0) {
+          return this.productData;
+        }
+        const response = await axios.get(`${baseURL}/v1/product`);
         this.productData = response.data;
-        console.log("==>ProductData", this.productData);
         return this.productData;
       } catch (error) {
-        console.log("==>Error", error);
         console.error("Error fetching products:", error);
       }
     },
-
     async applyFiltersAndFetch() {
       try {
         const response = await axios.get(`${baseURL}/v1/product`, {
