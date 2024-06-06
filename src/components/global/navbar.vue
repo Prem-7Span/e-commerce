@@ -32,20 +32,26 @@
           </nav>
         </div>
         <!-- Search form can be uncommented and used if needed -->
-        <!-- <form class="flex items-center max-w-md mx-auto" @submit.prevent="searchProducts">
+        <form
+          class="flex items-center max-w-md mx-auto"
+          @submit.prevent="searchProducts"
+        >
           <div class="relative">
-            <div class="absolute flex items-center pointer-events-none md:inset-y-0 inset-y-1 start-0 ps-3">
+            <div
+              class="absolute flex items-center pointer-events-none md:inset-y-0 inset-y-1 start-0 ps-3"
+            >
               <img src="/public/home-page/Vector.svg" alt="Search Icon" />
             </div>
             <input
               type="search"
               id="default-search"
               v-model="searchQuery"
+              @change="getSearchResult"
               class="hidden p-2 pl-8 mb-4 border border-gray-300 rounded-md shadow-sm cursor-pointer sm:inline md:mb-0 md:w-96 focus:outline-none focus:ring focus:ring-blue-500 focus:ring-opacity-50"
               placeholder="Search"
             />
           </div>
-        </form> -->
+        </form>
       </div>
       <div class="flex items-center space-x-2">
         <div class="relative">
@@ -154,6 +160,7 @@ import { useUserStore } from "@/store/user";
 import { useCartStore } from "@/store/cart.js";
 import { useWishlistStore } from "@/store/wishlist.js";
 import { useProductStore } from "@/store/product.js";
+import { useSearchStore } from "@/store/search.js";
 import axios from "axios";
 import { ref } from "vue";
 
@@ -163,6 +170,7 @@ export default {
     const cartStore = useCartStore();
     const wishlistStore = useWishlistStore();
     const productStore = useProductStore();
+    const searchStore = useSearchStore();
 
     const filterByGender = async (gender) => {
       productStore.parentCategory = [gender];
@@ -175,7 +183,7 @@ export default {
       cartStore.fetchCart();
     }
 
-    return { userStore, cartStore, wishlistStore, filterByGender };
+    return { userStore, cartStore, wishlistStore, filterByGender, searchStore };
   },
   data() {
     return {
@@ -198,6 +206,20 @@ export default {
     },
   },
   methods: {
+    getSearchResult() {
+      this.customDebounce(this.fetchSearch, 800);
+    },
+    async fetchSearch() {
+      await this.searchStore.searchProducts(this.searchQuery);
+      this.$router.push({ name: "products" });
+    },
+    customDebounce(func, delay = 500) {
+      let timeout;
+      clearTimeout(timeout);
+      timeout = setTimeout(() => {
+        func();
+      }, delay);
+    },
     toggleDropdown() {
       this.dropdownOpen = !this.dropdownOpen;
     },
@@ -216,17 +238,8 @@ export default {
       this.cartStore.clearCart();
       this.$router.push({ name: "home" });
     },
-    async searchProducts() {
-      if (this.searchQuery.trim() !== "") {
-        try {
-          const response = await axios.get(
-            `https://api.8orbit.shop/api/v1/product?search=${this.searchQuery}`
-          );
-          this.searchResults = response.data;
-        } catch (error) {
-          console.error("Error fetching search results:", error);
-        }
-      }
+    searchProducts() {
+      this.searchStore.searchProducts();
     },
   },
 };
