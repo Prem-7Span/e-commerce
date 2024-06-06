@@ -86,13 +86,12 @@ export const useAddressStore = defineStore("addressStore", {
         this.error = error;
       }
     },
-    async fetchCities(params) {
+    async fetchCities(Id) {
       try {
         const token = localStorage.getItem("token");
         const headers = { Authorization: `Bearer ${token}` };
-        const response = await axios.get(`${baseURL}/cities`, {
+        const response = await axios.get(`${baseURL}/cities/${Id}`, {
           headers,
-          params,
         });
         this.cities = response.data;
       } catch (error) {

@@ -1,5 +1,8 @@
 <template>
   <div>
+    <div v-if="addressStore.error" class="mb-2 text-red-500 rounded-md">
+      Please add address
+    </div>
     <div><p class="font-bold text-md">Select the address</p></div>
     <div
       v-for="address in addressStore.addresses"
@@ -54,7 +57,7 @@ import { defineComponent, ref } from "vue";
 
 export default defineComponent({
   name: "AddressComponent",
-  emits: ["selectAddress"],
+  emits: ["selectAddress", "editAddress"], // Include both emitted events
   setup(props, { emit }) {
     const addressStore = useAddressStore();
     const selectedAddressId = ref(null);
@@ -69,7 +72,7 @@ export default defineComponent({
 
     // Method to emit the address data to the parent component
     const editData = (address) => {
-      emit("editaddress", address);
+      emit("editAddress", address);
     };
 
     const selectAddress = (addressId) => {
