@@ -24,7 +24,7 @@
         Name</label>
       <p class="mt-2 text-primary-200"></p>
     </div>
-    <p class="text-red-500 text-lg">
+    <p class="text-red-500 text-sm ">
       {{ errors.lastName }}
     </p>
 
@@ -38,7 +38,7 @@
         Number</label>
       <p class="mt-2 text-primary-200"></p>
     </div>
-    <p class="text-red-500 text-lg">
+    <p class="text-red-500 text-sm ">
       {{ errors.mobileNumber }}
     </p>
 
@@ -53,7 +53,7 @@
         Line 1</label>
       <p class="mt-2 text-primary-200"></p>
     </div>
-    <p class="text-red-500 text-lg">
+    <p class="text-red-500 text-sm ">
       {{ errors.addressLine1 }}
     </p>
 
@@ -66,7 +66,7 @@
         Line 2</label>
       <p class="mt-2 text-primary-200"></p>
     </div>
-    <p class="text-red-500 text-lg">
+    <p class="text-red-500 text-sm ">
       {{ errors.addressLine2 }}
     </p>
     <div class="relative border rounded-md">
@@ -81,7 +81,7 @@
         class="absolute text-sm duration-300 transform -translate-y-4 scale-80 top-2 z-10 origin-[0] focus:ring-indigo-500 bg-white px-2 peer-focus:px-2 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-1 peer-focus:left-3 peer-focus:scale-80 peer-focus:-translate-y-4 text-secondary-100">Country</label>
       <p class="mt-2 text-primary-200"></p>
     </div>
-    <p class="text-red-500 text-lg">
+    <p class="text-red-500 text-sm ">
       {{ errors.countryId }}
     </p>
 
@@ -99,7 +99,7 @@
         class="absolute text-sm duration-300 transform -translate-y-4 scale-80 top-2 z-10 origin-[0] focus:ring-indigo-500 bg-white px-2 peer-focus:px-2 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-1 peer-focus:left-3 peer-focus:scale-80 peer-focus:-translate-y-4 text-secondary-100">State</label>
       <p class="mt-2 text-primary-200"></p>
     </div>
-    <p class="text-red-500 text-lg">
+    <p class="text-red-500 text-sm ">
       {{ errors.stateId }}
     </p>
 
@@ -115,7 +115,7 @@
         class="absolute text-sm duration-300 transform -translate-y-4 scale-80 top-2 z-10 origin-[0] focus:ring-indigo-500 bg-white px-2 peer-focus:px-2 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-1 peer-focus:left-3 peer-focus:scale-80 peer-focus:-translate-y-4 text-secondary-100">City</label>
       <p class="mt-2 text-primary-200"></p>
     </div>
-    <p class="text-red-500 text-lg">
+    <p class="text-red-500 text-sm ">
       {{ errors.cityId }}
     </p>
 
@@ -127,12 +127,13 @@
         class="absolute text-sm duration-300 transform -translate-y-4 scale-80 top-2 z-10 origin-[0] focus:ring-indigo-500 bg-white px-2 peer-focus:px-2 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-1 peer-focus:left-3 peer-focus:scale-80 peer-focus:-translate-y-4 text-secondary-100">Pincode</label>
       <p class="mt-2 text-primary-200"></p>
     </div>
-    <p class="text-red-500 text-lg">
+    <p class="text-red-500 text-sm">
       {{ errors.pincode }}
     </p>
 
     <button
       @click="addressToEdit ? updateAddress() : addAddress()"
+    
       class="flex justify-center w-full px-4 py-2 text-sm font-medium text-white border border-transparent rounded-md shadow-sm bg-primary-300 hover:bg-primary-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed">
       {{ addressToEdit ? 'Update' : 'Add address' }}
     </button>
@@ -250,13 +251,13 @@ export default {
     const validateField = (field) => {
       switch (field) {
         case "firstName":
-          errors.value.firstName = newAddress.value.firstName ? "" : "First Name is required";
+          errors.value.firstName = userDetails.value.firstName ? "" : "First Name is required";
           break;
         case "lastName":
-          errors.value.lastName = newAddress.value.lastName ? "" : "Last Name is required";
+          errors.value.lastName = userDetails.value.lastName ? "" : "Last Name is required";
           break;
         case "mobileNumber":
-          errors.value.mobileNumber = newAddress.value.mobileNumber ? "" : "Mobile Number is required";
+          errors.value.mobileNumber = userDetails.value.mobileNumber ? "" : "Mobile Number is required";
           break;
         case "addressLine1":
           errors.value.addressLine1 = newAddress.value.addressLine1 ? "" : "Address Line 1 is required";
@@ -281,9 +282,9 @@ export default {
 
     const canSubmit = computed(() => {
       return (
-        newAddress.value.firstName &&
-        newAddress.value.lastName &&
-        newAddress.value.mobileNumber &&
+        userDetails.value.firstName &&
+        userDetails.value.lastName &&
+        userDetails.value.mobileNumber &&
         newAddress.value.addressLine1 &&
         newAddress.value.addressLine2 &&
         newAddress.value.countryId &&

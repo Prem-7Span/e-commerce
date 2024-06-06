@@ -99,13 +99,13 @@
         </div>
 
         <div class="flex py-3">
-          <img src="/public/img/tickmark-delivery.svg" alt="" />
+          <img src="/img/tickmark-delivery.svg" alt="" />
           <p class="">Delivery:</p>
           <p class="text-gray-500">24-26 June, 2024</p>
         </div>
 
         <div class="flex py-3">
-          <img src="/public/img/tickmark-delivery.svg" alt="" />
+          <img src="/img/tickmark-delivery.svg" alt="" />
           <p class="">Shipping:</p>
           <p class="text-gray-500">Free for orders above Rs. 500</p>
         </div>
