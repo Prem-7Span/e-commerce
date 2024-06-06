@@ -91,6 +91,6 @@ const goToPayment = () => {
 };
 
 const updateOrderSummary = () => {
-  orderSummaryStore.calculateOrderSummary(cartStore.cartItems); // Calculate order summary based on cart items
+  // orderSummaryStore.calculateOrderSummary(cartStore.cartItems); // Calculate order summary based on cart items
 };
 </script>

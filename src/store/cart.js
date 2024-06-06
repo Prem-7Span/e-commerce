@@ -126,7 +126,8 @@ export const useCartStore = defineStore("cart", {
   },
   getters: {
     cartItemCount: (state) => {
-      return state.cartItems.reduce((total, item) => total + item.quantity, 0);
+      // return state.cartItems.reduce((total, item) => total + item.quantity, 0);
+      return state.cartItems.length;
     },
   },
 });
