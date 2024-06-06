@@ -39,7 +39,7 @@
   
   .sidebar {
     flex: 0 0 215px;
-    height: 720px; /* Adjust the width as needed */
+    height: 100vh; /* Adjust the width as needed */
   }
   
   .router-view {

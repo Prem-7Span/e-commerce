@@ -17,7 +17,9 @@ import profile from "../pages/private/profile/index.vue";
 import dashBoard from "@/pages/private/dashboard/index.vue";
 import Analytics from "@/pages/private/dashboard/analytics.vue";
 import vieworder from "../pages/private/view-orders/index.vue";
-import orders from "../pages/private/dashboard/orders.vue"
+import orders from "../pages/private/dashboard/orders.vue";
+import adminproducts from "../pages/private/dashboard/products.vue"
+import customers from "../pages/private/dashboard/customers.vue";
 const routes = [
   {
     path: "/",
@@ -131,6 +133,21 @@ const routes = [
         name: "Analytics",
         path: "Analytics",
         component: Analytics,
+      },
+      {
+        name: "adminproducts",
+        path: "adminproducts",
+        component: adminproducts,
+      },
+      {
+        name: "orders",
+        path: "orders",
+        component: orders,
+      },
+      {
+        name: "customers",
+        path: "customers",
+        component: customers,
       },
 ]}
 ];
