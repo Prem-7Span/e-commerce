@@ -1,8 +1,5 @@
 <template>
   <div>
-    <div v-if="addressStore.error" class=" mb-2  text-red-500 rounded-md">
-      Please add address
-    </div>
     <div><p class="font-bold text-md">Select the address</p></div>
     <div
       v-for="address in addressStore.addresses"

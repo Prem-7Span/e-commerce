@@ -1,25 +1,28 @@
 <template>
   <div class="rounded-md shadow-md hover:shadow-lg">
     <div class="relative w-92 h-92">
-      <div class="relative img-container">
-        <img
-          v-if="product.images && product.images.length > 0"
-          :src="product.images[0].imageUrl"
-          class="absolute inset-0 object-cover w-full h-full rounded-t-md"
-        />
-        <img
-          v-else
-          src="/img/Black.jpg"
-          class="absolute inset-0 object-cover w-full h-full rounded-t-md"
-        />
-      </div>
-      <div id="wishlist" v-if="!isWishlist">
+      <router-link :to="{ name: 'details', params: { slug: product.slug } }">
+        <div class="relative img-container">
+          <img
+            v-if="product.images && product.images.length > 0"
+            :src="product.images[0].imageUrl"
+            class="absolute inset-0 object-cover w-full h-full rounded-t-md"
+          />
+          <img
+            v-else
+            src="/img/Black.jpg"
+            class="absolute inset-0 object-cover w-full h-full rounded-t-md"
+          />
+        </div>
+      </router-link>
+
+      <div id="wishlist">
         <button
-          @click.stop="handleAddToWishlist"
+          @click.stop="toggleWishlist"
           class="absolute top-0 right-0 px-2 py-2 mt-2 mb-2 mr-2 bg-white rounded-full"
         >
-          <img src="/img/icon.svg" alt="Wishlist Icon" />
-          <!-- clcik in red and dubole click red remove  -->
+          <wishlistFillIcon v-if="product.isInWishlist" class="text-red-500" />
+          <wishlist-icon v-else />
         </button>
       </div>
       <button
@@ -86,8 +89,11 @@
 <script>
 import { ref, computed } from "vue";
 import { useWishlistStore } from "@/store/wishlist";
+import wishlistIcon from "@/components/icons/wishlist-icon.vue";
+import wishlistFillIcon from "@/components/icons/wishlist-fill-icon.vue";
 
 export default {
+  components: { wishlistIcon, wishlistFillIcon },
   props: {
     product: Object,
     isWishlist: {
@@ -111,12 +117,17 @@ export default {
   // })
 
 
-    const handleAddToWishlist = async () => {
+    const toggleWishlist = async () => {
       try {
-        await wishlistStore.addToWishlist(props.product);
-        console.log("Product added to wishlist successfully");
+        if (props.product.isInWishlist) {
+          await wishlistStore.removeFromWishlist(props.product.wishlists[0].id);
+          props.product.isInWishlist = false;
+        } else {
+          await wishlistStore.addToWishlist(props.product);
+          props.product.isInWishlist = true;
+        }
       } catch (error) {
-        console.error("Failed to add product to wishlist:", error.message);
+        console.error("Failed to toggle wishlist status:", error.message);
         if (error.response && error.response.status === 403) {
           console.error("You do not have permission to perform this action.");
         }
@@ -125,9 +136,9 @@ export default {
 
     return {
       defaultVariant,
-      
-      
-      handleAddToWishlist,
+      discount,
+      round,
+      toggleWishlist,
     };
   },
 };

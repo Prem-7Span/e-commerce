@@ -35,7 +35,6 @@
         />
 
         <div
-          @click="tab = 'TheAddress'"
           :class="{
             'bg-primary-300': tab === 'TheAddress',
             'text-white': tab === 'TheAddress',
@@ -46,7 +45,8 @@
           2
         </div>
 
-        <label class="mx-1 mt-2 text-xs font-bold md:mt-3 md:text-base md:px-2"
+        <label
+          class="mx-1 mt-2 text-xs font-bold pointer:none md:mt-3 md:text-base md:px-2"
           >Address</label
         >
         <!-- <hr

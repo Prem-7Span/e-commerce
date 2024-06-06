@@ -3,7 +3,7 @@ import axios from 'axios';
 
 export const useSearchStore = defineStore('search', {
   state: () => ({
-    searchQuery: '',
+    searchQuery: "",
     searchResults: [],
   }),
   actions: {
