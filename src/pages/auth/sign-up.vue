@@ -57,7 +57,7 @@
           v-model="termsAccepted"
           type="checkbox"
           id="terms"
-          class="w-4 h-4 mt-1 accent-indigo-500 focus:ring-2 focus:ring-indigo-500"
+          class="w-4 h-4 mt-1 accent-indigo-500 focus:ring-indigo-500"
         />
         <label for="terms" class="text-sm text-gray-700">
           By continuing you agree to the website's Terms & Conditions and

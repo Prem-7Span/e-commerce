@@ -1,10 +1,16 @@
 <template>
   <div class="cursor-pointer">
-    <div class="flex justify-between px-2 py-4 font-bold md:px-8 md:flex-row md:space-x-4">
+    <div
+      class="flex justify-between px-2 py-4 font-bold md:px-8 md:flex-row md:space-x-4"
+    >
       <div class="flex gap-5">
         <div class="py-2 logo">
           <router-link :to="{ name: 'home' }">
-            <img src="/default/8-orbit-logo-homepage.png" alt="logo" class="max-w-28" />
+            <img
+              src="/default/8-orbit-logo-homepage.png"
+              alt="logo"
+              class="max-w-28"
+            />
           </router-link>
         </div>
         <div class="flex items-center py-2 page">
@@ -31,7 +37,11 @@
       <div class="flex items-center space-x-2">
         <div class="relative">
           <router-link :to="{ name: 'wish-list' }">
-            <img src="/default/like-navbar.svg" class="py-2 sm:inline" alt="like" />
+            <img
+              src="/default/like-navbar.svg"
+              class="py-2 sm:inline"
+              alt="like"
+            />
           </router-link>
           <span v-if="wishlistItemCount > 0"
             class="absolute right-0 inline-block w-4 h-4 text-xs text-center text-white bg-red-600 rounded-full top-2">{{
@@ -39,7 +49,11 @@
         </div>
         <div class="relative">
           <router-link :to="{ name: 'check-out' }">
-            <img src="/default/cart-navbar.svg" class="py-2 sm:inline" alt="cart" />
+            <img
+              src="/default/cart-navbar.svg"
+              class="py-2 sm:inline"
+              alt="cart"
+            />
           </router-link>
           <span v-if="cartItemCount > 0"
             class="absolute right-0 inline-block w-4 h-4 text-xs text-center text-white bg-red-600 rounded-full top-2">{{
@@ -49,10 +63,17 @@
           <div v-if="userDetail">
             <div class="relative inline-block text-left">
               <div>
-                <button @click="toggleDropdown"
-                  class="inline-flex justify-center w-full px-4 py-2 text-sm font-medium text-gray-700"
-                  aria-haspopup="true" aria-expanded="true">
-                  <img src="/home-page/profileicons.svg" alt="Profile" class="w-6 h-6" />
+                <button
+                  @click="toggleDropdown"
+                  class="inline-flex justify-center w-full px-3 py-2 text-sm font-medium text-gray-700"
+                  aria-haspopup="true"
+                  aria-expanded="true"
+                >
+                  <img
+                    src="/public/default/profile-logo.svg"
+                    alt="Profile"
+                    class="w-5 h-6"
+                  />
                 </button>
               </div>
               <div v-show="dropdownOpen"

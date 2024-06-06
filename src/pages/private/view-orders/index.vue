@@ -40,7 +40,7 @@
                 class="grid grid-cols-2 grid-rows-1 md:flex md:items-center md:justify-between md:gap-2 md:mb-2"
               >
                 <div class="flex gap-2">
-                  <div class="text-sm md:mr-2 text-primary-400">Size:</div>
+                  <div class="text-sm text-primary-400">Size:</div>
                   <div class="text-sm font-semibold text-primary-300">
                     {{ order.productSize }}
                   </div>

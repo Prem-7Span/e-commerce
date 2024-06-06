@@ -391,7 +391,10 @@ export default {
     };
 
     onMounted(async () => {
-      filteredProducts.value = await productStore.fetchProductList();
+      filteredProducts.value = await productStore.fetchProductList(
+        localStorage.getItem("token")
+      );
+      console.log("==>Filtered", filteredProducts.value);
       handleResize();
       window.addEventListener("resize", handleResize);
     });
