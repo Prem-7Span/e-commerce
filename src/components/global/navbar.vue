@@ -31,7 +31,7 @@
             >
           </nav>
         </div>
-        <!-- <form
+        <form
           class="flex items-center max-w-md mx-auto"
           @submit.prevent="searchProducts"
         >
@@ -49,7 +49,7 @@
               placeholder="Search"
             />
           </div>
-        </form> -->
+        </form>
       </div>
       <div class="flex items-center space-x-2">
         <div class="relative">
