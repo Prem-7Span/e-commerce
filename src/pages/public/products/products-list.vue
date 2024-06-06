@@ -417,7 +417,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 /* Pagination styles and other necessary styles */
 .pagination-arrow,
 .pagination-button {
