@@ -18,8 +18,9 @@ import dashBoard from "@/pages/private/dashboard/index.vue";
 import Analytics from "@/pages/private/dashboard/analytics.vue";
 import vieworder from "../pages/private/view-orders/index.vue";
 import orders from "../pages/private/dashboard/orders.vue";
-import adminproducts from "../pages/private/dashboard/products.vue"
+import adminproducts from "../pages/private/dashboard/products.vue";
 import customers from "../pages/private/dashboard/customers.vue";
+import addproducts from "../pages/private/dashboard/add-products.vue";
 const routes = [
   {
     path: "/",
@@ -150,6 +151,12 @@ const routes = [
         path: "customers",
         component: customers,
       },
+      {
+        name: "addprodcts",
+        path: "addproducts",
+        component: addproducts,
+      },
+     
 ]}
 ];
 

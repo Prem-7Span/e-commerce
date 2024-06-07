@@ -1,7 +1,14 @@
 <template>
-    <div class="container mx-auto p-4">
-      <h1 class="text-2xl font-semibold mb-4">All Products</h1>
-      <table class="min-w-full bg-white rounded-t-lg">
+    <div class="container mx-auto  p-4">
+      <div class="flex justify-between">
+        <h1 class="text-2xl font-semibold mb-4">All Products</h1>
+        <router-link :to="{name : 'addprodcts'}">
+        <button type="submit" class="bg-primary-300 text-white py-2 px-4 rounded-md hover:bg-gray-800">Add Variant </button>
+        </router-link>
+      </div>
+
+
+      <table class="min-w-full bg-white mt-2 rounded-t-lg">
         <thead>
           <tr>
             <th class="px-4 py-2 border-b-2 border-gray-300 bg-gray-800 text-white">Sr.</th>

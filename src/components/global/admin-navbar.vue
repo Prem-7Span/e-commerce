@@ -39,8 +39,8 @@
           <div class="relative">
             <router-link :to="{ name: 'check-out' }">
               <img
-                src="/default/cart-navbar.svg"
-                class="py-2 sm:inline"
+                src="/admin/navbar notification.svg"
+                class="py-2   sm:inline"
                 alt="cart"
               />
             </router-link>
@@ -63,7 +63,7 @@
                     <img
                       src="/home-page/profileicons.svg"
                       alt="Profile"
-                      class="w-6 h-6"
+                      class="h-7"
                     />
                   </button>
                 </div>
