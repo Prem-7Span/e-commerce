@@ -387,7 +387,9 @@ export default {
     };
 
     onMounted(async () => {
-      filteredProducts.value = await productStore.fetchProductList();
+      filteredProducts.value = await productStore.fetchProductList(
+        localStorage.getItem("token")
+      );
       handleResize();
       window.addEventListener("resize", handleResize);
     });
