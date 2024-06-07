@@ -33,7 +33,7 @@
         class="px-1 md:w-60 w-full xl:w-64 md:!block z-10 md:relative absolute bg-white sidebar"
       >
         <!-- Filters here -->
-        <div class="hidden">
+         <div class="hidden">
           <h2 class="font-bold">Gender</h2>
           <hr class="p-1 px-20" />
           <input
@@ -218,40 +218,44 @@
           </div>
         </div>
 
+
+
         <h2 class="font-bold">Discount</h2>
-        <hr class="p-1 px-20" />
-        <div class="grid grid-cols-2 mb-2 md:block">
-          <div>
-            <input
-              type="radio"
-              id="20"
-              value="20"
-              v-model="productStore.discount"
-            />
-            <label for="20">Upto 20%</label><br />
-            <input
-              type="radio"
-              id="40"
-              value="40"
-              v-model="productStore.discount"
-            />
-            <label for="40">Upto 40%</label><br />
-            <input
-              type="radio"
-              id="60"
-              value="60"
-              v-model="productStore.discount"
-            />
-            <label for="60">Upto 60%</label><br />
-            <input
-              type="radio"
-              id="80"
-              value="80"
-              v-model="productStore.discount"
-            />
-            <label for="80">Upto 80%</label><br />
-          </div>
-        </div>
+    <hr class="p-1 px-20" />
+    <div class="grid grid-cols-2 mb-2 md:block">
+      <div>
+        <input
+          type="radio"
+          id="20"
+          value="20"
+          v-model="productStore.discount"
+        />
+        <label for="20">Upto 20%</label><br />
+        <input
+          type="radio"
+          id="40"
+          value="40"
+          v-model="productStore.discount"
+        />
+        <label for="40">Upto 40%</label><br />
+        <input
+          type="radio"
+          id="60"
+          value="60"
+          v-model="productStore.discount"
+        />
+        <label for="60">Upto 60%</label><br />
+        <input
+          type="radio"
+          id="80"
+          value="80"
+          v-model="productStore.discount"
+        />
+        <label for="80">Upto 80%</label><br />
+      </div>
+</div>
+
+
 
         <div
           class="sticky bottom-0 p-10 text-center bg-white w-72 left-9 right-9 md:hidden"
@@ -265,7 +269,7 @@
         </div>
 
         <div
-          class="sticky bottom-0 hidden w-full p-10 text-center bg-white left-9 right-9 md:block"
+          class="sticky bottom-0 hidden p-10 text-center bg-white w-full left-9 right-9 md:block"
         >
           <button
             @click="applyFilters"
@@ -319,7 +323,7 @@ import { useProductStore } from "/src/store/product.js";
 import ProductCard from "@/components/card/product-card.vue";
 import Breadcrumb from "@/components/global/bread-crumb.vue";
 import MultiRangeSlider from "multi-range-slider-vue";
-import { useSearchStore } from "../../../store/search.js"; // Corrected import statement
+import { useSearchStore } from "../../../store/search.js";  // Corrected import statement
 
 export default {
   components: {
@@ -329,7 +333,7 @@ export default {
   },
   setup() {
     const productStore = useProductStore();
-    const searchStore = useSearchStore(); // Use the search store
+    const searchStore = useSearchStore();  // Use the search store
     const sidebar = ref(false);
     const isMobile = ref(false);
     const filteredProducts = ref([]);
@@ -372,12 +376,12 @@ export default {
 
     const clearFilters = async () => {
       productStore.productData = [];
-      productStore.categoryName = [];
+      productStore.categoryName = []; 
       productStore.parentCategory = [];
       productStore.selectedPrice = [];
       productStore.color = [];
       productStore.size = [];
-      productStore.discount = [];
+      productStore.discount=[];
       productStore.minPrice = 0;
       productStore.maxPrice = 1500;
       productStore.fetchProductList().then(() => {
@@ -402,7 +406,7 @@ export default {
 
     const paginatedProducts = computed(() => {
       if (searchStore.searchResults.length > 0) {
-        return searchStore.searchResults;
+        return searchStore.searchResults; 
       } else {
         const start = (currentPage.value - 1) * productsPerPage;
         const end = start + productsPerPage;
@@ -446,8 +450,8 @@ export default {
       sidebar,
       isMobile,
       productStore,
-      searchStore, // Expose searchStore
-      searchProducts, // Expose searchProducts
+      searchStore,  // Expose searchStore
+      searchProducts,  // Expose searchProducts
       filteredProducts,
       handleResize,
       openSidebar,
@@ -467,7 +471,10 @@ export default {
 };
 </script>
 
-<style>
+
+
+<style >
+
 /* Pagination styles and other necessary styles */
 .pagination-arrow,
 .pagination-button {
@@ -506,12 +513,12 @@ export default {
   border-radius: none;
   box-shadow: none;
   border: none;
-  color: #2f2f2f;
+  color: #2f2f2f
 }
-.multi-range-slider .bar-inner-left {
-  background-color: #2f2f2f;
+.multi-range-slider .bar-inner-left{
+  background-color: #2f2f2f ;
 }
-.multi-range-slider .bar-inner-right {
-  background-color: #2f2f2f;
+.multi-range-slider .bar-inner-right{
+  background-color: #2f2f2f ;
 }
 </style>

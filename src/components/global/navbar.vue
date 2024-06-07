@@ -14,44 +14,25 @@
           </router-link>
         </div>
         <div class="flex items-center py-2 page">
-          <nav
-            class="flex-col hidden space-x-4 space-y-4 md:flex md:flex-row md:space-y-0 md:space-x-4"
-          >
-            <router-link
-              :to="{ name: 'products', query: { gender: 'Men' } }"
+          <nav class="flex-col hidden  active:underline space-x-4 space-y-4 md:flex md:flex-row md:space-y-0 md:space-x-4">
+            <router-link :to="{ name: 'products', query: { gender: 'Men' } }"
               class="text-gray-600 hover:text-gray-800 hover:underline"
-              @click.prevent="filterByGender('Men')"
-              >Men</router-link
-            >
-            <router-link
-              :to="{ name: 'products', query: { gender: 'Women' } }"
+              @click.prevent="filterByGender('Men')">Men</router-link>
+            <router-link :to="{ name: 'products', query: { gender: 'Women' } }"
               class="text-gray-600 hover:text-gray-800 hover:underline"
-              @click.prevent="filterByGender('Women')"
-              >Women</router-link
-            >
+              @click.prevent="filterByGender('Women')">Women</router-link>
           </nav>
         </div>
-        <!-- Search form can be uncommented and used if needed -->
-        <form
-          class="flex items-center max-w-md mx-auto"
-          @submit.prevent="searchProducts"
-        >
-          <div class="relative">
-            <div
-              class="absolute flex items-center pointer-events-none md:inset-y-0 inset-y-1 start-0 ps-3"
-            >
-              <img src="/public/home-page/Vector.svg" alt="Search Icon" />
-            </div>
-            <input
-              type="search"
-              id="default-search"
-              v-model="searchQuery"
-              @change="getSearchResult"
-              class="hidden p-2 pl-8 mb-4 border border-gray-300 rounded-md shadow-sm cursor-pointer sm:inline md:mb-0 md:w-96 focus:outline-none focus:ring focus:ring-blue-500 focus:ring-opacity-50"
-              placeholder="Search"
-            />
-          </div>
-        </form>
+        <form class="flex items-center max-w-md mx-auto" @submit.prevent="searchProducts">
+    <div class="relative">
+      <div class="absolute flex items-center pointer-events-none md:inset-y-0 inset-y-1 start-0 ps-3">
+        <img src="/public/home-page/Vector.svg" alt="Search Icon" />
+      </div>
+      <input type="search" id="default-search" v-model="searchQuery" @change="getSearchResult"
+        class="hidden p-2 pl-8 mb-4 border border-gray-300 rounded-md shadow-sm cursor-pointer sm:inline md:mb-0 md:w-96 focus:outline-none focus:ring focus:ring-blue-500 focus:ring-opacity-50"
+        placeholder="Search" />
+    </div>
+  </form>
       </div>
       <div class="flex items-center space-x-2">
         <div class="relative">
@@ -99,35 +80,22 @@
                   />
                 </button>
               </div>
-              <div
-                v-show="dropdownOpen"
+              <div v-show="dropdownOpen"
                 class="absolute right-0 z-10 w-56 mt-2 origin-top-right bg-white border border-gray-200 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
-                role="menu"
-                aria-orientation="vertical"
-                aria-labelledby="options-menu"
-              >
+                role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
                 <div class="py-1">
-                  <router-link
-                    :to="{ name: 'editProfile' }"
-                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                    role="menuitem"
-                    @click="closeDropdown"
-                  >
+                  <router-link :to="{ name: 'editProfile' }"
+                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem"
+                    @click="closeDropdown">
                     Edit Profile
                   </router-link>
-                  <router-link
-                    :to="{ name: 'vieworder' }"
-                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                    role="menuitem"
-                    @click="closeDropdown"
-                  >
+                  <router-link :to="{ name: 'vieworder' }"
+                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem"
+                    @click="closeDropdown">
                     View Order
                   </router-link>
-                  <button
-                    @click="logoutAndCloseDropdown"
-                    class="block w-full px-4 py-2 text-sm text-left text-gray-700 hover:bg-gray-100"
-                    role="menuitem"
-                  >
+                  <button @click="logoutAndCloseDropdown"
+                    class="block w-full px-4 py-2 text-sm text-left text-gray-700 hover:bg-gray-100" role="menuitem">
                     Logout
                   </button>
                 </div>
@@ -144,14 +112,14 @@
         </div>
       </div>
     </div>
-    <div v-if="searchResults.length > 0">
+    <!-- <div v-if="searchResults.length > 0">
       <h2 class="mt-4 text-xl font-bold">Search Results</h2>
       <ul>
         <li v-for="result in searchResults" :key="result.id">
           {{ result.name }}
         </li>
       </ul>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -160,7 +128,7 @@ import { useUserStore } from "@/store/user";
 import { useCartStore } from "@/store/cart.js";
 import { useWishlistStore } from "@/store/wishlist.js";
 import { useProductStore } from "@/store/product.js";
-import { useSearchStore } from "@/store/search.js";
+import { useSearchStore } from "@/store/search.js"; // Import the search store
 import axios from "axios";
 import { ref } from "vue";
 
@@ -170,7 +138,7 @@ export default {
     const cartStore = useCartStore();
     const wishlistStore = useWishlistStore();
     const productStore = useProductStore();
-    const searchStore = useSearchStore();
+    const searchStore = useSearchStore(); // Initialize the search store
 
     const filterByGender = async (gender) => {
       productStore.parentCategory = [gender];
@@ -187,10 +155,9 @@ export default {
   },
   data() {
     return {
+      searchQuery: '',
       dropdownOpen: false,
       token: localStorage.getItem("token"),
-      searchQuery: "",
-      searchResults: [],
       windowLocationPathname: window.location.pathname,
     };
   },
@@ -211,7 +178,7 @@ export default {
     },
     async fetchSearch() {
       await this.searchStore.searchProducts(this.searchQuery);
-      this.$router.push({ name: "products" });
+      this.$router.push({ name: 'products' });
     },
     customDebounce(func, delay = 500) {
       let timeout;

@@ -26,9 +26,9 @@
         </button>
       </div>
       <button
-        class="absolute top-0 left-0 px-3 py-3 m-1 mx-2 mt-2 mb-2 text-white rounded-lg md:mx-3 bg-primary-300 md:p-2 md:w-20 md:m-6"
+        class="absolute top-0 left-0 px-3 py-3 m-1 mx-2 mt-2 mb-2 text-white rounded-lg md:mx-3 bg-primary-300 md:p-1.5 md:w-15 md:m-6"
       >
-        {{ round(discount) }}%
+        {{ defaultVariant.discount }}%
       </button>
     </div>
     <div class="p-3">
@@ -37,7 +37,7 @@
           <div>
             <a
               href=""
-              class="text-xl font-normal text-black no-underline line-clamp-1"
+              class="text-md font-normal text-black no-underline line-clamp-1"
             >
               {{ product.name }}
             </a>
@@ -48,7 +48,7 @@
         class="flex flex-col items-start justify-between gap-1 mt-2 sm:gap-4 md:mt-0"
       >
         <div class="flex flex-row items-center justify-center gap-2">
-          <div class="flex gap-1 text-2xl font-semibold">
+          <div class="flex gap-1 text-xl font-semibold">
             <p>₹{{ defaultVariant.price }}</p>
             <p
               class="text-lg font-semibold text-primary-300 md:text-lg xl:text-2xl"
@@ -108,20 +108,14 @@ export default {
       if (!props.product || !props.product.productVariants) {
         return null;
       }
+      console.log(defaultVariant);
       return props.product.productVariants[0];
     });
 
-    const discount = computed(() => {
-      const variant = defaultVariant.value;
-      if (!variant) {
-        return 0;
-      }
-      return (
-        ((variant.regularPrice - variant.price) / variant.regularPrice) * 100
-      );
-    });
+  // const discount = computed (()=>{
+  //   if (!props)
+  // })
 
-    const round = (value) => Math.round(value);
 
     const toggleWishlist = async () => {
       try {
@@ -142,14 +136,9 @@ export default {
 
     return {
       defaultVariant,
-      discount,
-      round,
       toggleWishlist,
     };
   },
 };
 </script>
 
-<style scoped>
-/* Add any specific styles for the product card component here */
-</style>

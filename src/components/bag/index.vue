@@ -2,7 +2,7 @@
   <div>
     <div class="grid grid-cols-1 grid-rows-1 gap-8 mx-3 md:grid-cols-2">
       <div
-        class="grid grid-cols-1 grid-rows-1 gap-8 mt-5 md:grid-cols-1 md:grid-rows-1 md:w-auto md:gap-8"
+        class="grid grid-cols-1 grid-rows-1 gap-8 mt-5  md:grid-cols-1 md:grid-rows-1 md:w-auto md:gap-8"
       >
         <div v-if="cartStore.loading" class="text-center">Loading...</div>
         <div v-else-if="cartStore.error" class="text-center text-red-500">

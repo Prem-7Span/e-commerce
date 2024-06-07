@@ -12,29 +12,22 @@ export const useProductStore = defineStore("product", {
     maxPrice: 1500,
     color: [],
     size: [],
+    discount:[],
     wishlist: [], // Add wishlist state
   }),
   actions: {
-    async fetchProductList(token) {
-      console.log("==>token", token);
+    async fetchProductList() {
       try {
-        // if (this.productData.length > 0) {
-        //   return this.productData;
-        // }
-
-        const headers = token ? { Authorization: `Bearer ${token}` } : {};
-        const response = await axios.get(`${baseURL}/v1/product`, { headers });
-        console.log("==>response", response);
-
+        if (this.productData.length > 0) {
+          return this.productData;
+        }
+        const response = await axios.get(`${baseURL}/v1/product`);
         this.productData = response.data;
-        console.log("==>ProductData", this.productData);
         return this.productData;
       } catch (error) {
-        console.log("==>Error", error);
         console.error("Error fetching products:", error);
       }
     },
-
     async applyFiltersAndFetch() {
       try {
         const response = await axios.get(`${baseURL}/v1/product`, {
@@ -45,6 +38,7 @@ export const useProductStore = defineStore("product", {
             size: this.size,
             minPrice: this.minPrice,
             maxPrice: this.maxPrice,
+            discount:this.discount
           },
         });
         this.productData = response.data;
@@ -60,6 +54,7 @@ export const useProductStore = defineStore("product", {
       this.size = [];
       this.minPrice = 0;
       this.maxPrice = 1500;
+      this.discount = [];
       this.fetchProductList();
     },
     async addToWishlist(product) {
