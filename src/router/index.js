@@ -128,10 +128,11 @@ const routes = [
   {
     path: "/admin",
     component: admin,
+    redirect: { name: "analytics" },
     children: [
       {
-        name: "Analytics",
-        path: "Analytics",
+        name: "analytics",
+        path: "analytics",
         component: Analytics,
       },
       {
