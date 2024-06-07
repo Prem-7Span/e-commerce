@@ -350,7 +350,7 @@ export default {
       sidebar.value = !sidebar.value;
     };
 
-    const updateValues = (value) => {
+    const UpdateValues = (value) => {
       productStore.minPrice = value.minValue;
       productStore.maxPrice = value.maxValue;
     };
@@ -453,7 +453,7 @@ export default {
       filteredProducts,
       handleResize,
       openSidebar,
-      updateValues,
+      UpdateValues,
       applyFilters,
       applyFiltersAndCloseSidebar,
       clearFilters,
