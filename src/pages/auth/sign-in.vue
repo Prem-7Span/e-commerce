@@ -44,9 +44,7 @@
       >
         Continue
       </button>
-      <div id="recaptcha-container"></div>
-
-      <div class="mt-6 text-sm text-center text-gray-500">
+      <div v-if="!isAdminRoute" class="mt-6 text-sm text-center text-gray-500">
         Don’t have an account?
         <router-link :to="{ name: 'SignUp' }" class="text-primary-200"
           >Sign Up</router-link
@@ -59,7 +57,7 @@
 <script>
 import axios from "axios";
 import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
-import authentication from "@/plugins/firebase.js"; // Assuming a Firebase authentication config
+import authentication from "@/plugins/firebase.js";
 import { useToast } from "vue-toastification";
 
 export default {
@@ -82,6 +80,12 @@ export default {
     canSubmit() {
       return !this.errors.phoneNumber && this.termsAccepted;
     },
+    isAdminRoute() {
+      return this.$route.path.includes("/admin");
+    },
+  },
+  mounted() {
+    // No need to check here, isAdminRoute is reactive
   },
   methods: {
     validateField(field) {
@@ -123,14 +127,26 @@ export default {
         if (response.status === 200) {
           const token = response.data.userData.accessToken;
           localStorage.setItem("token", token);
-          this.submitForm();
+
+          if (
+            this.isAdminRoute &&
+            response.data.userData.role.roleName === "System Admin"
+          ) {
+            this.$router.push({ name: "analytics" });
+          } else {
+            this.submitForm();
+          }
         } else {
           this.toast.error("Account not available, Please sign up");
-          this.$router.push({ name: "SignUp" });
+          if (!this.isAdminRoute) {
+            this.$router.push({ name: "SignUp" });
+          }
         }
       } catch (error) {
         this.toast.error("Account not available, please sign up");
-        this.$router.push({ name: "SignUp" });
+        if (!this.isAdminRoute) {
+          this.$router.push({ name: "SignUp" });
+        }
         console.error("Error checking phone number availability:", error);
       }
     },
@@ -148,7 +164,7 @@ export default {
           this.recaptchaVerifier
         );
         this.$router.push({
-          name: "VerificationOtp", // Assuming a route for verification
+          name: "VerificationOtp",
           query: { obj: phoneNumberVerification.verificationId },
         });
       } catch (error) {
