@@ -126,6 +126,9 @@ export default {
     const toggleWishlist = async () => {
       try {
         if (props.product.isInWishlist) {
+          console.log("wdqwdqwdqwd1", props.product);
+          console.log("wdqwdqwdqwd2", props.product.wishlists);
+          console.log("wdqwdqwdqwd3", props.product.wishlists[0].id);
           await wishlistStore.removeFromWishlist(props.product.wishlists[0].id);
           props.product.isInWishlist = false;
         } else {
