@@ -1,79 +1,79 @@
 <template>
   <div class="p-4 px-0">
     <h1 class="text-2xl font-bold text-primary-300 mb-4">Add Variant</h1>
-    <form @submit.prevent="handleSubmit" class="space-y-4">
-      <!-- Loop through each variant and generate input fields -->
-      <div v-for="(variant, index) in state.variants" :key="index" class="variant-group space-y-4 mb-4">
-        <!-- Size field -->
-        <div class="flex items-center space-x-4">
-          <label :for="'size-' + index" class="text-sm mb-1 w-32">Size</label>
-          <select :id="'size-' + index" v-model="variant.size" class="flex-grow p-2 border rounded-md">
-            <option value="" disabled selected>Select</option>
-            <!-- Add options here -->
-          </select>
-        </div>
-
-        <!-- Regular Price field -->
-        <div class="flex items-center space-x-4">
-          <label :for="'regularPrice-' + index" class="text-sm mb-1 w-32">Regular Price</label>
-          <input type="number" :id="'regularPrice-' + index" v-model="variant.regularPrice" class="flex-grow p-2 border rounded-md">
-        </div>
-
-        <!-- Current Price field -->
-        <div class="flex items-center space-x-4">
-          <label :for="'currentPrice-' + index" class="text-sm mb-1 w-32">Current Price</label>
-          <input type="number" :id="'currentPrice-' + index" v-model="variant.currentPrice" class="flex-grow p-2 border rounded-md">
-        </div>
-
-        <!-- Stock field -->
-        <div class="flex items-center space-x-4">
-          <label :for="'stock-' + index" class="text-sm mb-1 w-32">Stock</label>
-          <select :id="'stock-' + index" v-model="variant.stock" class="flex-grow p-2 border rounded-md">
-            <option value="" disabled selected>Select</option>
-            <!-- Add options here -->
-          </select>
-        </div>
+    <form s class="space-y-4">
+      <div class="flex items-center space-x-4">
+        <label for="size" class="text-sm mb-1 w-32">Size</label>
+        <select id="size" v-model="newVariant.size" class="flex-grow p-2 border rounded-md">
+          <option value="" disabled selected>Select</option>
+          <!-- Add options here -->
+          <option value="S">Small</option>
+          <option value="M">Medium</option>
+          <option value="L">Large</option>
+        </select>
       </div>
 
-      <!-- Button to add a new variant -->
+      <div class="flex items-center space-x-4">
+        <label for="regularPrice" class="text-sm mb-1 w-32">Regular Price</label>
+        <input type="number" id="regularPrice" v-model="newVariant.regularPrice" class="flex-grow p-2 border rounded-md">
+      </div>
+
+      <div class="flex items-center space-x-4">
+        <label for="currentPrice" class="text-sm mb-1 w-32">Current Price</label>
+        <input type="number" id="currentPrice" v-model="newVariant.currentPrice" class="flex-grow p-2 border rounded-md">
+      </div>
+
+      <div class="flex items-center space-x-4">
+        <label for="stock" class="text-sm mb-1 w-32">Stock</label>
+        <select id="stock" v-model="newVariant.stock" class="flex-grow p-2 border rounded-md">
+          <option value="" disabled selected>Select</option>
+          <!-- Add options here -->
+          <option value="InStock">In Stock</option>
+          <option value="OutOfStock">Out of Stock</option>
+        </select>
+      </div>
+
       <div class="flex space-x-4">
         <button type="button" @click="addNewVariant" class="p-2 bg-primary-300 text-white rounded-md">Add Variant</button>
       </div>
     </form>
+
+    <div class="mt-4">
+      <h2 class="text-xl font-bold text-primary-300 mb-2">New Variants</h2>
+      <ul>
+        <li v-for="(variant, index) in variants" :key="index" class="mb-2 p-2 rounded-md border shadow-sm variant-item flex gap-2">
+          <span class="block text-lg"><strong >Size:</strong> {{ variant.size }}</span>
+          <span class="block text-lg"><strong>Regular Price:</strong> {{ variant.regularPrice }}</span>
+          <span class="block text-lg"><strong>Current Price:</strong> {{ variant.currentPrice }}</span>
+          <span class="block text-lg"><strong>Stock:</strong> {{ variant.stock }}</span>
+        </li>
+      </ul>
+    </div>
   </div>
 </template>
 
 <script setup>
-import { reactive } from 'vue';
+import { reactive, ref } from 'vue';
 
-// Reactive object to hold the variants array
-const state = reactive({
-  variants: [
-    {
-      size: '',
-      regularPrice: '',
-      currentPrice: '',
-      stock: '',
-    },
-  ],
+const newVariant = reactive({
+  size: '',
+  regularPrice: '',
+  currentPrice: '',
+  stock: ''
 });
 
-// Method to add a new variant object to the variants array
-function addNewVariant() {
-  state.variants.push({
-    size: '',
-    regularPrice: '',
-    currentPrice: '',
-    stock: '',
-  });
-}
+const variants = ref([]);
 
-// Optional: method to handle form submission
-function handleSubmit() {
-  console.log('Form submitted with:', state.variants);
-}
+const addNewVariant = () => {
+  if (newVariant.size && newVariant.regularPrice && newVariant.currentPrice && newVariant.stock) {
+    variants.value.push({ ...newVariant });
+    newVariant.size = '';
+    newVariant.regularPrice = '';
+    newVariant.currentPrice = '';
+    newVariant.stock = '';
+  } else {
+    alert('Please fill in all fields.');
+  }
+};
 </script>
 
-<style>
-/* Add your styles here if needed */
-</style>

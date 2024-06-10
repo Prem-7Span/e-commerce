@@ -75,7 +75,6 @@
           <button type="button" @click="" class="bg-white text-parimary-300 border py-2 px-4 rounded-md hover:bg-gray-100">Cancel</button>
         </div>
       </form>
-
     </div>
   </template>
   

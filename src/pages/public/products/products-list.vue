@@ -94,7 +94,7 @@
             :label="true"
             :minValue="productStore.minPrice"
             :maxValue="productStore.maxPrice"
-            @input="UpdateValues"
+            @input="updateValues"
           />
           <div class="flex justify-between">
             <p>Min</p>
