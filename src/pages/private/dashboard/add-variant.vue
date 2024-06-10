@@ -3,8 +3,8 @@
     <h1 class="text-2xl font-bold text-primary-300 mb-4">Add Variant</h1>
     <form s class="space-y-4">
       <div class="flex items-center space-x-4">
-        <label for="size" class="text-sm mb-1 w-32">Size</label>
-        <select id="size" v-model="newVariant.size" class="flex-grow p-2 border rounded-md">
+        <label for="size" class="text-lg mb-1 w-32">Size</label>
+        <select id="size" v-model="newVariant.size" class="flex w-1/2 p-2 border rounded-md">
           <option value="" disabled selected>Select</option>
           <!-- Add options here -->
           <option value="S">Small</option>
@@ -14,18 +14,18 @@
       </div>
 
       <div class="flex items-center space-x-4">
-        <label for="regularPrice" class="text-sm mb-1 w-32">Regular Price</label>
-        <input type="number" id="regularPrice" v-model="newVariant.regularPrice" class="flex-grow p-2 border rounded-md">
+        <label for="regularPrice" class="text-lg mb-1 w-32">Regular Price</label>
+        <input type="number" id="regularPrice" v-model="newVariant.regularPrice" class="flex w-1/2 p-2 border rounded-md">
       </div>
 
       <div class="flex items-center space-x-4">
-        <label for="currentPrice" class="text-sm mb-1 w-32">Current Price</label>
-        <input type="number" id="currentPrice" v-model="newVariant.currentPrice" class="flex-grow p-2 border rounded-md">
+        <label for="currentPrice" class="text-lg mb-1 w-32">Current Price</label>
+        <input type="number" id="currentPrice" v-model="newVariant.currentPrice" class="flex w-1/2 p-2 border rounded-md">
       </div>
 
       <div class="flex items-center space-x-4">
-        <label for="stock" class="text-sm mb-1 w-32">Stock</label>
-        <select id="stock" v-model="newVariant.stock" class="flex-grow p-2 border rounded-md">
+        <label for="stock" class="text-lg mb-1 w-32">Stock</label>
+        <select id="stock" v-model="newVariant.stock" class="flex- w-1/2 p-2 border rounded-md">
           <option value="" disabled selected>Select</option>
           <!-- Add options here -->
           <option value="InStock">In Stock</option>
@@ -61,7 +61,6 @@ const newVariant = reactive({
   currentPrice: '',
   stock: ''
 });
-
 const variants = ref([]);
 
 const addNewVariant = () => {
