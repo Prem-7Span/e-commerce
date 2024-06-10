@@ -31,6 +31,7 @@
             >
           </nav>
         </div>
+        <!-- Search form can be uncommented and used if needed -->
         <form
           class="flex items-center max-w-md mx-auto"
           @submit.prevent="searchProducts"
@@ -45,6 +46,7 @@
               type="search"
               id="default-search"
               v-model="searchQuery"
+              @change="getSearchResult"
               class="hidden p-2 pl-8 mb-4 border border-gray-300 rounded-md shadow-sm cursor-pointer sm:inline md:mb-0 md:w-96 focus:outline-none focus:ring focus:ring-blue-500 focus:ring-opacity-50"
               placeholder="Search"
             />
@@ -86,14 +88,14 @@
               <div>
                 <button
                   @click="toggleDropdown"
-                  class="inline-flex justify-center w-full px-4 py-2 text-sm font-medium text-gray-700"
+                  class="inline-flex justify-center w-full px-3 py-2 text-sm font-medium text-gray-700"
                   aria-haspopup="true"
                   aria-expanded="true"
                 >
                   <img
-                    src="/home-page/profileicons.svg"
+                    src="/public/default/profile-logo.svg"
                     alt="Profile"
-                    class="w-6 h-6"
+                    class="w-5 h-6"
                   />
                 </button>
               </div>
@@ -109,6 +111,7 @@
                     :to="{ name: 'editProfile' }"
                     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                     role="menuitem"
+                    @click="closeDropdown"
                   >
                     Edit Profile
                   </router-link>
@@ -116,11 +119,12 @@
                     :to="{ name: 'vieworder' }"
                     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                     role="menuitem"
+                    @click="closeDropdown"
                   >
-                    View order
+                    View Order
                   </router-link>
                   <button
-                    @click="logout"
+                    @click="logoutAndCloseDropdown"
                     class="block w-full px-4 py-2 text-sm text-left text-gray-700 hover:bg-gray-100"
                     role="menuitem"
                   >
@@ -154,8 +158,9 @@
 <script>
 import { useUserStore } from "@/store/user";
 import { useCartStore } from "@/store/cart.js";
-import { useWishlistStore } from "@/store/wishlist.js"; // Import the wishlist store
+import { useWishlistStore } from "@/store/wishlist.js";
 import { useProductStore } from "@/store/product.js";
+import { useSearchStore } from "@/store/search.js";
 import axios from "axios";
 import { ref } from "vue";
 
@@ -163,22 +168,22 @@ export default {
   setup() {
     const userStore = useUserStore();
     const cartStore = useCartStore();
-    const wishlistStore = useWishlistStore(); // Use the wishlist store
+    const wishlistStore = useWishlistStore();
     const productStore = useProductStore();
+    const searchStore = useSearchStore();
 
     const filterByGender = async (gender) => {
       productStore.parentCategory = [gender];
       await productStore.applyFiltersAndFetch();
-      // Navigate to the products page with the appropriate query parameter after fetching data
       window.location.href = `/products?gender=${gender}`;
     };
 
     if (localStorage.getItem("token")) {
-      wishlistStore.fetchWishlist(); // Fetch wishlist on login
-      cartStore.fetchCart(); // Fetch cart on login
+      wishlistStore.fetchWishlist();
+      cartStore.fetchCart();
     }
 
-    return { userStore, cartStore, wishlistStore, filterByGender };
+    return { userStore, cartStore, wishlistStore, filterByGender, searchStore };
   },
   data() {
     return {
@@ -197,45 +202,45 @@ export default {
       return this.cartStore.cartItemCount;
     },
     wishlistItemCount() {
-      return this.wishlistStore.wishlistCount; // Access the wishlist item count from the store
-    },
-  },
-  watch: {
-    userDetail(nv) {
-      if (nv) {
-        // console.log("New Value : ", nv);
-      }
+      return this.wishlistStore.wishlistCount;
     },
   },
   methods: {
+    getSearchResult() {
+      this.customDebounce(this.fetchSearch, 800);
+    },
+    async fetchSearch() {
+      await this.searchStore.searchProducts(this.searchQuery);
+      this.$router.push({ name: "products" });
+    },
+    customDebounce(func, delay = 500) {
+      let timeout;
+      clearTimeout(timeout);
+      timeout = setTimeout(() => {
+        func();
+      }, delay);
+    },
     toggleDropdown() {
       this.dropdownOpen = !this.dropdownOpen;
-      // console.log("dropdownOpen", this.dropdownOpen);
+    },
+    closeDropdown() {
+      this.dropdownOpen = false;
+    },
+    logoutAndCloseDropdown() {
+      this.logout();
+      this.closeDropdown();
     },
     logout() {
       localStorage.removeItem("token");
       localStorage.removeItem("user");
-      this.userStore.setToken(null); // Update token in store
-      this.wishlistStore.clearWishlist(); // Clear the wishlist on logout
+      this.userStore.setToken(null);
+      this.wishlistStore.clearWishlist();
       this.cartStore.clearCart();
       this.$router.push({ name: "home" });
     },
-    async searchProducts() {
-      if (this.searchQuery.trim() !== "") {
-        try {
-          const response = await axios.get(
-            `https://api.8orbit.shop/api/v1/product?search=${this.searchQuery}`
-          );
-          this.searchResults = response.data;
-        } catch (error) {
-          console.error("Error fetching search results:", error);
-        }
-      }
+    searchProducts() {
+      this.searchStore.searchProducts();
     },
   },
 };
 </script>
-
-<style scoped>
-/* Add any scoped styles here */
-</style>
