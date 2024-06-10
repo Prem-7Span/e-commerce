@@ -18,9 +18,9 @@ export const useProductStore = defineStore("product", {
     async fetchProductList(token) {
       console.log("==>token", token);
       try {
-        // if (this.productData.length > 0) {
-        //   return this.productData;
-        // }
+        if (this.productData.length > 0) {
+          return this.productData;
+        }
 
         const headers = token ? { Authorization: `Bearer ${token}` } : {};
         const response = await axios.get(`${baseURL}/v1/product`, { headers });
