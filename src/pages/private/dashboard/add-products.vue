@@ -67,7 +67,15 @@
           </label>
         </div>
       <AddVariant />
+      <div class="flex space-x-4">
+            <router-link :to="{name : 'adminproducts'}">
+          <button type="submit" class="bg-primary-300 text-white py-2 px-4 rounded-md hover:bg-gray-800">Save </button>
+          </router-link>
+          
+          <button type="button" @click="" class="bg-white text-parimary-300 border py-2 px-4 rounded-md hover:bg-gray-100">Cancel</button>
+        </div>
       </form>
+
     </div>
   </template>
   

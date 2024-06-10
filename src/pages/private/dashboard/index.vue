@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
   <div class="flex">
     <side-bar @update:activeComponent="updateActiveComponent" />
     <component :is="activeComponent" class="flex-grow" />
@@ -16,4 +16,5 @@ const activeComponent = ref("Analytics");
 function updateActiveComponent(component) {
   activeComponent.value = component;
 }
-</script>
+</script> -->
+<template></template>
