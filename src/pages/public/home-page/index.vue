@@ -8,11 +8,17 @@
     </router-link>
     <div class="container">
       <div class="sm:py-9">
-        <div class="py-5 text-3xl"><h3>Shop By Category</h3></div>
-        <router-link :to="{ name: 'list' }">
-          <div
-            id="category"
-            class="flex space-x-1 overflow-hidden md:space-x-3 bg-primary-offBlack rounded-3xl"
+        <div class="py-5 text-3xl">
+          <h3>Shop By Category</h3>
+        </div>
+
+        <div
+          id="category"
+          class="flex space-x-1 overflow-hidden md:space-x-3 bg-primary-offBlack rounded-3xl"
+        >
+          <router-link
+            :to="{ name: 'products', query: { Categories: 'Pants' } }"
+            @click.prevent="filterByCategory('Pants')"
           >
             <div class="relative items-end bg-overlay">
               <img
@@ -25,7 +31,12 @@
                 <p class="text-xs text-white sm:text-2xl">Shop Now</p>
               </div>
             </div>
-            <div class="items-end space-y-1 md:space-y-3">
+          </router-link>
+          <div class="items-end space-y-1 md:space-y-3">
+            <router-link
+              :to="{ name: 'products', query: { Categories: 'trousers' } }"
+              @click.prevent="filterByCategory('trousers')"
+            >
               <div class="relative bg-overlay">
                 <img src="/home-page/category-img-2.png" alt="card-2" />
                 <div class="absolute z-20 space-y-3 bottom-10 left-5">
@@ -33,42 +44,69 @@
                   <p class="text-xs text-white sm:text-2xl">Shop Now</p>
                 </div>
               </div>
-              <div class="relative bg-overlay">
-                <img src="/home-page/category-img-3.png" alt="card-3" />
-                <div class="absolute z-20 space-y-3 bottom-10 left-5">
-                  <h2 class="text-base text-white sm:text-5xl">T-shirts</h2>
-                  <p class="text-xs text-white sm:text-2xl">Shop Now</p>
+            </router-link>
+            <div class="items-end space-y-1 md:space-y-3">
+              <router-link
+                :to="{ name: 'products', query: { Categories: 't-shirt' } }"
+                @click.prevent="filterByCategory('t-shirt')"
+              >
+                <div class="relative bg-overlay">
+                  <img src="/home-page/category-img-3.png" alt="card-3" />
+                  <div class="absolute z-20 space-y-3 bottom-10 left-5">
+                    <h2 class="text-base text-white sm:text-5xl">T-shirt</h2>
+                    <p class="text-xs text-white sm:text-2xl">Shop Now</p>
+                  </div>
                 </div>
-              </div>
+              </router-link>
             </div>
           </div>
-        </router-link>
+        </div>
       </div>
 
       <div class="sm:pt-9">
-        <div class="py-5 text-3xl"><h3>Deal of the day</h3></div>
-        <router-link :to="{ name: 'list' }">
-          <div
-            id="category"
-            class="flex space-x-1 overflow-hidden md:space-x-3 bg-primary-offBlack rounded-3xl"
-          >
-            <div id="col-1" class="space-y-1 md:space-y-3">
+        <div class="py-5 text-3xl">
+          <h3>Deal of the day</h3>
+        </div>
+
+        <div
+          id="category"
+          class="flex space-x-1 overflow-hidden md:space-x-3 bg-primary-offBlack rounded-3xl"
+        >
+          <div id="col-1" class="space-y-1 md:space-y-3">
+            <router-link
+              :to="{ name: 'products', query: { Discount: '20' } }"
+              @click.prevent="filterByDiscount('20')"
+            >
               <div class="relative bg-overlay">
                 <img src="/home-page/deals-img-1.png" alt="card-1" />
                 <div class="absolute z-20 space-y-3 bottom-10 left-5">
-                  <h2 class="text-base text-white sm:text-5xl">UPTO 40% OFF</h2>
+                  <h2 class="text-base text-white sm:text-5xl">UPTO 20% OFF</h2>
                   <p class="text-xs text-white sm:text-2xl">Explore more</p>
                 </div>
               </div>
-              <div class="relative bg-overlay">
-                <img src="/home-page/deals-img-2.png" alt="card-1" />
-                <div class="absolute z-20 space-y-3 bottom-10 left-5">
-                  <h2 class="text-base text-white sm:text-5xl">UPTO 40% OFF</h2>
-                  <p class="text-xs text-white sm:text-2xl">Explore more</p>
+            </router-link>
+            <div>
+              <router-link
+                :to="{ name: 'products', query: { Discount: '60' } }"
+                @click.prevent="filterByDiscount('60')"
+              >
+                <div class="relative bg-overlay">
+                  <img src="/home-page/deals-img-2.png" alt="card-1" />
+                  <div class="absolute z-20 space-y-3 bottom-10 left-5">
+                    <h2 class="text-base text-white sm:text-5xl">
+                      UPTO 60% OFF
+                    </h2>
+                    <p class="text-xs text-white sm:text-2xl">Explore more</p>
+                  </div>
                 </div>
-              </div>
+              </router-link>
             </div>
-            <div id="col-2" class="pt-5 space-y-1 md:space-y-3 md:pt-16">
+          </div>
+          <div id="col-2" class="pt-5 space-y-1 md:space-y-3 md:pt-16">
+            <router-link
+              :to="{ name: 'products', query: { Discount: '40' } }"
+              @click.prevent="filterByDiscount('40')"
+            >
               <div class="relative bg-overlay">
                 <img src="/home-page/deals-img-3.png" alt="card-2" />
                 <div class="absolute z-20 space-y-3 bottom-10 left-5">
@@ -76,16 +114,25 @@
                   <p class="text-xs text-white sm:text-2xl">Explore more</p>
                 </div>
               </div>
-              <div class="relative bg-overlay">
-                <img src="/home-page/deals-img-4.png" alt="card-3" />
-                <div class="absolute z-20 space-y-3 bottom-10 left-5">
-                  <h2 class="text-base text-white sm:text-5xl">UPTO 40% OFF</h2>
-                  <p class="text-xs text-white sm:text-2xl">Explore more</p>
+            </router-link>
+            <div>
+              <router-link
+                :to="{ name: 'products', query: { Discount: '80' } }"
+                @click.prevent="filterByDiscount('80')"
+              >
+                <div class="relative bg-overlay">
+                  <img src="/home-page/deals-img-4.png" alt="card-3" />
+                  <div class="absolute z-20 space-y-3 bottom-10 left-5">
+                    <h2 class="text-base text-white sm:text-5xl">
+                      UPTO 80% OFF
+                    </h2>
+                    <p class="text-xs text-white sm:text-2xl">Explore more</p>
+                  </div>
                 </div>
-              </div>
+              </router-link>
             </div>
           </div>
-        </router-link>
+        </div>
       </div>
 
       <div class="md:pt-14">
@@ -103,7 +150,9 @@
         </div>
       </div>
       <div class="md:pt-14">
-        <div class="py-4 text-3xl"><h2 class="text-3xl">Highlights</h2></div>
+        <div class="py-4 text-3xl">
+          <h2 class="text-3xl">Highlights</h2>
+        </div>
         <div
           class="flex flex-col items-center justify-between space-x-5 sm:flex-row bg-gray-50"
         >
@@ -177,6 +226,26 @@ import { useProductStore } from "/src/store/product.js";
 
 const productStore = useProductStore();
 const productData = ref([]);
+
+const filterByCategory = async (Categories) => {
+  productStore.categoryName = [Categories];
+  await productStore.applyFiltersAndFetch();
+  window.location.href = `/products?Categories=${Categories}`;
+};
+
+const filterByDiscount = async (discount) => {
+  productStore.discount = [discount];
+  await productStore.applyFiltersAndFetch();
+  window.location.href = `/products?discount=${discount}`;
+};
+
+// const filterByGender = async (gender) => {
+//       productStore.parentCategory = [gender];
+//       await productStore.applyFiltersAndFetch();
+//       window.location.href = `/products?gender=${gender}`;
+//     };
+
+// console.log("sppp",filterByCategory);
 
 onMounted(async () => {
   await productStore.fetchProductList();
