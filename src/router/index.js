@@ -9,11 +9,18 @@ import ProductList from "@/pages/public/products/products-list.vue";
 import paymentSuccessful from "../components/payment-gateway/payment-successful.vue";
 import paymentError from "../components/payment-gateway/payment-error.vue";
 import Default from "@/layouts/default.vue";
+import admin from "@/layouts/admin.vue";
 import CheckOut from "../pages/private/product-checkout/index.vue";
 import wishList from "@/pages/private/wish-list/index.vue";
 import edit from "@/pages/private/profile/edit.vue";
 import profile from "../pages/private/profile/index.vue";
+import dashBoard from "@/pages/private/dashboard/index.vue";
+import Analytics from "@/pages/private/dashboard/analytics.vue";
 import vieworder from "../pages/private/view-orders/index.vue";
+import orders from "../pages/private/dashboard/orders.vue";
+import adminproducts from "../pages/private/dashboard/products.vue";
+import customers from "../pages/private/dashboard/customers.vue";
+import addproducts from "../pages/private/dashboard/add-products.vue";
 const routes = [
   {
     path: "/",
@@ -61,6 +68,23 @@ const routes = [
         path: "/payment-successful",
         component: paymentSuccessful,
       },
+      // {
+      //   name: "dashboard",
+      //   path: "/admin",
+      //   component: dashBoard,
+      //   children: [
+      //     {
+      //       name: "analytics",
+      //       path: "/analytics",
+      //       component: Analytics,
+      //     },
+      //     {
+      //       name: "orders",
+      //       path: "/orders",
+      //       component: orders,
+      //     },
+      //   ],
+      // },
       {
         name: "auth",
         path: "/",
@@ -101,6 +125,39 @@ const routes = [
       },
     ],
   },
+  
+  {
+    path: "/admin",
+    component: admin,
+    redirect: { name: "analytics" },
+    children: [
+      {
+        name: "analytics",
+        path: "analytics",
+        component: Analytics,
+      },
+      {
+        name: "adminproducts",
+        path: "adminproducts",
+        component: adminproducts,
+      },
+      {
+        name: "orders",
+        path: "orders",
+        component: orders,
+      },
+      {
+        name: "customers",
+        path: "customers",
+        component: customers,
+      },
+      {
+        name: "addprodcts",
+        path: "addproducts",
+        component: addproducts,
+      },
+     
+]}
 ];
 
 const router = createRouter({
