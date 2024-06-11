@@ -7,7 +7,7 @@ const routes = [
   {
     path: "/admin",
     component: admin,
-    redirect: { name: "adminSignIn" },
+    redirect: { name: "admin-sign-in" },
     children: [...adminRoutes],
   },
   {

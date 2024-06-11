@@ -2,6 +2,7 @@
   <div class="cursor-pointer">
     <div
       class="flex justify-between px-2 py-4 font-bold md:px-8 md:flex-row md:space-x-4"
+      v-if="$route.path !== '/admin/verification-otp'"
     >
       <div class="flex gap-5">
         <div class="py-2 logo">
