@@ -10,12 +10,12 @@
       >
         <div class="flex items-start gap-2 p-2 md:p-4 md:gap-5">
           <div class="item-center">
-            <img src="/default/order-img.png" alt="" />
-            <!-- <img
-              :src="order.productImage"
+            <!-- <img src="/default/order-img.png" alt="" /> -->
+            <img
+              :src="order.productImage.imageUrl"
               class="max-h-46 rounded-2xl md:w-32 max-w-24"
               :alt="order.productName"
-            /> -->
+            />
           </div>
           <div>
             <div class="flex items-end justify-between">

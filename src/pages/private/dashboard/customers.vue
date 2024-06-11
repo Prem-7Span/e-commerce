@@ -4,37 +4,37 @@
       <form @submit.prevent="" class="space-y-4">
         <div class="flex items-center space-x-4">
           <label for="customerId" class="text-lg mb-1 w-32">Customer Id</label>
-          <input type="text" id="customerId" class="flex w-1/2 p-2 border rounded-md" value="910101910" >
+          <input type="text" id="customerId" class="flex w-1/2 p-2 border rounded-md" >
         </div>
   
         <div class="flex items-center space-x-4">
           <label for="customerName" class="text-lg mb-1 w-32">Customer name</label>
-          <input type="text" id="customerName" class="flex w-1/2 p-2 border rounded-md" value="John Smith" >
+          <input type="text" id="customerName" class="flex w-1/2 p-2 border rounded-md" >
         </div>
   
         <div class="flex items-center space-x-4">
           <label for="emailId" class="text-lg mb-1 w-32">Email Id</label>
-          <input type="email" id="emailId" class="flex w-1/2 p-2 border rounded-md" value="abc@xyz.com" >
+          <input type="email" id="emailId" class="flex w-1/2 p-2 border rounded-md"  >
         </div>
   
         <div class="flex items-center space-x-4">
           <label for="mobileNumber" class="text-lg mb-1 w-32">Mobile number</label>
-          <input type="text" id="mobileNumber" class="flex w-1/2 p-2 border rounded-md" value="8293918374" >
+          <input type="text" id="mobileNumber" class="flex w-1/2 p-2 border rounded-md"  >
         </div>
   
         <div class="flex items-center space-x-4">
           <label for="date" class="text-lg mb-1 w-32">Date</label>
-          <input type="text" id="date" class="flex w-1/2 p-2 border rounded-md" value="10th May | 12:49:20 pm" >
+          <input type="text" id="date" class="flex w-1/2 p-2 border rounded-md"  >
         </div>
   
         <div class="flex items-center space-x-4">
           <label for="totalAmount" class="text-lg mb-1 w-32">Total Amount</label>
-          <input type="text" id="totalAmount" class="flex w-1/2 p-2 border rounded-md" value="Rs. 799" >
+          <input type="text" id="totalAmount" class="flex w-1/2 p-2 border rounded-md" >
         </div>
   
         <div class="flex items-center space-x-4">
           <label for="payment" class="text-sm mb-1 w-32">Payment</label>
-          <input type="text" id="payment" class="flex w-1/2 p-2 border rounded-md" value="Received" >
+          <input type="text" id="payment" class="flex w-1/2 p-2 border rounded-md"  >
         </div>
   
         <div class="flex items-center space-x-4">

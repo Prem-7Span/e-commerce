@@ -7,9 +7,27 @@
         <select id="size" v-model="newVariant.size" class="flex w-1/2 p-2 border rounded-md">
           <option value="" disabled selected>Select</option>
           <!-- Add options here -->
-          <option value="S">Small</option>
-          <option value="M">Medium</option>
-          <option value="L">Large</option>
+          <option value="S">XS</option>
+          <option value="M">S</option>
+          <option value="L">M</option>
+          <option value="L">L</option>
+          <option value="L">XL</option>
+          <option value="L">2XL</option>
+          <option value="L">3XL</option>
+        </select>
+      </div>
+
+      <div class="flex items-center space-x-4">
+        <label for="Colors" class="text-lg mb-1 w-32">Colors</label>
+        <select id="Colors" v-model="newVariant.color" class="flex w-1/2 p-2 border rounded-md">
+          <option value="" disabled selected>Select</option>
+          <!-- Add options here -->
+          <option value="S">Black</option>
+          <option value="M">White</option>
+          <option value="L">Blue</option>
+          <option value="L">Green</option>
+          <option value="L">Pink</option>
+          <option value="L">Red</option>
         </select>
       </div>
 
@@ -25,12 +43,7 @@
 
       <div class="flex items-center space-x-4">
         <label for="stock" class="text-lg mb-1 w-32">Stock</label>
-        <select id="stock" v-model="newVariant.stock" class="flex- w-1/2 p-2 border rounded-md">
-          <option value="" disabled selected>Select</option>
-          <!-- Add options here -->
-          <option value="InStock">In Stock</option>
-          <option value="OutOfStock">Out of Stock</option>
-        </select>
+        <input type="number" id="stock" v-model="newVariant.stock" class="flex w-1/2 p-2 border rounded-md">
       </div>
 
       <div class="flex space-x-4">
@@ -41,7 +54,8 @@
     <div class="mt-4">
       <h2 class="text-xl font-bold text-primary-300 mb-2">New Variants</h2>
       <ul>
-        <li v-for="(variant, index) in variants" :key="index" class="mb-2 p-2 rounded-md border shadow-sm variant-item flex gap-2">
+        <li v-for="(variant, index) in variants" :key="index" class="mb-2 p-2 rounded-md border shadow-sm variant-item flex gap-4 px-3">
+          <span class="block text-lg"><strong >Color:</strong> {{ variant.color }}</span>
           <span class="block text-lg"><strong >Size:</strong> {{ variant.size }}</span>
           <span class="block text-lg"><strong>Regular Price:</strong> {{ variant.regularPrice }}</span>
           <span class="block text-lg"><strong>Current Price:</strong> {{ variant.currentPrice }}</span>
@@ -57,6 +71,7 @@ import { reactive, ref } from 'vue';
 
 const newVariant = reactive({
   size: '',
+  color:'',
   regularPrice: '',
   currentPrice: '',
   stock: ''
@@ -67,6 +82,7 @@ const addNewVariant = () => {
   if (newVariant.size && newVariant.regularPrice && newVariant.currentPrice && newVariant.stock) {
     variants.value.push({ ...newVariant });
     newVariant.size = '';
+    newVariant.color = '',
     newVariant.regularPrice = '';
     newVariant.currentPrice = '';
     newVariant.stock = '';
