@@ -21,7 +21,7 @@ const routes = [
       },
       {
         name: "adminVerificationOtp",
-        path: "verification-otp",
+        path: "admin-verification-otp",
         component: adminVerificationOtp,
       },
     ],

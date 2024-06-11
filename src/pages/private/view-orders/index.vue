@@ -1,8 +1,9 @@
 <template>
-  <div class="mx-5">
+  <div class="max-w-3xl py-8 mx-5">
     <div v-if="loading">Loading...</div>
     <div v-if="error">Error loading orders: {{ error }}</div>
     <div v-else class="space-y-4">
+      <h1 class="text-xl font-bold">Your Orders</h1>
       <div
         v-for="order in orders"
         :key="order.id"
@@ -10,12 +11,12 @@
       >
         <div class="flex items-start gap-2 p-2 md:p-4 md:gap-5">
           <div class="item-center">
-            <img src="/default/order-img.png" alt="" />
-            <!-- <img
-              :src="order.productImage"
+            <!-- <img src="/default/order-img.png" alt="" /> -->
+            <img
+              :src="order.productImage.imageUrl"
               class="max-h-46 rounded-2xl md:w-32 max-w-24"
               :alt="order.productName"
-            /> -->
+            />
           </div>
           <div>
             <div class="flex items-end justify-between">

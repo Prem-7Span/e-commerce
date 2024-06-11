@@ -149,10 +149,18 @@ export default {
           `+91${this.phoneNumber}`,
           this.recaptchaVerifier
         );
-        this.$router.push({
-          name: "VerificationOtp", // Assuming a route for verification
-          query: { obj: phoneNumberVerification.verificationId },
-        });
+        const userRole = localStorage.getItem("userRole");
+        if (userRole === "System Admin") {
+          this.$router.push({
+            name: "adminVerificationOtp",
+            query: { obj: phoneNumberVerification.verificationId },
+          });
+        } else {
+          this.$router.push({
+            name: "VerificationOtp", // Assuming a route for regular verification
+            query: { obj: phoneNumberVerification.verificationId },
+          });
+        }
       } catch (error) {
         console.error("Error during phone number verification:", error);
       }

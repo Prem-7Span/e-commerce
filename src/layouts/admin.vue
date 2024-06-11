@@ -20,7 +20,7 @@ export default {
   },
   computed: {
     showSidebar() {
-      return !["/admin/sign-in", "/admin/verification-otp"].includes(
+      return !["/admin/sign-in", "/admin/admin-verification-otp"].includes(
         this.$route.path
       );
     },
