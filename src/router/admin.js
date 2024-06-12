@@ -6,6 +6,7 @@ import auth from "@/layouts/auth.vue";
 import adminproducts from "../pages/private/dashboard/products.vue";
 import customers from "../pages/private/dashboard/customers.vue";
 import addproducts from "../pages/private/dashboard/add-products.vue";
+import OrderDetail from "@/pages/private/dashboard/order-detail.vue";
 
 const routes = [
   {
@@ -40,6 +41,11 @@ const routes = [
     name: "orders",
     path: "orders",
     component: orders,
+  },
+  {
+    name: "OrderDetail",
+    path: "/orders/:orderId",
+    component: OrderDetail,
   },
   {
     name: "customers",
