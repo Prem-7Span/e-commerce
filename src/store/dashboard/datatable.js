@@ -23,7 +23,7 @@ export const useOrdersStore = defineStore("orders", {
         this.orders = data.map((order) => ({
           id: order.id,
           mobileNumber: order.reciverMobileNo,
-          address: order.shippingAddress,
+          orderStatus: order.orderStatus,
           orderId: order.id,
           date: order.createdAt,
           amount: order.orderItems.reduce(

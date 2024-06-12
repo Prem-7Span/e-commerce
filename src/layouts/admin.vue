@@ -1,6 +1,6 @@
 <template>
   <div class="layout">
-    <AdminNavbar class="navbar" />
+    <!-- <AdminNavbar class="navbar" /> -->
     <div class="main-content">
       <SideBar v-if="showSidebar" class="sidebar" />
       <router-view class="router-view" />
@@ -9,13 +9,13 @@
 </template>
 
 <script>
-import AdminNavbar from "@/components/global/admin-navbar.vue";
+// import AdminNavbar from "@/components/global/admin-navbar.vue";
 import SideBar from "@/components/global/side-bar.vue";
 
 export default {
   name: "AdminLayout",
   components: {
-    AdminNavbar,
+    // AdminNavbar,
     SideBar,
   },
   computed: {
