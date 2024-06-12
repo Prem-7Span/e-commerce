@@ -104,8 +104,14 @@ export default {
         await signInWithCredential(authentication, credential) // Assuming firebase is imported
           .then((res) => {
             this.userStore.setToken(res.user.accessToken);
-            this.toast.success("Verification successful!");
-            this.$router.push({ name: "home" });
+            const userData = localStorage.getItem("userRole");
+
+            // Check if the roleName is "System Admin" and navigate accordingly
+            if (userData === "System Admin") {
+              this.$router.push({ name: "analytics" });
+            } else {
+              this.$router.push({ name: "home" });
+            }
             this.fetchCartItems();
 
             // Store the token in localStorage
