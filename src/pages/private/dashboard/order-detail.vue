@@ -16,6 +16,18 @@
             disabled
           />
         </div>
+        <div class="flex items-center space-x-4">
+          <label for="customerId" class="w-32 mb-1 text-lg"
+            >Customer Email</label
+          >
+          <input
+            type="text"
+            id="customerId"
+            :value="order.createdby.email"
+            class="flex w-1/2 p-2 border rounded-md"
+            disabled
+          />
+        </div>
 
         <div class="flex items-center space-x-4">
           <label for="customerName" class="w-32 mb-1 text-lg"
