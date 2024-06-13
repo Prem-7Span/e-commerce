@@ -38,6 +38,8 @@
         <button
           v-if="showNextButton"
           @click="handleNext"
+          :class="{ 'opacity-50 cursor-not-allowed': isNextButtonDisabled }"
+          :disabled="isNextButtonDisabled"
           class="w-full p-2 text-center text-white rounded-md bg-primary-300"
         >
           Next
@@ -56,8 +58,11 @@
 
 <script setup>
 import { computed, onMounted, defineProps, defineEmits } from "vue";
+import { useToast } from "vue-toastification";
 import { useOrderSummaryStore } from "@/store/order-summary";
 import axios from "axios";
+
+const toast = useToast();
 
 const props = defineProps({
   showNextButton: {
@@ -80,12 +85,15 @@ onMounted(() => {
 
 const data = computed(() => orderSummaryStore);
 
+const isNextButtonDisabled = computed(() => orderSummaryStore.total === 0);
+
 const handleNext = () => {
   emit("next");
 };
 
 const placeOrder = async () => {
   if (!props.selectedAddressId) {
+    toast.error("Please select the address");
     console.error("No address selected");
     return;
   }
@@ -142,3 +150,12 @@ const placeOrder = async () => {
   }
 };
 </script>
+
+<style scoped>
+.opacity-50 {
+  opacity: 0.5;
+}
+.cursor-not-allowed {
+  cursor: not-allowed;
+}
+</style>
