@@ -5,7 +5,12 @@
     <div
       class="container px-8 py-6 text-center bg-white rounded-lg shadow-md w-fit md:text-left md:max-w-md"
     >
-      <div class="text-2xl animate_animated animate_fadeIn">Sign In</div>
+      <!-- Conditional rendering based on route -->
+      <div class="py-3 text-2xl animate_animated animate_fadeIn">
+        {{
+          $route.path === "/admin/sign-in" ? "Admin Panel Sign In" : "Sign In"
+        }}
+      </div>
 
       <div class="flex flex-col mt-2 space-y-2">
         <input
@@ -44,7 +49,12 @@
       >
         Continue
       </button>
-      <div v-if="!isAdminRoute" class="mt-6 text-sm text-center text-gray-500">
+      <div id="recaptcha-container"></div>
+
+      <div
+        v-if="$route.path !== '/admin/sign-in'"
+        class="mt-6 text-sm text-center text-gray-500"
+      >
         Don’t have an account?
         <router-link :to="{ name: 'SignUp' }" class="text-primary-200"
           >Sign Up</router-link
@@ -57,7 +67,7 @@
 <script>
 import axios from "axios";
 import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
-import authentication from "@/plugins/firebase.js";
+import authentication from "@/plugins/firebase.js"; // Assuming a Firebase authentication config
 import { useToast } from "vue-toastification";
 
 export default {
@@ -80,12 +90,6 @@ export default {
     canSubmit() {
       return !this.errors.phoneNumber && this.termsAccepted;
     },
-    isAdminRoute() {
-      return this.$route.path.includes("/admin");
-    },
-  },
-  mounted() {
-    // No need to check here, isAdminRoute is reactive
   },
   methods: {
     validateField(field) {
@@ -126,27 +130,17 @@ export default {
 
         if (response.status === 200) {
           const token = response.data.userData.accessToken;
+          const userRole = response.data.userData.role.roleName;
           localStorage.setItem("token", token);
-
-          if (
-            this.isAdminRoute &&
-            response.data.userData.role.roleName === "System Admin"
-          ) {
-            this.$router.push({ name: "analytics" });
-          } else {
-            this.submitForm();
-          }
+          localStorage.setItem("userRole", userRole);
+          this.submitForm();
         } else {
           this.toast.error("Account not available, Please sign up");
-          if (!this.isAdminRoute) {
-            this.$router.push({ name: "SignUp" });
-          }
+          this.$router.push({ name: "SignUp" });
         }
       } catch (error) {
         this.toast.error("Account not available, please sign up");
-        if (!this.isAdminRoute) {
-          this.$router.push({ name: "SignUp" });
-        }
+        this.$router.push({ name: "SignUp" });
         console.error("Error checking phone number availability:", error);
       }
     },
@@ -163,10 +157,18 @@ export default {
           `+91${this.phoneNumber}`,
           this.recaptchaVerifier
         );
-        this.$router.push({
-          name: "VerificationOtp",
-          query: { obj: phoneNumberVerification.verificationId },
-        });
+        const userRole = localStorage.getItem("userRole");
+        if (userRole === "System Admin") {
+          this.$router.push({
+            name: "adminVerificationOtp",
+            query: { obj: phoneNumberVerification.verificationId },
+          });
+        } else {
+          this.$router.push({
+            name: "VerificationOtp", // Assuming a route for regular verification
+            query: { obj: phoneNumberVerification.verificationId },
+          });
+        }
       } catch (error) {
         console.error("Error during phone number verification:", error);
       }

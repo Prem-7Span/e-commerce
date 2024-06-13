@@ -18,63 +18,58 @@
       </div>
     </div>
 
-    
-
     <!-- Inserted Line Chart Section -->
-    <div class="relative flex flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-md mt-8">
-      <div class="relative mx-4 mt-4 flex flex-col gap-4 overflow-hidden rounded-none bg-transparent bg-clip-border text-gray-700 shadow-none md:flex-row md:items-center">
-        <div class="w-max rounded-lg bg-gray-900 p-5 text-white">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" class="h-6 w-6">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M6.429 9.75L2.25 12l4.179 2.25m0-4.5l5.571 3 5.571-3m-11.142 0L2.25 7.5 12 2.25l9.75 5.25-4.179 2.25m0 0L21.75 12l-4.179 2.25m0 0l4.179 2.25L12 21.75 2.25 16.5l4.179-2.25m11.142 0l-5.571 3-5.571-3"/>
+    <div
+      class="relative flex flex-col mt-8 text-gray-700 bg-white shadow-md rounded-xl bg-clip-border"
+    >
+      <div
+        class="relative flex flex-col gap-4 mx-4 mt-4 overflow-hidden text-gray-700 bg-transparent rounded-none shadow-none bg-clip-border md:flex-row md:items-center"
+      >
+        <div class="p-5 text-white bg-gray-900 rounded-lg w-max">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            aria-hidden="true"
+            class="w-6 h-6"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M6.429 9.75L2.25 12l4.179 2.25m0-4.5l5.571 3 5.571-3m-11.142 0L2.25 7.5 12 2.25l9.75 5.25-4.179 2.25m0 0L21.75 12l-4.179 2.25m0 0l4.179 2.25L12 21.75 2.25 16.5l4.179-2.25m11.142 0l-5.571 3-5.571-3"
+            />
           </svg>
         </div>
         <div>
-          <h6 class="block font-sans text-base font-semibold leading-relaxed tracking-normal text-blue-gray-900 antialiased">Line Chart</h6>
-          <p class="block max-w-sm font-sans text-sm font-normal leading-normal text-gray-700 antialiased">Visualize your data in a simple way using the @material-tailwind/html chart plugin.</p>
+          <h6
+            class="block font-sans text-base antialiased font-semibold leading-relaxed tracking-normal text-blue-gray-900"
+          >
+            Line Chart
+          </h6>
+          <p
+            class="block max-w-sm font-sans text-sm antialiased font-normal leading-normal text-gray-700"
+          >
+            Visualize your data in a simple way using the
+            @material-tailwind/html chart plugin.
+          </p>
         </div>
       </div>
-      <div class="pt-6 px-2 pb-0">
+      <div class="px-2 pt-6 pb-0">
         <div id="bar-chart"></div>
       </div>
     </div>
 
-    <div>
-      <h2 class="mt-5 text-xl font-semibold">Analysis</h2>
-      <div class="overflow-x-auto">
-        <table class="w-full table-auto">
-          <thead>
-            <tr class="bg-gray-100">
-              <th class="px-4 py-2">Sr.</th>
-              <th class="px-4 py-2">Customer Id</th>
-              <th class="px-4 py-2">Mobile number</th>
-              <th class="px-4 py-2">Address</th>
-              <th class="px-4 py-2">Order Id</th>
-              <th class="px-4 py-2">Date</th>
-              <th class="px-4 py-2">Amount</th>
-              <th class="px-4 py-2">Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="(order, index) in orders" :key="index">
-              <td class="px-4 py-2 border">{{ index + 1 }}.</td>
-              <td class="px-4 py-2 border">{{ order.customerId }}</td>
-              <td class="px-4 py-2 border">{{ order.mobileNumber }}</td>
-              <td class="px-4 py-2 border">{{ order.address }}</td>
-              <td class="px-4 py-2 border">{{ order.orderId }}</td>
-              <td class="px-4 py-2 border">{{ order.date }}</td>
-              <td class="px-4 py-2 border">{{ order.amount }}</td>
-              <td class="px-4 py-2 border">{{ order.status }}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
+    <!-- Data Table Section -->
+    <dataTable />
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
-import ApexCharts from 'apexcharts';
+import { ref, onMounted } from "vue";
+import ApexCharts from "apexcharts";
+import dataTable from "./data-table.vue";
 
 const orders = ref([
   {
@@ -167,7 +162,17 @@ onMounted(() => {
           fontWeight: 400,
         },
       },
-      categories: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+      categories: [
+        "Apr",
+        "May",
+        "Jun",
+        "Jul",
+        "Aug",
+        "Sep",
+        "Oct",
+        "Nov",
+        "Dec",
+      ],
     },
     yaxis: {
       labels: {
@@ -201,8 +206,10 @@ onMounted(() => {
     },
   };
 
-  const chart = new ApexCharts(document.querySelector("#bar-chart"), chartConfig);
+  const chart = new ApexCharts(
+    document.querySelector("#bar-chart"),
+    chartConfig
+  );
   chart.render();
 });
 </script>
-

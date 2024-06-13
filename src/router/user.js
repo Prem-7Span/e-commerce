@@ -59,6 +59,11 @@ const routes = [
     component: paymentSuccessful,
   },
   {
+    name: "vieworder",
+    path: "vieworder",
+    component: vieworder,
+  },
+  {
     name: "auth",
     path: "/",
     component: Auth,
@@ -88,11 +93,6 @@ const routes = [
         name: "profile",
         path: "profile",
         component: profile,
-      },
-      {
-        name: "vieworder",
-        path: "vieworder",
-        component: vieworder,
       },
     ],
   },

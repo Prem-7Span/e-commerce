@@ -1,8 +1,9 @@
 <template>
-  <div class="mx-5">
+  <div class="max-w-3xl py-8 mx-5">
     <div v-if="loading">Loading...</div>
     <div v-if="error">Error loading orders: {{ error }}</div>
     <div v-else class="space-y-4">
+      <h1 class="text-xl font-bold">Your Orders</h1>
       <div
         v-for="order in orders"
         :key="order.id"

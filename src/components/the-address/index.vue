@@ -37,15 +37,12 @@ export default {
     };
   },
   methods: {
-    addressSubmitted(newAddress) {
-      console.log("Address submitted:", newAddress);
-    },
+    addressSubmitted(newAddress) {},
     onSelectAddress(addressId) {
       this.selectedAddressId = addressId;
     },
     onEditAddress(address) {
       this.addressToEdit = address;
-      console.log("Address to edit:", address);
     },
   },
 };

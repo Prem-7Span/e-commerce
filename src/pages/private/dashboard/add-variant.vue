@@ -63,7 +63,13 @@
 
 
       <div class="flex space-x-4">
-        <button type="button" @click="addNewVariant" class="p-2 bg-primary-300 text-white rounded-md">Add Variant</button>
+        <button
+          type="button"
+          @click="addNewVariant"
+          class="p-2 text-white rounded-md bg-primary-300"
+        >
+          Add Variant
+        </button>
       </div>
     </form>
 

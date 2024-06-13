@@ -1,50 +1,141 @@
 <template>
-    <div class="container mx-auto  p-4">
-      <div class="flex justify-between">
-        <h1 class="text-2xl font-semibold mb-4">All Products</h1>
-        <router-link :to="{name : 'addprodcts'}">
-        <button type="submit" class="bg-primary-300 text-white py-2 px-4 rounded-md hover:bg-gray-800">Add Variant </button>
-        </router-link>
-      </div>
-
-
-      <table class=" bg-white mt-2 rounded-t-lg">
-        <thead>
-          <tr>
-            <th class="px-8 py-2 border-b-2 border-gray-300 bg-gray-800 text-white">Sr.</th>
-            <th class="px-8 py-2 border-b-2 border-gray-300 bg-gray-800 text-white">order id</th>
-            <th class="px-8 py-2 border-b-2 border-gray-300 bg-gray-800 text-white">order data</th>
-            <th class="px-8 py-2 border-b-2 border-gray-300 bg-gray-800 text-white">customer id</th>
-            <th class="px-8 py-2 border-b-2 border-gray-300 bg-gray-800 text-white">Status</th>
-          </tr>
-        </thead>              
-        <tbody>
-          <tr v-for="(product, index) in orders" :key="index" class="text-center">
-            <td class="px-4 py-2 border-b">{{ index + 1 }}</td>
-            <td class="px-4 py-2 border-b">{{ product.orderId }}</td>
-            <td class="px-4 py-2 border-b">{{ product.orderDate }}</td>
-            <td class="px-4 py-2 border-b">{{ product.customerId }}</td>
-            
-            <td class="px-4 py-2 border-b">{{ product.status }}</td>
-          </tr>
-        </tbody>
-      </table>
+  <div class="container p-4 mx-auto">
+    <div v-if="isLoading" class="py-4 text-center">
+      <p>Loading...</p>
     </div>
-  </template>
+    <table v-else class="mt-2 bg-white rounded-t-lg">
+      <thead>
+        <tr>
+          <th
+            class="px-8 py-2 text-white bg-gray-800 border-b-2 border-gray-300"
+          >
+            Sr.
+          </th>
+          <th
+            class="px-8 py-2 text-white bg-gray-800 border-b-2 border-gray-300"
+          >
+            Order Id
+          </th>
+          <th
+            class="px-8 py-2 text-white bg-gray-800 border-b-2 border-gray-300"
+          >
+            Order Date
+          </th>
+          <th
+            class="px-8 py-2 text-white bg-gray-800 border-b-2 border-gray-300"
+          >
+            Customer Id
+          </th>
+          <th
+            class="px-8 py-2 text-white bg-gray-800 border-b-2 border-gray-300"
+          >
+            Status
+          </th>
+          <th
+            class="px-8 py-2 text-white bg-gray-800 border-b-2 border-gray-300"
+          >
+            Product Name
+          </th>
+          <th
+            class="px-8 py-2 text-white bg-gray-800 border-b-2 border-gray-300"
+          >
+            Color
+          </th>
+          <th
+            class="px-8 py-2 text-white bg-gray-800 border-b-2 border-gray-300"
+          >
+            Size
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          v-for="(order, index) in orders"
+          :key="order.orderId"
+          class="text-center"
+        >
+          <td class="px-4 py-2 border-b">{{ index + 1 }}</td>
+          <td class="px-4 py-2 border-b">
+            <router-link
+              :to="{ name: 'OrderDetail', params: { orderId: order.orderId } }"
+            >
+              {{ order.orderId }}
+            </router-link>
+          </td>
+          <td class="px-4 py-2 border-b">
+            <router-link
+              :to="{ name: 'OrderDetail', params: { orderId: order.orderId } }"
+            >
+              {{ new Date(order.orderDate).toLocaleDateString() }}
+            </router-link>
+          </td>
+          <td class="px-4 py-2 border-b">
+            <router-link
+              :to="{ name: 'OrderDetail', params: { orderId: order.orderId } }"
+            >
+              {{ order.customerId }}
+            </router-link>
+          </td>
+          <td class="px-4 py-2 border-b">
+            <router-link
+              :to="{ name: 'OrderDetail', params: { orderId: order.orderId } }"
+            >
+              {{ order.status }}
+            </router-link>
+          </td>
+          <td class="px-4 py-2 border-b">
+            <router-link
+              :to="{ name: 'OrderDetail', params: { orderId: order.orderId } }"
+            >
+              {{ order.productName }}
+            </router-link>
+          </td>
+          <td class="px-4 py-2 border-b">
+            <router-link
+              :to="{ name: 'OrderDetail', params: { orderId: order.orderId } }"
+            >
+              {{ order.color }}
+            </router-link>
+          </td>
+          <td class="px-4 py-2 border-b">
+            <router-link
+              :to="{ name: 'OrderDetail', params: { orderId: order.orderId } }"
+            >
+              {{ order.size }}
+            </router-link>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</template>
+
 <script>
+import { ref, onMounted } from "vue";
+import { useOrdersStore } from "@/store/dashboard/getAllOrders.js";
+
 export default {
-  name: 'OrdersTable',
-  data() {
+  name: "OrdersTable",
+  setup() {
+    const ordersStore = useOrdersStore();
+    const orders = ref([]);
+    const isLoading = ref(true);
+
+    onMounted(async () => {
+      isLoading.value = true;
+      await ordersStore.fetchOrders();
+      orders.value = ordersStore.orders;
+      isLoading.value = false;
+    });
+
     return {
-      orders: [
-        { sr: 1, orderId: '019102', orderDate: '2-4-24', customerId: '0193010', status: 'Received' },
-        { sr: 2, orderId: '019102', orderDate: '2-4-24', customerId: '0193010', status: 'In process' },
-        { sr: 3, orderId: '019102', orderDate: '2-4-24', customerId: '0193010', status: 'In Process' },
-        { sr: 4, orderId: '019102', orderDate: '2-4-24', customerId: '0193010', status: 'Received' },
-        { sr: 5, orderId: '019102', orderDate: '2-4-24', customerId: '0193010', status: 'Completed' },
-        { sr: 6, orderId: '019102', orderDate: '2-4-24', customerId: '0193010', status: 'Completed' },
-      ],
+      orders,
+      isLoading,
     };
   },
 };
 </script>
+
+<style>
+/* Add any necessary styles here */
+</style>
