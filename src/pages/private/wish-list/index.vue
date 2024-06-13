@@ -36,7 +36,7 @@
           :key="index"
           :product="product.products"
           :isWishlist="true"
-          @remove-from-wishlist="removeFromWishlist(product.id)"
+          @remove-from-wishlist="removeFromWishlist(product)"
         />
       </div>
     </div>
@@ -72,9 +72,10 @@ export default {
       }
     };
 
-    const removeFromWishlist = async (productId) => {
+    const removeFromWishlist = async (product) => {
+      console.log("====>>>>>", product.productId);
       try {
-        await wishlistStore.removeFromWishlist(productId, router);
+        await wishlistStore.removeFromWishlist(product.productId, router);
         await fetchWishlist(); // Refresh the wishlist after removal
       } catch (error) {
         console.error("Error removing product from wishlist:", error);

@@ -9,7 +9,6 @@ export const useOrderDetailsStore = defineStore("orderDetails", () => {
   const error = ref(null);
 
   const fetchOrderDetails = async (orderId) => {
-    console.log("==>Called");
     loading.value = true;
     error.value = null;
 
@@ -34,7 +33,6 @@ export const useOrderDetailsStore = defineStore("orderDetails", () => {
   };
 
   const updateOrderStatus = async (orderId, status, shippingAddressId) => {
-    console.log("==>Updating status");
     loading.value = true;
     error.value = null;
 

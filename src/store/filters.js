@@ -1,7 +1,7 @@
-import { createPinia } from 'pinia';
-import axios from 'axios';
+import { createPinia } from "pinia";
+import axios from "axios";
 
-export const productStore = createPinia().defineStore('product', {
+export const productStore = createPinia().defineStore("product", {
   state: () => ({
     productData: [],
     selectedCategories: [],
@@ -9,18 +9,22 @@ export const productStore = createPinia().defineStore('product', {
   actions: {
     async fetchProductList() {
       try {
-        const response = await axios.get('https://ai.8orbit.shop/api/v1/product');
+        const response = await axios.get(
+          "https://ai.8orbit.shop/api/v1/product"
+        );
         this.productData = response.data.product;
       } catch (error) {
-        console.error('Error fetching products:', error);
+        console.error("Error fetching products:", error);
       }
     },
     filterProducts(selectedCategories) {
       if (selectedCategories.length === 0) {
         return this.productData;
       }
-      return this.productData.filter(product => {
-        return selectedCategories.every(category => product.categories.includes(category));
+      return this.productData.filter((product) => {
+        return selectedCategories.every((category) =>
+          product.categories.includes(category)
+        );
       });
     },
     setSelectedCategories(categories) {

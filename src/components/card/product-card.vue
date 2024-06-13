@@ -22,6 +22,7 @@
           @click.stop="toggleWishlist"
           class="absolute top-0 right-0 px-2 py-2 mt-2 mb-2 mr-2 bg-white rounded-full"
         >
+          {{ product.isInWishlist }}
           <wishlistFillIcon v-if="product.isInWishlist" class="text-red-500" />
           <wishlist-icon v-else />
         </button>
@@ -127,10 +128,7 @@ export default {
     const toggleWishlist = async () => {
       try {
         if (props.product.isInWishlist) {
-          console.log("wdqwdqwdqwd1", props.product);
-          console.log("wdqwdqwdqwd2", props.product.wishlists);
-          console.log("wdqwdqwdqwd3", props.product.wishlists[0].id);
-          await wishlistStore.removeFromWishlist(props.product.wishlists[0].id);
+          await wishlistStore.removeFromWishlist(props.product.id);
           props.product.isInWishlist = false;
         } else {
           await wishlistStore.addToWishlist(props.product);
