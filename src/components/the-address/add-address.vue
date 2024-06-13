@@ -1,5 +1,4 @@
 <template>
-  <address-component @edit-address="editAddress"></address-component>
   <div class="flex flex-col mb-5 space-y-4">
     <label class="text-lg font-medium text-secondary-200"
       >Personal details</label
@@ -9,7 +8,7 @@
       <input
         type="text"
         id="firstName"
-        v-model="newAddress.firstName"
+        v-model="userDetails.firstName"
         @input="validateField('firstName')"
         class="border-gray-300 pl-3 py-2 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 text-gray-900 block px-2.5 pb-2.5 pt-4 w-full text-sm rounded-lg border-1 appearance-none focus:ring-0 peer"
         placeholder=" "
@@ -19,9 +18,8 @@
         class="absolute text-sm duration-300 transform -translate-y-4 scale-80 top-2 z-10 origin-[0] focus:ring-indigo-500 bg-white px-2 peer-focus:px-2 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-1 peer-focus:left-3 peer-focus:scale-80 peer-focus:-translate-y-4 text-secondary-100"
         >First Name</label
       >
-      <p class="mt-2 text-primary-200"></p>
     </div>
-    <p class="text-red-500">
+    <p class="text-sm text-red-500">
       {{ errors.firstName }}
     </p>
 
@@ -29,7 +27,7 @@
       <input
         type="text"
         id="lastName"
-        v-model="newAddress.lastName"
+        v-model="userDetails.lastName"
         @input="validateField('lastName')"
         class="border-gray-300 pl-3 py-2 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 text-gray-900 block px-2.5 pb-2.5 pt-4 w-full text-sm rounded-lg border-1 appearance-none focus:ring-0 peer"
         placeholder=" "
@@ -41,7 +39,7 @@
       >
       <p class="mt-2 text-primary-200"></p>
     </div>
-    <p class="text-red-500">
+    <p class="text-lg text-red-500">
       {{ errors.lastName }}
     </p>
 
@@ -50,7 +48,7 @@
         type="tel"
         id="mobileNumber"
         maxlength="10"
-        v-model="newAddress.mobileNumber"
+        v-model="userDetails.mobileNo"
         @input="validateField('mobileNumber')"
         class="border-gray-300 pl-3 py-2 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 text-gray-900 block px-2.5 pb-2.5 pt-4 w-full text-sm rounded-lg border-1 appearance-none focus:ring-0 peer"
         placeholder=" "
@@ -62,7 +60,7 @@
       >
       <p class="mt-2 text-primary-200"></p>
     </div>
-    <p class="text-red-500">
+    <p class="text-lg text-red-500">
       {{ errors.mobileNumber }}
     </p>
 
@@ -86,7 +84,7 @@
       >
       <p class="mt-2 text-primary-200"></p>
     </div>
-    <p class="text-red-500">
+    <p class="text-lg text-red-500">
       {{ errors.addressLine1 }}
     </p>
 
@@ -106,7 +104,7 @@
       >
       <p class="mt-2 text-primary-200"></p>
     </div>
-    <p class="text-red-500">
+    <p class="text-lg text-red-500">
       {{ errors.addressLine2 }}
     </p>
     <div class="relative border rounded-md">
@@ -133,7 +131,7 @@
       >
       <p class="mt-2 text-primary-200"></p>
     </div>
-    <p class="text-red-500">
+    <p class="text-lg text-red-500">
       {{ errors.countryId }}
     </p>
 
@@ -141,7 +139,12 @@
       <select
         id="states"
         v-model="newAddress.stateId"
-        @change="validateField('stateId')"
+        @change="
+          () => {
+            validateField('stateId');
+            fetchCity(newAddress.stateId);
+          }
+        "
         class="border-gray-300 pl-3 py-2 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 text-gray-900 block px-2.5 pb-2.5 pt-4 w-full text-sm rounded-lg border-1 appearance-none focus:ring-0 peer"
       >
         <option selected disabled>Choose a state</option>
@@ -161,7 +164,7 @@
       >
       <p class="mt-2 text-primary-200"></p>
     </div>
-    <p class="text-red-500">
+    <p class="text-lg text-red-500">
       {{ errors.stateId }}
     </p>
 
@@ -189,7 +192,7 @@
       >
       <p class="mt-2 text-primary-200"></p>
     </div>
-    <p class="text-red-500">
+    <p class="text-lg text-red-500">
       {{ errors.cityId }}
     </p>
 
@@ -209,30 +212,33 @@
       >
       <p class="mt-2 text-primary-200"></p>
     </div>
-    <p class="text-red-500">
+    <p class="text-lg text-red-500">
       {{ errors.pincode }}
     </p>
 
     <button
-      @click="submitAddress"
-      :disabled="!canSubmit"
+      @click="addressToEdit ? updateAddress() : addAddress()"
       class="flex justify-center w-full px-4 py-2 text-sm font-medium text-white border border-transparent rounded-md shadow-sm bg-primary-300 hover:bg-primary-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed"
     >
-      Add address
+      {{ addressToEdit ? "Update" : "Add address" }}
     </button>
   </div>
 </template>
 
 <script>
-import { ref, computed, onMounted } from "vue";
+import { ref, computed, onMounted, watch } from "vue";
+import axios from "axios";
 import { useAddressStore } from "../../store/address";
 
 export default {
-  setup() {
+  props: {
+    addressToEdit: {
+      type: Object,
+      default: null,
+    },
+  },
+  setup(props, { emit }) {
     const addressStore = useAddressStore();
-    let allCities = ref([]);
-    let allStates = ref([]);
-    let allCountries = ref([]);
 
     const newAddress = ref({
       firstName: "",
@@ -258,19 +264,74 @@ export default {
       pincode: "",
     });
 
-    const editAddress = (address) => {
-      newAddress.value = { ...address };
-      console.log("edit", editAddress);
+    const userDetails = ref({
+      firstName: "",
+      lastName: "",
+      mobileNo: "",
+      email: "",
+      addresses: [],
+    });
+
+    const isLoading = ref(true);
+
+    const save = async () => {
+      try {
+        const token = localStorage.getItem("token");
+
+        const response = await axios.get(
+          "https://api.8orbit.shop/api/v1/userDetails",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        userDetails.value = response.data;
+      } catch (error) {
+        console.error("Error fetching user details:", error.message);
+      } finally {
+        isLoading.value = false;
+      }
     };
+
+    const allCountries = computed(() => addressStore.countries);
+    const allStates = computed(() => addressStore.states);
+    const allCities = computed(() => addressStore.cities);
 
     onMounted(async () => {
       await addressStore.fetchCountries();
       await addressStore.fetchStates();
-      await addressStore.fetchCities();
-      allCities.value = await addressStore.cities;
-      allStates.value = await addressStore.states;
-      allCountries.value = await addressStore.countries;
+      save();
     });
+
+    watch(
+      () => props.addressToEdit,
+      (newVal) => {
+        if (newVal) {
+          fetchCity(newVal.state.id);
+
+          // console.log('newid',newVal.city.id);
+          newAddress.value = {
+            firstName: newVal.firstName,
+            lastName: newVal.lastName,
+            mobileNumber: newVal.mobileNumber,
+            addressLine1: newVal.addressLine1,
+            addressLine2: newVal.addressLine2,
+            countryId: newVal.country.id,
+            stateId: newVal.state.id,
+            cityId: newVal.city.id,
+            pincode: newVal.pincode,
+          };
+          window.scrollTo(0, 0);
+        } else {
+          resetNewAddress();
+        }
+      }
+    );
+
+    const fetchCity = (id) => {
+      addressStore.fetchCities(id);
+    };
 
     const validateField = (field) => {
       switch (field) {
@@ -345,37 +406,72 @@ export default {
       );
     });
 
-    const submitAddress = async () => {
+    const addAddress = async () => {
       try {
         await addressStore.createAddress(newAddress.value);
         await addressStore.fetchAddresses();
-        newAddress.value = {
-          firstName: "",
-          lastName: "",
-          mobileNumber: "",
-          addressLine1: "",
-          addressLine2: "",
-          countryId: "",
-          stateId: "",
-          cityId: "",
-          pincode: "",
-        };
+        resetNewAddress();
+        emit("addressSubmitted", newAddress.value);
       } catch (error) {
         console.error("Error submitting address:", error);
       }
     };
 
+    const updateAddress = async () => {
+      try {
+        await axios.put(
+          `https://api.8orbit.shop/api/v1/address/${props.addressToEdit.id}`,
+          newAddress.value,
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          }
+        );
+        await addressStore.fetchAddresses();
+        resetNewAddress();
+        emit("addressUpdated", newAddress.value);
+      } catch (error) {
+        console.error("Error updating address:", error);
+      }
+    };
+
+    const resetNewAddress = () => {
+      newAddress.value = {
+        firstName: "",
+        lastName: "",
+        mobileNumber: "",
+        addressLine1: "",
+        addressLine2: "",
+        countryId: "",
+        stateId: "",
+        cityId: "",
+        pincode: "",
+      };
+    };
+
+    const handleSubmit = () => {
+      if (props.addressToEdit) {
+        updateAddress();
+      } else {
+        addAddress();
+      }
+    };
+
     return {
-      addresses: addressStore.addresses,
-      error: addressStore.error,
       newAddress,
       allCities,
+      fetchCity,
       allCountries,
       allStates,
       errors,
       validateField,
       canSubmit,
-      submitAddress,
+      save,
+      userDetails,
+      addAddress,
+      updateAddress,
+      handleSubmit,
     };
   },
 };

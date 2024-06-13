@@ -25,6 +25,18 @@ export const useWishlistStore = defineStore("wishlist", {
 
         if (response.status === 200) {
           this.wishlist = response.data;
+
+          // Check if there are any products with isDefault = true
+          const defaultProduct = this.wishlist.find(
+            (product) => product.isDefault === true
+          );
+          if (defaultProduct) {
+            console.log("Default product found:", defaultProduct);
+            // You can also set this.defaultProduct if you want to store it separately
+            this.defaultProduct = defaultProduct;
+          } else {
+            console.log("No default product found");
+          }
         } else {
           this.error = "Failed to fetch wishlist";
           console.error("Failed to fetch wishlist");
@@ -39,6 +51,7 @@ export const useWishlistStore = defineStore("wishlist", {
         this.loading = false;
       }
     },
+
     async addToWishlist(product, router) {
       this.error = null;
       try {
@@ -76,7 +89,6 @@ export const useWishlistStore = defineStore("wishlist", {
         if (!token) {
           throw new Error("No authentication token found");
         }
-
         const response = await axios.delete(
           `${baseURL}/v1/wishlist/${productId}`,
           {

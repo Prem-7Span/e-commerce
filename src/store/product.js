@@ -16,22 +16,19 @@ export const useProductStore = defineStore("product", {
   }),
   actions: {
     async fetchProductList(token) {
-      console.log("==>token", token);
+      if (this.productData.length > 0) {
+        return this.productData;
+      }
+
+      const headers = token ? { Authorization: `Bearer ${token}` } : {};
+
       try {
-        // if (this.productData.length > 0) {
-        //   return this.productData;
-        // }
-
-        const headers = token ? { Authorization: `Bearer ${token}` } : {};
         const response = await axios.get(`${baseURL}/v1/product`, { headers });
-        console.log("==>response", response);
-
         this.productData = response.data;
-        console.log("==>ProductData", this.productData);
         return this.productData;
       } catch (error) {
-        console.log("==>Error", error);
         console.error("Error fetching products:", error);
+        throw error;
       }
     },
 
@@ -51,8 +48,10 @@ export const useProductStore = defineStore("product", {
         return response.data;
       } catch (error) {
         console.error("Error applying filters and fetching products:", error);
+        throw error;
       }
     },
+
     clearFilters() {
       this.categoryName = [];
       this.parentCategory = [];
@@ -62,13 +61,16 @@ export const useProductStore = defineStore("product", {
       this.maxPrice = 1500;
       this.fetchProductList();
     },
-    async addToWishlist(product) {
-      try {
-        const token = localStorage.getItem("token");
-        if (!token) {
-          throw new Error("No authentication token found");
-        }
 
+    async addToWishlist(product) {
+      const token = localStorage.getItem("token");
+
+      if (!token) {
+        console.error("No authentication token found");
+        throw new Error("No authentication token found");
+      }
+
+      try {
         const response = await axios.post(
           `${baseURL}/v1/wishlist`,
           { productId: product.id },
@@ -82,13 +84,12 @@ export const useProductStore = defineStore("product", {
         }
       } catch (error) {
         console.error("Error adding product to wishlist:", error);
+        throw error;
       }
     },
   },
   getters: {
-    getProductData() {
-      return this.productData;
-    },
+    getProductData: (state) => state.productData,
   },
   persist: true,
 });

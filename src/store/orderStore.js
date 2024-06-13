@@ -37,7 +37,7 @@ export const useOrderStore = defineStore("order", {
               return {
                 id: orderData.id,
                 date: orderData.createdAt,
-                productImage: "path/to/default/image.jpg", // Replace with the actual image URL if available in the response
+                productImage: productVariant?.products.images[0], // Replace with the actual image URL if available in the response
                 productName: orderItem.productName,
                 productSize: productVariant.size,
                 productColor: productVariant.color,

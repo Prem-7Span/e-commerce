@@ -288,7 +288,6 @@ const decrement = () => {
 const addToCart = async () => {
   try {
     const token = localStorage.getItem("token");
-    console.log("token", token);
     if (!token) {
       router.push({ name: "SignIn" }); // Redirect to the sign-in page
       return;
@@ -336,7 +335,6 @@ const addToWishlist = async () => {
       }
     );
     toast.success("Product added to wishlist");
-    console.log("Added to wishlist:", response.data);
   } catch (error) {
     console.error("Error adding to wishlist:", error);
   }

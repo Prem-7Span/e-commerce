@@ -94,7 +94,7 @@
             :label="true"
             :minValue="productStore.minPrice"
             :maxValue="productStore.maxPrice"
-            @input="UpdateValues"
+            @input="updateValues"
           />
           <div class="flex justify-between">
             <p>Min</p>
@@ -350,7 +350,7 @@ export default {
       sidebar.value = !sidebar.value;
     };
 
-    const updateValues = (value) => {
+    const UpdateValues = (value) => {
       productStore.minPrice = value.minValue;
       productStore.maxPrice = value.maxValue;
     };
@@ -387,7 +387,9 @@ export default {
     };
 
     onMounted(async () => {
-      filteredProducts.value = await productStore.fetchProductList();
+      filteredProducts.value = await productStore.fetchProductList(
+        localStorage.getItem("token")
+      );
       handleResize();
       window.addEventListener("resize", handleResize);
     });
@@ -451,7 +453,7 @@ export default {
       filteredProducts,
       handleResize,
       openSidebar,
-      updateValues,
+      UpdateValues,
       applyFilters,
       applyFiltersAndCloseSidebar,
       clearFilters,
