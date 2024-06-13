@@ -18,6 +18,7 @@
 
       <div id="wishlist">
         <button
+          v-if="$route.path !== '/wishlist'"
           @click.stop="toggleWishlist"
           class="absolute top-0 right-0 px-2 py-2 mt-2 mb-2 mr-2 bg-white rounded-full"
         >
