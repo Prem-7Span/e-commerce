@@ -116,8 +116,6 @@ const placeOrder = async () => {
       }
     );
 
-    console.log("Order placed successfully:", orderResponse.data);
-
     const orderId = orderResponse.data.orderId;
     if (!orderId) {
       console.error("No orderId found in order response");
@@ -134,11 +132,8 @@ const placeOrder = async () => {
       }
     );
 
-    console.log("Payment initiated successfully:", paymentResponse.data);
-
     const paymentUrl = paymentResponse.data;
     if (paymentUrl) {
-      console.log("Redirecting to payment URL:", paymentUrl);
       window.open(paymentUrl);
     } else {
       console.error("No URL found in payment response");
