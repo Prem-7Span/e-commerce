@@ -31,11 +31,11 @@ export const useWishlistStore = defineStore("wishlist", {
             (product) => product.isDefault === true
           );
           if (defaultProduct) {
-            console.log("Default product found:", defaultProduct);
+            // console.log("Default product found:", defaultProduct);
             // You can also set this.defaultProduct if you want to store it separately
             this.defaultProduct = defaultProduct;
           } else {
-            console.log("No default product found");
+            // console.log("No default product found");
           }
         } else {
           this.error = "Failed to fetch wishlist";
