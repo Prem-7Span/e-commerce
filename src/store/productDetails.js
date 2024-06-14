@@ -11,7 +11,8 @@ export const useProductDetailsStore = defineStore("product-details", {
   actions: {
     async fetchProductDetails(slug) {
       try {
-        (this.isLoading = true), console.log("Slug:", slug); // Log the slug object
+        (this.isLoading = true), 
+        console.log("Slug:", slug); // Log the slug object
         const response = await fetch(
           `https://api.8orbit.shop/api/v1/product/${slug}`
         );
