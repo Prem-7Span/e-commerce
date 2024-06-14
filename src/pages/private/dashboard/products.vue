@@ -16,7 +16,7 @@
           <th class="px-4 py-2 border-b-2 border-gray-300 bg-gray-800 text-white">Price</th>
           <th class="px-4 py-2 border-b-2 border-gray-300 bg-gray-800 text-white">Stock</th>
           <th class="px-4 py-2 border-b-2 border-gray-300 bg-gray-800 text-white">Status</th>
-          <th class="px-4 py-2 border-b-2 border-gray-300 bg-gray-800 text-white">Edit</th>
+          <th class="px-4 py-2 border-b-2 border-gray-300 bg-gray-800 text-white">Category</th>
           <th class="px-4 py-2 border-b-2 border-gray-300 bg-gray-800 text-white">Delete</th>
         </tr>
       </thead>
@@ -24,15 +24,13 @@
         <tr v-for="(product, index) in products" :key="index" class="text-center">
           <td class="px-4 py-2 border-b">{{ index + 1 }}</td>
           <td class="px-4 py-2 border-b">
-            <img :src="product.image" alt="Product Image" class="h-12 w-12 object-cover mx-auto">
+            <img :src="product.images[0] ? product.images[0].imageUrl : 'https://via.placeholder.com/50'" alt="Product Image" class="h-12 w-12 object-cover mx-auto">
           </td>
           <td class="px-4 py-2 border-b">{{ product.name }}</td>
-          <td class="px-4 py-2 border-b">{{ product.price }}</td>
-          <td class="px-4 py-2 border-b">{{ product.stock }}</td>
-          <td class="px-4 py-2 border-b">{{ product.status }}</td>
-          <td class="px-4 py-2 border-b">
-            <button @click="editProduct(product)" class="bg-blue-500 text-white py-1 px-2 rounded hover:bg-blue-700">Edit</button>
-          </td>
+          <td class="px-4 py-2 border-b">{{ product.productVariants[0].price }}</td>
+          <td class="px-4 py-2 border-b">{{ product.productVariants[0].stock }}</td>
+          <td class="px-4 py-2 border-b">{{ product.isActive ? 'Active' : 'Inactive' }}</td>
+          <td class="px-4 py-2 border-b">{{ product.categories.categoryName }}</td>
           <td class="px-4 py-2 border-b">
             <button @click="deleteProduct(product)" class="bg-red-500 text-white py-1 px-2 rounded hover:bg-red-700">Delete</button>
           </td>
@@ -43,28 +41,45 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   name: 'ProductTable',
   data() {
     return {
-      products: [
-        { image: 'https://via.placeholder.com/50', name: 'T-shirt', price: 'Rs. 1200', stock: 42, status: 'Active' },
-        { image: 'https://via.placeholder.com/50', name: 'T-shirt', price: 'Rs. 1200', stock: 93, status: 'Active' },
-        { image: 'https://via.placeholder.com/50', name: 'T-shirt', price: 'Rs. 1200', stock: 0, status: 'Inactive' },
-      ]
+      products: [],
+      token: localStorage.getItem("token") // Corrected the syntax error
     };
   },
+  created() {
+    this.fetchProducts();
+  },
   methods: {
-    editProduct(product) {
-      
-      console.log('Editing product:', product);
+    fetchProducts() {
+      axios.get('https://api.8orbit.shop/api/v1/product')
+        .then(response => {
+          this.products = response.data;
+        })
+        .catch(error => {
+          console.error('There was an error fetching the products!', error);
+        });
     },
-   deleteProduct(product) {
+    deleteProduct(product) {
       if (confirm(`Are you sure you want to delete the product: ${product.name}?`)) {
-        this.products = this.products.filter(p => p !== product);
+        axios.delete(`https://api.8orbit.shop/api/v1/product/${product.slug}`, {
+          headers: {
+            'Authorization': `Bearer ${this.token}` // Add token in headers
+          }
+        })
+        .then(() => {
+          this.products = this.products.filter(p => p !== product);
+        })
+        .catch(error => {
+          console.error('There was an error deleting the product!', error);
+        });
+      }
     }
   }
-}
 };
 </script>
 
