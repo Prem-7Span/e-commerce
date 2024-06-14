@@ -5,17 +5,17 @@
         <div
           class="flex flex-col items-center justify-center px-4 py-12 border sm:max-w-md card-3 sm:max-h-52 max-w-40"
         >
-          <img src="/public/home-page/semi-colon.svg" alt="" />
+          <img src="/home-page/semi-colon.svg" alt="" />
           <p class="text-xs sm:text-base">
             Lorem ipsum dolor sit amet consectetur. Leo volutpat elit quam
             egestas placerat adipiscing faucibus sodales.
           </p>
           <div class="flex px-2 py-3">
-            <img src="/public/stars/yellow-star.svg" alt="yellow-star" />
-            <img src="/public/stars/yellow-star.svg" alt="yellow-star" />
-            <img src="/public/stars/yellow-star.svg" alt="yellow-star" />
-            <img src="/public/stars/yellow-star.svg" alt="yellow-star" />
-            <img src="/public/stars/black-star.svg" alt="black-star" />
+            <img src="/stars/yellow-star.svg" alt="yellow-star" />
+            <img src="/stars/yellow-star.svg" alt="yellow-star" />
+            <img src="/stars/yellow-star.svg" alt="yellow-star" />
+            <img src="/stars/yellow-star.svg" alt="yellow-star" />
+            <img src="/stars/black-star.svg" alt="black-star" />
           </div>
         </div>
       </div>
