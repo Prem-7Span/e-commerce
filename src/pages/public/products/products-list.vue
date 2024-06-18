@@ -275,25 +275,16 @@
           </button>
         </div>
       </div>
-      
+
       <div>
-        <div v-if="filteredProducts.length === 0" class="flex flex-col px-12 mt-36 items-center justify-center py-10">
-          <p class="text-lg font-semibold">No products match your filters.</p>
-          <p class="text-lg">Try adjusting your filters</p>
-          <div class="py-4 max-w-56">
-              <button @click="clearFilters" class="block w-full px-8 py-2 text-white rounded-md bg-primary-300">
-                View All Products
-              </button>
-          </div>
-        </div>
-        <div v-else class="grid grid-cols-2 gap-5 py-4 md:gap-8 md:grid-cols-5">
+        <div class="grid grid-cols-2 gap-5 py-4 md:gap-8 md:grid-cols-5">
           <ProductCard
             v-for="(product, index) in paginatedProducts"
             :key="index"
             :product="product"
           />
         </div>
-        <div v-if="filteredProducts.length !== 0" class="flex justify-center mt-4 mb-8">
+        <div class="flex justify-center mt-4 mb-8">
           <button
             @click="previousPage"
             :disabled="currentPage === 1"
@@ -321,7 +312,6 @@
     </div>
   </div>
 </template>
-
 
 <script>
 import { ref, computed, onMounted, onBeforeUnmount } from "vue";
