@@ -7,9 +7,16 @@ export const useOrdersStore = defineStore("orders", {
     orders: [],
   }),
   actions: {
-    async fetchOrders() {
+    async fetchOrders(router) {
       try {
         const token = localStorage.getItem("token");
+
+        // Check if the token is not present
+        if (!token) {
+          router.push({ name: "admin-sign-in" }); // Adjust the route name according to your router setup
+          return;
+        }
+
         const response = await fetch(
           "https://api.8orbit.shop/api/v1/getAllOrder",
           {
