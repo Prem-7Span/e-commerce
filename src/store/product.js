@@ -11,6 +11,7 @@ export const useProductStore = defineStore("product", {
     minPrice: 0,
     maxPrice: 1500,
     color: [],
+    discount : [],
     size: [],
     wishlist: [], // Add wishlist state
   }),
@@ -40,6 +41,7 @@ export const useProductStore = defineStore("product", {
             parentCategory: this.parentCategory,
             color: this.color,
             size: this.size,
+            discount: this.discount,
             minPrice: this.minPrice,
             maxPrice: this.maxPrice,
           },
@@ -57,6 +59,7 @@ export const useProductStore = defineStore("product", {
       this.parentCategory = [];
       this.color = [];
       this.size = [];
+      this.discount = [];
       this.minPrice = 0;
       this.maxPrice = 1500;
       this.fetchProductList();
