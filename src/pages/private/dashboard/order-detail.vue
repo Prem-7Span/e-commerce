@@ -7,7 +7,7 @@
       <div class="space-y-4" v-if="order">
         <!-- Customer details -->
         <div class="flex items-center space-x-4">
-          <label for="customerId" class="w-32 mb-1 text-lg">Customer Id</label>
+          <!-- <label for="customerId" class="w-32 mb-1 text-lg">Customer Id</label> -->
           <input
             type="text"
             id="customerId"

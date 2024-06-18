@@ -78,7 +78,6 @@
               <span class="ml-3">Orders</span>
             </a>
           </router-link>
-          <hr />
         </li>
       </ul>
     </nav>

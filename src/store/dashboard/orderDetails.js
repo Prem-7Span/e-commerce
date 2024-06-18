@@ -3,7 +3,7 @@ import { defineStore } from "pinia";
 import axios from "axios";
 import { ref } from "vue";
 
-export const useOrderDetailsStore = defineStore("orderDetails", () => {
+export const useOrderDetailsStore = defineStore("orderss", () => {
   const order = ref(null);
   const loading = ref(false);
   const error = ref(null);
