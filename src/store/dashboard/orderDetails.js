@@ -15,6 +15,11 @@ export const useOrderDetailsStore = defineStore("orderss", () => {
     // Retrieve the token from localStorage
     const token = localStorage.getItem("token");
 
+    if (!token) {
+      router.push({ name: "admin-sign-in" }); // Adjust the route name according to your router setup
+      return;
+    }
+
     try {
       const response = await axios.get(
         `https://api.8orbit.shop/api/v1/orderById/${orderId}`,
