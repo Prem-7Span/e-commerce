@@ -221,37 +221,38 @@
         <h2 class="font-bold">Discount</h2>
         <hr class="p-1 px-20" />
         <div class="grid grid-cols-2 mb-2 md:block">
-          <div>
-            <input
-              type="radio"
-              id="20"
-              value="20"
-              v-model="productStore.discount"
-            />
-            <label for="20">Upto 20%</label><br />
-            <input
-              type="radio"
-              id="40"
-              value="40"
-              v-model="productStore.discount"
-            />
-            <label for="40">Upto 40%</label><br />
-            <input
-              type="radio"
-              id="60"
-              value="60"
-              v-model="productStore.discount"
-            />
-            <label for="60">Upto 60%</label><br />
-            <input
-              type="radio"
-              id="80"
-              value="80"
-              v-model="productStore.discount"
-            />
-            <label for="80">Upto 80%</label><br />
-          </div>
-        </div>
+  <div>
+    <input
+      type="radio"
+      id="20"
+      value="20"
+      v-model="productStore.discount"
+    />
+    <label for="20">Upto 20%</label><br />
+    <input
+      type="radio"
+      id="40"
+      value="40"
+      v-model="productStore.discount"
+    />
+    <label for="40">Upto 40%</label><br />
+    <input
+      type="radio"
+      id="60"
+      value="60"
+      v-model="productStore.discount"
+    />
+    <label for="60">Upto 60%</label><br />
+    <input
+      type="radio"
+      id="80"
+      value="80"
+      v-model="productStore.discount"
+    />
+    <label for="80">Upto 80%</label><br />
+  </div>
+</div>
+
 
         <div
           class="sticky bottom-0 p-10 text-center bg-white w-72 left-9 right-9 md:hidden"
@@ -275,16 +276,25 @@
           </button>
         </div>
       </div>
-
+      
       <div>
-        <div class="grid grid-cols-2 gap-5 py-4 md:gap-8 md:grid-cols-5">
+        <div v-if="filteredProducts.length === 0" class="flex flex-col px-12 mt-36 items-center justify-center py-10">
+          <p class="text-lg font-semibold">No products match your filters.</p>
+          <p class="text-lg">Try adjusting your filters</p>
+          <div class="py-4 max-w-56">
+              <button @click="clearFilters" class="block w-full px-8 py-2 text-white rounded-md bg-primary-300">
+                View All Products
+              </button>
+          </div>
+        </div>
+        <div v-else class="grid grid-cols-2 gap-5 py-4 md:gap-8 md:grid-cols-5">
           <ProductCard
             v-for="(product, index) in paginatedProducts"
             :key="index"
             :product="product"
           />
         </div>
-        <div class="flex justify-center mt-4 mb-8">
+        <div v-if="filteredProducts.length !== 0" class="flex justify-center mt-4 mb-8">
           <button
             @click="previousPage"
             :disabled="currentPage === 1"
@@ -312,6 +322,7 @@
     </div>
   </div>
 </template>
+
 
 <script>
 import { ref, computed, onMounted, onBeforeUnmount } from "vue";
