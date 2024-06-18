@@ -21,12 +21,15 @@
           <div>
             <div class="flex items-end justify-between">
               <div>
+                <router-link :to="{ name: 'details', params: { slug: order.productsulg  } }">
+
                 <div class="flex gap-2 text-sm">
                   <p>Order id:</p>
                   <p>{{ order.id }}</p>
                   |
                   <p>{{ new Date(order.date).toLocaleDateString() }}</p>
                 </div>
+                </router-link>
                 <div class="flex items-end justify-between">
                   <p
                     class="items-center mt-3 text-3xl font-bold md:text-lg md:mb-2 text-primary-300 line-clamp-2 max-w-72"

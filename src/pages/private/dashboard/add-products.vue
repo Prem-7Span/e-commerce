@@ -102,6 +102,9 @@
 import { onMounted, reactive, ref, watch } from 'vue';
 import AddVariant from './add-variant.vue';
 import axios from 'axios';
+import { useRouter } from 'vue-router'
+const router = useRouter()
+
 
 const addproduct = reactive({
   productName: '',
@@ -252,6 +255,8 @@ const save = async () => {
       });
       console.log('Product created:', response.data);
       await updateProductAndFetchImages();
+      await   router.push({ path: 'adminproducts' })
+
     } catch (error) {
       console.error('Error creating product:', error);
     }
