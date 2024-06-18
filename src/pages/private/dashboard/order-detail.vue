@@ -6,8 +6,8 @@
       <h1 class="mb-4 text-xl font-semibold">Order Id: {{ orderId }}</h1>
       <div class="space-y-4" v-if="order">
         <!-- Customer details -->
-        <div class="flex items-center space-x-4">
-          <!-- <label for="customerId" class="w-32 mb-1 text-lg">Customer Id</label> -->
+        <!-- <div class="flex items-center space-x-4">
+          <label for="customerId" class="w-32 mb-1 text-lg">Customer Id</label>
           <input
             type="text"
             id="customerId"
@@ -15,7 +15,7 @@
             class="flex w-1/2 p-2 border rounded-md"
             disabled
           />
-        </div>
+        </div> -->
         <div class="flex items-center space-x-4">
           <label for="customerId" class="w-32 mb-1 text-lg"
             >Customer Email</label
@@ -230,6 +230,8 @@ const updateStatus = () => {
 };
 
 onMounted(() => {
-  orderDetailsStore.fetchOrderDetails(orderId.value);
+  orderDetailsStore.fetchOrderDetails(orderId.value).then(() => {
+    selectedStatus.value = order.value.orderStatus; // Set the initial status to the current order status
+  });
 });
 </script>

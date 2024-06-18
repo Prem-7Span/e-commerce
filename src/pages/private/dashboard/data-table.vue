@@ -17,11 +17,10 @@
         <tbody>
           <tr v-for="(order, index) in orders" :key="order.id">
             <td class="px-4 py-2 border">{{ index + 1 }}.</td>
-            <td class="px-4 py-2 border">==>{{ order.mobileNumber }}</td>
+            <td class="px-4 py-2 border">{{ order.mobileNumber }}</td>
 
             <td class="px-4 py-2 border">{{ order.orderId }}</td>
             <td class="px-4 py-2 border">
-              ==> {{ order.date }} ==>
               {{ new Date(order.date).toLocaleDateString() }}
             </td>
             <td class="px-4 py-2 border">{{ order.amount }}</td>
