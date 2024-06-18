@@ -12,12 +12,14 @@
         @input="validateField('firstName')"
         class="border-gray-300 pl-3 py-2 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 text-gray-900 block px-2.5 pb-2.5 pt-4 w-full text-sm rounded-lg border-1 appearance-none focus:ring-0 peer"
         placeholder=" "
+        readonly
       />
       <label
         for="firstName"
         class="absolute text-sm duration-300 transform -translate-y-4 scale-80 top-2 z-10 origin-[0] focus:ring-indigo-500 bg-white px-2 peer-focus:px-2 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-1 peer-focus:left-3 peer-focus:scale-80 peer-focus:-translate-y-4 text-secondary-100"
         >First Name</label
       >
+      
     </div>
     <p class="text-sm text-red-500">
       {{ errors.firstName }}
@@ -31,6 +33,7 @@
         @input="validateField('lastName')"
         class="border-gray-300 pl-3 py-2 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 text-gray-900 block px-2.5 pb-2.5 pt-4 w-full text-sm rounded-lg border-1 appearance-none focus:ring-0 peer"
         placeholder=" "
+        readonly
       />
       <label
         for="lastName"
@@ -52,6 +55,7 @@
         @input="validateField('mobileNumber')"
         class="border-gray-300 pl-3 py-2 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 text-gray-900 block px-2.5 pb-2.5 pt-4 w-full text-sm rounded-lg border-1 appearance-none focus:ring-0 peer"
         placeholder=" "
+        readonly
       />
       <label
         for="mobileNumber"

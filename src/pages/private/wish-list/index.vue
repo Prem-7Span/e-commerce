@@ -73,7 +73,7 @@ export default {
     };
 
     const removeFromWishlist = async (product) => {
-      console.log("====>>>>>", product.productId);
+      // console.log("====>>>>>", product.productId);
       try {
         await wishlistStore.removeFromWishlist(product.productId, router);
         await fetchWishlist(); // Refresh the wishlist after removal

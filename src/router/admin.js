@@ -13,8 +13,11 @@ const routes = [
     name: "layout",
     path: "",
     component: auth,
-    redirect: { name: "admin-sign-in" },
     children: [
+      {
+        path: "",
+        redirect: { name: "admin-sign-in" },
+      },
       {
         name: "admin-sign-in",
         path: "sign-in",

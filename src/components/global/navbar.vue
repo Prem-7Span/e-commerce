@@ -41,7 +41,7 @@
             <div
               class="absolute flex items-center pointer-events-none md:inset-y-0 inset-y-1 start-0 ps-3"
             >
-              <img src="/public/home-page/Vector.svg" alt="Search Icon" />
+              <img src="/home-page/Vector.svg" alt="Search Icon" />
             </div>
             <input
               type="search"
@@ -94,7 +94,7 @@
                   aria-expanded="true"
                 >
                   <img
-                    src="/public/default/profile-logo.svg"
+                    src="/default/profile-logo.svg"
                     alt="Profile"
                     class="w-5 h-6"
                   />
