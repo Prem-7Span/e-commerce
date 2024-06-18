@@ -1,14 +1,21 @@
 // src/stores/ordersStore.js
 import { defineStore } from "pinia";
 
-export const useOrdersStore = defineStore("orders", {
+export const useOrdersStore = defineStore("orderDetails", {
   state: () => ({
     orders: [],
   }),
   actions: {
-    async fetchOrders() {
+    async fetchOrders(router) {
       try {
         const token = localStorage.getItem("token");
+
+        // Check if the token is not present
+        if (!token) {
+          router.push({ name: "admin-sign-in" }); // Adjust the route name according to your router setup
+          return;
+        }
+
         const response = await fetch(
           "https://api.8orbit.shop/api/v1/getAllOrder",
           {

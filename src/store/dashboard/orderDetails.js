@@ -3,7 +3,7 @@ import { defineStore } from "pinia";
 import axios from "axios";
 import { ref } from "vue";
 
-export const useOrderDetailsStore = defineStore("orderDetails", () => {
+export const useOrderDetailsStore = defineStore("orderss", () => {
   const order = ref(null);
   const loading = ref(false);
   const error = ref(null);
@@ -14,6 +14,11 @@ export const useOrderDetailsStore = defineStore("orderDetails", () => {
 
     // Retrieve the token from localStorage
     const token = localStorage.getItem("token");
+
+    if (!token) {
+      router.push({ name: "admin-sign-in" }); // Adjust the route name according to your router setup
+      return;
+    }
 
     try {
       const response = await axios.get(

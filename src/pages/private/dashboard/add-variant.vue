@@ -17,15 +17,15 @@
       </div>
 
       <div class="flex items-center space-x-4">
-        <label for="Colors" class="text-lg mb-1 w-32">Colors</label>
+        <label for="Colors" class="text-lg mb-1  w-32">Colors</label>
         <select id="Colors" v-model="newVariant.color" class="flex w-1/2 p-2 border rounded-md">
           <option value="" disabled>Select</option>
-          <option value="Black">Black</option>
-          <option value="White">White</option>
-          <option value="Blue">Blue</option>
-          <option value="Green">Green</option>
-          <option value="Pink">Pink</option>
-          <option value="Red">Red</option>
+<option class="bg-black text-white" value="Black">Black</option>
+<option class="bg-white" value="White">White</option>
+<option class="bg-blue-500" value="Blue">Blue</option>
+<option class="bg-green-500" value="Green">Green</option>
+<option class="bg-pink-500" value="Pink">Pink</option>
+<option class="bg-red-500" value="Red">Red</option>
         </select>
       </div>
 
@@ -115,7 +115,7 @@ const addNewVariant = () => {
     variants.value.push(variant);
     emit('variantAdded', variant);
     newVariant.size = '';
-    newVariant.color = '';
+    newVariant.color = '';  
     newVariant.regularPrice = '';
     newVariant.price = '';
     newVariant.stock = '';
