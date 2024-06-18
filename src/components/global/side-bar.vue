@@ -1,5 +1,18 @@
 <template>
   <div class="sticky top-0 flex flex-col h-screen p-4 bg-white">
+    <div
+      class="flex justify-between py-2 font-bold p md:px-2 md:flex-row md:space-x-4"
+    >
+      <div class="flex gap-5">
+        <div class="py-2 logo">
+          <img
+            src="/default/8-orbit-logo-homepage.png"
+            alt="logo"
+            class="max-w-28"
+          />
+        </div>
+      </div>
+    </div>
     <nav>
       <ul>
         <li>
@@ -66,43 +79,32 @@
             </a>
           </router-link>
           <hr />
-          <a
-            href="#"
-            @click="confirmLogout"
-            class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-200"
-          >
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M17 8L15.59 9.41L17.17 11H9V13H17.17L15.59 14.58L17 16L21 12L17 8ZM5 5H12V3H5C3.9 3 3 3.9 3 5V19C3 20.1 3.9 21 5 21H12V19H5V5Z"
-                fill="#757575"
-              />
-            </svg>
-            <span class="ml-3">Logout</span>
-          </a>
         </li>
       </ul>
     </nav>
     <div class="mt-auto">
       <hr />
     </div>
-    <div
-      class="flex justify-between px-2 py-4 font-bold md:px-8 md:flex-row md:space-x-4"
-    >
-      <div class="flex gap-5">
-        <div class="py-2 logo">
-          <img
-            src="/default/8-orbit-logo-homepage.png"
-            alt="logo"
-            class="max-w-28"
+    <div>
+      <a
+        href="#"
+        @click="confirmLogout"
+        class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-200"
+      >
+        <svg
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M17 8L15.59 9.41L17.17 11H9V13H17.17L15.59 14.58L17 16L21 12L17 8ZM5 5H12V3H5C3.9 3 3 3.9 3 5V19C3 20.1 3.9 21 5 21H12V19H5V5Z"
+            fill="#757575"
           />
-        </div>
-      </div>
+        </svg>
+        <span class="ml-3">Logout</span>
+      </a>
     </div>
   </div>
 </template>
