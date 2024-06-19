@@ -262,15 +262,25 @@ const selectedVariant = computed(() => {
 const getColorClass = (color) => {
   const colorMap = {
     red: "bg-red-500",
+    Red: "bg-red-500",
     yellow: "bg-yellow-500",
+    Yellow: "bg-yellow-500",
     black: "bg-gray-900",
+    Black: "bg-gray-900",
     blue: "bg-cyan-500",
+    Blue: "bg-cyan-500",
     orange: "bg-orange-600",
+    Orange: "bg-orange-600",
     purple: "bg-purple-500",
+    Purple: "bg-purple-500",
     pink: "bg-pink-500",
+    Pink: "bg-pink-500",
     green: "bg-green-500",
+    Green: "bg-green-500",
     white: "bg-slate-100",
+    White: "bg-slate-100",
     brown: "bg-amber-950",
+    Brown: "bg-amber-950",
   };
   return colorMap[color] || "bg-gray-500";
 };
