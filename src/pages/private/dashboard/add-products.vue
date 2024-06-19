@@ -242,7 +242,7 @@ const save = async () => {
 
     const savaproduct = {
       name: addproduct.productName,
-      categoryId: addproduct.category,
+      categoryId: addproduct.subcategory,
       variants: productVariants.value,
       imageNames: imagesName.value
     };
