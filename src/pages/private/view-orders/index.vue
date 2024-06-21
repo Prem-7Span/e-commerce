@@ -12,16 +12,18 @@
         <div class="flex items-start gap-2 p-2 md:p-4 md:gap-5">
           <div class="item-center">
             <!-- <img src="/default/order-img.png" alt="" /> -->
+            <router-link :to="{ name: 'details', params: { slug: order.productsulg  } }">
             <img
               :src="order.productImage.imageUrl"
               class="max-h-46 rounded-2xl md:w-32 max-w-24"
               :alt="order.productName"
             />
+          </router-link>
           </div>
           <div>
             <div class="flex items-end justify-between">
               <div>
-                <router-link :to="{ name: 'details', params: { slug: order.productsulg  } }">
+                
 
                 <div class="flex gap-2 text-sm">
                   <p>Order id:</p>
@@ -29,7 +31,7 @@
                   |
                   <p>{{ new Date(order.date).toLocaleDateString() }}</p>
                 </div>
-                </router-link>
+                
                 <div class="flex items-end justify-between">
                   <p
                     class="items-center mt-3 text-3xl font-bold md:text-lg md:mb-2 text-primary-300 line-clamp-2 max-w-72"

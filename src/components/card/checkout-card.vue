@@ -138,6 +138,7 @@ const cartItem = computed(() => {
   );
 });
 
+
 const productVariant = computed(() => cartItem.value?.productVarient);
 const product = computed(() => productVariant.value?.products);
 
