@@ -22,9 +22,10 @@
             <div class="flex items-end justify-between">
               <div>
                 <div class="flex gap-2 text-sm">
-                  <p>Order id:</p>
-                  <p>{{ order.id }}</p>
-                  |
+                  <!-- <p>Order id:</p> -->
+                  <!-- <p>{{ order.id }}</p> -->
+                  <!-- | -->
+                  <p>Date:</p>
                   <p>{{ new Date(order.date).toLocaleDateString() }}</p>
                 </div>
                 <div class="flex items-end justify-between">
@@ -44,6 +45,12 @@
                   <div class="text-sm text-primary-400">Size:</div>
                   <div class="text-sm font-semibold text-primary-300">
                     {{ order.productSize }}
+                  </div>
+                </div>
+                <div class="flex gap-2">
+                  <div class="text-sm text-primary-400">Quantity:</div>
+                  <div class="text-sm font-semibold text-primary-300">
+                    {{ order.productQuantity }}
                   </div>
                 </div>
                 <div class="flex gap-2">

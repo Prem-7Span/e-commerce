@@ -40,6 +40,7 @@ export const useOrderStore = defineStore("order", {
                 productImage: productVariant?.products.images[0], // Replace with the actual image URL if available in the response
                 productName: orderItem.productName,
                 productSize: productVariant.size,
+                productQuantity: orderItem.quantity,
                 productColor: productVariant.color,
                 productPrice: orderItem.price,
                 productRegularPrice: productVariant.regularPrice,
