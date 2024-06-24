@@ -1,10 +1,14 @@
 <template>
   <div class="p-4 px-0">
-    <h1 class="text-2xl font-bold text-primary-300 mb-4">Add Variant</h1>
+    <h1 class="mb-4 text-2xl font-bold text-primary-300">Add Variant</h1>
     <form class="space-y-4">
       <div class="flex items-center space-x-4">
-        <label for="size" class="text-lg mb-1 w-32">Size</label>
-        <select id="size" v-model="newVariant.size" class="flex w-1/2 p-2 border rounded-md">
+        <label for="size" class="w-32 mb-1 text-lg">Size</label>
+        <select
+          id="size"
+          v-model="newVariant.size"
+          class="flex w-1/2 p-2 border rounded-md"
+        >
           <option value="" disabled>Select</option>
           <option value="XS">XS</option>
           <option value="S">S</option>
@@ -30,13 +34,25 @@
       </div>
 
       <div class="flex items-center space-x-4">
-        <label for="regularPrice" class="text-lg mb-1 w-32">Regular Price</label>
-        <input type="number" id="regularPrice" v-model="newVariant.regularPrice" class="flex w-1/2 p-2 border rounded-md">
+        <label for="regularPrice" class="w-32 mb-1 text-lg"
+          >Regular Price</label
+        >
+        <input
+          type="number"
+          id="regularPrice"
+          v-model="newVariant.regularPrice"
+          class="flex w-1/2 p-2 border rounded-md"
+        />
       </div>
 
       <div class="flex items-center space-x-4">
-        <label for="price" class="text-lg mb-1 w-32"> Price</label>
-        <input type="number" id="price" v-model="newVariant.price" class="flex w-1/2 p-2 border rounded-md">
+        <label for="price" class="w-32 mb-1 text-lg"> Price</label>
+        <input
+          type="number"
+          id="price"
+          v-model="newVariant.price"
+          class="flex w-1/2 p-2 border rounded-md"
+        />
       </div>
 
       <div class="flex items-center space-x-4">
@@ -54,8 +70,8 @@
         <label class="relative inline-flex items-center cursor-pointer">
           <input type="checkbox" v-model="newVariant.isDefault" :disabled="isDefaultDisabled" id="isDefault" class="sr-only peer" />
           <div
-            class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-300">
-          </div>
+            class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-300"
+          ></div>
           <span class="ml-2 text-lg font-medium text-gray-900"></span>
         </label>
       </div>
@@ -71,8 +87,8 @@
       </div>
     </form>
 
-    <div class="mt-4 hidden">
-      <h2 class="text-xl font-bold text-primary-300 mb-2">New Variants</h2>
+    <div class="hidden mt-4">
+      <h2 class="mb-2 text-xl font-bold text-primary-300">New Variants</h2>
       <ul>
         <li v-for="(variant, index) in variants" :key="index" class="mb-2 p-2 rounded-md border shadow-sm variant-item flex gap-4 px-3">
           <span class="block text-lg"><strong>Color:</strong> {{ variant.color }}</span>
@@ -89,9 +105,9 @@
 </template>
 
 <script setup>
-import { reactive, ref, defineEmits } from 'vue';
+import { reactive, ref, defineEmits } from "vue";
 
-const emit = defineEmits(['variantAdded']);
+const emit = defineEmits(["variantAdded"]);
 
 const newVariant = reactive({
   size: '',
@@ -122,7 +138,7 @@ const addNewVariant = () => {
     newVariant.availableQuantity = '';
     newVariant.isDefault = false;
   } else {
-    alert('Please fill in all fields.');
+    alert("Please fill in all fields.");
   }
 };
 </script>

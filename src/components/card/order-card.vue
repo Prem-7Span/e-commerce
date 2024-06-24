@@ -17,7 +17,7 @@
         </p>
       </div>
       <div class="flex justify-between px-4 py-4">
-        <p class="text-base text-gray-700">Platform Fee</p>
+        <p class="text-base text-gray-700">Platform Fee(4%)</p>
         <p class="text-base font-medium text-green-500">
           + ₹{{ orderSummaryStore.totalPlatformCharges }}
         </p>

@@ -102,6 +102,8 @@
             <option disabled value="">Select Status</option>
             <option value="Pending">Pending</option>
             <option value="Accepted">Accepted</option>
+            <option value="Accepted">shipped</option>
+            <option value="Accepted">Completed</option>
           </select>
         </div>
 
