@@ -27,20 +27,23 @@
         </button>
       </div>
       <button
-        class="absolute top-0 left-0 px-3 py-3 m-1 mx-2 mt-2 mb-2 text-white rounded-lg md:mx-3 bg-primary-300 md:p-2 md:w-20 md:m-6"
+        class="absolute top-0 left-0 px-3 py-3 m-1 mx-2 mt-2 mb-2 text-white rounded-lg md:mx-3 bg-primary-300 md:p-1 md:w-12 md:m-6"
       >
         {{ round(discount) }}%
       </button>
     </div>
     <div class="p-3">
+      
       <div class="flex justify-between">
+        
         <router-link :to="{ name: 'details', params: { slug: product.slug } }">
           <div>
             <a
               href=""
-              class="text-xl font-normal text-black no-underline line-clamp-1"
+              class="text-lg font-normal  text-black no-underline line-clamp-1"
             >
               {{ product.name }}
+              
             </a>
           </div>
         </router-link>
@@ -49,7 +52,7 @@
         class="flex flex-col items-start justify-between gap-1 mt-2 sm:gap-4 md:mt-0"
       >
         <div class="flex flex-row items-center justify-center gap-2">
-          <div class="flex gap-1 text-2xl font-semibold">
+          <div class="flex gap-2 text-2xl font-semibold">
             <p>₹{{ defaultVariant.price }}</p>
             <p
               class="text-lg font-semibold text-primary-300 md:text-lg xl:text-2xl"

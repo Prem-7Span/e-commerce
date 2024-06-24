@@ -29,7 +29,7 @@ export const useOrderSummaryStore = defineStore("orderSummary", {
           headers: { Authorization: `Bearer ${token}` },
         });
 
-        console.log("==>", response);
+        // console.log("==>", response);
         if (response.status === 200) {
           const data = response.data;
           this.totalMrp = data.TotalMrp;
