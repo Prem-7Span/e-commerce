@@ -291,6 +291,10 @@ const fetchProduct = async () => {
   }
 };
 
+watch(selectedCategory, async (newCategoryId) => {
+  await fetchSubCategories(newCategoryId);
+});
+
 const fetchSubCategories = async (categoryId) => {
   try {
     const response = await axios.get(
@@ -310,6 +314,75 @@ const fetchSubCategories = async (categoryId) => {
   }
 };
 
+const fetchProductUrl = async (count = 4) => {
+  try {
+    const response = await axios.get(
+      "https://api.8orbit.shop/api/v1/product-image",
+      {
+        params: { count },
+      }
+    );
+    const res = response.data.presignedUrls;
+    productUrl.value = res.map((el) => el.url);
+    imagesName.value = res.map((el) => el.imagename);
+  } catch (error) {
+    console.error("Error fetching images:", error);
+  }
+};
+
+function base64ToBinary(base64String) {
+  const binaryString = window.atob(base64String.split(",")[1]);
+  const len = binaryString.length;
+  const bytes = new Uint8Array(len);
+  for (let i = 0; i < len; i++) {
+    bytes[i] = binaryString.charCodeAt(i);
+  }
+  const blob = new Blob([bytes], { type: "image/png" });
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = function (event) {
+      resolve(new Uint8Array(event.target.result));
+    };
+    reader.onerror = function (event) {
+      reject(event.target.error);
+    };
+    reader.readAsArrayBuffer(blob);
+  });
+}
+
+const fetchMultipleImages = async () => {
+  for (let i = 0; i < productUrl.value.length; i++) {
+    const itemUrl = productUrl.value[i];
+    const image = images.value[i];
+    if (itemUrl && image) {
+      try {
+        const convertedImage = await base64ToBinary(image);
+        await axios.put(itemUrl, convertedImage, {
+          headers: {
+            "Content-Type": "image/png",
+            "Access-Control-Allow-Origin": "*",
+          },
+          crossdomain: true,
+        });
+      } catch (error) {
+        console.error(`Error uploading image ${i + 1}:`, error);
+      }
+    } else {
+      console.error(
+        `Error: Product URL at index ${i} is invalid or undefined.`
+      );
+    }
+  }
+};
+
+const updateProductAndFetchImages = async () => {
+  try {
+    await fetchMultipleImages();
+  } catch (error) {
+    console.error("Error updating product or fetching images:", error);
+  }
+};
+
 const handleFileChange = (event) => {
   const files = event.target.files;
   for (let i = 0; i < files.length; i++) {
@@ -326,8 +399,40 @@ const handleVariantAdded = (variant) => {
 };
 
 const save = async () => {
-  // Add your save logic here, including API requests
-  console.log("Save product");
+  if (
+    addproduct.productName &&
+    selectedCategory.value &&
+    selectedSubcategory.value &&
+    images.value.length > 0
+  ) {
+    addproduct.category = selectedCategory.value;
+    addproduct.subcategory = selectedSubcategory.value;
+
+    const savaproduct = {
+      name: addproduct.productName,
+      categoryId: addproduct.subcategory,
+      variants: productVariants.value,
+      imageNames: images.value,
+    };
+
+    try {
+      const response = await axios.post(
+        "https://api.8orbit.shop/api/v1/product",
+        savaproduct,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      console.log("Product created:", response.data);
+      await router.push({ path: "adminproducts" });
+    } catch (error) {
+      console.error("Error creating product:", error);
+    }
+  } else {
+    alert("Please fill in all fields and upload at least one image.");
+  }
 };
 
 const cancel = () => {
@@ -337,7 +442,8 @@ const cancel = () => {
 onMounted(() => {
   fetchCategories();
   fetchProduct();
-  fetchSubCategories();
+  fetchProductUrl();
+  fetchSubCategories(selectedCategory.value);
 });
 </script>
 
