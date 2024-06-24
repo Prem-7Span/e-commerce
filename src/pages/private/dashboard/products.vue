@@ -32,15 +32,14 @@
           <td class="px-4 py-2 border-b">{{ product.isActive ? 'Active' : 'Inactive' }}</td>
           <td class="px-4 py-2 border-b">{{ product.categories.categoryName }}</td>
           <td class="px-4 py-2 border-b">
-            <!-- <button @click="deleteProduct(product)" class="bg-red-500 text-white py-1 px-2 rounded hover:bg-red-700">Delete</button> -->
-            <div class="flex  gap-4">
-        <button @click="deleteProduct(product)">
-          <img src="/address/Vector.svg" alt="delete" />
-        </button>
-        <button @click="editData(product)">
-          <img src="/address/EditVector.svg" alt="edit" />
-        </button>
-      </div>
+            <div class="flex gap-4">
+              <button @click="deleteProduct(product)">
+                <img src="/address/Vector.svg" alt="delete" />
+              </button>
+              <button @click="editData(product)">
+                <img src="/address/EditVector.svg" alt="edit" />
+              </button>
+            </div>
           </td>
         </tr>
       </tbody>
@@ -51,14 +50,13 @@
 <script>
 import axios from 'axios';
 import { useRouter } from 'vue-router'
-const router = useRouter()
 
 export default {
   name: 'ProductTable',
   data() {
     return {
       products: [],
-      token: localStorage.getItem("token") // Corrected the syntax error
+      token: localStorage.getItem("token")
     };
   },
   created() {
@@ -74,16 +72,14 @@ export default {
           console.error('There was an error fetching the products!', error);
         });
     },
-    editData (product) {
-      const router = useRouter(); 
-      this.$router.push({ name: 'addprodcts' })
+    editData(product) {
+      this.$router.push({ name: 'editprodcts', params: { slug: product.slug } });
     },
-
     deleteProduct(product) {
       if (confirm(`Are you sure you want to delete the product: ${product.name}?`)) {
         axios.delete(`https://api.8orbit.shop/api/v1/product/${product.slug}`, {
           headers: {
-            'Authorization': `Bearer ${this.token}` // Add token in headers
+            'Authorization': `Bearer ${this.token}`
           }
         })
         .then(() => {
@@ -97,7 +93,6 @@ export default {
   }
 };
 </script>
-
 
 <style>
 .container {

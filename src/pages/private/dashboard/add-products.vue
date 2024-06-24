@@ -102,8 +102,18 @@
 import { onMounted, reactive, ref, watch } from 'vue';
 import AddVariant from './add-variant.vue';
 import axios from 'axios';
-import { useRouter } from 'vue-router'
-const router = useRouter()
+import { useRoute } from 'vue-router'
+
+const route = useRoute()
+
+
+
+const slug = ref(route.params.slug)
+
+
+watch(() => route.params.slug, (slug) => {
+  slug.value = slug
+})
 
 
 const addproduct = reactive({
@@ -122,6 +132,8 @@ const productVariants = ref([]);
 const productUrl = ref([]);
 const imagesName = ref([]);
 const token = localStorage.getItem("token");
+const product = ref(null)
+const error = ref(null)
 
 const fetchCategories = async () => {
   try {
@@ -138,6 +150,16 @@ const fetchCategories = async () => {
     console.error('Error fetching categories:', error);
   }
 };
+
+
+const fetchProduct = async () => {
+  try {
+    const response = await axios.get(`https://api.8orbit.shop/api/v1/product/${route.params.slug}`)
+    addproduct.value = response.data
+  } catch (err) {
+    error.value = err.message
+  }
+}
 
 const fetchSubCategories = async (categoryId) => {
   try {
@@ -281,5 +303,6 @@ const handleVariantAdded = (variant) => {
 onMounted(() => {
   fetchProductUrl();
   fetchCategories();
+  fetchProduct();
 });
 </script>

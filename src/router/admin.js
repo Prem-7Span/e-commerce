@@ -7,6 +7,7 @@ import adminproducts from "../pages/private/dashboard/products.vue";
 import customers from "../pages/private/dashboard/customers.vue";
 import addproducts from "../pages/private/dashboard/add-products.vue";
 import OrderDetail from "@/pages/private/dashboard/order-detail.vue";
+import editproducts from "../pages/private/dashboard/add-products.vue";
 
 const routes = [
   {
@@ -60,6 +61,12 @@ const routes = [
     path: "addproducts",
     component: addproducts,
   },
+  {
+    name: "editprodcts",
+    path: "editproducts/:slug",
+    component: editproducts,
+  },
+
 
   // {
   //   name: "adminSignIn",
