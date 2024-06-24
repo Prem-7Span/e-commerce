@@ -21,17 +21,17 @@
             :ref="`otpBox${index}`"
           />
         </div>
-        <!-- <button
-          class="block mt-4 text-sm text-gray-400 hover:underline"
-          @click="resendOTP"
-        >
-          Resend OTP
-        </button> -->
         <button
           class="w-full py-2 mt-6 font-bold text-white rounded-md md:w-full md:px-3 bg-primary-100 hover:bg-primary-100 focus:outline-none focus:ring-1 focus:bg-primary-100"
           @click="submitForm"
+          :disabled="loading"
         >
-          Continue
+          <span v-if="!loading">Continue</span>
+          <div v-else class="flex items-center justify-center">
+            <div
+              class="w-6 h-6 border-4 border-gray-300 rounded-full animate-spin border-t-blue-800"
+            ></div>
+          </div>
         </button>
         <p class="mt-4 text-sm text-red-500">{{ errorMessage }}</p>
         <p class="mt-4 text-sm text-green-500">{{ successMessage }}</p>
@@ -63,6 +63,7 @@ export default {
       errorMessage: "",
       successMessage: "",
       confirmationResult: this.$route.query.obj,
+      loading: false, // Loader visibility state
     };
   },
   methods: {
@@ -87,7 +88,6 @@ export default {
     },
     async submitForm() {
       const otp = this.verificationOtp.join("");
-
       this.errorMessage = ""; // Reset
 
       if (!otp) {
@@ -95,13 +95,15 @@ export default {
         return;
       }
 
+      this.loading = true; // Show loader
+
       try {
         const credential = PhoneAuthProvider.credential(
           this.confirmationResult,
           otp
         );
 
-        await signInWithCredential(authentication, credential) // Assuming firebase is imported
+        await signInWithCredential(authentication, credential)
           .then((res) => {
             this.userStore.setToken(res.user.accessToken);
             const userData = localStorage.getItem("userRole");
@@ -113,11 +115,6 @@ export default {
               this.$router.push({ name: "home" });
             }
             this.fetchCartItems();
-
-            // Store the token in localStorage
-            // res.user.getIdToken().then((token) => {
-            //   localStorage.setItem("authToken", token);
-            // });
           })
           .catch((error) => {
             if (error.code === "auth/invalid-verification-code") {
@@ -131,10 +128,9 @@ export default {
       } catch (error) {
         console.error("Unexpected error:", error);
         this.errorMessage = "An error occurred. Please try again.";
+      } finally {
+        this.loading = false; // Hide loader
       }
-    },
-    resendOTP() {
-      z;
     },
     async fetchCartItems() {
       await this.cartStore.fetchCart();

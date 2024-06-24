@@ -7,6 +7,7 @@ import adminproducts from "../pages/private/dashboard/products.vue";
 import customers from "../pages/private/dashboard/customers.vue";
 import addproducts from "../pages/private/dashboard/add-products.vue";
 import OrderDetail from "@/pages/private/dashboard/order-detail.vue";
+import editproducts from "../pages/private/dashboard/edit-product.vue";
 
 const routes = [
   {
@@ -60,26 +61,11 @@ const routes = [
     path: "addproducts",
     component: addproducts,
   },
-
-  // {
-  //   name: "adminSignIn",
-  //   path: "sign-in",
-  //   component: adminSignIn,
-  // },
-
-  // {
-  //   name: "adminVerificationOtp",
-  //   path: "verification-otp",
-  //   component: adminVerificationOtp,
-  // },
+  {
+    name: "editprodcts",
+    path: "editproducts/:slug",
+    component: editproducts,
+  },
 ];
 
 export default routes;
-
-// const router = createRouter({
-//   history: createWebHistory(),
-//   routes,
-//   scrollBehavior() {
-//     document.querySelector("body").scrollIntoView({ behavior: "smooth" });
-//   },
-// });

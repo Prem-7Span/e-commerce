@@ -38,16 +38,21 @@
       </div>
 
       <button
-        :disabled="!canSubmit"
+        :disabled="!canSubmit || loading"
         :class="{
-          'bg-gray-300 cursor-not-allowed': !canSubmit,
-          'bg-primary-100 hover:scale-105': canSubmit,
+          'bg-gray-300 cursor-not-allowed': !canSubmit || loading,
+          'bg-primary-100 hover:scale-105': canSubmit && !loading,
         }"
         type="button"
         class="w-full px-4 py-2 font-medium text-center text-white transition duration-200 ease-in-out rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-700 focus:ring-opacity-50"
         @click="checkPhoneNumberAvailability"
       >
-        Continue
+        <span v-if="!loading">Continue</span>
+        <div v-else class="flex items-center justify-center">
+          <div
+            class="w-6 h-6 border-4 border-gray-300 rounded-full animate-spin border-t-blue-800"
+          ></div>
+        </div>
       </button>
       <div id="recaptcha-container"></div>
 
@@ -84,6 +89,7 @@ export default {
         phoneNumber: "",
       },
       recaptchaVerifier: null,
+      loading: false, // Loader visibility state
     };
   },
   computed: {
@@ -122,6 +128,8 @@ export default {
         return;
       }
 
+      this.loading = true; // Show loader
+
       try {
         const response = await axios.post(
           "https://api.8orbit.shop/api/v1/login",
@@ -142,6 +150,8 @@ export default {
         this.toast.error("Account not available, please sign up");
         this.$router.push({ name: "SignUp" });
         console.error("Error checking phone number availability:", error);
+      } finally {
+        this.loading = false; // Hide loader
       }
     },
     submitForm() {
@@ -171,6 +181,8 @@ export default {
         }
       } catch (error) {
         console.error("Error during phone number verification:", error);
+      } finally {
+        this.loading = false; // Hide loader if error occurs
       }
     },
   },
@@ -189,5 +201,11 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: inherit;
 }
 </style>
