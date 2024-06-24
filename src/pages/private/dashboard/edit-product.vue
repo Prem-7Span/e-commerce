@@ -1,6 +1,6 @@
 <template>
     <div class="p-4">
-      <h1 class="mb-4 text-2xl font-bold text-primary-300">Add Product</h1>
+      <h1 class="mb-4 text-2xl font-bold text-primary-300">Update Product</h1>
       <form @submit.prevent="save" class="space-y-6">
         <!-- Product Name -->
         <div class="flex items-center space-x-4">
@@ -56,7 +56,7 @@
         <!-- Image Upload -->
         <div class="space-y-4">
           <label for="images" class="block text-lg font-semibold text-gray-700"
-            >Add Images</label
+            >Added Images</label
           >
           <input
             type="file"
@@ -68,7 +68,7 @@
           />
           <label
             for="images"
-            class="inline-flex items-center px-6 py-3 text-base font-medium leading-6 text-white rounded-md shadow-md cursor-pointer bg-primary-300 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+            class="inline-flex md:hidden items-center px-6 py-3 text-base font-medium leading-6 text-white rounded-md shadow-md cursor-pointer bg-primary-300 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
           >
             <svg
               class="w-5 h-5 mr-2"
@@ -144,7 +144,7 @@
   
         <div class="mt-1">
           <h2 class="mb-2 text-lg font-bold text-primary-300">
-            Product Variants
+         Update   Product Variants
           </h2>
           <ul>
             <li
