@@ -28,6 +28,7 @@ const router = createRouter({
 // Before each
 router.beforeEach((to, from, next) => {
   if (to.meta.requiresAuth) {
+    // console.log("8899",to.meta.requiresAuth);
     if (localStorage.getItem("token")) {
       next();
     } else {

@@ -9,18 +9,18 @@
         <div id="name"><p>Olivia Johnson</p></div>
         <div id="stats" class="flex">
           <div>
-            <img src="/public/stars/yellow-star.svg" alt="yellow-star" />
+            <img src="/stars/yellow-star.svg" alt="yellow-star" />
           </div>
           <div>
-            <img src="/public/stars/yellow-star.svg" alt="yellow-star" />
+            <img src="/stars/yellow-star.svg" alt="yellow-star" />
           </div>
           <div>
-            <img src="/public/stars/yellow-star.svg" alt="yellow-star" />
+            <img src="/stars/yellow-star.svg" alt="yellow-star" />
           </div>
           <div>
-            <img src="/public/stars/yellow-star.svg" alt="yellow-star" />
+            <img src="/stars/yellow-star.svg" alt="yellow-star" />
           </div>
-          <div><img src="/public/stars/black-star.svg" alt="black-star" /></div>
+          <div><img src="/stars/black-star.svg" alt="black-star" /></div>
         </div>
         <div id="description"><p class="text-gray-500">Nice</p></div>
         <hr />
@@ -30,18 +30,18 @@
         <div><p>Olivia Johnson</p></div>
         <div class="flex">
           <div>
-            <img src="/public/stars/yellow-star.svg" alt="yellow-star" />
+            <img src="/stars/yellow-star.svg" alt="yellow-star" />
           </div>
           <div>
-            <img src="/public/stars/yellow-star.svg" alt="yellow-star" />
+            <img src="/stars/yellow-star.svg" alt="yellow-star" />
           </div>
           <div>
-            <img src="/public/stars/yellow-star.svg" alt="yellow-star" />
+            <img src="/stars/yellow-star.svg" alt="yellow-star" />
           </div>
           <div>
-            <img src="/public/stars/yellow-star.svg" alt="yellow-star" />
+            <img src="/stars/yellow-star.svg" alt="yellow-star" />
           </div>
-          <div><img src="/public/stars/black-star.svg" alt="black-star" /></div>
+          <div><img src="/stars/black-star.svg" alt="black-star" /></div>
         </div>
         <div><p class="text-gray-500">Nice</p></div>
         <hr />
@@ -51,18 +51,18 @@
         <div><p>Olivia Johnson</p></div>
         <div class="flex">
           <div>
-            <img src="/public/stars/yellow-star.svg" alt="yellow-star" />
+            <img src="/stars/yellow-star.svg" alt="yellow-star" />
           </div>
           <div>
-            <img src="/public/stars/yellow-star.svg" alt="yellow-star" />
+            <img src="/stars/yellow-star.svg" alt="yellow-star" />
           </div>
           <div>
-            <img src="/public/stars/yellow-star.svg" alt="yellow-star" />
+            <img src="/stars/yellow-star.svg" alt="yellow-star" />
           </div>
           <div>
-            <img src="/public/stars/yellow-star.svg" alt="yellow-star" />
+            <img src="/stars/yellow-star.svg" alt="yellow-star" />
           </div>
-          <div><img src="/public/stars/black-star.svg" alt="black-star" /></div>
+          <div><img src="/stars/black-star.svg" alt="black-star" /></div>
         </div>
         <div><p class="text-gray-500">Nice</p></div>
         <hr />

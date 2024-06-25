@@ -44,6 +44,7 @@ export const useOrderStore = defineStore("order", {
                 productColor: productVariant.color,
                 productPrice: orderItem.price,
                 productRegularPrice: productVariant.regularPrice,
+                productsulg : orderItem.productVariants.products.slug
               };
             })
             .filter((order) => order !== null);
