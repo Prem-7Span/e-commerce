@@ -31,12 +31,12 @@
             Name
           </th>
           <th
-            class="px-4 py-2 text-white bg-gray-800 border-b-2 border-gray-300"
+            class="px-4 py-2 hidden text-white bg-gray-800 border-b-2 border-gray-300"
           >
             Price
           </th>
           <th
-            class="px-4 py-2 text-white bg-gray-800 border-b-2 border-gray-300"
+            class="px-4 py-2 hidden text-white bg-gray-800 border-b-2 border-gray-300"
           >
             Stock
           </th>
@@ -76,12 +76,12 @@
             />
           </td>
           <td class="px-4 py-2 border-b">{{ product.name }}</td>
-          <td class="px-4 py-2 border-b">
+          <!-- <td class="px-4 py-2 border-b">
             {{ product.productVariants[0].price }}
           </td>
           <td class="px-4 py-2 border-b">
             {{ product.productVariants[0].stock }}
-          </td>
+          </td> -->
           <td class="px-4 py-2 border-b">
             {{ product.isActive ? "Active" : "Inactive" }}
           </td>
