@@ -111,7 +111,7 @@
     <p class="text-lg text-red-500">
       {{ errors.addressLine2 }}
     </p>
-    <div class="relative border rounded-md">
+    <!-- <div class="relative border rounded-md">
       <select
         id="country"
         v-model="newAddress.countryId"
@@ -137,7 +137,7 @@
     </div>
     <p class="text-lg text-red-500">
       {{ errors.countryId }}
-    </p>
+    </p> -->
 
     <div class="relative border rounded-md">
       <select
