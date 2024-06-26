@@ -1,3 +1,4 @@
+
 <template>
   <div id="main-parent" class="">
     <router-link :to="{ name: 'list' }">

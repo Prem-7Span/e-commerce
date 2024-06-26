@@ -33,7 +33,7 @@
         class="px-1 md:w-60 w-full xl:w-64 md:!block z-10 md:relative absolute bg-white sidebar"
       >
         <!-- Filters here -->
-        <div class="hidden">
+        <div class="">
           <h2 class="font-bold">Gender</h2>
           <hr class="p-1 px-20" />
           <input

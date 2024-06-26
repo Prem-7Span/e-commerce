@@ -7,8 +7,7 @@
       <div><img src="/default/order-success.png" alt="" /></div>
       <div>
         <p class="text-lg text-bold">
-          Order placed successfully! Sit back and relax while we take care of
-          the rest.
+          Order placed successfully.
         </p>
       </div>
     </div>
